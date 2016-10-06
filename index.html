@@ -1,0 +1,133 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>Calvert's murmur</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Calvert's murmur</h1><a id="logo" href="/.">Calvert's murmur</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首頁</i></a><a href="/archives/"><i class="fa fa-archive"> 所有文章</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h2 class="post-title"><a href="/2016/10/05/upgrade_your_ssh_keys/">【譯】升級你的 SSH 金鑰！</a></h2><div class="post-meta">2016/10/05</div><div class="post-content"><p>無論你是軟體開發人員或系統管理員，我敢打賭你正在使用 SSH 金鑰。比起使用密碼來推送提交到 Github 或是管理 Unix 系統，透過 SSH 公開金鑰驗證是最佳的方法。然而，隨著時光飛逝，很多人都使用舊金鑰而沒有意識到需要產生一個新的來提供私密資料更好的保護。在這篇文章，我將示範如何平穩的轉換到 Ed25519 金鑰、你為什麼會想要它以及展示一些技巧和訣竅。</p>
+<p>長話短說，使用 <code>ssh-keygen -o -a 100 -t ed25519</code> 來產生新的金鑰並指定一個高強度的通關密語，如果你需要平穩的轉換，請繼續往下閱讀。</p>
+<p>我計劃發佈更多 SSH 技巧和訣竅，所以請關注我的部落格。這篇文章的重點是關於作為使用者公開金鑰驗證的 SSH 金鑰。</p>
+<h3 id="DSA-和-RSA-1024-位元已經廢止"><a href="#DSA-和-RSA-1024-位元已經廢止" class="headerlink" title="DSA 和 RSA 1024 位元已經廢止"></a>DSA 和 RSA 1024 位元已經廢止</h3><p>如果你已經使用預設選項建立金鑰超過四年，它可能不安全（RSA &lt; 2048 位元）。更糟的是，我最近看到了推特迷、同事和朋友還在使用 DSA 金鑰（OpenSSH 格式裡的 <code>ssh-dss</code> 類型）。那是一種類似於 RSA 的金鑰類型，但長度受限於 1024 位元且被<a href="https://security.stackexchange.com/a/5100/12948">推薦</a>了很長一段時間。它顯然不安全，且被最近的 OpenSSH 版本以正當理由拒絕（請參見 <a href="http://www.openssh.com/txt/release-7.0">7.0 更新日誌</a>）。</p>
+<p>難過的是，我看到關於如何重新啟用支援 DSA 金鑰的文章，而不是轉移到一種更安全的金鑰類型。真的，依照指示更改 <code>PubkeyAcceptedKeyTypes</code> 或 <code>HostKeyAlgorithms</code> 的設定是不明智的(host keys are for a later post)。取而代之，升級你的金鑰！</p>
+<p><table><br>  <tr><br>    <td>比較 DSA 及使用像這樣技術打造的鑰匙，你不會希望此類型的鑰匙來開啟你的前門，對吧？</td><br>    <td><img src="/2016/10/05/upgrade_your_ssh_keys/old_key_picture.jpg" alt="舊式鑰匙" title="舊式鑰匙"></td><br>  </tr><br></table><br></div><p class="readmore"><a href="/2016/10/05/upgrade_your_ssh_keys/">閱讀更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">【譯】使用 Mailboxer 實作站內信系統</a></h2><div class="post-meta">2015/05/20</div><div class="post-content"><p>Mailboxer 是一個 Rails gem，為 <a href="https://github.com/ging/social_stream">social_stream</a> 框架用來建立社群網路的一部分。它是具備一些通用方法的訊息系統，允許任何 model 擔任傳遞訊息的角色。</p>
+<p>使用 Mailboxer，你可以與一或多個收件人建立對話（訊息會被歸納到寄件匣、收件匣及垃圾桶）並透過電子郵件發送通知。它甚至可以在不同 model 間發送訊息和附件！唯一的缺點是缺乏文件，所以我希望這邊文章是有幫助的。</p>
+<p>我們要討論的範例程式為：</p>
+<ul>
+<li>使用 Devise 做基本身份驗證</li>
+<li>使用 Gravatar 讓使用者管理頭像</li>
+<li>整合 Mailboxer</li>
+<li>使用圖形介面來建立／回覆對話（使用 Bootstrap 樣式及 Chosen jQuery 插件）</li>
+<li>顯示資料夾，並允許在它們之間輕鬆切換</li>
+<li>允許將對話標示為已讀、放到垃圾桶或還原，也可以清理垃圾桶。</li>
+<li>設定電子郵件通知</li>
+</ul>
+<p>此範例將使用 Rails 4，但幾乎相同的解決方案也可以實作於 Rails 3.2（Mailboxer 不再支援 3.1 版）。</p>
+<p>原始碼可以在 <a href="https://github.com/CalvertYang/Synergy">Github</a> 找到。</p></div><p class="readmore"><a href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">閱讀更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2014/09/21/understanding-the-github-flow/">了解 GitHub Flow</a></h2><div class="post-meta">2014/09/21</div><div class="post-content"><p>GitHub Flow 是一個基於分支的輕量化工作流程，幫助團隊及專案定期的進行部署。</p></div><p class="readmore"><a href="/2014/09/21/understanding-the-github-flow/">閱讀更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審</a></h2><div class="post-meta">2014/08/23</div><div class="post-content"><p>這次 App 送審被 Apple 以違反 PLA 3.3.12 而退審，內容大致上是說 Advertising Identifier(IDFA) 僅可基於廣告目的使用於應用程式內，但審核團隊沒發現需用 IDFA 來呈現廣告的地方。</p></div><p class="readmore"><a href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">閱讀更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2014/08/20/npm-semantic-versioner/">看懂 npm 語意化版本</a></h2><div class="post-meta">2014/08/20</div><div class="post-content"><p>npm(Node Package Manager) 採用語意化版本 2.0.0 規範，詳細的規範內容可查看 <a href="http://semver.org/" target="_blank" rel="external">http://semver.org/</a>。</p></div><p class="readmore"><a href="/2014/08/20/npm-semantic-versioner/">閱讀更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2013/11/16/sql-to-aggregation-mapping-chart/">SQL 到彙總(Aggregation)對應表</a></h2><div class="post-meta">2013/11/16</div><div class="post-content"><p>彙總管線(<a href="http://docs.mongodb.org/manual/core/aggregation/">aggregation pipeline</a>)允許 MongoDB 提供原生彙總功能，對應 SQL 中許多常見的資料彙總操作。</p>
+<h5 id="下表列出了常見的-SQL-彙總術語、功能及概念和相應的-MongoDB-彙總運算元概觀。"><a href="#下表列出了常見的-SQL-彙總術語、功能及概念和相應的-MongoDB-彙總運算元概觀。" class="headerlink" title="下表列出了常見的 SQL 彙總術語、功能及概念和相應的 MongoDB 彙總運算元概觀。"></a>下表列出了常見的 SQL 彙總術語、功能及概念和相應的 MongoDB 彙總運算元概觀。</h5><table>
+<thead>
+<tr>
+<th style="text-align:left">SQL 術語、功能及概念</th>
+<th style="text-align:left">MongoDB 彙總運算元</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">WHERE</td>
+<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/match/#pipe._S_match">$match</a></td>
+</tr>
+<tr>
+<td style="text-align:left">GROUP BY</td>
+<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/group/#pipe._S_group">$group</a></td>
+</tr>
+<tr>
+<td style="text-align:left">HAVING</td>
+<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/match/#pipe._S_match">$match</a></td>
+</tr>
+<tr>
+<td style="text-align:left">SELECT</td>
+<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/project/#pipe._S_project">$project</a></td>
+</tr>
+<tr>
+<td style="text-align:left">ORDER BY</td>
+<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/sort/#pipe._S_sort">$sort</a></td>
+</tr>
+<tr>
+<td style="text-align:left">LIMIT</td>
+<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/limit/#pipe._S_limit">$limit</a></td>
+</tr>
+<tr>
+<td style="text-align:left">SUM()</td>
+<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/sum/#grp._S_sum">$sum</a></td>
+</tr>
+<tr>
+<td style="text-align:left">COUNT()</td>
+<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/sum/#grp._S_sum">$sum</a></td>
+</tr>
+<tr>
+<td style="text-align:left">join</td>
+<td style="text-align:left">沒有直接對應的運算元，然而，<a href="http://docs.mongodb.org/manual/reference/operator/aggregation/unwind/#pipe._S_unwind">$unwind</a> 運算元允許有些類似的功能，但是與嵌入的欄位在文件內。</td>
+</tr>
+</tbody>
+</table></div><p class="readmore"><a href="/2013/11/16/sql-to-aggregation-mapping-chart/">閱讀更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2013/11/14/sql-to-mongodb-mapping-chart/">SQL 到 MongoDB 對應表</a></h2><div class="post-meta">2013/11/14</div><div class="post-content"><p>由於新專案採用了 <a href="http://nodejs.org/">Node.js</a> 開發且使用 <a href="http://www.mongodb.org/">MongoDB</a> 作為儲存媒介，所以動手翻譯了官方文件方便查閱相關用法。</p>
+<h3 id="術語和概念-Terminology-and-Concepts"><a href="#術語和概念-Terminology-and-Concepts" class="headerlink" title="術語和概念(Terminology and Concepts)"></a>術語和概念(Terminology and Concepts)</h3><h5 id="下表列出了各種-SQL-和相應的-MongoDB-的術語和概念。"><a href="#下表列出了各種-SQL-和相應的-MongoDB-的術語和概念。" class="headerlink" title="下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。"></a>下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。</h5><table>
+<thead>
+<tr>
+<th style="text-align:left">SQL 術語/概念</th>
+<th style="text-align:left">MongoDB 術語/概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">資料庫(database)</td>
+<td style="text-align:left">資料庫(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-database">database</a>)</td>
+</tr>
+<tr>
+<td style="text-align:left">資料表(table)</td>
+<td style="text-align:left">集合(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-collection">collection</a>)</td>
+</tr>
+<tr>
+<td style="text-align:left">資料列(row)</td>
+<td style="text-align:left">文件(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-document">document</a>) 或 <a href="http://docs.mongodb.org/manual/reference/glossary/#term-bson">BSON</a> 文件</td>
+</tr>
+<tr>
+<td style="text-align:left">資料行(column)</td>
+<td style="text-align:left">欄位(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-field">field</a>)</td>
+</tr>
+<tr>
+<td style="text-align:left">索引(index)</td>
+<td style="text-align:left">索引(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-index">index</a>)</td>
+</tr>
+<tr>
+<td style="text-align:left">資料表連結(table joins)</td>
+<td style="text-align:left">嵌入式文件及連結(embedded documents and linking)</td>
+</tr>
+<tr>
+<td style="text-align:left">主索引鍵(primary key)<br /><br />指定任意一個或多個欄位組合為主索引鍵，資料內容須唯一不可重複。</td>
+<td style="text-align:left">主索引鍵(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-primary-key">primary key</a>)<br /><br />在 MongoDB，主索引鍵會自動設定到 <a href="http://docs.mongodb.org/manual/reference/glossary/#term-id">_id</a> 欄位。</td>
+</tr>
+<tr>
+<td style="text-align:left">彙總(aggregation)，例如：group by</td>
+<td style="text-align:left">彙總管線(aggregation pipeline)<br /><br /><a href="http://calvert.logdown.com/posts/159915-sql-to-aggregation-mapping-chart">參閱 SQL 至彙總(Aggregation)對應表</a>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="可執行檔案-Executables"><a href="#可執行檔案-Executables" class="headerlink" title="可執行檔案(Executables)"></a>可執行檔案(Executables)</h3><h5 id="下表列出了-MySQL-Oracle-可執行檔案和相應的-MongoDB-的可執行檔案。"><a href="#下表列出了-MySQL-Oracle-可執行檔案和相應的-MongoDB-的可執行檔案。" class="headerlink" title="下表列出了 MySQL / Oracle 可執行檔案和相應的 MongoDB 的可執行檔案。"></a>下表列出了 MySQL / Oracle 可執行檔案和相應的 MongoDB 的可執行檔案。</h5><table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left">MySQL / Oracle</th>
+<th style="text-align:left">MongoDB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">資料庫伺服器(Database Server)</td>
+<td style="text-align:left">mysqld / oracle</td>
+<td style="text-align:left">mongod</td>
+</tr>
+<tr>
+<td style="text-align:left">資料庫用戶端(Database Client)</td>
+<td style="text-align:left">mysql / sqlplus</td>
+<td style="text-align:left">mongo</td>
+</tr>
+</tbody>
+</table></div><p class="readmore"><a href="/2013/11/14/sql-to-mongodb-mapping-chart/">閱讀更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2013/11/06/install-redis-in-centos-6/">安裝 Redis 於 CentOS 6</a></h2><div class="post-meta">2013/11/06</div><div class="post-content"><p>Redis 是一個開源、遵守 BSD 授權、先進的鍵值對儲存庫。它通常被稱為資料結構伺服器，因為值可以是字串(String)、雜湊(Hash)、列表(List)、集合(Set)及序列集合(Sorted Set)等類型。</p></div><p class="readmore"><a href="/2013/11/06/install-redis-in-centos-6/">閱讀更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2013/10/26/mac-os-x-ssd-performance-optimization/">Mac OS X 延長 SSD 壽命</a></h2><div class="post-meta">2013/10/26</div><div class="post-content"><p>由於有時候會重灌電腦，所以在這記錄一下重灌之後要延長 SSD 所做的步驟。</p></div><p class="readmore"><a href="/2013/10/26/mac-os-x-ssd-performance-optimization/">閱讀更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2013/10/20/jquery-validation-plugin-for-array-of-elements/">使用 jQuery Validation Plugin 驗證元素陣列</a></h2><div class="post-meta">2013/10/20</div><div class="post-content"><p>有時候我們會需要驗證表單中的元素陣列，例如：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">"userDataForm"</span> <span class="attr">name</span>=<span class="string">"userDataForm"</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">action</span>=<span class="string">""</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!-- User 1 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"userName1"</span> <span class="attr">name</span>=<span class="string">"userName[]"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"userAddress1"</span> <span class="attr">name</span>=<span class="string">"userAddress[]"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"sex1"</span> <span class="attr">name</span>=<span class="string">"sex[]"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span>- 請選擇 -<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"1"</span>&gt;</span>男<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"0"</span>&gt;</span>女<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line">    …</div><div class="line">  <span class="comment">&lt;!-- User 2 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"userName2"</span> <span class="attr">name</span>=<span class="string">"userName[]"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"userAddress2"</span> <span class="attr">name</span>=<span class="string">"userAddress[]"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"sex2"</span> <span class="attr">name</span>=<span class="string">"sex[]"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span>- 請選擇 -<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"1"</span>&gt;</span>男<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"0"</span>&gt;</span>女<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line">    …</div><div class="line">  <span class="comment">&lt;!-- User N --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"userNameN"</span> <span class="attr">name</span>=<span class="string">"userName[]"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"userAddressN"</span> <span class="attr">name</span>=<span class="string">"userAddress[]"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"sexN"</span> <span class="attr">name</span>=<span class="string">"sex[]"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span>- 請選擇 -<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"1"</span>&gt;</span>男<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"0"</span>&gt;</span>女<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line">    …</div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure></p></div><p class="readmore"><a href="/2013/10/20/jquery-validation-plugin-for-array-of-elements/">閱讀更多</a></p></div><nav class="page-navigator"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一頁</a></nav></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分類</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Server/">Server</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 標籤</i></div><div class="tagcloud"><a href="/tags/Node-js/" style="font-size: 15px;">Node.js</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/Nginx/" style="font-size: 15px;">Nginx</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/Redis/" style="font-size: 15px;">Redis</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/SQL/" style="font-size: 15px;">SQL</a> <a href="/tags/NoSQL/" style="font-size: 15px;">NoSQL</a> <a href="/tags/MongoDB/" style="font-size: 15px;">MongoDB</a> <a href="/tags/SSL/" style="font-size: 15px;">SSL</a> <a href="/tags/npm/" style="font-size: 15px;">npm</a> <a href="/tags/SemVer/" style="font-size: 15px;">SemVer</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/GitHub/" style="font-size: 15px;">GitHub</a> <a href="/tags/GitHub-Flow/" style="font-size: 15px;">GitHub Flow</a> <a href="/tags/Workflow/" style="font-size: 15px;">Workflow</a> <a href="/tags/Ruby-on-Rails/" style="font-size: 15px;">Ruby on Rails</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Ed25519/" style="font-size: 15px;">Ed25519</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/upgrade_your_ssh_keys/">【譯】升級你的 SSH 金鑰！</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">【譯】使用 Mailboxer 實作站內信系統</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/09/21/understanding-the-github-flow/">了解 GitHub Flow</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/08/20/npm-semantic-versioner/">看懂 npm 語意化版本</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/11/16/sql-to-aggregation-mapping-chart/">SQL 到彙總(Aggregation)對應表</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/11/14/sql-to-mongodb-mapping-chart/">SQL 到 MongoDB 對應表</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/11/06/install-redis-in-centos-6/">安裝 Redis 於 CentOS 6</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/10/26/mac-os-x-ssd-performance-optimization/">Mac OS X 延長 SSD 壽命</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/10/20/jquery-validation-plugin-for-array-of-elements/">使用 jQuery Validation Plugin 驗證元素陣列</a></li></ul></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">Calvert's murmur.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create','UA-44933497-2','auto');ga('send','pageview');
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

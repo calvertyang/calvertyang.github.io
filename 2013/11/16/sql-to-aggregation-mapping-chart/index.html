@@ -1,0 +1,183 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>SQL 到彙總(Aggregation)對應表 | Calvert's murmur</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">SQL 到彙總(Aggregation)對應表</h1><a id="logo" href="/.">Calvert's murmur</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首頁</i></a><a href="/archives/"><i class="fa fa-archive"> 所有文章</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">SQL 到彙總(Aggregation)對應表</h1><div class="post-meta">Nov 16, 2013<span> | </span><span class="category"><a href="/categories/Programming/">Programming</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><div class="post-content"><p>彙總管線(<a href="http://docs.mongodb.org/manual/core/aggregation/" target="_blank" rel="external">aggregation pipeline</a>)允許 MongoDB 提供原生彙總功能，對應 SQL 中許多常見的資料彙總操作。</p>
+<h5 id="下表列出了常見的-SQL-彙總術語、功能及概念和相應的-MongoDB-彙總運算元概觀。"><a href="#下表列出了常見的-SQL-彙總術語、功能及概念和相應的-MongoDB-彙總運算元概觀。" class="headerlink" title="下表列出了常見的 SQL 彙總術語、功能及概念和相應的 MongoDB 彙總運算元概觀。"></a>下表列出了常見的 SQL 彙總術語、功能及概念和相應的 MongoDB 彙總運算元概觀。</h5><table>
+<thead>
+<tr>
+<th style="text-align:left">SQL 術語、功能及概念</th>
+<th style="text-align:left">MongoDB 彙總運算元</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">WHERE</td>
+<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/match/#pipe._S_match" target="_blank" rel="external">$match</a></td>
+</tr>
+<tr>
+<td style="text-align:left">GROUP BY</td>
+<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/group/#pipe._S_group" target="_blank" rel="external">$group</a></td>
+</tr>
+<tr>
+<td style="text-align:left">HAVING</td>
+<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/match/#pipe._S_match" target="_blank" rel="external">$match</a></td>
+</tr>
+<tr>
+<td style="text-align:left">SELECT</td>
+<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/project/#pipe._S_project" target="_blank" rel="external">$project</a></td>
+</tr>
+<tr>
+<td style="text-align:left">ORDER BY</td>
+<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/sort/#pipe._S_sort" target="_blank" rel="external">$sort</a></td>
+</tr>
+<tr>
+<td style="text-align:left">LIMIT</td>
+<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/limit/#pipe._S_limit" target="_blank" rel="external">$limit</a></td>
+</tr>
+<tr>
+<td style="text-align:left">SUM()</td>
+<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/sum/#grp._S_sum" target="_blank" rel="external">$sum</a></td>
+</tr>
+<tr>
+<td style="text-align:left">COUNT()</td>
+<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/sum/#grp._S_sum" target="_blank" rel="external">$sum</a></td>
+</tr>
+<tr>
+<td style="text-align:left">join</td>
+<td style="text-align:left">沒有直接對應的運算元，然而，<a href="http://docs.mongodb.org/manual/reference/operator/aggregation/unwind/#pipe._S_unwind" target="_blank" rel="external">$unwind</a> 運算元允許有些類似的功能，但是與嵌入的欄位在文件內。</td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<h3 id="範例-Examples"><a href="#範例-Examples" class="headerlink" title="範例(Examples)"></a>範例(Examples)</h3><h5 id="下表列出了-SQL-彙總語句和相應的-MongoDB-語句的快速參考。在表格中的範例假定有下列條件："><a href="#下表列出了-SQL-彙總語句和相應的-MongoDB-語句的快速參考。在表格中的範例假定有下列條件：" class="headerlink" title="下表列出了 SQL 彙總語句和相應的 MongoDB 語句的快速參考。在表格中的範例假定有下列條件："></a>下表列出了 SQL 彙總語句和相應的 MongoDB 語句的快速參考。在表格中的範例假定有下列條件：</h5><ul>
+<li>SQL 範例假設有兩張資料表 orders 及 order_lineitem，透過 order_lineitem.order_id 及 orders.id 資料行相連結。</li>
+<li><p>MongoDB 範例假設一個名為 orders 的集合，包含的文件原型如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">　cust_id: "abc123",</div><div class="line">　ord_date: ISODate("2012-11-02T17:04:11.102Z"),</div><div class="line">　status: 'A',</div><div class="line">　price: 50,</div><div class="line">　items: [ &#123; sku: "xxx", qty: 25, price: 1 &#125;,</div><div class="line">　　　　　　&#123; sku: "yyy", qty: 25, price: 1 &#125; ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>MongoDB 語句中集合內的文件的欄位名稱在彙總操作時以 $ 字元為字首。</p>
+</li>
+</ul>
+<hr>
+<h5 id="計算-orders-所有資料數"><a href="#計算-orders-所有資料數" class="headerlink" title="計算 orders 所有資料數"></a>計算 orders 所有資料數</h5><blockquote>
+<ul>
+<li>SQL 架構語句<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">AS</span> <span class="keyword">count</span></div><div class="line"><span class="keyword">FROM</span> orders</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>MongoDB 架構語句<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">db.orders.aggregate( [</div><div class="line">　&#123; $group: &#123; _id: null,</div><div class="line">　　　　　　　count: &#123; $sum: 1 &#125; &#125; &#125;</div><div class="line">] )</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h5 id="加總-orders-的-price-欄位"><a href="#加總-orders-的-price-欄位" class="headerlink" title="加總 orders 的 price 欄位"></a>加總 orders 的 price 欄位</h5><blockquote>
+<ul>
+<li>SQL 架構語句<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">SUM</span>(price) <span class="keyword">AS</span> total</div><div class="line"><span class="keyword">FROM</span> orders</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>MongoDB 架構語句<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">db.orders.aggregate( [</div><div class="line">　&#123; $group: &#123; _id: null,</div><div class="line">　　　　　　　total: &#123; $sum: "$price" &#125; &#125; &#125;</div><div class="line">] )</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h5 id="對不同的-cust-id-加總-price-欄位"><a href="#對不同的-cust-id-加總-price-欄位" class="headerlink" title="對不同的 cust_id 加總 price 欄位"></a>對不同的 cust_id 加總 price 欄位</h5><blockquote>
+<ul>
+<li>SQL 架構語句<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> cust_id,</div><div class="line">　　　　<span class="keyword">SUM</span>(price) <span class="keyword">AS</span> total</div><div class="line"><span class="keyword">FROM</span> orders</div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> cust_id</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>MongoDB 架構語句<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">db.orders.aggregate( [</div><div class="line">　&#123; $group: &#123; _id: "$cust_id",</div><div class="line">　　　　　　　total: &#123; $sum: "$price" &#125; &#125; &#125;</div><div class="line">] )</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h5 id="對不同的-cust-id-加總-price-欄位，並依照加總排序"><a href="#對不同的-cust-id-加總-price-欄位，並依照加總排序" class="headerlink" title="對不同的 cust_id 加總 price 欄位，並依照加總排序"></a>對不同的 cust_id 加總 price 欄位，並依照加總排序</h5><blockquote>
+<ul>
+<li>SQL 架構語句<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> cust_id,</div><div class="line">　　　　<span class="keyword">SUM</span>(price) <span class="keyword">AS</span> total</div><div class="line"><span class="keyword">FROM</span> orders</div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> cust_id</div><div class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> total</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>MongoDB 架構語句<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">db.orders.aggregate( [</div><div class="line">　&#123; $group: &#123; _id: "$cust_id",</div><div class="line">　　　　　　　total: &#123; $sum: "$price" &#125; &#125; &#125;,</div><div class="line">　&#123; $sort: &#123; total: 1 &#125; &#125;</div><div class="line">] )</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h5 id="對不同的-cust-id-及-ord-date-分組，加總-price-欄位"><a href="#對不同的-cust-id-及-ord-date-分組，加總-price-欄位" class="headerlink" title="對不同的 cust_id 及 ord_date 分組，加總 price 欄位"></a>對不同的 cust_id 及 ord_date 分組，加總 price 欄位</h5><blockquote>
+<ul>
+<li>SQL 架構語句<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> cust_id,</div><div class="line">　　　　ord_date,</div><div class="line">　　　　<span class="keyword">SUM</span>(price) <span class="keyword">AS</span> total</div><div class="line"><span class="keyword">FROM</span> orders</div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> cust_id, ord_date</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>MongoDB 架構語句<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">db.orders.aggregate( [</div><div class="line">　&#123; $group: &#123; _id: &#123; cust_id: "$cust_id",</div><div class="line">　　　　　　　　　　　ord_date: "$ord_date" &#125;,</div><div class="line">　　　　　　　total: &#123; $sum: "$price" &#125; &#125; &#125;</div><div class="line">] )</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h5 id="對於-cust-id-的多筆資料，返回-cust-id-和相應的資料數"><a href="#對於-cust-id-的多筆資料，返回-cust-id-和相應的資料數" class="headerlink" title="對於 cust_id 的多筆資料，返回 cust_id 和相應的資料數"></a>對於 cust_id 的多筆資料，返回 cust_id 和相應的資料數</h5><blockquote>
+<ul>
+<li>SQL 架構語句<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> cust_id, <span class="keyword">count</span>(*)</div><div class="line"><span class="keyword">FROM</span> orders</div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> cust_id</div><div class="line"><span class="keyword">HAVING</span> <span class="keyword">count</span>(*) &gt; <span class="number">1</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>MongoDB 架構語句<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">db.orders.aggregate( [</div><div class="line">　&#123; $group: &#123; _id: "$cust_id",</div><div class="line">　　　　　　　count: &#123; $sum: 1 &#125; &#125; &#125;,</div><div class="line">　&#123; $match: &#123; count: &#123; $gt: 1 &#125; &#125; &#125;</div><div class="line">] )</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h5 id="對不同的-cust-id-及-ord-date-分組，加總-price-欄位，並只返回總和大於-250-的資料"><a href="#對不同的-cust-id-及-ord-date-分組，加總-price-欄位，並只返回總和大於-250-的資料" class="headerlink" title="對不同的 cust_id 及 ord_date 分組，加總 price 欄位，並只返回總和大於 250 的資料"></a>對不同的 cust_id 及 ord_date 分組，加總 price 欄位，並只返回總和大於 250 的資料</h5><blockquote>
+<ul>
+<li>SQL 架構語句<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> cust_id,</div><div class="line">　　　　ord_date,</div><div class="line">　　　　<span class="keyword">SUM</span>(price) <span class="keyword">AS</span> total</div><div class="line"><span class="keyword">FROM</span> orders</div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> cust_id, ord_date</div><div class="line"><span class="keyword">HAVING</span> total &gt; <span class="number">250</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>MongoDB 架構語句<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">db.orders.aggregate( [</div><div class="line">　&#123; $group: &#123; _id: &#123; cust_id: "$cust_id",</div><div class="line">　　　　　　　　　　　ord_date: "$ord_date" &#125;,</div><div class="line">　　　　　　　total: &#123; $sum: "$price" &#125; &#125; &#125;,</div><div class="line">　&#123; $match: &#123; total: &#123; $gt: 250 &#125; &#125; &#125;</div><div class="line">] )</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h5 id="對-status-為-A-的不同的-cust-id-加總-price-欄位"><a href="#對-status-為-A-的不同的-cust-id-加總-price-欄位" class="headerlink" title="對 status 為 A 的不同的 cust_id 加總 price 欄位"></a>對 status 為 A 的不同的 cust_id 加總 price 欄位</h5><blockquote>
+<ul>
+<li>SQL 架構語句<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> cust_id,</div><div class="line">　　　　<span class="keyword">SUM</span>(price) <span class="keyword">as</span> total</div><div class="line"><span class="keyword">FROM</span> orders</div><div class="line"><span class="keyword">WHERE</span> <span class="keyword">status</span> = <span class="string">'A'</span></div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> cust_id</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>MongoDB 架構語句<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">db.orders.aggregate( [</div><div class="line">　&#123; $match: &#123; status: 'A' &#125; &#125;,</div><div class="line">　&#123; $group: &#123; _id: "$cust_id",</div><div class="line">　　　　　　　total: &#123; $sum: "$price" &#125; &#125; &#125;</div><div class="line">] )</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h5 id="對-status-為-A-的不同的-cust-id-加總-price-欄位，並只返回總和大於-250-的資料"><a href="#對-status-為-A-的不同的-cust-id-加總-price-欄位，並只返回總和大於-250-的資料" class="headerlink" title="對 status 為 A 的不同的 cust_id 加總 price 欄位，並只返回總和大於 250 的資料"></a>對 status 為 A 的不同的 cust_id 加總 price 欄位，並只返回總和大於 250 的資料</h5><blockquote>
+<ul>
+<li>SQL 架構語句<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> cust_id,</div><div class="line">　　　　<span class="keyword">SUM</span>(price) <span class="keyword">as</span> total</div><div class="line"><span class="keyword">FROM</span> orders</div><div class="line"><span class="keyword">WHERE</span> <span class="keyword">status</span> = <span class="string">'A'</span></div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> cust_id</div><div class="line"><span class="keyword">HAVING</span> total &gt; <span class="number">250</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>MongoDB 架構語句<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">db.orders.aggregate( [</div><div class="line">　&#123; $match: &#123; status: 'A' &#125; &#125;,</div><div class="line">　&#123; $group: &#123; _id: "$cust_id",</div><div class="line">　　　　　　　total: &#123; $sum: "$price" &#125; &#125; &#125;,</div><div class="line">　&#123; $match: &#123; total: &#123; $gt: 250 &#125; &#125; &#125;</div><div class="line">] )</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h5 id="對不同的-cust-id-加總與-orders-相應的-order-lineitem-的-qty-欄位"><a href="#對不同的-cust-id-加總與-orders-相應的-order-lineitem-的-qty-欄位" class="headerlink" title="對不同的 cust_id 加總與 orders 相應的 order_lineitem 的 qty 欄位"></a>對不同的 cust_id 加總與 orders 相應的 order_lineitem 的 qty 欄位</h5><blockquote>
+<ul>
+<li>SQL 架構語句<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> cust_id,</div><div class="line">　　　　<span class="keyword">SUM</span>(li.qty) <span class="keyword">as</span> qty</div><div class="line"><span class="keyword">FROM</span> orders o,</div><div class="line">　　　order_lineitem li</div><div class="line"><span class="keyword">WHERE</span> li.order_id = o.id</div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> cust_id</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>MongoDB 架構語句<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">db.orders.aggregate( [</div><div class="line">　&#123; $unwind: "$items" &#125;,</div><div class="line">　&#123; $group: &#123; _id: "$cust_id",</div><div class="line">　　　　　　　qty: &#123; $sum: "$items.qty" &#125; &#125; &#125;</div><div class="line">] )</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h5 id="計算不同的-cust-id-及-ord-date-分組數量"><a href="#計算不同的-cust-id-及-ord-date-分組數量" class="headerlink" title="計算不同的 cust_id 及 ord_date 分組數量"></a>計算不同的 cust_id 及 ord_date 分組數量</h5><blockquote>
+<ul>
+<li>SQL 架構語句<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*)</div><div class="line"><span class="keyword">FROM</span> (<span class="keyword">SELECT</span> cust_id, ord_date</div><div class="line">　　　<span class="keyword">FROM</span> orders</div><div class="line">　　　<span class="keyword">GROUP</span> <span class="keyword">BY</span> cust_id, ord_date) <span class="keyword">as</span> DerivedTable</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>MongoDB 架構語句<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">db.orders.aggregate( [</div><div class="line">　&#123; $group: &#123; _id: &#123; cust_id: "$cust_id",</div><div class="line">　　　　　　　　　　　ord_date: "$ord_date" &#125; &#125; &#125;,</div><div class="line">　&#123; $group: &#123; _id: null, count: &#123; $sum: 1 &#125; &#125; &#125;</div><div class="line">] )</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="https://blog.chyang.me/2013/11/16/sql-to-aggregation-mapping-chart/" data-id="citxr5w2d00092au6vlty37ep" class="article-share-link">分享至</a><div class="tags"><a href="/tags/SQL/">SQL</a><a href="/tags/NoSQL/">NoSQL</a><a href="/tags/MongoDB/">MongoDB</a></div><div class="post-nav"><a href="/2014/08/20/npm-semantic-versioner/" class="pre">看懂 npm 語意化版本</a><a href="/2013/11/14/sql-to-mongodb-mapping-chart/" class="next">SQL 到 MongoDB 對應表</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分類</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Server/">Server</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 標籤</i></div><div class="tagcloud"><a href="/tags/Node-js/" style="font-size: 15px;">Node.js</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/Nginx/" style="font-size: 15px;">Nginx</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/Redis/" style="font-size: 15px;">Redis</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/SQL/" style="font-size: 15px;">SQL</a> <a href="/tags/NoSQL/" style="font-size: 15px;">NoSQL</a> <a href="/tags/MongoDB/" style="font-size: 15px;">MongoDB</a> <a href="/tags/SSL/" style="font-size: 15px;">SSL</a> <a href="/tags/npm/" style="font-size: 15px;">npm</a> <a href="/tags/SemVer/" style="font-size: 15px;">SemVer</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/GitHub/" style="font-size: 15px;">GitHub</a> <a href="/tags/GitHub-Flow/" style="font-size: 15px;">GitHub Flow</a> <a href="/tags/Workflow/" style="font-size: 15px;">Workflow</a> <a href="/tags/Ruby-on-Rails/" style="font-size: 15px;">Ruby on Rails</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Ed25519/" style="font-size: 15px;">Ed25519</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/upgrade_your_ssh_keys/">【譯】升級你的 SSH 金鑰！</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">【譯】使用 Mailboxer 實作站內信系統</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/09/21/understanding-the-github-flow/">了解 GitHub Flow</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/08/20/npm-semantic-versioner/">看懂 npm 語意化版本</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/11/16/sql-to-aggregation-mapping-chart/">SQL 到彙總(Aggregation)對應表</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/11/14/sql-to-mongodb-mapping-chart/">SQL 到 MongoDB 對應表</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/11/06/install-redis-in-centos-6/">安裝 Redis 於 CentOS 6</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/10/26/mac-os-x-ssd-performance-optimization/">Mac OS X 延長 SSD 壽命</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/10/20/jquery-validation-plugin-for-array-of-elements/">使用 jQuery Validation Plugin 驗證元素陣列</a></li></ul></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">Calvert's murmur.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create','UA-44933497-2','auto');ga('send','pageview');
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
