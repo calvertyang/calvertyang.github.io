@@ -1,9 +1,562 @@
-<!DOCTYPE html><html lang="zh-TW"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>Calvert's murmur</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Calvert's murmur</h1><a id="logo" href="/.">Calvert's murmur</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首頁</i></a><a href="/archives/"><i class="fa fa-archive"> 所有文章</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h2 class="post-title"><a href="/2016/10/16/capistrano-with-ed25519-keys/">【譯】在 Capistrano 自動化部署時使用 Ed25519 金鑰</a></h2><div class="post-meta">2016/10/16</div><div class="post-content"><p>我最近將我的 Capistrano 自動化部署切換到了 Ed25519 金鑰。在正常運作之前我發現到一些奇怪的錯誤，部署使用者/代理程式無法登入到主機。在檢查 authorized_keys 檔案權限、本地 SSH 代理程式後，我開始用 Google 搜尋這個問題。結果是，net-ssh 版本小於 4 不支援 Ed25519 金鑰。</p></div><p class="readmore"><a href="/2016/10/16/capistrano-with-ed25519-keys/">閱讀更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2016/10/05/upgrade_your_ssh_keys/">【譯】升級你的 SSH 金鑰！</a></h2><div class="post-meta">2016/10/05</div><div class="post-content"><p>無論你是軟體開發人員或系統管理員，我敢打賭你正在使用 SSH 金鑰。比起使用密碼來推送提交到 Github 或是管理 Unix 系統，透過 SSH 公開金鑰驗證是最佳的方法。然而，隨著時光飛逝，很多人都使用舊金鑰而沒有意識到需要產生一個新的來提供私密資料更好的保護。在這篇文章，我將示範如何平穩的轉換到 Ed25519 金鑰、你為什麼會想要它以及展示一些技巧和訣竅。</p>
-<p>長話短說，使用 <code>ssh-keygen -o -a 100 -t ed25519</code> 來產生新的金鑰並指定一個高強度的通關密語，如果你需要平穩的轉換，請繼續往下閱讀。</p>
-<p>我計劃發佈更多 SSH 技巧和訣竅，所以請關注我的部落格。這篇文章的重點是關於作為使用者公開金鑰驗證的 SSH 金鑰。</p>
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Y0Zz15IXRv_417TF0lTBI_cHWg8Mt8OEaFqkWgXLY6I" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calvert's murmur">
+<meta property="og:url" content="https://blog.chyang.me/index.html">
+<meta property="og:site_name" content="Calvert's murmur">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Calvert's murmur">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://blog.chyang.me/"/>
+
+
+  <title> Calvert's murmur </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-44933497-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Calvert's murmur</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/16/capistrano-with-ed25519-keys/" itemprop="url">
+                  【譯】在 Capistrano 自動化部署時使用 Ed25519 金鑰
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2016-10-16T14:43:27+08:00" content="2016/10/16">
+              2016/10/16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>原文：<strong>steigr</strong> — <a href="https://blog.stei.gr/?p=4" target="_blank" rel="external">Capistrano with ED25519 keys</a></p>
+</blockquote>
+<p>我最近將我的 Capistrano 自動化部署切換到了 Ed25519 金鑰。在正常運作之前我發現到一些奇怪的錯誤，部署使用者/代理程式無法登入到主機。在檢查 authorized_keys 檔案權限、本地 SSH 代理程式後，我開始用 Google 搜尋這個問題。結果是，net-ssh 版本小於 4 不支援 Ed25519 金鑰。</p>
+<p>在 Gemfile 加入以下幾行，安裝所需的版本和 ruby gems 以啟用 Ed25519 金鑰支援：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">gem <span class="string">'bcrypt_pbkdf'</span>, <span class="symbol">group:</span> <span class="symbol">:development</span></div><div class="line">gem <span class="string">'rbnacl-libsodium'</span>, <span class="symbol">group:</span> <span class="symbol">:development</span></div><div class="line">gem <span class="string">'rbnacl'</span>, <span class="symbol">group:</span> <span class="symbol">:development</span></div><div class="line">gem <span class="string">'net-ssh'</span>, <span class="string">'~&gt; 4.0.0.beta'</span>, <span class="symbol">group:</span> <span class="symbol">:development</span></div></pre></td></tr></table></figure>
+<p>確認 ruby 開發標頭檔，安裝到 <code>rbnacl</code> 及 <code>rbnacl-libsodium</code> 的 C 編譯器和相依開發標頭檔皆有原生擴充功能。</p>
+<p>現在，<code>deploy-agent@server&#39;s password:</code> 訊息應該消失了。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/05/upgrade_your_ssh_keys/" itemprop="url">
+                  【譯】升級你的 SSH 金鑰！
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2016-10-05T13:53:00+08:00" content="2016/10/05">
+              2016/10/05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Security/" itemprop="url" rel="index">
+                    <span itemprop="name">Security</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文：<strong>Gert van Dijk</strong> — <a href="https://blog.g3rt.nl/upgrade-your-ssh-keys.html">Upgrade your SSH keys!</a></p>
+</blockquote>
+<p>無論你是軟體開發人員或系統管理員，我敢打賭你正在使用 SSH 金鑰。比起使用密碼來推送提交到 Github 或是管理 Unix 系統，透過 SSH 公開金鑰驗證是最佳的方法。然而，隨著時光飛逝，很多人都使用舊金鑰而沒有意識到需要產生一個新的來提供私密資料更好的保護。在這篇文章，我將示範如何平穩的轉換到 Ed25519 金鑰、你為什麼會想要它以及展示一些技巧和訣竅。</p>
+<blockquote><p>長話短說，使用 <code>ssh-keygen -o -a 100 -t ed25519</code> 來產生新的金鑰並指定一個高強度的通關密語，如果你需要平穩的轉換，請繼續往下閱讀。</p>
+</blockquote>
+<blockquote><p>我計劃發佈更多 SSH 技巧和訣竅，所以請關注我的部落格。這篇文章的重點是關於作為使用者公開金鑰驗證的 SSH 金鑰。</p>
+</blockquote>
 <h3 id="DSA-和-RSA-1024-位元已經廢止"><a href="#DSA-和-RSA-1024-位元已經廢止" class="headerlink" title="DSA 和 RSA 1024 位元已經廢止"></a>DSA 和 RSA 1024 位元已經廢止</h3><p>如果你已經使用預設選項建立金鑰超過四年，它可能不安全（RSA &lt; 2048 位元）。更糟的是，我最近看到了推特迷、同事和朋友還在使用 DSA 金鑰（OpenSSH 格式裡的 <code>ssh-dss</code> 類型）。那是一種類似於 RSA 的金鑰類型，但長度受限於 1024 位元且被<a href="https://security.stackexchange.com/a/5100/12948">推薦</a>了很長一段時間。它顯然不安全，且被最近的 OpenSSH 版本以正當理由拒絕（請參見 <a href="http://www.openssh.com/txt/release-7.0">7.0 更新日誌</a>）。</p>
 <p>難過的是，我看到關於如何重新啟用支援 DSA 金鑰的文章，而不是轉移到一種更安全的金鑰類型。真的，依照指示更改 <code>PubkeyAcceptedKeyTypes</code> 或 <code>HostKeyAlgorithms</code> 的設定是不明智的(host keys are for a later post)。取而代之，升級你的金鑰！</p>
-<p><table><br>  <tr><br>    <td>比較 DSA 及使用像這樣技術打造的鑰匙，你不會希望此類型的鑰匙來開啟你的前門，對吧？</td><br>    <td><img src="/2016/10/05/upgrade_your_ssh_keys/old_key_picture.jpg" alt="舊式鑰匙" title="舊式鑰匙"></td><br>  </tr><br></table><br></div><p class="readmore"><a href="/2016/10/05/upgrade_your_ssh_keys/">閱讀更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">【譯】使用 Mailboxer 實作站內信系統</a></h2><div class="post-meta">2015/05/20</div><div class="post-content"><p>Mailboxer 是一個 Rails gem，為 <a href="https://github.com/ging/social_stream">social_stream</a> 框架用來建立社群網路的一部分。它是具備一些通用方法的訊息系統，允許任何 model 擔任傳遞訊息的角色。</p>
+<img src="/2016/10/05/upgrade_your_ssh_keys/old_key_picture.jpg" alt="比較 DSA 及使用像這樣技術打造的鑰匙，你不會希望此類型的鑰匙來開啟你家的門，對吧？" title="比較 DSA 及使用像這樣技術打造的鑰匙，你不會希望此類型的鑰匙來開啟你家的門，對吧？">
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/05/upgrade_your_ssh_keys/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/" itemprop="url">
+                  【譯】使用 Mailboxer 實作站內信系統
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2015-05-20T01:34:00+08:00" content="2015/05/20">
+              2015/05/20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Mailboxer 是一個 Rails gem，為 <a href="https://github.com/ging/social_stream">social_stream</a> 框架用來建立社群網路的一部分。它是具備一些通用方法的訊息系統，允許任何 model 擔任傳遞訊息的角色。</p>
 <p>使用 Mailboxer，你可以與一或多個收件人建立對話（訊息會被歸納到寄件匣、收件匣及垃圾桶）並透過電子郵件發送通知。它甚至可以在不同 model 間發送訊息和附件！唯一的缺點是缺乏文件，所以我希望這邊文章是有幫助的。</p>
 <p>我們要討論的範例程式為：</p>
 <ul>
@@ -16,7 +569,618 @@
 <li>設定電子郵件通知</li>
 </ul>
 <p>此範例將使用 Rails 4，但幾乎相同的解決方案也可以實作於 Rails 3.2（Mailboxer 不再支援 3.1 版）。</p>
-<p>原始碼可以在 <a href="https://github.com/CalvertYang/Synergy">Github</a> 找到。</p></div><p class="readmore"><a href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">閱讀更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2014/09/21/understanding-the-github-flow/">了解 GitHub Flow</a></h2><div class="post-meta">2014/09/21</div><div class="post-content"><p>GitHub Flow 是一個基於分支的輕量化工作流程，幫助團隊及專案定期的進行部署。</p></div><p class="readmore"><a href="/2014/09/21/understanding-the-github-flow/">閱讀更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審</a></h2><div class="post-meta">2014/08/23</div><div class="post-content"><p>這次 App 送審被 Apple 以違反 PLA 3.3.12 而退審，內容大致上是說 Advertising Identifier(IDFA) 僅可基於廣告目的使用於應用程式內，但審核團隊沒發現需用 IDFA 來呈現廣告的地方。</p></div><p class="readmore"><a href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">閱讀更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2014/08/20/npm-semantic-versioner/">看懂 npm 語意化版本</a></h2><div class="post-meta">2014/08/20</div><div class="post-content"><p>npm(Node Package Manager) 採用語意化版本 2.0.0 規範，詳細的規範內容可查看 <a href="http://semver.org/" target="_blank" rel="external">http://semver.org/</a>。</p></div><p class="readmore"><a href="/2014/08/20/npm-semantic-versioner/">閱讀更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2013/11/16/sql-to-aggregation-mapping-chart/">SQL 到彙總(Aggregation)對應表</a></h2><div class="post-meta">2013/11/16</div><div class="post-content"><p>彙總管線(<a href="http://docs.mongodb.org/manual/core/aggregation/">aggregation pipeline</a>)允許 MongoDB 提供原生彙總功能，對應 SQL 中許多常見的資料彙總操作。</p>
+<p>原始碼可以在 <a href="https://github.com/CalvertYang/Synergy">Github</a> 找到。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/09/21/understanding-the-github-flow/" itemprop="url">
+                  【譯】了解 GitHub Flow
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2014-09-21T14:51:00+08:00" content="2014/09/21">
+              2014/09/21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>原文：<strong>GitHub</strong> — <a href="https://guides.github.com/introduction/flow/index.html" target="_blank" rel="external">Understanding the GitHub Flow</a></p>
+</blockquote>
+<p>GitHub Flow 是一個基於分支的輕量化工作流程，幫助團隊及專案定期的進行部署。</p>
+<p><img src="http://i.imgur.com/IDOaTrc.png" alt="Create a branch"></p>
+<p>在進行一項專案時，任何時候你可能會有一堆不同功能或想法，有些已經準備好了，而另有些則沒有。分支的存在是為了幫助你管理這些工作流程。</p>
+<p>當你在專案建立一個分支，代表建立了一個環境來測試你的新想法。在分支所做的修改不會影響 <code>master</code> 分支，所以可以自由的嘗試並提交修改。你可以放心，分支不會被合併，直到準備將它交由某位協同者來檢查。</p>
+<h3 id="進階提示"><a href="#進階提示" class="headerlink" title="進階提示"></a>進階提示</h3><p>整個 GitHub Flow 是基於分支，它是 Git 的一個核心概念。這裡只有一個規則：任何在 <code>master</code> 分支中的都是可部署的。</p>
+<p>正因為如此，當在進行一個功能或修復時，分離新分支與 master 是非常重要的。分支名稱應該具有描述性（如 <code>refactor-authentication</code>、<code>user-content-cache-key</code> 或 <code>make-retina-avatars</code>），讓其他人知道哪些正在進行中。</p>
+<p><img src="http://i.imgur.com/5dSdhjw.png" alt="Add commits"></p>
+<p>一旦你的分支已經建立，是時候開始進行修改。無論你何時新增、修改或刪除檔案，你會提交更新並將它們加入分支。加入提交的過程讓你可以追蹤分支的工作進度。</p>
+<p>提交也產生了一個透明的工作記錄，讓其他人可以了解你做了些什麼，以及原因。每個提交都有相關的提交訊息，用以解釋為什麼做了修改。此外，每個提交被視為一個修改的獨立個體。這使你在找到錯誤或決定朝不同方向時可以復原修改。</p>
+<h3 id="進階提示-1"><a href="#進階提示-1" class="headerlink" title="進階提示"></a>進階提示</h3><p>提交訊息是很重要的，尤其當 Git 追蹤你的修改並顯示這些提交於伺服器上。透過撰寫清楚的提交訊息，你可以更容易讓其他人了解並提供回饋。</p>
+<p><img src="http://i.imgur.com/bd63kSL.png" alt="Open a Pull Request"></p>
+<p>Pull Requests 發起了關於提交的討論。因為它們緊密的與底層的 Git 儲存庫結合，任何人都可以清楚的看到如果他們接受你的請求，將會合併什麼修改。</p>
+<p>在任何的開發過程中，你可以開啟一個 Pull Request：當你有些許或沒有程式碼，但想分享一些截圖或想法，當你卡住了，需要幫助或建議，或者當你準備好讓某人來檢查你的工作。在 Pull Request 訊息內使用 GitHub 的 <code>@</code> 提及系統，可以要求某個人或團隊的回饋，無論他們身在何處。</p>
+<h3 id="進階提示-2"><a href="#進階提示-2" class="headerlink" title="進階提示"></a>進階提示</h3><p>Pull Requests 對於協作開源專案和管理共享儲存庫的修改很有用。如果你使用的是 Fork 及 Pull 模式，Pull Requests 提供了一個方法來通知專案維護者關於你所做的修改。如果你使用的是共享儲存庫模式，Pull Requests 協助在合併到 master 分支前的程式碼檢閱和討論關於修改的建議。</p>
+<p><img src="http://i.imgur.com/jJYTQbj.png" alt="Discuss and review your code"></p>
+<p>一旦 Pull Request 被開啟，檢閱修改的人或團隊可能會有問題或意見。也許是程式碼風格不符合專案指引、缺少單元測試，或者也許一切看起來都不錯且狀況良好。Pull Requests 旨在鼓勵這種類型的討論。</p>
+<p>在討論及回饋關於你的提交時，你還可以繼續推送到你的分支。如果有人反應說你忘了做某件事，或者在程式碼中有錯誤，你可以在分支中修正它並推送修改。GitHub 會顯示你的新提交及任何可能會收到的額外回饋在統一的 Pull Request 頁面。</p>
+<h3 id="進階提示-3"><a href="#進階提示-3" class="headerlink" title="進階提示"></a>進階提示</h3><p>Pull Request 的意見都是用 Markdown 撰寫，所以你可以插入圖片和表情符號，使用預先格式化的文字區塊，及其他輕量化的格式。</p>
+<p><img src="http://i.imgur.com/tQfqXjR.png" alt="Merge and deploy"></p>
+<p>一旦你的 Pull Request 進行了檢閱且分支通過測試，是時候將程式碼合併到 master 分支進行部署。如果你想在合併到 GitHub 儲存庫前測試東西，你可以先在本地進行合併。若你沒有推送到儲存庫的權限，這就派上用場了。</p>
+<p>合併後，Pull Requests 保存了一筆程式碼的修改歷史記錄。因為他們是可搜尋的，可讓任何人回頭來了解為什麼及如何作出決定。</p>
+<h3 id="進階提示-4"><a href="#進階提示-4" class="headerlink" title="進階提示"></a>進階提示</h3><p>你可以透過將特定的關鍵字放入 Pull Request 訊息中，將問題與程式碼做關聯。當你的 Pull Request 被合併，相關的問題也將被關閉。舉例來說，輸入 <code>Closes #32</code> 將會關閉儲存庫中編號 32 的問題。欲了解更多資訊，請查看我們的<a href="https://help.github.com/articles/closing-issues-via-commit-messages" target="_blank" rel="external">幫助文章</a>。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/" itemprop="url">
+                  修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2014-08-23T05:21:00+08:00" content="2014/08/23">
+              2014/08/23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>這次 App 送審被 Apple 以違反 PLA 3.3.12 而退審，內容大致上是說 Advertising Identifier(IDFA) 僅可基於廣告目的使用於應用程式內，但審核團隊沒發現需用 IDFA 來呈現廣告的地方。</p>
+<p>因送審的 App 內僅使用 iAd，而 iAd 是不需 AdSupport framework、ASIdentifierManager 或 Advertising Identifier 的，所以唯一的可能性就是第三方 Framework 使用了 IDFA。</p>
+<p>Apple 在退審原因內提示可透過 <strong>strings</strong> 或 <strong>otool</strong> 指令來幫忙找出問題點，最終揪出兇手就是 FacebookSDK，在 <a href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m" target="_blank" rel="external"><code>FBUtility.m</code></a> 引入了 <a href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m#L28" target="_blank" rel="external"><code>AdSupport</code></a> 並使用 <a href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m#L287" target="_blank" rel="external"><code>advertisingIdentifier</code></a>。</p>
+<p>暫時的解決方法如下：</p>
+<ol>
+<li>git clone <a href="https://github.com/facebook/facebook-ios-sdk" target="_blank" rel="external">FacebookSDK</a> 到本機</li>
+<li><p>開啟 <code>src/Core/FBUtility.m</code>，將此行註解</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//#import &lt;AdSupport/AdSupport.h&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>將</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">+ (<span class="built_in">NSString</span> *)advertiserID &#123;</div><div class="line">    <span class="built_in">NSString</span> *advertiserID = <span class="literal">nil</span>;</div><div class="line">    Class ASIdentifierManagerClass = [FBDynamicFrameworkLoader loadClass:<span class="string">@"ASIdentifierManager"</span>     withFramework:<span class="string">@"AdSupport"</span>];</div><div class="line">    <span class="keyword">if</span> ([ASIdentifierManagerClass <span class="keyword">class</span>]) &#123;</div><div class="line">        ASIdentifierManager *manager = [ASIdentifierManagerClass sharedManager];</div><div class="line">        advertiserID = [[manager advertisingIdentifier] UUIDString];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> advertiserID;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>改為</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">+ (<span class="built_in">NSString</span> *)advertiserID &#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">@""</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>將</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">+ (FBAdvertisingTrackingStatus)advertisingTrackingStatus &#123;</div><div class="line">    <span class="keyword">if</span> ([FBSettings restrictedTreatment] == FBRestrictedTreatmentYES) &#123;</div><div class="line">        <span class="keyword">return</span> AdvertisingTrackingDisallowed;</div><div class="line">    &#125;</div><div class="line">    FBAdvertisingTrackingStatus status = AdvertisingTrackingUnspecified;</div><div class="line">    Class ASIdentifierManagerClass = [FBDynamicFrameworkLoader loadClass:<span class="string">@"ASIdentifierManager"</span> withFramework:<span class="string">@"AdSupport"</span>];</div><div class="line">    <span class="keyword">if</span> ([ASIdentifierManagerClass <span class="keyword">class</span>]) &#123;</div><div class="line">        ASIdentifierManager *manager = [ASIdentifierManagerClass sharedManager];</div><div class="line">        <span class="keyword">if</span> (manager) &#123;</div><div class="line">            status = [manager isAdvertisingTrackingEnabled] ? AdvertisingTrackingAllowed : AdvertisingTrackingDisallowed;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> status;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>改為</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">+ (FBAdvertisingTrackingStatus)advertisingTrackingStatus &#123;</div><div class="line">    <span class="keyword">return</span> AdvertisingTrackingDisallowed;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用 <code>scripts/build_framework.sh</code> 重新打包 FacebookSDK。</p>
+</li>
+<li><p>返回原專案引用新打包的 FacebookSDK 重建 App 並送審。</p>
+</li>
+</ol>
+<p><strong>註：若 App 內使用了 iAd 以外的廣告服務且廣告有正常顯示，應該不會因違反 PLA 3.3.12 而退審。</strong></p>
+<p>參考資料：</p>
+<ul>
+<li>Stack Overflow：<a href="http://stackoverflow.com/questions/21574680/app-rejected-because-of-advertisingidentifier-in-facebook-sdk-and-flurry-sdk" target="_blank" rel="external">app rejected because of advertisingIdentifier in Facebook SDK and Flurry SDK</a></li>
+<li>Github：<a href="https://github.com/facebook/facebook-ios-sdk/issues/583" target="_blank" rel="external">Rejection for ASIdentifierManager</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/08/20/npm-semantic-versioner/" itemprop="url">
+                  看懂 npm 語意化版本
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2014-08-20T06:14:00+08:00" content="2014/08/20">
+              2014/08/20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>npm(Node Package Manager) 採用語意化版本 2.0.0 規範，詳細的規範內容可查看 <a href="http://semver.org/" target="_blank" rel="external">http://semver.org/</a>。</p>
+<p>使用 npm 管理套件時，你會注意到 package.json 內的套件版本有許多表示法，以下說明各表示法所代表的意思：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">版本</th>
+<th style="text-align:left">說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>1.2.3</code></td>
+<td style="text-align:left">指定版本。需為完整的版號，包含<strong>主版號</strong>、<strong>次版號</strong>及<strong>修訂號</strong>。<br>需注意的是，版本編譯資訊（Metadata）會被忽略，所以 <code>1.2.3+build2012</code> 滿足此條件。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>&gt;1.2.3</code></td>
+<td style="text-align:left">大於指定版本。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>&lt;1.2.3</code></td>
+<td style="text-align:left">小於指定版本。如果沒有預先發佈版在此版本範圍，則沒有預先發佈版會被允許，即使在技術上是「小於」。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>&gt;=1.2.3</code></td>
+<td style="text-align:left">大於或等於。需注意的是，預先發佈版不等同其版本。<br>因此 <code>1.2.3-beta</code> 不滿足此條件，但 <code>2.3.0-beta</code> 則會。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>&lt;=1.2.3</code></td>
+<td style="text-align:left">小於或等於。在這種情況下，允許預先發佈版，所以 <code>1.2.3-beta</code> 滿足此條件。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>1.2.3 - 2.3.4</code></td>
+<td style="text-align:left">等同於 <code>&gt;=1.2.3 &lt;=2.3.4</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>~1.2.3</code></td>
+<td style="text-align:left">等同於 <code>&gt;=1.2.3-0 &lt;1.3.0-0</code>，當使用 ~ 符號時，支援預先發佈版，但不含次版號的變更（及其預先發佈版）。<br>因此 <code>1.3.0-beta</code> 不滿足 <code>~1.2.3</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>^1.2.3</code></td>
+<td style="text-align:left">等同於 <code>&gt;=1.2.3-0 &lt;2.0.0-0</code>，當使用 ^ 符號時，支援任何次版號及修訂號的變更（含預先發佈版），但不含主版號的變更（及其預先發佈版）。<br>因此 <code>1.5.1</code> 能滿足 <code>^1.2.3</code>，而 <code>1.2.2</code> 及 <code>2.0.0-beta</code> 則不會。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>^0.1.3</code></td>
+<td style="text-align:left">等同於 <code>0.1.3</code>，與 0.1.3 版相容。0.x.x 版比較特殊，因為語意化版本規範規定 0.x.x 版不作任何穩定性保證，只有指定的版本被認為是有效的。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>~0.0.2</code></td>
+<td style="text-align:left">等同於 <code>0.0.2</code>，與 0.0.2 版相容。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>~1.2</code></td>
+<td style="text-align:left">等同於 <code>&gt;=1.2.0-0 &lt;1.3.0-0</code>，任何從 1.2 開始的版本。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>^1.2</code></td>
+<td style="text-align:left">等同於 <code>&gt;=1.2.0-0 &lt;1.3.0-0</code>，任何相容於從 1.2 開始的版本。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>1.2.x</code></td>
+<td style="text-align:left">等同於 <code>&gt;=1.2.0-0 &lt;1.3.0-0</code>，任何從 1.2 開始的版本。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>1.2.*</code></td>
+<td style="text-align:left">等同於 <code>1.2.x</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>1.2</code></td>
+<td style="text-align:left">等同於 <code>1.2.x</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>~1</code></td>
+<td style="text-align:left">等同於 <code>&gt;=1.0.0-0 &lt;2.0.0-0</code>，任何從 1 開始的版本。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>^1</code></td>
+<td style="text-align:left">等同於 <code>&gt;=1.0.0-0 &lt;2.0.0-0</code>，任何相容於從 1 開始的版本。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>1.x</code></td>
+<td style="text-align:left">等同於 <code>&gt;=1.0.0-0 &lt;2.0.0-0</code>，任何從 1 開始的版本。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>1.*</code></td>
+<td style="text-align:left">等同於 <code>1.x</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>1</code></td>
+<td style="text-align:left">等同於 <code>1.x</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>*</code></td>
+<td style="text-align:left">任何版本。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>x</code></td>
+<td style="text-align:left">等同於 <code>*</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>&quot;&quot;</code></td>
+<td style="text-align:left">空字串，等同於 <code>*</code>。</td>
+</tr>
+</tbody>
+</table>
+<p>官方文件：<a href="https://www.npmjs.org/doc/misc/semver.html" target="_blank" rel="external">The semantic versioner for npm</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2013/11/16/sql-to-aggregation-mapping-chart/" itemprop="url">
+                  SQL 到彙總(Aggregation)對應表
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2013-11-16T03:10:00+08:00" content="2013/11/16">
+              2013/11/16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>彙總管線(<a href="http://docs.mongodb.org/manual/core/aggregation/">aggregation pipeline</a>)允許 MongoDB 提供原生彙總功能，對應 SQL 中許多常見的資料彙總操作。</p>
 <h5 id="下表列出了常見的-SQL-彙總術語、功能及概念和相應的-MongoDB-彙總運算元概觀。"><a href="#下表列出了常見的-SQL-彙總術語、功能及概念和相應的-MongoDB-彙總運算元概觀。" class="headerlink" title="下表列出了常見的 SQL 彙總術語、功能及概念和相應的 MongoDB 彙總運算元概觀。"></a>下表列出了常見的 SQL 彙總術語、功能及概念和相應的 MongoDB 彙總運算元概觀。</h5><table>
 <thead>
 <tr>
@@ -62,7 +1226,122 @@
 <td style="text-align:left">沒有直接對應的運算元，然而，<a href="http://docs.mongodb.org/manual/reference/operator/aggregation/unwind/#pipe._S_unwind">$unwind</a> 運算元允許有些類似的功能，但是與嵌入的欄位在文件內。</td>
 </tr>
 </tbody>
-</table></div><p class="readmore"><a href="/2013/11/16/sql-to-aggregation-mapping-chart/">閱讀更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2013/11/14/sql-to-mongodb-mapping-chart/">SQL 到 MongoDB 對應表</a></h2><div class="post-meta">2013/11/14</div><div class="post-content"><p>由於新專案採用了 <a href="http://nodejs.org/">Node.js</a> 開發且使用 <a href="http://www.mongodb.org/">MongoDB</a> 作為儲存媒介，所以動手翻譯了官方文件方便查閱相關用法。</p>
+</table>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/11/16/sql-to-aggregation-mapping-chart/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2013/11/14/sql-to-mongodb-mapping-chart/" itemprop="url">
+                  SQL 到 MongoDB 對應表
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2013-11-14T11:46:00+08:00" content="2013/11/14">
+              2013/11/14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>由於新專案採用了 <a href="http://nodejs.org/">Node.js</a> 開發且使用 <a href="http://www.mongodb.org/">MongoDB</a> 作為儲存媒介，所以動手翻譯了官方文件方便查閱相關用法。</p>
 <h3 id="術語和概念-Terminology-and-Concepts"><a href="#術語和概念-Terminology-and-Concepts" class="headerlink" title="術語和概念(Terminology and Concepts)"></a>術語和概念(Terminology and Concepts)</h3><h5 id="下表列出了各種-SQL-和相應的-MongoDB-的術語和概念。"><a href="#下表列出了各種-SQL-和相應的-MongoDB-的術語和概念。" class="headerlink" title="下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。"></a>下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。</h5><table>
 <thead>
 <tr>
@@ -125,9 +1404,563 @@
 <td style="text-align:left">mongo</td>
 </tr>
 </tbody>
-</table></div><p class="readmore"><a href="/2013/11/14/sql-to-mongodb-mapping-chart/">閱讀更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2013/11/06/install-redis-in-centos-6/">安裝 Redis 於 CentOS 6</a></h2><div class="post-meta">2013/11/06</div><div class="post-content"><p>Redis 是一個開源、遵守 BSD 授權、先進的鍵值對儲存庫。它通常被稱為資料結構伺服器，因為值可以是字串(String)、雜湊(Hash)、列表(List)、集合(Set)及序列集合(Sorted Set)等類型。</p></div><p class="readmore"><a href="/2013/11/06/install-redis-in-centos-6/">閱讀更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2013/10/26/mac-os-x-ssd-performance-optimization/">Mac OS X 延長 SSD 壽命</a></h2><div class="post-meta">2013/10/26</div><div class="post-content"><p>由於有時候會重灌電腦，所以在這記錄一下重灌之後要延長 SSD 所做的步驟。</p></div><p class="readmore"><a href="/2013/10/26/mac-os-x-ssd-performance-optimization/">閱讀更多</a></p></div><nav class="page-navigator"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一頁</a></nav></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分類</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Security/">Security</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Server/">Server</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 標籤</i></div><div class="tagcloud"><a href="/tags/SemVer/" style="font-size: 15px;">SemVer</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/Nginx/" style="font-size: 15px;">Nginx</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/SQL/" style="font-size: 15px;">SQL</a> <a href="/tags/NoSQL/" style="font-size: 15px;">NoSQL</a> <a href="/tags/MongoDB/" style="font-size: 15px;">MongoDB</a> <a href="/tags/Node-js/" style="font-size: 15px;">Node.js</a> <a href="/tags/npm/" style="font-size: 15px;">npm</a> <a href="/tags/SSL/" style="font-size: 15px;">SSL</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/GitHub/" style="font-size: 15px;">GitHub</a> <a href="/tags/GitHub-Flow/" style="font-size: 15px;">GitHub Flow</a> <a href="/tags/Workflow/" style="font-size: 15px;">Workflow</a> <a href="/tags/Ruby-on-Rails/" style="font-size: 15px;">Ruby on Rails</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Ed25519/" style="font-size: 15px;">Ed25519</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/Redis/" style="font-size: 15px;">Redis</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/16/capistrano-with-ed25519-keys/">【譯】在 Capistrano 自動化部署時使用 Ed25519 金鑰</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/upgrade_your_ssh_keys/">【譯】升級你的 SSH 金鑰！</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">【譯】使用 Mailboxer 實作站內信系統</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/09/21/understanding-the-github-flow/">了解 GitHub Flow</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/08/20/npm-semantic-versioner/">看懂 npm 語意化版本</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/11/16/sql-to-aggregation-mapping-chart/">SQL 到彙總(Aggregation)對應表</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/11/14/sql-to-mongodb-mapping-chart/">SQL 到 MongoDB 對應表</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/11/06/install-redis-in-centos-6/">安裝 Redis 於 CentOS 6</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/10/26/mac-os-x-ssd-performance-optimization/">Mac OS X 延長 SSD 壽命</a></li></ul></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">Calvert's murmur.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-ga('create','UA-44933497-2','auto');ga('send','pageview');
-</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
+</table>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013/11/14/sql-to-mongodb-mapping-chart/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2013/11/06/install-redis-in-centos-6/" itemprop="url">
+                  安裝 Redis 於 CentOS 6
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2013-11-06T04:45:00+08:00" content="2013/11/06">
+              2013/11/06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Server/" itemprop="url" rel="index">
+                    <span itemprop="name">Server</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Redis 是一個開源、遵守 BSD 授權、先進的鍵值對儲存庫。它通常被稱為資料結構伺服器，因為值可以是字串(String)、雜湊(Hash)、列表(List)、集合(Set)及序列集合(Sorted Set)等類型。</p>
+<ol>
+<li><p>下載並解壓縮</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ wget http://download.redis.io/redis-stable.tar.gz</div><div class="line">$ tar -zxvf redis-stable.tar.gz</div><div class="line">$ <span class="built_in">cd</span> redis-stable</div></pre></td></tr></table></figure>
+</li>
+<li><p>編譯並測試是否可安裝</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ make</div><div class="line">$ make <span class="built_in">test</span></div></pre></td></tr></table></figure>
+<p>若出現訊息，代表系統尚未安裝 tcl</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> src &amp;&amp; make <span class="built_in">test</span></div><div class="line">make[1]: Entering directory `/tmp/redis-stable/src<span class="string">'</span></div><div class="line">You need tcl 8.5 or newer in order to run the Redis test</div><div class="line">make[1]: *** [test] Error 1</div><div class="line">make[1]: Leaving directory `/tmp/redis-stable/src'</div><div class="line">make: *** [<span class="built_in">test</span>] Error 2</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>tcl 安裝步驟，詳見<a href="http://www.linuxfromscratch.org/blfs/view/cvs/general/tcl.html" target="_blank" rel="external">官方文件</a></p>
+<ol>
+<li><p>安裝 redis</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ make install</div><div class="line"><span class="built_in">cd</span> src &amp;&amp; make install</div><div class="line">make[1]: Entering directory <span class="string">'/tmp/redis-stable/src'</span></div><div class="line">Hint: To run <span class="string">'make test'</span> is a good idea ;)</div><div class="line">mkdir -p /usr/<span class="built_in">local</span>/bin</div><div class="line">    INSTALL install</div><div class="line">    INSTALL install</div><div class="line">    INSTALL install</div><div class="line">    INSTALL install</div><div class="line">    INSTALL install</div><div class="line">make[1]: Leaving directory `/tmp/redis-stable/src<span class="string">'</span></div></pre></td></tr></table></figure>
+<p>到此，redis 便安裝完畢了，redis 包含了以下幾個部分：</p>
+<ul>
+<li>redis-server: is the Redis Server itself.</li>
+<li>redis-cli: is the command line interface utility to talk with Redis.</li>
+<li>redis-benchmark: is used to check Redis performances.</li>
+<li>redis-check-aof 及 redis-check-dump:  are useful in the rare event of corrupted data files.</li>
+</ul>
+</li>
+<li><p>啟動 redis<br>最簡單的啟動方式為直接執行 <code>redis-server</code> 且不含任何參數。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ redis-server</div><div class="line">[12182] 06 Nov 13:58:15.841 <span class="comment"># Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf</span></div><div class="line">[12182] 06 Nov 13:58:15.842 * Max number of open files <span class="built_in">set</span> to 10032</div><div class="line">...</div><div class="line">...</div><div class="line">[12182] 06 Nov 13:58:15.843 <span class="comment"># Server started, Redis version 2.6.16</span></div><div class="line">[12182] 06 Nov 13:58:15.843 * The server is now ready to accept connections on port 6379</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>若要啟動 redis 並帶入設定檔，只需將設定檔的完整路徑帶入即可，如：redis-server /etc/redis.conf</p>
+<ol>
+<li>接著加入設定將 redis 作為服務於開機時啟動<br>建立工作目錄<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo mkdir /var/redis</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>從 utils 資料夾複製啟動腳本到 /etc/init.d/<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo cp utils/redis_init_script /etc/init.d/redis</div></pre></td></tr></table></figure></p>
+<p>編輯啟動腳本，根據需求修改 REDIS_PORT<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vi /etc/init.d/redis</div></pre></td></tr></table></figure></p>
+<p>複製預設設定檔<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo cp redis.conf /etc/redis.conf</div></pre></td></tr></table></figure></p>
+<p>需修改以下幾個項目</p>
+<ul>
+<li>daemonize: 設定為 yes 讓 redis 可背景執行，預設為 no</li>
+<li>port: 根據需求修改連接埠，預設為 6379</li>
+<li>loglevel: 根據需求修改要記錄的訊息等級，預設為 notice</li>
+<li>logfile: 設定要放置記錄檔的位置，預設為標準輸出(stdout) 不會保留記錄於檔案內</li>
+<li><p>dir: 將工作目錄設定為 /var/redis (<strong>此設定非常重要</strong>)</p>
+<p>最後，將啟動腳本加入開機執行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo update-rc.d redis defaults</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>現在你可以透過以下指令啟動 redis<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service redis start</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2013/10/26/mac-os-x-ssd-performance-optimization/" itemprop="url">
+                  Mac OS X 延長 SSD 壽命
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2013-10-26T12:28:00+08:00" content="2013/10/26">
+              2013/10/26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Mac/" itemprop="url" rel="index">
+                    <span itemprop="name">Mac</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>由於有時候會重灌電腦，所以在這記錄一下重灌之後要延長 SSD 所做的步驟。</p>
+<h3 id="關閉-Time-Machine-的本機備份模式"><a href="#關閉-Time-Machine-的本機備份模式" class="headerlink" title="關閉 Time Machine 的本機備份模式"></a>關閉 Time Machine 的本機備份模式</h3><p>如果有開啟 Time Machine 功能，當備份磁碟無法使用時，系統還是會每小時建立快照摒除存在本機硬碟，使用以下指令可以禁止系統在本地端備份檔案<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo tmutil disablelocal</div></pre></td></tr></table></figure></p>
+<p>往後也可以使用以下的指令重新開啟這個功能<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo tmutil enablelocal</div></pre></td></tr></table></figure></p>
+<h3 id="設定-noatime-掛載"><a href="#設定-noatime-掛載" class="headerlink" title="設定 noatime 掛載"></a>設定 noatime 掛載</h3><p>Unix like 的作業系統，會在每次存取檔案時修改 Access time 的屬性，可以令如 Spotlight 的程式找到最近存取的檔案。但是每次存取檔案時皆會對硬碟寫入資料，對有存取次數限制的 SSD 來說便會縮短壽命，以下的步驟可以取消記錄存取時間。</p>
+<ol>
+<li><p>在家目錄建立 com.disk.noatime.plist 檔案，內容如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="meta">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">plist</span> <span class="attr">version</span>=<span class="string">"1.0"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>Label<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>com.disk.noatime<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>ProgramArguments<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">array</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>mount<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>-vuwo<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>noatime<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>/<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">array</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>RunAtLoad<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">true</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">plist</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>搬移檔案到 LaunchDaemons 資料夾</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo mv ~/com.disk.noatime.plist /Library/LaunchDaemons/</div></pre></td></tr></table></figure>
+</li>
+<li><p>變更 com.disk.noatime.plist 檔案擁有者</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo chown root:wheel /Library/LaunchDaemons/com.disk.noatime.plist</div></pre></td></tr></table></figure>
+</li>
+<li><p>重開機後，於終端機內輸入 mount 看到 noatime 代表已使用 noatime 掛載</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ mount</div><div class="line">/dev/disk0s2 on / (hfs, <span class="built_in">local</span>, journaled, noatime)</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="變更睡眠時資料儲存位置"><a href="#變更睡眠時資料儲存位置" class="headerlink" title="變更睡眠時資料儲存位置"></a>變更睡眠時資料儲存位置</h3><p>當系統進入睡眠狀態時，OS X 預設將資料保存於記憶體內，另外再將記憶體資料寫入硬碟，防止電腦沒電時資料遺失。<br>假設記憶體有 8 GB，代表睡眠時若電腦電力不足都會將 8 GB 資料寫入硬碟，長期下來 SSD 的壽命將會大打折扣，因此我們要變更睡眠時的資料存放位置，改為只存於記憶體中，但若是電腦沒電時，資料便會遺失。</p>
+<ol>
+<li><p>透使用下列指令設定睡眠時只存在記憶體</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo pmset <span class="_">-a</span> hibernatemode 0</div></pre></td></tr></table></figure>
+</li>
+<li><p>刪除在硬碟上的睡眠備份檔</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo rm /var/vm/sleepimage</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>若要改回預設的模式，則輸入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo pmset <span class="_">-a</span> hibernatemode 3</div></pre></td></tr></table></figure></p>
+<p>輸入下列指令可以查看目前模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo pmset -g | grep hibernatemode</div></pre></td></tr></table></figure></p>
+<p>hibernatemode 0</p>
+<ol>
+<li>建立一個空檔案，防止系統再產生 sleepimage<br>建立檔案<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo touch /var/vm/sleepimage</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>防止系統修改此檔案<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ chflags uchg /var/vm/sleepimage</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpeg"
+               alt="Calvert" />
+          <p class="site-author-name" itemprop="name">Calvert</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分類</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CalvertYang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Calvert</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 提供
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

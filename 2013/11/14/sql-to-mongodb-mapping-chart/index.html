@@ -1,4 +1,360 @@
-<!DOCTYPE html><html lang="zh-TW"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>SQL 到 MongoDB 對應表 | Calvert's murmur</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">SQL 到 MongoDB 對應表</h1><a id="logo" href="/.">Calvert's murmur</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首頁</i></a><a href="/archives/"><i class="fa fa-archive"> 所有文章</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">SQL 到 MongoDB 對應表</h1><div class="post-meta">Nov 14, 2013<span> | </span><span class="category"><a href="/categories/Programming/">Programming</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><div class="post-content"><p>由於新專案採用了 <a href="http://nodejs.org/" target="_blank" rel="external">Node.js</a> 開發且使用 <a href="http://www.mongodb.org/" target="_blank" rel="external">MongoDB</a> 作為儲存媒介，所以動手翻譯了官方文件方便查閱相關用法。</p>
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Y0Zz15IXRv_417TF0lTBI_cHWg8Mt8OEaFqkWgXLY6I" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="SQL,NoSQL,MongoDB," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="由於新專案採用了 Node.js 開發且使用 MongoDB 作為儲存媒介，所以動手翻譯了官方文件方便查閱相關用法。
+術語和概念(Terminology and Concepts)下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。
+
+
+SQL 術語/概念
+MongoDB 術語/概念
+
+
+
+
+資料庫(database)
+資料庫(database)
+
+
+資料表(table)
+集合(col">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL 到 MongoDB 對應表">
+<meta property="og:url" content="https://blog.chyang.me/2013/11/14/sql-to-mongodb-mapping-chart/index.html">
+<meta property="og:site_name" content="Calvert's murmur">
+<meta property="og:description" content="由於新專案採用了 Node.js 開發且使用 MongoDB 作為儲存媒介，所以動手翻譯了官方文件方便查閱相關用法。
+術語和概念(Terminology and Concepts)下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。
+
+
+SQL 術語/概念
+MongoDB 術語/概念
+
+
+
+
+資料庫(database)
+資料庫(database)
+
+
+資料表(table)
+集合(col">
+<meta property="og:updated_time" content="2016-10-06T02:30:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL 到 MongoDB 對應表">
+<meta name="twitter:description" content="由於新專案採用了 Node.js 開發且使用 MongoDB 作為儲存媒介，所以動手翻譯了官方文件方便查閱相關用法。
+術語和概念(Terminology and Concepts)下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。
+
+
+SQL 術語/概念
+MongoDB 術語/概念
+
+
+
+
+資料庫(database)
+資料庫(database)
+
+
+資料表(table)
+集合(col">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://blog.chyang.me/2013/11/14/sql-to-mongodb-mapping-chart/"/>
+
+
+  <title> SQL 到 MongoDB 對應表 | Calvert's murmur </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-44933497-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Calvert's murmur</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                SQL 到 MongoDB 對應表
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2013-11-14T11:46:00+08:00" content="2013/11/14">
+              2013/11/14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>由於新專案採用了 <a href="http://nodejs.org/" target="_blank" rel="external">Node.js</a> 開發且使用 <a href="http://www.mongodb.org/" target="_blank" rel="external">MongoDB</a> 作為儲存媒介，所以動手翻譯了官方文件方便查閱相關用法。</p>
 <h3 id="術語和概念-Terminology-and-Concepts"><a href="#術語和概念-Terminology-and-Concepts" class="headerlink" title="術語和概念(Terminology and Concepts)"></a>術語和概念(Terminology and Concepts)</h3><h5 id="下表列出了各種-SQL-和相應的-MongoDB-的術語和概念。"><a href="#下表列出了各種-SQL-和相應的-MongoDB-的術語和概念。" class="headerlink" title="下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。"></a>下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。</h5><table>
 <thead>
 <tr>
@@ -536,9 +892,308 @@
 </li>
 </ul>
 <p>參考資料：<a href="http://docs.mongodb.org/manual/reference/sql-comparison/" target="_blank" rel="external">SQL to MongoDB Mapping Chart</a></p>
-</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="https://blog.chyang.me/2013/11/14/sql-to-mongodb-mapping-chart/" data-id="ciucao54f001ctfa52u0jvrq6" class="article-share-link">分享至</a><div class="tags"><a href="/tags/SQL/">SQL</a><a href="/tags/NoSQL/">NoSQL</a><a href="/tags/MongoDB/">MongoDB</a></div><div class="post-nav"><a href="/2013/11/16/sql-to-aggregation-mapping-chart/" class="pre">SQL 到彙總(Aggregation)對應表</a><a href="/2013/11/06/install-redis-in-centos-6/" class="next">安裝 Redis 於 CentOS 6</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分類</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Security/">Security</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Server/">Server</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 標籤</i></div><div class="tagcloud"><a href="/tags/SemVer/" style="font-size: 15px;">SemVer</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/Nginx/" style="font-size: 15px;">Nginx</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/SQL/" style="font-size: 15px;">SQL</a> <a href="/tags/NoSQL/" style="font-size: 15px;">NoSQL</a> <a href="/tags/MongoDB/" style="font-size: 15px;">MongoDB</a> <a href="/tags/Node-js/" style="font-size: 15px;">Node.js</a> <a href="/tags/npm/" style="font-size: 15px;">npm</a> <a href="/tags/SSL/" style="font-size: 15px;">SSL</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/GitHub/" style="font-size: 15px;">GitHub</a> <a href="/tags/GitHub-Flow/" style="font-size: 15px;">GitHub Flow</a> <a href="/tags/Workflow/" style="font-size: 15px;">Workflow</a> <a href="/tags/Ruby-on-Rails/" style="font-size: 15px;">Ruby on Rails</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Ed25519/" style="font-size: 15px;">Ed25519</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/Redis/" style="font-size: 15px;">Redis</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/16/capistrano-with-ed25519-keys/">【譯】在 Capistrano 自動化部署時使用 Ed25519 金鑰</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/upgrade_your_ssh_keys/">【譯】升級你的 SSH 金鑰！</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">【譯】使用 Mailboxer 實作站內信系統</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/09/21/understanding-the-github-flow/">了解 GitHub Flow</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/08/20/npm-semantic-versioner/">看懂 npm 語意化版本</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/11/16/sql-to-aggregation-mapping-chart/">SQL 到彙總(Aggregation)對應表</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/11/14/sql-to-mongodb-mapping-chart/">SQL 到 MongoDB 對應表</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/11/06/install-redis-in-centos-6/">安裝 Redis 於 CentOS 6</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/10/26/mac-os-x-ssd-performance-optimization/">Mac OS X 延長 SSD 壽命</a></li></ul></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">Calvert's murmur.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-ga('create','UA-44933497-2','auto');ga('send','pageview');
-</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SQL/" rel="tag">#SQL</a>
+          
+            <a href="/tags/NoSQL/" rel="tag">#NoSQL</a>
+          
+            <a href="/tags/MongoDB/" rel="tag">#MongoDB</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/11/06/install-redis-in-centos-6/" rel="next" title="安裝 Redis 於 CentOS 6">
+                <i class="fa fa-chevron-left"></i> 安裝 Redis 於 CentOS 6
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/11/16/sql-to-aggregation-mapping-chart/" rel="prev" title="SQL 到彙總(Aggregation)對應表">
+                SQL 到彙總(Aggregation)對應表 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpeg"
+               alt="Calvert" />
+          <p class="site-author-name" itemprop="name">Calvert</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分類</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CalvertYang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#術語和概念-Terminology-and-Concepts"><span class="nav-number">1.</span> <span class="nav-text">術語和概念(Terminology and Concepts)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#下表列出了各種-SQL-和相應的-MongoDB-的術語和概念。"><span class="nav-number">1.0.1.</span> <span class="nav-text">下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可執行檔案-Executables"><span class="nav-number">2.</span> <span class="nav-text">可執行檔案(Executables)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#下表列出了-MySQL-Oracle-可執行檔案和相應的-MongoDB-的可執行檔案。"><span class="nav-number">2.0.1.</span> <span class="nav-text">下表列出了 MySQL / Oracle 可執行檔案和相應的 MongoDB 的可執行檔案。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#範例-Examples"><span class="nav-number">3.</span> <span class="nav-text">範例(Examples)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#下表列出了各種-SQL-語句和相應的-MongoDB-語句。在表格中的範例假定有下列條件："><span class="nav-number">3.0.1.</span> <span class="nav-text">下表列出了各種 SQL 語句和相應的 MongoDB 語句。在表格中的範例假定有下列條件：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#建立及修改資料表-Create-and-Alter"><span class="nav-number">3.1.</span> <span class="nav-text">建立及修改資料表(Create and Alter)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入-Insert"><span class="nav-number">3.2.</span> <span class="nav-text">插入(Insert)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#選擇-Select"><span class="nav-number">3.3.</span> <span class="nav-text">選擇(Select)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改資料-Update-Records"><span class="nav-number">3.4.</span> <span class="nav-text">修改資料(Update Records)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#刪除資料-Delete-Records"><span class="nav-number">3.5.</span> <span class="nav-text">刪除資料(Delete Records)</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Calvert</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 提供
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
