@@ -249,6 +249,165 @@
             
               
                 
+                <a class="post-title-link" href="/2013/11/06/how-to-install-redis-in-centos-6/" itemprop="url">
+                  如何在 CentOS 6 安裝 Redis
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2013-11-06T04:45:00+08:00" content="2013/11/06">
+              2013/11/06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Server/" itemprop="url" rel="index">
+                    <span itemprop="name">Server</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Redis 是一個開源、遵守 BSD 授權、先進的鍵值對儲存庫。它通常被稱為資料結構伺服器，因為值可以是字串(String)、雜湊(Hash)、列表(List)、集合(Set)及序列集合(Sorted Set)等類型。</p>
+<ol>
+<li><p>下載並解壓縮</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ wget http://download.redis.io/redis-stable.tar.gz</div><div class="line">$ tar -zxvf redis-stable.tar.gz</div><div class="line">$ <span class="built_in">cd</span> redis-stable</div></pre></td></tr></table></figure>
+</li>
+<li><p>編譯並測試是否可安裝</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ make</div><div class="line">$ make <span class="built_in">test</span></div></pre></td></tr></table></figure>
+<p>若出現訊息，代表系統尚未安裝 tcl</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> src &amp;&amp; make <span class="built_in">test</span></div><div class="line">make[1]: Entering directory `/tmp/redis-stable/src<span class="string">'</span></div><div class="line">You need tcl 8.5 or newer in order to run the Redis test</div><div class="line">make[1]: *** [test] Error 1</div><div class="line">make[1]: Leaving directory `/tmp/redis-stable/src'</div><div class="line">make: *** [<span class="built_in">test</span>] Error 2</div></pre></td></tr></table></figure>
+<p>tcl 安裝步驟，詳見<a href="http://www.linuxfromscratch.org/blfs/view/cvs/general/tcl.html" target="_blank" rel="external">官方文件</a></p>
+</li>
+<li><p>安裝 redis</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ make install</div><div class="line"><span class="built_in">cd</span> src &amp;&amp; make install</div><div class="line">make[1]: Entering directory <span class="string">'/tmp/redis-stable/src'</span></div><div class="line">Hint: To run <span class="string">'make test'</span> is a good idea ;)</div><div class="line">mkdir -p /usr/<span class="built_in">local</span>/bin</div><div class="line">    INSTALL install</div><div class="line">    INSTALL install</div><div class="line">    INSTALL install</div><div class="line">    INSTALL install</div><div class="line">    INSTALL install</div><div class="line">make[1]: Leaving directory `/tmp/redis-stable/src<span class="string">'</span></div></pre></td></tr></table></figure>
+<p>到此，redis 便安裝完畢了，redis 包含了以下幾個部分：</p>
+<ul>
+<li>redis-server: is the Redis Server itself.</li>
+<li>redis-cli: is the command line interface utility to talk with Redis.</li>
+<li>redis-benchmark: is used to check Redis performances.</li>
+<li>redis-check-aof 及 redis-check-dump:  are useful in the rare event of corrupted data files.</li>
+</ul>
+</li>
+<li><p>啟動 redis<br>最簡單的啟動方式為直接執行 <code>redis-server</code> 且不含任何參數。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ redis-server</div><div class="line">[12182] 06 Nov 13:58:15.841 <span class="comment"># Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf</span></div><div class="line">[12182] 06 Nov 13:58:15.842 * Max number of open files <span class="built_in">set</span> to 10032</div><div class="line">...</div><div class="line">...</div><div class="line">[12182] 06 Nov 13:58:15.843 <span class="comment"># Server started, Redis version 2.6.16</span></div><div class="line">[12182] 06 Nov 13:58:15.843 * The server is now ready to accept connections on port 6379</div></pre></td></tr></table></figure>
+<p>若要啟動 redis 並帶入設定檔，只需將設定檔的完整路徑帶入即可，如：redis-server /etc/redis.conf</p>
+</li>
+<li><p>接著加入設定將 redis 作為服務於開機時啟動<br>建立工作目錄</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo mkdir /var/redis</div></pre></td></tr></table></figure>
+<p>從 utils 資料夾複製啟動腳本到 /etc/init.d/</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo cp utils/redis_init_script /etc/init.d/redis</div></pre></td></tr></table></figure>
+<p>編輯啟動腳本，根據需求修改 REDIS_PORT</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vi /etc/init.d/redis</div></pre></td></tr></table></figure>
+<p>複製預設設定檔</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo cp redis.conf /etc/redis.conf</div></pre></td></tr></table></figure>
+<p>需修改以下幾個項目</p>
+<ul>
+<li>daemonize: 設定為 yes 讓 redis 可背景執行，預設為 no</li>
+<li>port: 根據需求修改連接埠，預設為 6379</li>
+<li>loglevel: 根據需求修改要記錄的訊息等級，預設為 notice</li>
+<li>logfile: 設定要放置記錄檔的位置，預設為標準輸出(stdout) 不會保留記錄於檔案內</li>
+<li>dir: 將工作目錄設定為 /var/redis (<strong>此設定非常重要</strong>)</li>
+</ul>
+<p>最後，將啟動腳本加入開機執行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo update-rc.d redis defaults</div></pre></td></tr></table></figure>
+<p>現在你可以透過以下指令啟動 redis</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service redis start</div></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2013/10/26/mac-os-x-ssd-performance-optimization/" itemprop="url">
                   Mac OS X 延長 SSD 壽命
                 </a>
@@ -667,7 +826,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -684,7 +843,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">標籤</span>
               </a>
             </div>

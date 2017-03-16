@@ -1,0 +1,713 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Y0Zz15IXRv_417TF0lTBI_cHWg8Mt8OEaFqkWgXLY6I" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Ruby,Rmagick," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="原文：RMagick User’s Guide and Reference — Drawing with RVG
+
+介紹RVG（Ruby 向量圖形）是 RMagick 的 Draw 類別的外觀，它提供了基於 W3C 推薦的可縮放向量圖形（Scalable Vector Graphics）的繪圖 API。
+RVG 是一個可縮放向量繪圖函式庫。可縮放意味著圖形不是固定的像素尺寸。相同的圖形可以被呈現">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【譯】使用 RVG 繪圖">
+<meta property="og:url" content="https://blog.chyang.me/2017/03/15/drawing-with-rvg/index.html">
+<meta property="og:site_name" content="Calvert's murmur">
+<meta property="og:description" content="原文：RMagick User’s Guide and Reference — Drawing with RVG
+
+介紹RVG（Ruby 向量圖形）是 RMagick 的 Draw 類別的外觀，它提供了基於 W3C 推薦的可縮放向量圖形（Scalable Vector Graphics）的繪圖 API。
+RVG 是一個可縮放向量繪圖函式庫。可縮放意味著圖形不是固定的像素尺寸。相同的圖形可以被呈現">
+<meta property="og:image" content="https://blog.chyang.me/2017/03/15/drawing-with-rvg/duck.gif">
+<meta property="og:image" content="https://blog.chyang.me/2017/03/15/drawing-with-rvg/duck0.gif">
+<meta property="og:image" content="https://blog.chyang.me/2017/03/15/drawing-with-rvg/duck1.gif">
+<meta property="og:image" content="https://blog.chyang.me/2017/03/15/drawing-with-rvg/duck3.gif">
+<meta property="og:image" content="https://blog.chyang.me/2017/03/15/drawing-with-rvg/duck4.gif">
+<meta property="og:image" content="https://blog.chyang.me/2017/03/15/drawing-with-rvg/duck6.gif">
+<meta property="og:image" content="https://blog.chyang.me/2017/03/15/drawing-with-rvg/duck8.gif">
+<meta property="og:image" content="https://blog.chyang.me/2017/03/15/drawing-with-rvg/duck9.gif">
+<meta property="og:image" content="https://blog.chyang.me/2017/03/15/drawing-with-rvg/duck10.gif">
+<meta property="og:image" content="https://blog.chyang.me/2017/03/15/drawing-with-rvg/duck11.gif">
+<meta property="og:image" content="https://blog.chyang.me/2017/03/15/drawing-with-rvg/duck12.gif">
+<meta property="og:image" content="https://blog.chyang.me/2017/03/15/drawing-with-rvg/duck14.gif">
+<meta property="og:image" content="https://blog.chyang.me/2017/03/15/drawing-with-rvg/duck15.gif">
+<meta property="og:image" content="https://blog.chyang.me/2017/03/15/drawing-with-rvg/big-duck.gif">
+<meta property="og:updated_time" content="2017-03-16T08:00:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【譯】使用 RVG 繪圖">
+<meta name="twitter:description" content="原文：RMagick User’s Guide and Reference — Drawing with RVG
+
+介紹RVG（Ruby 向量圖形）是 RMagick 的 Draw 類別的外觀，它提供了基於 W3C 推薦的可縮放向量圖形（Scalable Vector Graphics）的繪圖 API。
+RVG 是一個可縮放向量繪圖函式庫。可縮放意味著圖形不是固定的像素尺寸。相同的圖形可以被呈現">
+<meta name="twitter:image" content="https://blog.chyang.me/2017/03/15/drawing-with-rvg/duck.gif">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://blog.chyang.me/2017/03/15/drawing-with-rvg/"/>
+
+
+  <title> 【譯】使用 RVG 繪圖 | Calvert's murmur </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-44933497-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Calvert's murmur</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【譯】使用 RVG 繪圖
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2017-03-15T13:50:06+08:00" content="2017/03/15">
+              2017/03/15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>原文：<strong>RMagick User’s Guide and Reference</strong> — <a href="https://rmagick.github.io/rvgtut.html" target="_blank" rel="external">Drawing with RVG</a></p>
+</blockquote>
+<h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><p>RVG（Ruby 向量圖形）是 RMagick 的 Draw 類別的外觀，它提供了基於 W3C 推薦的可縮放向量圖形（Scalable Vector Graphics）的繪圖 API。</p>
+<p>RVG 是一個可縮放向量繪圖函式庫。可縮放意味著圖形不是固定的像素尺寸。相同的圖形可以被呈現在螢幕上或列印出來。向量圖使用了幾何物件，如直線和圓。與點陣圖不同，向量圖在放大時不會「像素化」。</p>
+<img src="/2017/03/15/drawing-with-rvg/duck.gif" alt="duck.gif" title="">
+<p>作為 RVG 函式庫的介紹，讓我們來看看如何畫出上面這隻小鴨。以下是完整的程式。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">require</span> <span class="string">'rvg/rvg'</span></div><div class="line"><span class="keyword">include</span> Magick</div><div class="line"></div><div class="line">RVG::dpi = <span class="number">72</span></div><div class="line"></div><div class="line">rvg = RVG.new(<span class="number">2.5</span>.<span class="keyword">in</span>, <span class="number">2.5</span>.<span class="keyword">in</span>).viewbox(<span class="number">0</span>,<span class="number">0</span>,<span class="number">250</span>,<span class="number">250</span>) <span class="keyword">do</span> <span class="params">|canvas|</span></div><div class="line">  canvas.background_fill = <span class="string">'white'</span></div><div class="line"></div><div class="line">  canvas.g.translate(<span class="number">100</span>, <span class="number">150</span>).rotate(-<span class="number">30</span>) <span class="keyword">do</span> <span class="params">|body|</span></div><div class="line">    body.styles(<span class="symbol">:fill=&gt;<span class="string">'yellow'</span></span>, <span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>, <span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>)</div><div class="line">    body.ellipse(<span class="number">50</span>, <span class="number">30</span>)</div><div class="line">    body.rect(<span class="number">45</span>, <span class="number">20</span>, -<span class="number">20</span>, -<span class="number">10</span>).skewX(-<span class="number">35</span>)</div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  canvas.g.translate(<span class="number">130</span>, <span class="number">83</span>) <span class="keyword">do</span> <span class="params">|head|</span></div><div class="line">    head.styles(<span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>, <span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>)</div><div class="line">    head.circle(<span class="number">30</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'yellow'</span></span>)</div><div class="line">    head.circle(<span class="number">5</span>, <span class="number">10</span>, -<span class="number">5</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'black'</span></span>)</div><div class="line">    head.polygon(<span class="number">30</span>,<span class="number">0</span>, <span class="number">70</span>,<span class="number">5</span>, <span class="number">30</span>,<span class="number">10</span>, <span class="number">62</span>,<span class="number">25</span>, <span class="number">23</span>,<span class="number">20</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'orange'</span></span>)</div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  foot = RVG::Group.new <span class="keyword">do</span> <span class="params">|_foot|</span></div><div class="line">    _foot.path(<span class="string">'m0,0 v30 l30,10 l5,-10, l-5,-10 l-30,10z'</span>).</div><div class="line">    styles(<span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>, <span class="symbol">:fill=&gt;<span class="string">'orange'</span></span>, <span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>)</div><div class="line">  <span class="keyword">end</span></div><div class="line">  canvas.use(foot).translate(<span class="number">75</span>, <span class="number">188</span>).rotate(<span class="number">15</span>)</div><div class="line">  canvas.use(foot).translate(<span class="number">100</span>, <span class="number">185</span>).rotate(-<span class="number">15</span>)</div><div class="line"></div><div class="line">  canvas.text(<span class="number">125</span>, <span class="number">30</span>) <span class="keyword">do</span> <span class="params">|title|</span></div><div class="line">    title.tspan(<span class="string">"duck|"</span>).styles(<span class="symbol">:text_anchor=&gt;<span class="string">'end'</span></span>, <span class="symbol">:font_size=&gt;</span><span class="number">20</span>,</div><div class="line">      <span class="symbol">:font_family=&gt;<span class="string">'helvetica'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'black'</span></span>)</div><div class="line">    title.tspan(<span class="string">"type"</span>).styles(<span class="symbol">:font_size=&gt;</span><span class="number">22</span>,</div><div class="line">      <span class="symbol">:font_family=&gt;<span class="string">'times'</span></span>, <span class="symbol">:font_style=&gt;<span class="string">'italic'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'red'</span></span>)</div><div class="line">    <span class="keyword">end</span></div><div class="line">    canvas.rect(<span class="number">249</span>,<span class="number">249</span>).styles(<span class="symbol">:stroke=&gt;<span class="string">'blue'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'none'</span></span>)</div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">rvg.draw.write(<span class="string">'duck.gif'</span>)</div></pre></td></tr></table></figure>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>所有的繪圖都遵循相同的 3 個步驟：</p>
+<ol>
+<li>建立一個 RVG 物件。指定最終圖片的寬度和高度。轉交程式碼區塊給 <code>RVG.new</code> 方法。</li>
+<li>在程式區塊內，在 RVG 物件調用方法來指定背景，加入形狀、文字或點陣圖，或加入一組形狀、文字或點陣圖。</li>
+<li>調用 <code>draw</code> 方法在背景繪出形狀、文字或點陣圖。</li>
+</ol>
+<p>我將逐行介紹範例。</p>
+<a id="more"></a>
+<h2 id="第-1-3-行"><a href="#第-1-3-行" class="headerlink" title="第 1 ~ 3 行"></a>第 1 ~ 3 行</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">require</span> <span class="string">'rvg/rvg'</span></div><div class="line"><span class="keyword">include</span> Magick</div></pre></td></tr></table></figure>
+<p>這只是平常用來載入 RVG 擴展的 Ruby 程式碼。為了少打一些字，我引入了 Magick 模組到物件的命名空間。</p>
+<h2 id="第-4-6-行"><a href="#第-4-6-行" class="headerlink" title="第 4 ~ 6 行"></a>第 4 ~ 6 行</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">RVG::dpi = <span class="number">72</span></div><div class="line"></div><div class="line">rvg = RVG.new(<span class="number">2.5</span>.<span class="keyword">in</span>, <span class="number">2.5</span>.<span class="keyword">in</span>).viewbox(<span class="number">0</span>,<span class="number">0</span>,<span class="number">250</span>,<span class="number">250</span>) <span class="keyword">do</span> <span class="params">|canvas|</span></div></pre></td></tr></table></figure>
+<p><code>RVG::dpi</code> 啟用了在 RVG 使用單位方法。當你將 <code>RVG::dpi</code> 設定為非 nil 值時，RVG 向整數和浮點數類別加入了許多轉換方法。這些方法允許你使用如英吋、毫米和厘米來指定測量單位。DPI 代表「每英吋點數」圖片解析度。這裡我設定 <code>RVG::dpi</code> 為 72，一個螢幕常用的數值。</p>
+<p><code>RVG.new</code> 需要 2 個參數。這些參數以像素指定最終圖片的寬度和高度。由於我定義了 <code>RVG::dpi</code>，我可以透過 <code>in</code> 轉換方法使用英吋指定這些數值。在 72dpi，最終圖片的邊長將會是 2.5 * 72 = 180 像素。</p>
+<p>預設情況下，RVG 使用像素作為其測量單位，但由於我正在繪製一個可縮放的圖片，我不想限制自己的像素。<code>viewbox</code> 方法定義了一個具有邏輯單位的座標系。<code>viewbox</code> 需要 4 個參數，<code>min_x</code>、<code>min_y</code>、<code>width</code> 和 <code>height</code>。在第 6 行，我定義了我的座標系，它的原點在 (0,0)，寬度和高度為 250 單位。透過使用我自己的座標系，我可以稍後將圖片的尺寸更改為 5 英吋正方形或 1 英吋正方形，只需要更改 <code>new</code> 的參數。</p>
+<h3 id="預設座標系"><a href="#預設座標系" class="headerlink" title="預設座標系"></a>預設座標系</h3><img src="/2017/03/15/drawing-with-rvg/duck0.gif" alt="duck0.gif" title="">
+<p>預設情況下，RVG 座標系的原點在左上角。X 軸向右為正值，Y 軸向下為正值。上面的圖片顯示了該座標系的座標軸。我為範例圖片加上了淺藍色方格紙背景，以協助將坐標參數與圖片中的實際位置相關聯。只要記住，座標軸和方格紙背景實際上不是我產生的圖片的一部分。</p>
+<p>RVG 類別是 RVG 定義的容器類別之一。容器物件可以包含圖形物件，如圓和線、文字、點陣圖及其他容器物件。最外面的容器永遠是 RVG 物件。我將加入所有組成鴨子的圖形物件到此容器。</p>
+<p>我們通常會轉交一個程式區塊給容器建構方法。但是，在這裡我連接了 <code>viewbox</code> 到 <code>new</code>，所以 <code>viewbox</code> 負責產生並傳遞新的 RVG 實例到 <code>canvas</code> 參數。</p>
+<h2 id="第-7-行"><a href="#第-7-行" class="headerlink" title="第 7 行"></a>第 7 行</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">canvas.background_fill = <span class="string">'white'</span></div></pre></td></tr></table></figure>
+<p>預設情況下，RVG 圖形是繪製在透明背景上。當你想要顯示你的圖片在另一個圖片上時，這是很方便的。你可以透過為 <code>background_fill=</code> 屬性指定顏色來覆蓋預設背景顏色。這裡我設定背景顏色為「白色」。</p>
+<h2 id="第-9-13-行"><a href="#第-9-13-行" class="headerlink" title="第 9 ~ 13 行"></a>第 9 ~ 13 行</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">canvas.g.translate(<span class="number">100</span>, <span class="number">150</span>).rotate(-<span class="number">30</span>) <span class="keyword">do</span> <span class="params">|body|</span></div><div class="line">  body.styles(<span class="symbol">:fill=&gt;<span class="string">'yellow'</span></span>, <span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>, <span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>)</div><div class="line">  body.ellipse(<span class="number">50</span>, <span class="number">30</span>)</div><div class="line">  body.rect(<span class="number">45</span>, <span class="number">20</span>, -<span class="number">20</span>, -<span class="number">10</span>).skewX(-<span class="number">35</span>)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>這幾行做了很多事情，調用 7 個方法，所以讓我們一次介紹一個方法。</p>
+<h3 id="Groups（群組）"><a href="#Groups（群組）" class="headerlink" title="Groups（群組）"></a>Groups（群組）</h3><p><code>Group</code> 是 RVG 中的第二個容器類別。群組的目的是將一組座標系變形和一組樣式與群組中的圖形物件相關聯。要在另一個容器中建立群組物件，可調用容器上的 <code>g</code> 方法。如果程式區塊存在的話，<code>g</code> 方法會轉交給程式區塊。在這個範例中，沒有與 <code>g</code> 關聯的程式區塊，所以 <code>g</code> 返回了新群組。<code>g</code> 方法加入群組到其容器的內容。在這個範例中，群組的容器是在第 6 行建立的 canvas 物件。群組中的圖形物件會作為繪製容器的一部分被繪製。連接到 <code>g</code> 的 <code>translate</code> 和 <code>rotate</code>，透過<em>新增坐標系變形</em>來修改群組。</p>
+<p>（那邊有一個程式區塊，但有個 2 方法調用在 <code>g</code> 和程式區塊間。我稍後會解釋。）</p>
+<h3 id="Transforms（變形）"><a href="#Transforms（變形）" class="headerlink" title="Transforms（變形）"></a>Transforms（變形）</h3><p>我將使用這個群組來包含組成鴨子身體的橢圓和組成翅膀的矩形。我可以只指定 x 和 y 座標來定位這些形狀相對於原點的位置，但移動原點到我想繪製形狀的位置更容易。這是 <code>translate</code> 方法的目的。這個方法將原點移動到由其參數指定的（x,y）位置。我在群組物件上調用 <code>translate</code>，並且由群組的內容取得為此群組指定的座標系變形，橢圓和矩形將在相對於舊座標系原點的座標（100,150）上繪製。</p>
+<p>另外，我想讓鴨子的身體向上傾斜，所以我使用 <code>rotate</code> 方法來旋轉座標軸。<code>rotate</code> 的參數是旋轉的角度。負數表示逆時針旋轉。</p>
+<p>在平移及旋轉座標系後，座標軸看起來像這樣：</p>
+<p><strong>變形方法</strong></p>
+<img src="/2017/03/15/drawing-with-rvg/duck1.gif" alt="duck1.gif" title="">
+<p>有六種變形方法，除了 <code>translate</code> 和 <code>rotate</code> 外，還有 <code>scale</code>、<code>skewX</code>、<code>skewY</code> 和 <code>matrix</code>。當巢狀群組時，在內部群組上定義的任何變形都會被增加入外部變形。</p>
+<h3 id="Styles（樣式）"><a href="#Styles（樣式）" class="headerlink" title="Styles（樣式）"></a>Styles（樣式）</h3><p>回想一下，<code>styles</code> 方法修改了預設的群組樣式。<code>styles</code> 方法需要一個雜湊作為參數。雜湊的鍵是樣式名稱，雜湊的值為樣式值。在這個範例中，有三個樣式名稱。:fill 樣式將填充顏色設定為「黃色」。:stroke 樣式將邊框顏色設定為「黑色」。:stroke_width 樣式將邊框寬度設定為「2」。我想要樣式套用在全組內的所有物件，所以第 10 行我在新的群組物件上調用 <code>style</code>。</p>
+<p><code>styles</code> 方法是真正的主力。它幾乎在每個 RVG 的類別內都有定義，除了這三個之外還有許多其他樣式名稱。</p>
+<h3 id="Basic-shapes（基本形狀）"><a href="#Basic-shapes（基本形狀）" class="headerlink" title="Basic shapes（基本形狀）"></a>Basic shapes（基本形狀）</h3><p>該群組包含了兩個基本形狀，一個<code>橢圓</code>和一個<code>矩形</code>。我使用 <code>ellipse</code> 方法將橢圓加入群組。<code>ellipse</code> 有四個參數，前兩個是在 x 軸及 y 軸上的半徑，是必要的。後兩個是中心點的 (x,y) 座標，當如同此處省略時，會預設為 (0,0)。我使用 <code>rect</code> 方法將矩形加入，它也有四個參數。前兩個是矩形的寬與高，後兩個是左上角的 (x,y) 座標。這兩個方法都會回傳<code>自己本身</code>，所以你可以連接其他方法給他們。</p>
+<p>這是群組呈現時的樣子。橢圓以原點為中心，矩形的左上角稍微向上並且在原點的左邊。</p>
+<p><strong>形狀方法</strong></p>
+<img src="/2017/03/15/drawing-with-rvg/duck3.gif" alt="duck3.gif" title="">
+<p>有七種形狀方法，除了 <code>ellipse</code> 和 <code>rect</code> 外，還有 <code>circle</code>、<code>line</code>、<code>path</code>、<code>polygon</code> 和 <code>polyline</code>。你也可以把文字當成形狀。形狀可以加上邊框和填充顏色，也可以透過變形方法和 <code>styles</code> 方法進行修改。</p>
+<h3 id="SkewX（X-方向傾斜）"><a href="#SkewX（X-方向傾斜）" class="headerlink" title="SkewX（X 方向傾斜）"></a>SkewX（X 方向傾斜）</h3><p>每個人都知道翅膀看起來不像矩形！翅膀看起來像傾斜的平行四邊形。（嗯，在這個範例是這樣！）幸運的是，我們可以如同對容器一樣在形狀使用變形。<code>skewX</code> 方法讓我們很容易傾斜矩形。<code>skewX</code> 方法是另一個變形，它需要一個參數，傾斜 x 軸的角度。由於所有的形狀建構式包含 <code>rect</code>，都會回傳<code>自己本身</code>，我可以將 <code>skewX</code> 直接連接到 <code>rect</code>，並限制只有矩形有變形效果。結果如下所示。（我為翅膀座標系畫了座標軸。）</p>
+<img src="/2017/03/15/drawing-with-rvg/duck4.gif" alt="duck4.gif" title="">
+<p>身體就是這樣。在繼續之前讓我們來完成其他瑣事。我之前說過容器建構式（如 <code>g</code>）會轉交給程式區塊如果存在的話。在這個範例，<code>translate</code> 和 <code>rotate</code> 方法介於 <code>g</code> 和程式區塊間。如果有相關聯的程式區塊，所有變形方法都會轉交過去，所以我可以很容易地將他們連接到容器建構式，並仍然使用程式區塊參數來定義群組內的圖形物件。方法連結是 RVG 常見的慣用方法，你會在範例中看到很多。</p>
+<p>下一個群組繪製頭部。</p>
+<h2 id="第-15-20-行"><a href="#第-15-20-行" class="headerlink" title="第 15 ~ 20 行"></a>第 15 ~ 20 行</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">canvas.g.translate(<span class="number">130</span>, <span class="number">83</span>) <span class="keyword">do</span> <span class="params">|head|</span></div><div class="line">  head.styles(<span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>, <span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>)</div><div class="line">  head.circle(<span class="number">30</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'yellow'</span></span>)</div><div class="line">  head.circle(<span class="number">5</span>, <span class="number">10</span>, -<span class="number">5</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'black'</span></span>)</div><div class="line">  head.polygon(<span class="number">30</span>,<span class="number">0</span>, <span class="number">70</span>,<span class="number">5</span>, <span class="number">30</span>,<span class="number">10</span>, <span class="number">62</span>,<span class="number">25</span>, <span class="number">23</span>,<span class="number">20</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'orange'</span></span>)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>這個部分與前一部分非常相似。我要定義一個群組來包含繪製鴨子頭部、眼睛和喙的圖形物件。首先，我使用平移方法來將原點移動到 (130,83)：</p>
+<img src="/2017/03/15/drawing-with-rvg/duck6.gif" alt="duck6.gif" title="">
+<p>在第 16 行我在群組定義了 <code>strok</code> 和 <code>stroke_width</code>。在群組上定義的樣式會傳播到群組中的形狀，除非你覆蓋他們。要做到這一點，在形狀調用 <code>styles</code>。在這個群組，每個形狀都有自己的填充顏色。黃色的圓組成了頭部，<code>circle</code> 需要 3 個參數，第一個參數是圓的半徑，另外兩個參數是中心點的 (x,y) 座標。當如同此處省略時，會預設為 (0,0)。我使用一個小黑圓作為眼睛。</p>
+<p>最後，我使用 <code>polygon</code> 方法來繪製鳥喙。此方法使用一系列的 (x,y) 座標繪製多邊形。如果最後一個座標不等於第一個，<code>polygon</code> 會暗中的加上它以關閉多邊形。同樣地，我使用 <code>styles</code> 將填充顏色設定為「橘色」。</p>
+<img src="/2017/03/15/drawing-with-rvg/duck8.gif" alt="duck8.gif" title="">
+<h2 id="第-22-25-行"><a href="#第-22-25-行" class="headerlink" title="第 22 ~ 25 行"></a>第 22 ~ 25 行</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">foot = RVG::Group.new <span class="keyword">do</span> <span class="params">|_foot|</span></div><div class="line">  _foot.path(<span class="string">'m0,0 v30 l30,10 l5,-10, l-5,-10 l-30,10z'</span>).</div><div class="line">    styles(<span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>, <span class="symbol">:fill=&gt;<span class="string">'orange'</span></span>, <span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>這裡我透過直接調用 <code>new</code> 來建立一個群組，而不是在容器上調用 <code>g</code> 方法。這將建立一個不包含在畫布中的群組物件。你可以想像腳沒有附加到任何東西，像這樣：</p>
+<img src="/2017/03/15/drawing-with-rvg/duck9.gif" alt="duck9.gif" title="">
+<h2 id="第-26-27-行"><a href="#第-26-27-行" class="headerlink" title="第 26 ~ 27 行"></a>第 26 ~ 27 行</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">canvas.use(foot).translate(<span class="number">75</span>, <span class="number">188</span>).rotate(<span class="number">15</span>)</div><div class="line">canvas.use(foot).translate(<span class="number">100</span>, <span class="number">185</span>).rotate(-<span class="number">15</span>)</div></pre></td></tr></table></figure>
+<p>要將群組加入到畫布，我使用 <code>use</code> 方法。use 方法可以接受任何容器或圖形物件作為參數。你還可以指定一個 (x,y) 座標來放置物件。然而，在這個範例中，我讓那些參數預設為 (0,0)，並使用 <code>translate</code> 來決定腳的位置。以下展示了左腳如何附加到鴨子上：</p>
+<img src="/2017/03/15/drawing-with-rvg/duck10.gif" alt="duck10.gif" title="">
+<p>當然，鴨子在走路，所以我必須用 <code>rotate</code> 讓腳有點傾斜：</p>
+<img src="/2017/03/15/drawing-with-rvg/duck11.gif" alt="duck11.gif" title="">
+<p>附加右腳很簡單，再次調用 <code>use</code> 但使用不同的參數來 <code>translate</code> 和 <code>rotate</code>：</p>
+<img src="/2017/03/15/drawing-with-rvg/duck12.gif" alt="duck12.gif" title="">
+<h2 id="第-29-34-行"><a href="#第-29-34-行" class="headerlink" title="第 29 ~ 34 行"></a>第 29 ~ 34 行</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">canvas.text(<span class="number">125</span>, <span class="number">30</span>) <span class="keyword">do</span> <span class="params">|title|</span></div><div class="line">  title.tspan(<span class="string">"duck|"</span>).styles(<span class="symbol">:text_anchor=&gt;<span class="string">'end'</span></span>, <span class="symbol">:font_size=&gt;</span><span class="number">20</span>,</div><div class="line">    <span class="symbol">:font_family=&gt;<span class="string">'helvetica'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'black'</span></span>)</div><div class="line">  title.tspan(<span class="string">"type"</span>).styles(<span class="symbol">:font_size=&gt;</span><span class="number">22</span>,</div><div class="line">    <span class="symbol">:font_family=&gt;<span class="string">'times'</span></span>, <span class="symbol">:font_style=&gt;<span class="string">'italic'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'red'</span></span>)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>我現在需要的是一個圖片標題。文字在 RVG 是 <code>text</code> 方法的工作。和形狀方法相同，<code>text</code> 可以與任何容器物件一起使用。<code>text</code> 本身是一個容器，除了它只能包含文字相關的物件。<code>text</code> 方法接受 2 或 3 個參數，一個 (x,y) 座標對和一個可選的字串。(x,y) 座標對定義目前文字開始呈現的位置，如果有一個字串參數，它將從目前文字位置開始被呈現。呈現文字會改變目前文字位置到文字的結尾。</p>
+<p>在這個範例中，文字被作為一個容器，文字物件可以包含 <code>tspan</code> 物件。每個 <code>tspan</code> 可以指定它自己的樣式。預設情況下，每個 <code>tspan</code> 會從目前文字位置開始呈現。</p>
+<p>同樣地，我可以使用 <code>styles</code> 改變文字外觀。我在這裡選擇字體、字體樣式（預設是「normal」）、以點計算的大小和顏色。</p>
+<img src="/2017/03/15/drawing-with-rvg/duck14.gif" alt="duck14.gif" title="">
+<h2 id="第-35-行"><a href="#第-35-行" class="headerlink" title="第 35 行"></a>第 35 行</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">canvas.rect(<span class="number">249</span>,<span class="number">249</span>).styles(<span class="symbol">:stroke=&gt;<span class="string">'blue'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'none'</span></span>)</div></pre></td></tr></table></figure>
+<p>就快完成了，我現在需要的是加上一個藍色邊框。（我現在要刪除方格紙背景，因為我們不再需要它。）</p>
+<img src="/2017/03/15/drawing-with-rvg/duck15.gif" alt="duck15.gif" title="">
+<h2 id="第-38-行"><a href="#第-38-行" class="headerlink" title="第 38 行"></a>第 38 行</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rvg.draw.write(<span class="string">'duck.gif'</span>)</div></pre></td></tr></table></figure>
+<p>調用 <code>draw</code> 方法沒有佔用大量空間，只有 4 個字母，但是做了很多工作。<code>draw</code> 方法會遍歷我加到最外層 RVG 容器的所有圖形物件，並在背景繪製他們。繪製完成後，<code>draw</code> 將以 RMagick Image 物件的形式回傳圖像。你可以在圖像上使用任何 Image 類別方法，這裡我簡單地將圖像輸出為 GIF 檔案。</p>
+<h2 id="縮放圖片"><a href="#縮放圖片" class="headerlink" title="縮放圖片"></a>縮放圖片</h2><p>RVG 圖片真的可以縮放嗎？讓我們試試看。更改 RVG.new 調用讓圖片變成 4 倍大。邊長是 5 英吋：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rvg = RVG.new(<span class="number">5</span>.<span class="keyword">in</span>, <span class="number">5</span>.<span class="keyword">in</span>).viewbox(<span class="number">0</span>,<span class="number">0</span>,<span class="number">250</span>,<span class="number">250</span>) <span class="keyword">do</span> <span class="params">|canvas|</span></div></pre></td></tr></table></figure>
+<p>不改變其他東西。再次執行程式，看看你得到什麼。</p>
+<img src="/2017/03/15/drawing-with-rvg/big-duck.gif" alt="big-duck.gif" title="">
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Ruby/" rel="tag">#Ruby</a>
+          
+            <a href="/tags/Rmagick/" rel="tag">#Rmagick</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/06/how-to-setup-virtual-users-for-vsftpd-in-ubuntu/" rel="next" title="如何在 Ubuntu 中為 vsftpd 設置虛擬帳號">
+                <i class="fa fa-chevron-left"></i> 如何在 Ubuntu 中為 vsftpd 設置虛擬帳號
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpeg"
+               alt="Calvert" />
+          <p class="site-author-name" itemprop="name">Calvert</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分類</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CalvertYang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介紹"><span class="nav-number">1.</span> <span class="nav-text">介紹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">2.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-1-3-行"><span class="nav-number">3.</span> <span class="nav-text">第 1 ~ 3 行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-4-6-行"><span class="nav-number">4.</span> <span class="nav-text">第 4 ~ 6 行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#預設座標系"><span class="nav-number">4.1.</span> <span class="nav-text">預設座標系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-7-行"><span class="nav-number">5.</span> <span class="nav-text">第 7 行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-9-13-行"><span class="nav-number">6.</span> <span class="nav-text">第 9 ~ 13 行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Groups（群組）"><span class="nav-number">6.1.</span> <span class="nav-text">Groups（群組）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transforms（變形）"><span class="nav-number">6.2.</span> <span class="nav-text">Transforms（變形）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Styles（樣式）"><span class="nav-number">6.3.</span> <span class="nav-text">Styles（樣式）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-shapes（基本形狀）"><span class="nav-number">6.4.</span> <span class="nav-text">Basic shapes（基本形狀）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SkewX（X-方向傾斜）"><span class="nav-number">6.5.</span> <span class="nav-text">SkewX（X 方向傾斜）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-15-20-行"><span class="nav-number">7.</span> <span class="nav-text">第 15 ~ 20 行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-22-25-行"><span class="nav-number">8.</span> <span class="nav-text">第 22 ~ 25 行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-26-27-行"><span class="nav-number">9.</span> <span class="nav-text">第 26 ~ 27 行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-29-34-行"><span class="nav-number">10.</span> <span class="nav-text">第 29 ~ 34 行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-35-行"><span class="nav-number">11.</span> <span class="nav-text">第 35 行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-38-行"><span class="nav-number">12.</span> <span class="nav-text">第 38 行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#縮放圖片"><span class="nav-number">13.</span> <span class="nav-text">縮放圖片</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Calvert</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 提供
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
