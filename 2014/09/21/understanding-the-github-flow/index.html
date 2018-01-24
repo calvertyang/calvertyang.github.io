@@ -111,16 +111,16 @@
 <meta property="og:site_name" content="Calvert&#39;s murmur">
 <meta property="og:description" content="原文：GitHub — Understanding the GitHub Flow  GitHub Flow 是一個基於分支的輕量化工作流程，幫助團隊及專案定期的進行部署。  在進行一項專案時，任何時候你可能會有一堆不同功能或想法，有些已經準備好了，而另有些則沒有。分支的存在是為了幫助你管理這些工作流程。 當你在專案建立一個分支，代表建立了一個環境來測試你的新想法。在分支所做的修改不會影響 ma">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:image" content="http://i.imgur.com/IDOaTrc.png">
-<meta property="og:image" content="http://i.imgur.com/5dSdhjw.png">
-<meta property="og:image" content="http://i.imgur.com/bd63kSL.png">
-<meta property="og:image" content="http://i.imgur.com/jJYTQbj.png">
-<meta property="og:image" content="http://i.imgur.com/tQfqXjR.png">
-<meta property="og:updated_time" content="2017-02-06T07:08:45.000Z">
+<meta property="og:image" content="https://blog.chyang.me/2014/09/21/understanding-the-github-flow/create_a_branch.png">
+<meta property="og:image" content="https://blog.chyang.me/2014/09/21/understanding-the-github-flow/add_commits.png">
+<meta property="og:image" content="https://blog.chyang.me/2014/09/21/understanding-the-github-flow/open_a_pull_request.png">
+<meta property="og:image" content="https://blog.chyang.me/2014/09/21/understanding-the-github-flow/discuss_and_review_your_code.png">
+<meta property="og:image" content="https://blog.chyang.me/2014/09/21/understanding-the-github-flow/merge_and_deploy.png">
+<meta property="og:updated_time" content="2018-01-24T08:04:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【譯】了解 GitHub Flow">
 <meta name="twitter:description" content="原文：GitHub — Understanding the GitHub Flow  GitHub Flow 是一個基於分支的輕量化工作流程，幫助團隊及專案定期的進行部署。  在進行一項專案時，任何時候你可能會有一堆不同功能或想法，有些已經準備好了，而另有些則沒有。分支的存在是為了幫助你管理這些工作流程。 當你在專案建立一個分支，代表建立了一個環境來測試你的新想法。在分支所做的修改不會影響 ma">
-<meta name="twitter:image" content="http://i.imgur.com/IDOaTrc.png">
+<meta name="twitter:image" content="https://blog.chyang.me/2014/09/21/understanding-the-github-flow/create_a_branch.png">
 
 
 
@@ -353,24 +353,24 @@
 <p>原文：<strong>GitHub</strong> — <a href="https://guides.github.com/introduction/flow/index.html" target="_blank" rel="noopener">Understanding the GitHub Flow</a></p>
 </blockquote>
 <p>GitHub Flow 是一個基於分支的輕量化工作流程，幫助團隊及專案定期的進行部署。</p>
-<p><img src="http://i.imgur.com/IDOaTrc.png" alt="Create a branch"></p>
+<img src="/2014/09/21/understanding-the-github-flow/create_a_branch.png">
 <p>在進行一項專案時，任何時候你可能會有一堆不同功能或想法，有些已經準備好了，而另有些則沒有。分支的存在是為了幫助你管理這些工作流程。</p>
 <p>當你在專案建立一個分支，代表建立了一個環境來測試你的新想法。在分支所做的修改不會影響 <code>master</code> 分支，所以可以自由的嘗試並提交修改。你可以放心，分支不會被合併，直到準備將它交由某位協同者來檢查。</p>
 <h3 id="進階提示"><a href="#進階提示" class="headerlink" title="進階提示"></a>進階提示</h3><p>整個 GitHub Flow 是基於分支，它是 Git 的一個核心概念。這裡只有一個規則：任何在 <code>master</code> 分支中的都是可部署的。</p>
 <p>正因為如此，當在進行一個功能或修復時，分離新分支與 master 是非常重要的。分支名稱應該具有描述性（如 <code>refactor-authentication</code>、<code>user-content-cache-key</code> 或 <code>make-retina-avatars</code>），讓其他人知道哪些正在進行中。</p>
-<p><img src="http://i.imgur.com/5dSdhjw.png" alt="Add commits"></p>
+<img src="/2014/09/21/understanding-the-github-flow/add_commits.png">
 <p>一旦你的分支已經建立，是時候開始進行修改。無論你何時新增、修改或刪除檔案，你會提交更新並將它們加入分支。加入提交的過程讓你可以追蹤分支的工作進度。</p>
 <p>提交也產生了一個透明的工作記錄，讓其他人可以了解你做了些什麼，以及原因。每個提交都有相關的提交訊息，用以解釋為什麼做了修改。此外，每個提交被視為一個修改的獨立個體。這使你在找到錯誤或決定朝不同方向時可以復原修改。</p>
 <h3 id="進階提示-1"><a href="#進階提示-1" class="headerlink" title="進階提示"></a>進階提示</h3><p>提交訊息是很重要的，尤其當 Git 追蹤你的修改並顯示這些提交於伺服器上。透過撰寫清楚的提交訊息，你可以更容易讓其他人了解並提供回饋。</p>
-<p><img src="http://i.imgur.com/bd63kSL.png" alt="Open a Pull Request"></p>
+<img src="/2014/09/21/understanding-the-github-flow/open_a_pull_request.png">
 <p>Pull Requests 發起了關於提交的討論。因為它們緊密的與底層的 Git 儲存庫結合，任何人都可以清楚的看到如果他們接受你的請求，將會合併什麼修改。</p>
 <p>在任何的開發過程中，你可以開啟一個 Pull Request：當你有些許或沒有程式碼，但想分享一些截圖或想法，當你卡住了，需要幫助或建議，或者當你準備好讓某人來檢查你的工作。在 Pull Request 訊息內使用 GitHub 的 <code>@</code> 提及系統，可以要求某個人或團隊的回饋，無論他們身在何處。</p>
 <h3 id="進階提示-2"><a href="#進階提示-2" class="headerlink" title="進階提示"></a>進階提示</h3><p>Pull Requests 對於協作開源專案和管理共享儲存庫的修改很有用。如果你使用的是 Fork 及 Pull 模式，Pull Requests 提供了一個方法來通知專案維護者關於你所做的修改。如果你使用的是共享儲存庫模式，Pull Requests 協助在合併到 master 分支前的程式碼檢閱和討論關於修改的建議。</p>
-<p><img src="http://i.imgur.com/jJYTQbj.png" alt="Discuss and review your code"></p>
+<img src="/2014/09/21/understanding-the-github-flow/discuss_and_review_your_code.png">
 <p>一旦 Pull Request 被開啟，檢閱修改的人或團隊可能會有問題或意見。也許是程式碼風格不符合專案指引、缺少單元測試，或者也許一切看起來都不錯且狀況良好。Pull Requests 旨在鼓勵這種類型的討論。</p>
 <p>在討論及回饋關於你的提交時，你還可以繼續推送到你的分支。如果有人反應說你忘了做某件事，或者在程式碼中有錯誤，你可以在分支中修正它並推送修改。GitHub 會顯示你的新提交及任何可能會收到的額外回饋在統一的 Pull Request 頁面。</p>
 <h3 id="進階提示-3"><a href="#進階提示-3" class="headerlink" title="進階提示"></a>進階提示</h3><p>Pull Request 的意見都是用 Markdown 撰寫，所以你可以插入圖片和表情符號，使用預先格式化的文字區塊，及其他輕量化的格式。</p>
-<p><img src="http://i.imgur.com/tQfqXjR.png" alt="Merge and deploy"></p>
+<img src="/2014/09/21/understanding-the-github-flow/merge_and_deploy.png">
 <p>一旦你的 Pull Request 進行了檢閱且分支通過測試，是時候將程式碼合併到 master 分支進行部署。如果你想在合併到 GitHub 儲存庫前測試東西，你可以先在本地進行合併。若你沒有推送到儲存庫的權限，這就派上用場了。</p>
 <p>合併後，Pull Requests 保存了一筆程式碼的修改歷史記錄。因為他們是可搜尋的，可讓任何人回頭來了解為什麼及如何作出決定。</p>
 <h3 id="進階提示-4"><a href="#進階提示-4" class="headerlink" title="進階提示"></a>進階提示</h3><p>你可以透過將特定的關鍵字放入 Pull Request 訊息中，將問題與程式碼做關聯。當你的 Pull Request 被合併，相關的問題也將被關閉。舉例來說，輸入 <code>Closes #32</code> 將會關閉儲存庫中編號 32 的問題。欲了解更多資訊，請查看我們的<a href="https://help.github.com/articles/closing-issues-via-commit-messages" target="_blank" rel="noopener">幫助文章</a>。</p>
