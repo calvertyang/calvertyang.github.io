@@ -1,15 +1,25 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next muse use-motion">
+<html class="theme-next muse use-motion" lang="zh-tw">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
 
 
 
@@ -18,7 +28,6 @@
 
 
 
-  <meta name="google-site-verification" content="Y0Zz15IXRv_417TF0lTBI_cHWg8Mt8OEaFqkWgXLY6I" />
 
 
 
@@ -29,48 +38,6 @@
 
 
 
-  
-  
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="iOS," />
 
 
 
@@ -79,42 +46,77 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.2" color="#222">
 
 
 
 
 
 
-<meta name="description" content="這次 App 送審被 Apple 以違反 PLA 3.3.12 而退審，內容大致上是說 Advertising Identifier(IDFA) 僅可基於廣告目的使用於應用程式內，但審核團隊沒發現需用 IDFA 來呈現廣告的地方。
-因送審的 App 內僅使用 iAd，而 iAd 是不需 AdSupport framework、ASIdentifierManager 或 Advertising Id">
-<meta property="og:type" content="article">
-<meta property="og:title" content="修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審">
-<meta property="og:url" content="https://blog.chyang.me/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/index.html">
-<meta property="og:site_name" content="Calvert's murmur">
-<meta property="og:description" content="這次 App 送審被 Apple 以違反 PLA 3.3.12 而退審，內容大致上是說 Advertising Identifier(IDFA) 僅可基於廣告目的使用於應用程式內，但審核團隊沒發現需用 IDFA 來呈現廣告的地方。
-因送審的 App 內僅使用 iAd，而 iAd 是不需 AdSupport framework、ASIdentifierManager 或 Advertising Id">
-<meta property="og:updated_time" content="2016-11-01T01:11:05.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審">
-<meta name="twitter:description" content="這次 App 送審被 Apple 以違反 PLA 3.3.12 而退審，內容大致上是說 Advertising Identifier(IDFA) 僅可基於廣告目的使用於應用程式內，但審核團隊沒發現需用 IDFA 來呈現廣告的地方。
-因送審的 App 內僅使用 iAd，而 iAd 是不需 AdSupport framework、ASIdentifierManager 或 Advertising Id">
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
+    version: '6.0.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="iOS," />
+
+
+<meta name="description" content="這次 App 送審被 Apple 以違反 PLA 3.3.12 而退審，內容大致上是說 Advertising Identifier(IDFA) 僅可基於廣告目的使用於應用程式內，但審核團隊沒發現需用 IDFA 來呈現廣告的地方。 因送審的 App 內僅使用 iAd，而 iAd 是不需 AdSupport framework、ASIdentifierManager 或 Advertising Id">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審">
+<meta property="og:url" content="https://blog.chyang.me/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/index.html">
+<meta property="og:site_name" content="Calvert&#39;s murmur">
+<meta property="og:description" content="這次 App 送審被 Apple 以違反 PLA 3.3.12 而退審，內容大致上是說 Advertising Identifier(IDFA) 僅可基於廣告目的使用於應用程式內，但審核團隊沒發現需用 IDFA 來呈現廣告的地方。 因送審的 App 內僅使用 iAd，而 iAd 是不需 AdSupport framework、ASIdentifierManager 或 Advertising Id">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:updated_time" content="2016-11-01T01:11:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審">
+<meta name="twitter:description" content="這次 App 送審被 Apple 以違反 PLA 3.3.12 而退審，內容大致上是說 Advertising Identifier(IDFA) 僅可基於廣告目的使用於應用程式內，但審核團隊沒發現需用 IDFA 來呈現廣告的地方。 因送審的 App 內僅使用 iAd，而 iAd 是不需 AdSupport framework、ASIdentifierManager 或 Advertising Id">
+
+
 
 
 
@@ -122,22 +124,10 @@
   <link rel="canonical" href="https://blog.chyang.me/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/"/>
 
 
-  <title> 修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審 | Calvert's murmur </title>
-</head>
-
-<body itemscope itemtype="//schema.org/WebPage" lang="zh-tw">
-
+  <title>修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審 | Calvert's murmur</title>
   
 
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-44933497-2', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
 
@@ -145,36 +135,69 @@
 
 
 
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
 
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Calvert's murmur</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Calvert's murmur</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -186,33 +209,13 @@
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
-            
-            首頁
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-            分類
-          </a>
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
         </li>
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-            歸檔
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-            標籤
-          </a>
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
         </li>
       
 
@@ -223,8 +226,16 @@
   
 </nav>
 
+
+  
+
+
+
  </div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
@@ -236,57 +247,72 @@
     
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.chyang.me/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Calvert">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Calvert's murmur">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審
-              
-            
-          </h1>
+          <h1 class="post-title" itemprop="name headline">修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審</h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2014-08-23T05:21:00+08:00" content="2014/08/23">
-              2014/08/23
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-08-23T05:21:00+08:00">2014/08/23</time>
+            
+
+            
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分類於</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Programming/" itemprop="url" rel="index">
-                    <span itemprop="name">Programming</span>
-                  </a>
-                </span>
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a></span>
 
                 
                 
-
               
             </span>
           
@@ -296,16 +322,21 @@
           
 
           
-
-          
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -314,22 +345,22 @@
       
         <p>這次 App 送審被 Apple 以違反 PLA 3.3.12 而退審，內容大致上是說 Advertising Identifier(IDFA) 僅可基於廣告目的使用於應用程式內，但審核團隊沒發現需用 IDFA 來呈現廣告的地方。</p>
 <p>因送審的 App 內僅使用 iAd，而 iAd 是不需 AdSupport framework、ASIdentifierManager 或 Advertising Identifier 的，所以唯一的可能性就是第三方 Framework 使用了 IDFA。</p>
-<p>Apple 在退審原因內提示可透過 <strong>strings</strong> 或 <strong>otool</strong> 指令來幫忙找出問題點，最終揪出兇手就是 FacebookSDK，在 <a href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m" target="_blank" rel="external"><code>FBUtility.m</code></a> 引入了 <a href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m#L28" target="_blank" rel="external"><code>AdSupport</code></a> 並使用 <a href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m#L287" target="_blank" rel="external"><code>advertisingIdentifier</code></a>。</p>
+<p>Apple 在退審原因內提示可透過 <strong>strings</strong> 或 <strong>otool</strong> 指令來幫忙找出問題點，最終揪出兇手就是 FacebookSDK，在 <a href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m" target="_blank" rel="noopener"><code>FBUtility.m</code></a> 引入了 <a href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m#L28" target="_blank" rel="noopener"><code>AdSupport</code></a> 並使用 <a href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m#L287" target="_blank" rel="noopener"><code>advertisingIdentifier</code></a>。</p>
 <p>暫時的解決方法如下：</p>
 <ol>
-<li>git clone <a href="https://github.com/facebook/facebook-ios-sdk" target="_blank" rel="external">FacebookSDK</a> 到本機</li>
+<li>git clone <a href="https://github.com/facebook/facebook-ios-sdk" target="_blank" rel="noopener">FacebookSDK</a> 到本機</li>
 <li><p>開啟 <code>src/Core/FBUtility.m</code>，將此行註解</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//#import &lt;AdSupport/AdSupport.h&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//#import &lt;AdSupport/AdSupport.h&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>將</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">+ (<span class="built_in">NSString</span> *)advertiserID &#123;</div><div class="line">    <span class="built_in">NSString</span> *advertiserID = <span class="literal">nil</span>;</div><div class="line">    Class ASIdentifierManagerClass = [FBDynamicFrameworkLoader loadClass:<span class="string">@"ASIdentifierManager"</span>     withFramework:<span class="string">@"AdSupport"</span>];</div><div class="line">    <span class="keyword">if</span> ([ASIdentifierManagerClass <span class="keyword">class</span>]) &#123;</div><div class="line">        ASIdentifierManager *manager = [ASIdentifierManagerClass sharedManager];</div><div class="line">        advertiserID = [[manager advertisingIdentifier] UUIDString];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> advertiserID;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">NSString</span> *)advertiserID &#123;</span><br><span class="line">    <span class="built_in">NSString</span> *advertiserID = <span class="literal">nil</span>;</span><br><span class="line">    Class ASIdentifierManagerClass = [FBDynamicFrameworkLoader loadClass:<span class="string">@"ASIdentifierManager"</span>     withFramework:<span class="string">@"AdSupport"</span>];</span><br><span class="line">    <span class="keyword">if</span> ([ASIdentifierManagerClass <span class="keyword">class</span>]) &#123;</span><br><span class="line">        ASIdentifierManager *manager = [ASIdentifierManagerClass sharedManager];</span><br><span class="line">        advertiserID = [[manager advertisingIdentifier] UUIDString];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> advertiserID;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>改為</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">+ (<span class="built_in">NSString</span> *)advertiserID &#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">@""</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">NSString</span> *)advertiserID &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">@""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>將</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">+ (FBAdvertisingTrackingStatus)advertisingTrackingStatus &#123;</div><div class="line">    <span class="keyword">if</span> ([FBSettings restrictedTreatment] == FBRestrictedTreatmentYES) &#123;</div><div class="line">        <span class="keyword">return</span> AdvertisingTrackingDisallowed;</div><div class="line">    &#125;</div><div class="line">    FBAdvertisingTrackingStatus status = AdvertisingTrackingUnspecified;</div><div class="line">    Class ASIdentifierManagerClass = [FBDynamicFrameworkLoader loadClass:<span class="string">@"ASIdentifierManager"</span> withFramework:<span class="string">@"AdSupport"</span>];</div><div class="line">    <span class="keyword">if</span> ([ASIdentifierManagerClass <span class="keyword">class</span>]) &#123;</div><div class="line">        ASIdentifierManager *manager = [ASIdentifierManagerClass sharedManager];</div><div class="line">        <span class="keyword">if</span> (manager) &#123;</div><div class="line">            status = [manager isAdvertisingTrackingEnabled] ? AdvertisingTrackingAllowed : AdvertisingTrackingDisallowed;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> status;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">+ (FBAdvertisingTrackingStatus)advertisingTrackingStatus &#123;</span><br><span class="line">    <span class="keyword">if</span> ([FBSettings restrictedTreatment] == FBRestrictedTreatmentYES) &#123;</span><br><span class="line">        <span class="keyword">return</span> AdvertisingTrackingDisallowed;</span><br><span class="line">    &#125;</span><br><span class="line">    FBAdvertisingTrackingStatus status = AdvertisingTrackingUnspecified;</span><br><span class="line">    Class ASIdentifierManagerClass = [FBDynamicFrameworkLoader loadClass:<span class="string">@"ASIdentifierManager"</span> withFramework:<span class="string">@"AdSupport"</span>];</span><br><span class="line">    <span class="keyword">if</span> ([ASIdentifierManagerClass <span class="keyword">class</span>]) &#123;</span><br><span class="line">        ASIdentifierManager *manager = [ASIdentifierManagerClass sharedManager];</span><br><span class="line">        <span class="keyword">if</span> (manager) &#123;</span><br><span class="line">            status = [manager isAdvertisingTrackingEnabled] ? AdvertisingTrackingAllowed : AdvertisingTrackingDisallowed;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> status;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>改為</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">+ (FBAdvertisingTrackingStatus)advertisingTrackingStatus &#123;</div><div class="line">    <span class="keyword">return</span> AdvertisingTrackingDisallowed;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ (FBAdvertisingTrackingStatus)advertisingTrackingStatus &#123;</span><br><span class="line">    <span class="keyword">return</span> AdvertisingTrackingDisallowed;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使用 <code>scripts/build_framework.sh</code> 重新打包 FacebookSDK。</p>
 </li>
@@ -339,34 +370,33 @@
 <p><strong>註：若 App 內使用了 iAd 以外的廣告服務且廣告有正常顯示，應該不會因違反 PLA 3.3.12 而退審。</strong></p>
 <p>參考資料：</p>
 <ul>
-<li>Stack Overflow：<a href="http://stackoverflow.com/questions/21574680/app-rejected-because-of-advertisingidentifier-in-facebook-sdk-and-flurry-sdk" target="_blank" rel="external">app rejected because of advertisingIdentifier in Facebook SDK and Flurry SDK</a></li>
-<li>Github：<a href="https://github.com/facebook/facebook-ios-sdk/issues/583" target="_blank" rel="external">Rejection for ASIdentifierManager</a></li>
+<li>Stack Overflow：<a href="http://stackoverflow.com/questions/21574680/app-rejected-because-of-advertisingidentifier-in-facebook-sdk-and-flurry-sdk" target="_blank" rel="noopener">app rejected because of advertisingIdentifier in Facebook SDK and Flurry SDK</a></li>
+<li>Github：<a href="https://github.com/facebook/facebook-ios-sdk/issues/583" target="_blank" rel="noopener">Rejection for ASIdentifierManager</a></li>
 </ul>
 
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-
-      
-    </div>
+    
 
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/iOS/" rel="tag">#iOS</a>
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
           
         </div>
+      
+
+      
+      
       
 
       
@@ -378,6 +408,8 @@
               </a>
             
           </div>
+
+          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -392,6 +424,10 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -405,11 +441,8 @@
           </div>
           
 
+  
 
-          
-  <div class="comments" id="comments">
-    
-  </div>
 
 
         </div>
@@ -425,93 +458,78 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目錄
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            本站概覽
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpeg"
-               alt="Calvert" />
-          <p class="site-author-name" itemprop="name">Calvert</p>
-          <p class="site-description motion-element" itemprop="description"></p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">14</span>
-              <span class="site-state-item-name">文章</span>
-            </a>
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Calvert</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
           
-            <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">分類</span>
-              </a>
-            </div>
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
           
 
           
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">21</span>
-                <span class="site-state-item-name">標籤</span>
-              </a>
-            </div>
+
           
 
-        </nav>
+          
+          
 
-        
+          
+          
 
-        <div class="links-of-author motion-element">
           
             
-              <span class="links-of-author-item">
-                <a href="https://github.com/CalvertYang" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
           
+          
+
         </div>
-
-        
-        
-
-        
-        
-
       </section>
 
       
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <p class="post-toc-empty">此文章未包含目錄</p>
-            
-          </div>
-        </section>
+
       
 
     </div>
@@ -524,36 +542,52 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Calvert</span>
+
+  
+
+  
 </div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 提供
-</div>
 
-<div class="theme-info">
-  主題 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a> v6.0.2</div>
+
+
+
 
         
+
+
+
+
+
+
 
         
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
   </div>
 
   
@@ -572,60 +606,45 @@
 
 
 
-  
 
 
 
-  
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
-  
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+
+
+
 
 
 
   
   
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
-
-
-
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
 
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
-
-
-
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
 
 
   
 
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.2"></script>
 
 
 
@@ -633,6 +652,50 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.2"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
 
   
 
@@ -640,6 +703,18 @@
 
   
 
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>
