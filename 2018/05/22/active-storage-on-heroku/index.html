@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Calvert&#39;s tech blog">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      在 Heroku 使用 Active Storage | Calvert&#39;s murmur
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrcode.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Calvert's murmur</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/categories/" class="item-link">Categories</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/categories/" class="menu-link">Categories</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>在 Heroku 使用 Active Storage</h2>
+  <p class="post-date">2018-05-22</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><blockquote>
+<p>原文：<strong>HEROKU BLOG</strong> — <a href="https://blog.heroku.com/rails-active-storage" target="_blank" rel="noopener">Rails 5.2 Active Storage: Previews, Poppler, and Solving Licensing Pitfalls</a></p>
+</blockquote>
+<p>上個月剛剛發佈的 Rails 5.2 有一個重要的新功能：Active Storage。Active Storage 支援各種後端服務（如 AWS S3），為 Active Record 模型提供檔案上傳和附件功能。雖然有像 <a href="https://github.com/thoughtbot/paperclip" target="_blank" rel="noopener">Paperclip</a> 這樣的函式庫來做類似的工作，但這是 Rails 第一次發佈這樣的功能。在 Heroku，我們認為雲端儲存是最佳實作規範，所以我們確保它能在我們的平台上執行。在這篇文章中，我們將分享如何準備發佈 Rails 5.2，以及如何在部署的應用程式中使用新的 Active Storage 功能。</p>
+<a id="more"></a>
+<h3 id="信任但要驗證"><a href="#信任但要驗證" class="headerlink" title="信任但要驗證"></a>信任但要驗證</h3><p>在 Heroku，信任是我們的第一價值。當我們得知 Active Storage 隨著 Rails 5.2 發佈時，我們開始嘗試使用它的所有功能。Active Storage 其中一個最便利的功能就是能夠預覽 PDF 和影片。PDF 或影片的小截圖將從檔案中擷取並呈現在頁面上，而不是透過文字連結到資源。</p>
+<p>測試版的 Rails 5.2 使用了熱門的開源工具 FFmpeg 和 MuPDF 來產生影片和 PDF 預覽。透過我們的安全及法務部門審查了這些新的二進位相依檔案，我們發現 MuPDF 採用 AGPL 授權條款，並且需要商業許可才能使用。如果我們在預設情況下簡單地將 MuPDF 加到 Rails 5.2+ 的應用程式中，我們的許多客戶會不知道他們需要購買 MuPDF 才能在商業上使用它。</p>
+<p>AGPL 授權條款的限制在 2017 年 9 月引起<a href="https://github.com/rails/rails/pull/30667#issuecomment-332276198" target="_blank" rel="noopener">公眾關注</a>。為了準備 5.2 版本，我們的工程師 <a href="https://twitter.com/hone02" target="_blank" rel="noopener">Terence Lee</a> 致力於更新 Active Storage，以便 PDF 預覽功能也可以使用沒有商業許可的開源後端程式。我們在 2018 年 2 月向 Rails 提交了一個 PR，<a href="https://github.com/rails/rails/pull/31906" target="_blank" rel="noopener">介紹採用 poppler PDF 作為 MuPDF 的替代方案的能力</a>。該 PR 大約在 1 個月後被合併，現在任何 Rails 5.2 使用者，無論是否在 Heroku，都無需購買商業許可即可呈現 PDF 預覽。</p>
+<h3 id="展示在-Heroku-使用-Active-Storage"><a href="#展示在-Heroku-使用-Active-Storage" class="headerlink" title="展示在 Heroku 使用 Active Storage"></a>展示在 Heroku 使用 Active Storage</h3><p>如果你已經有實作 Active Storage 的應用程式，則可以<a href="https://devcenter.heroku.com/articles/active-storage-on-heroku?preview=1" target="_blank" rel="noopener">跳轉到我們開發中心的 Active Storage 文件</a>。</p>
+<p>或者，你可以使用我們的應用程式範例。這是一個 Rails 5.2 應用程式，它是數位布告欄，允許使用者張貼影片、PDF 和圖片。你可以<a href="https://github.com/heroku/active_storage_with_previews_example" target="_blank" rel="noopener">在 Github 檢視原始碼</a>或用 Heroku 按鈕部署應用程式：</p>
+<p><a href="https://heroku.com/deploy?template=https://github.com/heroku/active_storage_with_previews_example" target="_blank" rel="noopener"><img src="/2018/05/22/active-storage-on-heroku/deploy-button.svg" title="發佈到heroku"></a></p>
+<blockquote>
+<p>注意：這個應用程式範例需要付費的 S3 附加元件。</p>
+</blockquote>
+<p>以下是該應用程式的範例影片。</p>
+<img src="/2018/05/22/active-storage-on-heroku/active-storage.gif" title="範例影片">
+<p>當你開啟首頁時，選擇適當的資源檔，然後送出表單。在影片中，<code>mp4</code> 檔案被上傳到 S3，然後透過 <code>ffmpeg</code> 幫助 Rails 產生預覽。很簡約。</p>
+<h3 id="在-Heroku-使用-Active-Storage"><a href="#在-Heroku-使用-Active-Storage" class="headerlink" title="在 Heroku 使用 Active Storage"></a>在 Heroku 使用 Active Storage</h3><p>如果你使用按鈕部署應用程式範例，它已經透過 <code>app.json</code> 設定能在 Heroku 上運作，但是，如果你有自己的應用程式想要部署，你要如何設定它以便在 Heroku 上運作？</p>
+<p>根據<a href="https://devcenter.heroku.com/articles/active-storage-on-heroku?preview=1" target="_blank" rel="noopener">開發中心的 Active Storage 文件</a>，你將需要一個檔案儲存服務，讓你所有的 dynos 都可以與其溝通。該範例使用名為 <a href="https://elements.heroku.com/addons/bucketeer" target="_blank" rel="noopener">Bucketeer</a> 的 Heroku S3 附加元件，但你也可以使用現有的 S3 憑證。</p>
+<p>馬上開始，請將 S3 的 AWS gem 加到 Gemfile，如果你要修改圖片，請加入 Mini Magick：</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gem <span class="string">"aws-sdk-s3"</span>, <span class="symbol">require:</span> <span class="literal">false</span></span><br><span class="line">gem <span class="string">'mini_magick'</span>, <span class="string">'~&gt; 4.8'</span></span><br></pre></td></tr></table></figure>
+<p>更新 Gemfile 後別忘了 <code>$ bundle install</code>。</p>
+<p>接下來，在你的 <code>config/storage.yml</code> 檔案中加入一個 <code>amazon</code> 選項來指向 S3 設定，在這個範例中我們使用了由 Bucketeer 設定的配置：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">amazon:</span></span><br><span class="line"><span class="attr">  service:</span> <span class="string">S3</span></span><br><span class="line"><span class="attr">  access_key_id:</span> &lt;%=<span class="ruby"> ENV[<span class="string">'BUCKETEER_AWS_ACCESS_KEY_ID'</span>] </span>%&gt;</span><br><span class="line"><span class="attr">  secret_access_key:</span> &lt;%=<span class="ruby"> ENV[<span class="string">'BUCKETEER_AWS_SECRET_ACCESS_KEY'</span>] </span>%&gt;</span><br><span class="line"><span class="attr">  region:</span> &lt;%=<span class="ruby"> ENV[<span class="string">'BUCKETEER_AWS_REGION'</span>] </span>%&gt;</span><br><span class="line"><span class="attr">  bucket:</span> &lt;%=<span class="ruby"> ENV[<span class="string">'BUCKETEER_BUCKET_NAME'</span>] </span>%&gt;</span><br></pre></td></tr></table></figure>
+<p>然後確保你的應用程式設定為在生產環境中使用 <code>:amazon</code> 儲存配置：</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.active_storage.service = <span class="symbol">:amazon</span></span><br></pre></td></tr></table></figure>
+<p>如果你忘記了這一步，預設的儲存是使用 <code>:local</code> 將檔案儲存到磁碟。這不是處理生產環境中上傳檔案的可擴展方式。如果你不小心將它部署到 Heroku，首先它會顯示檔案已上傳，但是如果你執行超過一個 dyno，他們會在隨機的請求中消失。當重新啟動 dynos 時，這些檔案將完全消失。你可以在開發中心取得有關 <a href="https://devcenter.heroku.com/articles/active-storage-on-heroku?preview=1#ephemeral-disk" target="_blank" rel="noopener">Heroku 的臨時磁碟</a>的更多資訊。</p>
+<p>最後，要使其在生產環境中運作的最後一件事是安裝一個客制的建置套件，它將安裝用來產生資源預覽的二進位相依檔案 <code>ffmpeg</code> 和 <code>poppler</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ heroku buildpacks:add -i 1 https://github.com/heroku/heroku-buildpack-activestorage-preview</span><br></pre></td></tr></table></figure>
+<p>一但你完成了，就可以部署到 Heroku！</p>
+<h3 id="將-Active-Storage-加到現有應用程式"><a href="#將-Active-Storage-加到現有應用程式" class="headerlink" title="將 Active Storage 加到現有應用程式"></a>將 Active Storage 加到現有應用程式</h3><p>如果你的應用程式還沒有 Active Storage，可以把它加入。首先，你需要執行以下指令啟用 Active Storage：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bin/rails active_storage:install</span><br></pre></td></tr></table></figure>
+<p>這會新增一個遷移，讓 Rails 追蹤上傳的檔案。</p>
+<p>接下來，你需要一個模型來「附加」檔案。你可以使用現有模型或建立新模型。在應用程式範例中，使用了幾乎是空的 <code>bulletin</code> 模型：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bin/rails generate scaffold bulletin</span><br></pre></td></tr></table></figure>
+<p>接下來，在應用程式上執行遷移：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bin/rails db:migrate</span><br></pre></td></tr></table></figure>
+<p>在資料庫遷移後，更新模型讓 Rails 知道你打算讓它能夠附加檔案：</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bulletin</span> &lt; ApplicationRecord</span></span><br><span class="line">  has_one_attached <span class="symbol">:attachment</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>一旦完成，我們還需要三個部分：上傳附件的表單、儲存附件的控制器以及呈現附件的視圖。</p>
+<p>如果你有一個現有的表單，你可以透過 <code>file_field</code> 視圖輔助方法加入一個附件欄位：</p>
+<figure class="highlight erb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%=<span class="ruby"> form.file_field <span class="symbol">:attachment</span> </span>%&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以在<a href="https://github.com/heroku/active_storage_with_previews_example/blob/ab0370f77f35f8eb0813727b8d49758926450f5e/app/views/welcome/_upload.html.erb#L14" target="_blank" rel="noopener">應用程式範例</a>中看到帶有附件的表單範例。一旦有了表單，你將需要保存附件。</p>
+<p>在這個應用程式範例中，首頁包含了表單和視圖。附件在 <a href="https://github.com/heroku/active_storage_with_previews_example/blob/ab0370f77f35f8eb0813727b8d49758926450f5e/app/controllers/bulletins_controller.rb#L26-L32" target="_blank" rel="noopener">bulletin 控制器</a>被儲存，然後將使用者導回主布告列表：</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create</span></span></span><br><span class="line">  @bulletin = Bulletin.new()</span><br><span class="line">  @bulletin.attachment.attach(params[<span class="symbol">:bulletin</span>][<span class="symbol">:attachment</span>])</span><br><span class="line">  @bulletin.save!</span><br><span class="line"></span><br><span class="line">  redirect_back(<span class="symbol">fallback_location:</span> root_path)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>最後，在 <a href="https://github.com/heroku/active_storage_with_previews_example/blob/ab0370f77f35f8eb0813727b8d49758926450f5e/app/views/welcome/index.erb" target="_blank" rel="noopener">welcome 視圖</a>中，我們迭代每個布告項目，並根據我們的附件類型，以不同的方式呈現。</p>
+<p>在 Active Storage 中，對於 PDF 和影片，只要系統安裝了正確的二進位檔案，<code>previewable?</code> 方法將回傳 true。對於圖片，如果安裝了 <code>mini_magick</code>，<code>variable?</code> 方法將回傳 true。如果這些都不是 true，那麼附件可能是一個最好在下載後查看的檔案。下面展示了<a href="https://github.com/heroku/active_storage_with_previews_example/blob/ab0370f77f35f8eb0813727b8d49758926450f5e/app/views/welcome/index.erb#L24-L37" target="_blank" rel="noopener">我們如何表示該邏輯</a>：</p>
+<figure class="highlight erb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul class="no-bullet"&gt;</span><br><span class="line">  &lt;%<span class="ruby"> @bulletin_list.each <span class="keyword">do</span> <span class="params">|bulletin|</span> </span>%&gt;</span><br><span class="line">    &lt;li&gt;</span><br><span class="line">      &lt;%<span class="ruby"> <span class="keyword">if</span> bulletin.attachment.previewable? </span>%&gt;</span><br><span class="line">        &lt;%=<span class="ruby"> link_to(image_tag(bulletin.attachment.preview(<span class="symbol">resize:</span> <span class="string">"200x200&gt;"</span>)),  rails_blob_path(bulletin.attachment, <span class="symbol">disposition:</span> <span class="string">"attachment"</span>))</span></span><br><span class="line"><span class="ruby">        </span>%&gt;</span><br><span class="line">      &lt;%<span class="ruby"> <span class="keyword">elsif</span> bulletin.attachment.variable? </span>%&gt;</span><br><span class="line">        &lt;%=<span class="ruby"> link_to(image_tag(bulletin.attachment.variant(<span class="symbol">resize:</span> <span class="string">"200x200"</span>)), rails_blob_path(bulletin.attachment, <span class="symbol">disposition:</span> <span class="string">"attachment"</span>))</span>%&gt;</span><br><span class="line">      &lt;%<span class="ruby"> <span class="keyword">else</span> </span>%&gt;</span><br><span class="line">        &lt;%=<span class="ruby"> link_to <span class="string">"Download file"</span>, rails_blob_path(bulletin.attachment, <span class="symbol">disposition:</span> <span class="string">"attachment"</span>) </span>%&gt;</span><br><span class="line">      &lt;%<span class="ruby"> <span class="keyword">end</span> </span>%&gt;</span><br><span class="line">    &lt;/li&gt;</span><br><span class="line">  &lt;%<span class="ruby"> <span class="keyword">end</span> </span>%&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+<p>一旦你完成以上所有步驟，並將 Active Storage 設定為在生產環境中運作，使用者就可以輕鬆上傳和下載檔案。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Ruby on Rails" >
+    <span class="tag-code">Ruby on Rails</span>
+  </a>
+
+  <a href="/tags#Active Storage" >
+    <span class="tag-code">Active Storage</span>
+  </a>
+
+  <a href="/tags#Heroku" >
+    <span class="tag-code">Heroku</span>
+  </a>
+
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2018/05/18/active-storage-overview/">
+        <span class="nav-arrow">← </span>
+        
+          Active Storage 概要
+        
+      </a>
+    
+    
+  </div>
+
+
+    <!-- NAV END -->
+    <!-- 打賞 START -->
+    
+    <!-- 打賞 END -->
+    <!-- 二維條碼 START -->
+    
+      <div class="qrcode">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="share-qrcode"/>
+        </svg>
+        <p class="notice">掃描二維條碼，分享此文章</p>
+      </div>
+    
+    <!-- 二維條碼 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">目錄</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#信任但要驗證"><span class="toc-nav-text">信任但要驗證</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#展示在-Heroku-使用-Active-Storage"><span class="toc-nav-text">展示在 Heroku 使用 Active Storage</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#在-Heroku-使用-Active-Storage"><span class="toc-nav-text">在 Heroku 使用 Active Storage</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#將-Active-Storage-加到現有應用程式"><span class="toc-nav-text">將 Active Storage 加到現有應用程式</span></a></li></ol>
+    
+  </div>
+</aside>
+
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.chyang.me/2018/05/22/active-storage-on-heroku/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // 若圖片放在連結內，則將游標改為 pointer 並將圖片靠左
+    $(".markdown-content img").each(function() {
+      if ($(this).parents().is('a')) {
+        $(this).css({
+          'cursor': 'pointer',
+          'display': 'inline-block'
+        })
+      }
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function(e) {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qrcode = new QRCode(document.getElementById("share-qrcode"), {
+      text: document.location.href,
+      width : 100,
+      height : 100,
+      colorDark : "#000000",
+    	colorLight : "#ffffff",
+      correctLevel : QRCode.CorrectLevel.L,
+      useSVG: true
+    });
+
+    // gitment
+    var gitmentConfig = "undefined";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "在 Heroku 使用 Active Storage",
+        owner: "undefined",
+        repo: "",
+        oauth: {
+          client_id: "",
+          client_secret: ""
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; Calvert 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>

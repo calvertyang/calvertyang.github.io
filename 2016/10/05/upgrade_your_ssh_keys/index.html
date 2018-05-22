@@ -1,357 +1,173 @@
 <!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Calvert&#39;s tech blog">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      升級你的 SSH 金鑰！ | Calvert&#39;s murmur
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrcode.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
 
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
   
 
-
-<html class="theme-next muse use-motion" lang="zh-tw">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=6.0.2" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.2">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.2">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.2">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=6.0.2" color="#222">
-
-
-
-
-
-
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '6.0.2',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: false,
-    fastclick: false,
-    lazyload: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-  
-
-
-
-
-  
-  <meta name="keywords" content="SSH,Ed25519," />
-
-
-<meta name="description" content="原文：Gert van Dijk — Upgrade your SSH keys!  無論你是軟體開發人員或系統管理員，我敢打賭你正在使用 SSH 金鑰。比起使用密碼來推送提交到 Github 或是管理 Unix 系統，透過 SSH 公開金鑰驗證是最佳的方法。然而，隨著時光飛逝，很多人都使用舊金鑰而沒有意識到需要產生一個新的來提供私密資料更好的保護。在這篇文章，我將示範如何平穩的轉換到 Ed25">
-<meta name="keywords" content="SSH,Ed25519">
-<meta property="og:type" content="article">
-<meta property="og:title" content="【譯】升級你的 SSH 金鑰！">
-<meta property="og:url" content="https://blog.chyang.me/2016/10/05/upgrade_your_ssh_keys/index.html">
-<meta property="og:site_name" content="Calvert&#39;s murmur">
-<meta property="og:description" content="原文：Gert van Dijk — Upgrade your SSH keys!  無論你是軟體開發人員或系統管理員，我敢打賭你正在使用 SSH 金鑰。比起使用密碼來推送提交到 Github 或是管理 Unix 系統，透過 SSH 公開金鑰驗證是最佳的方法。然而，隨著時光飛逝，很多人都使用舊金鑰而沒有意識到需要產生一個新的來提供私密資料更好的保護。在這篇文章，我將示範如何平穩的轉換到 Ed25">
-<meta property="og:locale" content="zh-tw">
-<meta property="og:image" content="https://blog.chyang.me/2016/10/05/upgrade_your_ssh_keys/old_key_picture.jpg">
-<meta property="og:updated_time" content="2016-11-01T01:08:06.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【譯】升級你的 SSH 金鑰！">
-<meta name="twitter:description" content="原文：Gert van Dijk — Upgrade your SSH keys!  無論你是軟體開發人員或系統管理員，我敢打賭你正在使用 SSH 金鑰。比起使用密碼來推送提交到 Github 或是管理 Unix 系統，透過 SSH 公開金鑰驗證是最佳的方法。然而，隨著時光飛逝，很多人都使用舊金鑰而沒有意識到需要產生一個新的來提供私密資料更好的保護。在這篇文章，我將示範如何平穩的轉換到 Ed25">
-<meta name="twitter:image" content="https://blog.chyang.me/2016/10/05/upgrade_your_ssh_keys/old_key_picture.jpg">
-
-
-
-
-
-
-  <link rel="canonical" href="https://blog.chyang.me/2016/10/05/upgrade_your_ssh_keys/"/>
-
-
-  <title>【譯】升級你的 SSH 金鑰！ | Calvert's murmur</title>
-  
-
-
-
-
-
-
-
-
-
-  <noscript>
-  <style type="text/css">
-    .use-motion .motion-element,
-    .use-motion .brand,
-    .use-motion .menu-item,
-    .sidebar-inner,
-    .use-motion .post-block,
-    .use-motion .pagination,
-    .use-motion .comments,
-    .use-motion .post-header,
-    .use-motion .post-body,
-    .use-motion .collection-title { opacity: initial; }
-
-    .use-motion .logo,
-    .use-motion .site-title,
-    .use-motion .site-subtitle {
-      opacity: initial;
-      top: initial;
-    }
-
-    .use-motion {
-      .logo-line-before i { left: initial; }
-      .logo-line-after i { right: initial; }
-    }
-  </style>
-</noscript>
 
 </head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"> <div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Calvert's murmur</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
 </div>
 
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Calvert's murmur</span>
+    </a>
+    <ul class="right-list">
       
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Startseite</a>
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
         </li>
       
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archiv</a>
+        <li class="list-item">
+          
+            <a href="/categories/" class="item-link">Categories</a>
+          
         </li>
       
-
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
       
     </ul>
-  
-
-  
-</nav>
-
-
-  
-
-
-
- </div>
-    </header>
-
-    
-
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.chyang.me/2016/10/05/upgrade_your_ssh_keys/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Calvert">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Calvert's murmur">
-    </span>
-
-    
-      <header class="post-header">
-
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
         
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
         
-          <h1 class="post-title" itemprop="name headline">【譯】升級你的 SSH 金鑰！</h1>
+          <li class="menu-item">
+            
+              <a href="/categories/" class="menu-link">Categories</a>
+            
+          </li>
         
-
-        <div class="post-meta">
-          <span class="post-time">
+          <li class="menu-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-05T13:53:00+08:00">2016/10/05</time>
+              <a href="/tags/" class="menu-link">Tags</a>
             
-
+          </li>
+        
+          <li class="menu-item">
             
+              <a href="/archives/" class="menu-link">Archives</a>
             
-
+          </li>
+        
+          <li class="menu-item">
             
-          </span>
-
-          
-            <span class="post-category" >
+              <a href="/project/" class="menu-link">Projects</a>
             
-              <span class="post-meta-divider">|</span>
+          </li>
+        
+          <li class="menu-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Security/" itemprop="url" rel="index"><span itemprop="name">Security</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
+              <a href="/about/" class="menu-link">About</a>
             
-          
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
 
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <blockquote>
+    <div id="article-banner">
+  <h2>升級你的 SSH 金鑰！</h2>
+  <p class="post-date">2016-10-05</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><blockquote>
 <p>原文：<strong>Gert van Dijk</strong> — <a href="https://blog.g3rt.nl/upgrade-your-ssh-keys.html" target="_blank" rel="noopener">Upgrade your SSH keys!</a></p>
 </blockquote>
 <p>無論你是軟體開發人員或系統管理員，我敢打賭你正在使用 SSH 金鑰。比起使用密碼來推送提交到 Github 或是管理 Unix 系統，透過 SSH 公開金鑰驗證是最佳的方法。然而，隨著時光飛逝，很多人都使用舊金鑰而沒有意識到需要產生一個新的來提供私密資料更好的保護。在這篇文章，我將示範如何平穩的轉換到 Ed25519 金鑰、你為什麼會想要它以及展示一些技巧和訣竅。</p>
-<blockquote><p>長話短說，使用 <code>ssh-keygen -o -a 100 -t ed25519</code> 來產生新的金鑰並指定一個高強度的通關密語，如果你需要平穩的轉換，請繼續往下閱讀。</p>
+<blockquote>
+<p>長話短說，使用 <code>ssh-keygen -o -a 100 -t ed25519</code> 來產生新的金鑰並指定一個高強度的通關密語，如果你需要平穩的轉換，請繼續往下閱讀。</p>
 </blockquote>
-<blockquote><p>我計劃發佈更多 SSH 技巧和訣竅，所以請關注我的部落格。這篇文章的重點是關於作為使用者公開金鑰驗證的 SSH 金鑰。</p>
+<blockquote>
+<p>我計劃發佈更多 SSH 技巧和訣竅，所以請關注我的部落格。這篇文章的重點是關於作為使用者公開金鑰驗證的 SSH 金鑰。</p>
 </blockquote>
 <h3 id="DSA-和-RSA-1024-位元已經廢止"><a href="#DSA-和-RSA-1024-位元已經廢止" class="headerlink" title="DSA 和 RSA 1024 位元已經廢止"></a>DSA 和 RSA 1024 位元已經廢止</h3><p>如果你已經使用預設選項建立金鑰超過四年，它可能不安全（RSA &lt; 2048 位元）。更糟的是，我最近看到了推特迷、同事和朋友還在使用 DSA 金鑰（OpenSSH 格式裡的 <code>ssh-dss</code> 類型）。那是一種類似於 RSA 的金鑰類型，但長度受限於 1024 位元且被<a href="https://security.stackexchange.com/a/5100/12948" target="_blank" rel="noopener">推薦</a>了很長一段時間。它顯然不安全，且被最近的 OpenSSH 版本以正當理由拒絕（請參見 <a href="http://www.openssh.com/txt/release-7.0" target="_blank" rel="noopener">7.0 更新日誌</a>）。</p>
 <p>難過的是，我看到關於如何重新啟用支援 DSA 金鑰的文章，而不是轉移到一種更安全的金鑰類型。真的，依照指示更改 <code>PubkeyAcceptedKeyTypes</code> 或 <code>HostKeyAlgorithms</code> 的設定是不明智的(host keys are for a later post)。取而代之，升級你的金鑰！</p>
@@ -376,7 +192,7 @@
 <p>OpenSSH 金鑰產生器提供了兩種選項，以抵抗暴力破解密碼：使用新的 OpenSSH 金鑰格式並增加金鑰推導函數的使用次數。它會降低解鎖金鑰的速度，但也防止了惡意使用者高效的暴力破解。在你的系統實驗推倒函數的使用次數，約從 100 次開始。在我的系統大約需要 1 秒來解密，且每天用金鑰管理器載入一次。在我看來，是可以接受的。</p>
 <p>透過 <code>ssh-keygen</code> 使用 <code>-o</code> 選項並利用 bcrypt 所搭載的嶄新金鑰推導函數建立新的 RFC4716 金鑰格式。使用 <code>-a &lt;num&gt;</code> 選項指定推導函數的使用次數。</p>
 <p>事實上，當建立一個 Ed25519 金鑰時，<code>-o</code> 選項看來是預設值。</p>
-<p>OpenSSH 的手冊並沒有真正關於「新」格式的解釋。我發現 www.tedunangst.com 內的這篇文章非常有用：「<a href="http://www.tedunangst.com/flak/post/new-openssh-key-format-and-bcrypt-pbkdf" target="_blank" rel="noopener">新的 OpenSSH 金鑰格式及 bcrypt pbkdf</a>」。</p>
+<p>OpenSSH 的手冊並沒有真正關於「新」格式的解釋。我發現 <a href="http://www.tedunangst.com" target="_blank" rel="noopener">www.tedunangst.com</a> 內的這篇文章非常有用：「<a href="http://www.tedunangst.com/flak/post/new-openssh-key-format-and-bcrypt-pbkdf" target="_blank" rel="noopener">新的 OpenSSH 金鑰格式及 bcrypt pbkdf</a>」。</p>
 <h3 id="產生新的吸引人的-Ed25519-金鑰"><a href="#產生新的吸引人的-Ed25519-金鑰" class="headerlink" title="產生新的吸引人的 Ed25519 金鑰"></a>產生新的吸引人的 Ed25519 金鑰</h3><blockquote>
 <p>提示：使用相同的密碼短語在你所有的金鑰類型來獲得更多便利性。（參見：<a href="#multi-key-aware-ssh-client">知道多個金鑰的 SSH 客戶端</a>。）</p>
 </blockquote>
@@ -404,375 +220,228 @@
 <h3 id="我的-Gnome-keyring-不再運作"><a href="#我的-Gnome-keyring-不再運作" class="headerlink" title="我的 Gnome-keyring 不再運作"></a>我的 Gnome-keyring 不再運作</h3><p>Gnome-keyring 被用在 Ubuntu Unity，無法讀取新的 RFC4716 格式金鑰，但回報成功。這是臭蟲。更多細節在<a href="https://askubuntu.com/q/564821/88802" target="_blank" rel="noopener">我的 AskUbuntu Q&amp;A 文章</a>。我建議停用 Gnome keyring 作為 SSH 金鑰管理器，改用普通的 OpenSSH 金鑰管理器來代替。</p>
 <h3 id="我在-Windows-使用-PuTTY"><a href="#我在-Windows-使用-PuTTY" class="headerlink" title="我在 Windows 使用 PuTTY"></a>我在 Windows 使用 PuTTY</h3><p>抱歉，我沒有使用 PuTTY，但是首先要確定已經升級。根據<a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/wishlist/ed25519.html" target="_blank" rel="noopener">願望清單項目</a>建議，從 2015 年末版本開始支援 Ed25519。一般來說，我對於它實作的安全功能的速度不是太興奮。</p>
 <h3 id="這是最安全的-SSH-金鑰對？"><a href="#這是最安全的-SSH-金鑰對？" class="headerlink" title="這是最安全的 SSH 金鑰對？"></a>這是最安全的 SSH 金鑰對？</h3><p>我們已經採取了一些重要措施，但是離最安全還很遠。在處理高保證環境時，如本文所述，因為在記憶體中保存著未加密的私鑰，我強烈反對使用金鑰。取而代之，使用安全硬體（智慧卡）來避免洩露金鑰甚至從記憶體轉存。它未涵蓋在此文章，主要是因為它需要你購買硬體，其次是因為依賴於設備的限制。一個很好的解決方案是利用可能已經內建在你電腦的可信賴平台模組，不過那肯定值得用其它文章來解說。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#SSH" >
+    <span class="tag-code">SSH</span>
+  </a>
 
-      
-    </div>
+  <a href="/tags#Ed25519" >
+    <span class="tag-code">Ed25519</span>
+  </a>
+
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">
+        <span class="nav-arrow">← </span>
+        
+          使用 Mailboxer 實作站內信系統
+        
+      </a>
     
     
+      <a class="nav-right" href="/2016/10/16/capistrano-with-ed25519-keys/">
+        
+          在 Capistrano 自動化部署時使用 Ed25519 金鑰
+        
+        <span class="nav-arrow"> →</span>
+      </a>
     
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/SSH/" rel="tag"># SSH</a>
-          
-            <a href="/tags/Ed25519/" rel="tag"># Ed25519</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/" rel="next" title="【譯】使用 Mailboxer 實作站內信系統">
-                <i class="fa fa-chevron-left"></i> 【譯】使用 Mailboxer 實作站內信系統
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/10/16/capistrano-with-ed25519-keys/" rel="prev" title="【譯】在 Capistrano 自動化部署時使用 Ed25519 金鑰">
-                【譯】在 Capistrano 自動化部署時使用 Ed25519 金鑰 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
   </div>
-  
-  
-  
+
+
+    <!-- NAV END -->
+    <!-- 打賞 START -->
+    
+    <!-- 打賞 END -->
+    <!-- 二維條碼 START -->
+    
+      <div class="qrcode">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="share-qrcode"/>
+        </svg>
+        <p class="notice">掃描二維條碼，分享此文章</p>
+      </div>
+    
+    <!-- 二維條碼 END -->
+    
+      <!-- No Comment -->
+    
   </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">目錄</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#DSA-和-RSA-1024-位元已經廢止"><span class="toc-nav-text">DSA 和 RSA 1024 位元已經廢止</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#確定你目前的狀況"><span class="toc-nav-text">確定你目前的狀況</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#平穩的轉換，我保證。"><span class="toc-nav-text">平穩的轉換，我保證。</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#你會喜歡-Twisted-Edwards-curve"><span class="toc-nav-text">你會喜歡 Twisted Edwards curve</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#增加對暴力破解密碼的抵抗"><span class="toc-nav-text">增加對暴力破解密碼的抵抗</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#產生新的吸引人的-Ed25519-金鑰"><span class="toc-nav-text">產生新的吸引人的 Ed25519 金鑰</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#知道多個金鑰的-SSH-客戶端"><span class="toc-nav-text">知道多個金鑰的 SSH 客戶端</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#變更或設定密碼短語"><span class="toc-nav-text">變更或設定密碼短語</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#升級你現在的-RSA-金鑰"><span class="toc-nav-text">升級你現在的 RSA 金鑰</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#支援-Ed25519-的軟體"><span class="toc-nav-text">支援 Ed25519 的軟體</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#我的-Gnome-keyring-不再運作"><span class="toc-nav-text">我的 Gnome-keyring 不再運作</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#我在-Windows-使用-PuTTY"><span class="toc-nav-text">我在 Windows 使用 PuTTY</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#這是最安全的-SSH-金鑰對？"><span class="toc-nav-text">這是最安全的 SSH 金鑰對？</span></a></li></ol>
+    
   </div>
-
-
-          </div>
-          
+</aside>
 
   
+  <!-- Catalog END -->
+</main>
 
+<script>
+  (function () {
+    var url = 'https://blog.chyang.me/2016/10/05/upgrade_your_ssh_keys/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
 
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
 
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
+    // 若圖片放在連結內，則將游標改為 pointer 並將圖片靠左
+    $(".markdown-content img").each(function() {
+      if ($(this).parents().is('a')) {
+        $(this).css({
+          'cursor': 'pointer',
+          'display': 'inline-block'
+        })
+      }
+    })
 
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
+    // zoom image
+    $(".markdown-content img").on('click', function(e) {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
 
-      
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
-          </li>
-        </ul>
-      
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
 
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">Calvert</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
 
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives/">
-                
-                    <span class="site-state-item-count">15</span>
-                    <span class="site-state-item-name">Artikel</span>
-                  </a>
-                </div>
-              
+    // qrcode
+    var qrcode = new QRCode(document.getElementById("share-qrcode"), {
+      text: document.location.href,
+      width : 100,
+      height : 100,
+      colorDark : "#000000",
+    	colorLight : "#ffffff",
+      correctLevel : QRCode.CorrectLevel.L,
+      useSVG: true
+    });
 
-              
-                
-                
-                <div class="site-state-item site-state-categories">
-                  <a href="/categories/index.html">
-                    <span class="site-state-item-count">4</span>
-                    <span class="site-state-item-name">Kategorien</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  <a href="/tags/index.html">
-                    <span class="site-state-item-count">22</span>
-                    <span class="site-state-item-name">Tags</span>
-                  </a>
-                </div>
-              
-            </nav>
-          
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-            
-          
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#DSA-和-RSA-1024-位元已經廢止"><span class="nav-number">1.</span> <span class="nav-text">DSA 和 RSA 1024 位元已經廢止</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#確定你目前的狀況"><span class="nav-number">2.</span> <span class="nav-text">確定你目前的狀況</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平穩的轉換，我保證。"><span class="nav-number">3.</span> <span class="nav-text">平穩的轉換，我保證。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你會喜歡-Twisted-Edwards-curve"><span class="nav-number">4.</span> <span class="nav-text">你會喜歡 Twisted Edwards curve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加對暴力破解密碼的抵抗"><span class="nav-number">5.</span> <span class="nav-text">增加對暴力破解密碼的抵抗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#產生新的吸引人的-Ed25519-金鑰"><span class="nav-number">6.</span> <span class="nav-text">產生新的吸引人的 Ed25519 金鑰</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#知道多個金鑰的-SSH-客戶端"><span class="nav-number">7.</span> <span class="nav-text">知道多個金鑰的 SSH 客戶端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#變更或設定密碼短語"><span class="nav-number">8.</span> <span class="nav-text">變更或設定密碼短語</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#升級你現在的-RSA-金鑰"><span class="nav-number">9.</span> <span class="nav-text">升級你現在的 RSA 金鑰</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支援-Ed25519-的軟體"><span class="nav-number">10.</span> <span class="nav-text">支援 Ed25519 的軟體</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的-Gnome-keyring-不再運作"><span class="nav-number">11.</span> <span class="nav-text">我的 Gnome-keyring 不再運作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我在-Windows-使用-PuTTY"><span class="nav-number">12.</span> <span class="nav-text">我在 Windows 使用 PuTTY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#這是最安全的-SSH-金鑰對？"><span class="nav-number">13.</span> <span class="nav-text">這是最安全的 SSH 金鑰對？</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Calvert</span>
-
-  
-
-  
-</div>
-
-
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a> v6.0.2</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+    // gitment
+    var gitmentConfig = "undefined";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "升級你的 SSH 金鑰！",
+        owner: "undefined",
+        repo: "",
+        oauth: {
+          client_id: "",
+          client_secret: ""
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=6.0.2"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=6.0.2"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.2"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=6.0.2"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.2"></script>
-
-
-
-  
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-</body>
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; Calvert 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+
+  </body>
 </html>

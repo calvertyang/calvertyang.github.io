@@ -1,488 +1,261 @@
 <!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Calvert&#39;s tech blog">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Calvert&#39;s murmur
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrcode.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
 
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
   
 
-
-<html class="theme-next muse use-motion" lang="zh-tw">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=6.0.2" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.2">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.2">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.2">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=6.0.2" color="#222">
-
-
-
-
-
-
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '6.0.2',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: false,
-    fastclick: false,
-    lazyload: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-  
-
-
-
-
-  
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="Calvert&#39;s murmur">
-<meta property="og:url" content="https://blog.chyang.me/index.html">
-<meta property="og:site_name" content="Calvert&#39;s murmur">
-<meta property="og:locale" content="zh-tw">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Calvert&#39;s murmur">
-
-
-
-
-
-
-  <link rel="canonical" href="https://blog.chyang.me/"/>
-
-
-  <title>Calvert's murmur</title>
-  
-
-
-
-
-
-
-
-
-
-  <noscript>
-  <style type="text/css">
-    .use-motion .motion-element,
-    .use-motion .brand,
-    .use-motion .menu-item,
-    .sidebar-inner,
-    .use-motion .post-block,
-    .use-motion .pagination,
-    .use-motion .comments,
-    .use-motion .post-header,
-    .use-motion .post-body,
-    .use-motion .collection-title { opacity: initial; }
-
-    .use-motion .logo,
-    .use-motion .site-title,
-    .use-motion .site-subtitle {
-      opacity: initial;
-      top: initial;
-    }
-
-    .use-motion {
-      .logo-line-before i { left: initial; }
-      .logo-line-after i { right: initial; }
-    }
-  </style>
-</noscript>
 
 </head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left 
-  page-home">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"> <div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Calvert's murmur</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
 </div>
 
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Calvert's murmur</span>
+    </a>
+    <ul class="right-list">
       
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Startseite</a>
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">Home</a>
+          
         </li>
       
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archiv</a>
+        <li class="list-item">
+          
+            <a href="/categories/" class="item-link">Categories</a>
+          
         </li>
       
-
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
       
     </ul>
-  
-
-  
-</nav>
-
-
-  
-
-
-
- </div>
-    </header>
-
-    
-
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-  <section id="posts" class="posts-expand">
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.chyang.me/2018/01/24/electron-api-demos/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Calvert">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Calvert's murmur">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/24/electron-api-demos/" itemprop="url">Electron API 範例</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-24T15:37:00+08:00">2018/01/24</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://github.com/CalvertYang/electron-api-demos-zh-Hant" target="_blank" rel="noopener"><img src="/2018/01/24/electron-api-demos/screenshot.png"></a></p>
-<p>因為最近在工作時需要使用 <a href="https://electronjs.org/" target="_blank" rel="noopener">Electron</a>，發現官方提供的 <a href="https://github.com/electron/electron-api-demos" target="_blank" rel="noopener">Electron API 範例應用程式</a>很適合讓想入門的人了解一些基本 API 的用法以及實際執行的效果。</p>
-<p>在 Github 上搜尋這個範例程式發現沒有正體中文版覺得有點可惜，於是就花了點時間來翻譯此範例程式。</p>
-<p>原始碼可從 <a href="https://github.com/CalvertYang/electron-api-demos-zh-Hant" target="_blank" rel="noopener">Github</a> 下載，若有任何翻譯建議也歡迎提出。</p>
-
-          
-        
-      
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/categories/" class="menu-link">Categories</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
   </div>
-  
-  
-  
-  </article>
+</header>
 
-
-    
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2018/05/22/active-storage-on-heroku/">在 Heroku 使用 Active Storage</a>
+      </h2>
+      <p class="article-date">2018年5月22日</p>
       
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.chyang.me/2017/03/15/drawing-with-rvg/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Calvert">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Calvert's murmur">
-    </span>
-
-    
-      <header class="post-header">
-
         
+  <a href="/tags#Ruby on Rails" >
+    <span class="tag-code">Ruby on Rails</span>
+  </a>
+
+  <a href="/tags#Active Storage" >
+    <span class="tag-code">Active Storage</span>
+  </a>
+
+  <a href="/tags#Heroku" >
+    <span class="tag-code">Heroku</span>
+  </a>
+
+
+      
+      <div class="article-summary">
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/15/drawing-with-rvg/" itemprop="url">【譯】使用 RVG 繪圖</a></h1>
+          <blockquote>
+<p>原文：<strong>HEROKU BLOG</strong> — <a href="https://blog.heroku.com/rails-active-storage" target="_blank" rel="noopener">Rails 5.2 Active Storage: Previews, Poppler, and Solving Licensing Pitfalls</a></p>
+</blockquote>
+<p>上個月剛剛發佈的 Rails 5.2 有一個重要的新功能：Active Storage。Active Storage 支援各種後端服務（如 AWS S3），為 Active Record 模型提供檔案上傳和附件功能。雖然有像 <a href="https://github.com/thoughtbot/paperclip" target="_blank" rel="noopener">Paperclip</a> 這樣的函式庫來做類似的工作，但這是 Rails 第一次發佈這樣的功能。在 Heroku，我們認為雲端儲存是最佳實作規範，所以我們確保它能在我們的平台上執行。在這篇文章中，我們將分享如何準備發佈 Rails 5.2，以及如何在部署的應用程式中使用新的 Active Storage 功能。</p>
         
+      </div>
+      <a class="more" href="/2018/05/22/active-storage-on-heroku/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2018/05/18/active-storage-overview/">Active Storage 概要</a>
+      </h2>
+      <p class="article-date">2018年5月18日</p>
+      
+        
+  <a href="/tags#Ruby on Rails" >
+    <span class="tag-code">Ruby on Rails</span>
+  </a>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-15T13:50:06+08:00">2017/03/15</time>
-            
+  <a href="/tags#Active Storage" >
+    <span class="tag-code">Active Storage</span>
+  </a>
 
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
 
       
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>Ruby on Rails Guides</strong> — <a href="http://edgeguides.rubyonrails.org/active_storage_overview.html" target="_blank" rel="noopener">Active Storage Overview</a></p>
+</blockquote>
+<p>Active Storage 是 Rails 5.2 所新增的功能，它可以讓你輕鬆的將檔案傳送到 <a href="https://aws.amazon.com/s3/" target="_blank" rel="noopener">Amazon S3</a>、<a href="https://cloud.google.com/storage/docs/" target="_blank" rel="noopener">Google Cloud Storage</a> 或 <a href="https://azure.microsoft.com/en-us/services/storage/" target="_blank" rel="noopener">Microsoft Azure Storage</a> 等雲端儲存服務，並將這些檔案附加到 Active Record。</p>
+<p>支援一個主要雲端儲存服務，並在其它服務中建立鏡像以實現備援機制，它還提供了用於測試或本地部署的磁碟服務，但重點還是放在雲端儲存。</p>
+<p>檔案可以從伺服器上傳到雲端或直接從客戶端上傳到雲端。</p>
+<p>圖片檔案還可以按照需求使用 variant 進行品質、寬高比、尺寸或任何其它 <a href="https://github.com/minimagick/minimagick" target="_blank" rel="noopener">MiniMagick</a> 或 <a href="http://www.rubydoc.info/gems/ruby-vips/Vips/Image" target="_blank" rel="noopener">Vips</a> 所支援的轉換。</p>
+        
+      </div>
+      <a class="more" href="/2018/05/18/active-storage-overview/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2018/01/24/electron-api-demos/">Electron API 範例</a>
+      </h2>
+      <p class="article-date">2018年1月24日</p>
       
+        
+  <a href="/tags#Electron" >
+    <span class="tag-code">Electron</span>
+  </a>
+
 
       
+      <div class="article-summary">
+        
+          
+因為最近在工作時需要使用 Electron，發現官方提供的 Electron API 應用程式範例很適合讓想入門的人了解一些基本 API 的用法以及實際執行的效果。
+在 Github 上搜尋這個範例程式發現沒有正體中文版覺得有點可惜，於是就花了點時間來翻譯此範例程式。
+原始碼可從 Gith ...
+        
+      </div>
+      <a class="more" href="/2018/01/24/electron-api-demos/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/03/15/drawing-with-rvg/">使用 RVG 繪圖</a>
+      </h2>
+      <p class="article-date">2017年3月15日</p>
+      
+        
+  <a href="/tags#Ruby" >
+    <span class="tag-code">Ruby</span>
+  </a>
+
+  <a href="/tags#Rmagick" >
+    <span class="tag-code">Rmagick</span>
+  </a>
+
+
+      
+      <div class="article-summary">
         
           <blockquote>
 <p>原文：<strong>RMagick User’s Guide and Reference</strong> — <a href="https://rmagick.github.io/rvgtut.html" target="_blank" rel="noopener">Drawing with RVG</a></p>
@@ -499,623 +272,118 @@
 <li>調用 <code>draw</code> 方法在背景繪出形狀、文字或點陣圖。</li>
 </ol>
 <p>我將逐行介紹範例。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/15/drawing-with-rvg/#more" rel="contents">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
+      </div>
+      <a class="more" href="/2017/03/15/drawing-with-rvg/">繼續閱讀</a>
+    </article>
   
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.chyang.me/2017/02/06/how-to-setup-virtual-users-for-vsftpd-in-ubuntu/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Calvert">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Calvert's murmur">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/06/how-to-setup-virtual-users-for-vsftpd-in-ubuntu/" itemprop="url">如何在 Ubuntu 中為 vsftpd 設置虛擬帳號</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-06T14:35:56+08:00">2017/02/06</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Server/" itemprop="url" rel="index"><span itemprop="name">Server</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/02/06/how-to-setup-virtual-users-for-vsftpd-in-ubuntu/">如何在 Ubuntu 中為 vsftpd 設置虛擬帳號</a>
+      </h2>
+      <p class="article-date">2017年2月6日</p>
       
         
-          
-            <p>以下是在 Ubunto 16.04 LTS 安裝 vsftpd 並設定虛擬帳號的步驟</p>
-<ol>
-<li><p>安裝 vsftpd</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install vsftpd</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>編輯設定檔</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /etc/vsftpd.conf</span><br></pre></td></tr></table></figure>
-<p>以下設定僅供參考，可依實際使用情形調整（詳細設定及說明可查看 <code>man vsftpd.conf</code>）</p>
-<figure class="highlight plain"><figcaption><span>/etc/vsftpd.conf</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"># 設定為 YES 表示 vsftpd 是以 standalone 的方式來啟動</span><br><span class="line"># 註：listen_ipv6 預設接受 IPv6 及 IPv4 連線，因此設定 listen_ipv6 為 YES 即可</span><br><span class="line">listen=NO</span><br><span class="line">listen_ipv6=YES</span><br><span class="line"></span><br><span class="line"># 是否允許匿名者登入</span><br><span class="line">anonymous_enable=NO</span><br><span class="line"></span><br><span class="line"># 是否以實體用戶的方式登入 vsftpd 伺服器</span><br><span class="line"># 註：使用虛擬帳號時需要一個實體帳號</span><br><span class="line">local_enable=YES</span><br><span class="line"></span><br><span class="line"># 是否允許使用者上傳資料</span><br><span class="line">write_enable=YES</span><br><span class="line"></span><br><span class="line"># 建立新目錄與檔案的權限預設值</span><br><span class="line">local_umask=022</span><br><span class="line"></span><br><span class="line"># 若目錄下有 .message 檔案時，當使用者進入此目錄是否顯示該檔案的內容</span><br><span class="line">dirmessage_enable=YES</span><br><span class="line"></span><br><span class="line"># 是否使用本地時間</span><br><span class="line">use_localtime=YES</span><br><span class="line"></span><br><span class="line"># 是否將使用者上傳與下載檔案記錄起來</span><br><span class="line">xferlog_enable=YES</span><br><span class="line"></span><br><span class="line"># 是否支援主動式連線功能</span><br><span class="line">connect_from_port_20=YES</span><br><span class="line"></span><br><span class="line"># 使用者在指定秒數內都沒有命令動作時，是否強制離線</span><br><span class="line">idle_session_timeout=600</span><br><span class="line"></span><br><span class="line"># 是否將使用者限制在自己的家目錄之內</span><br><span class="line">chroot_local_user=YES</span><br><span class="line"></span><br><span class="line"># 用於 chroot 的空目錄路徑，此目錄不應被 ftp 使用者寫入</span><br><span class="line">secure_chroot_dir=/var/run/vsftpd/empty</span><br><span class="line"></span><br><span class="line"># pam 模組的名稱</span><br><span class="line">pam_service_name=vsftpd</span><br><span class="line"></span><br><span class="line"># RSA 加密的憑證檔案所在位置</span><br><span class="line">rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem</span><br><span class="line"></span><br><span class="line"># RSA 加密的私鑰檔案所在位置</span><br><span class="line">rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key</span><br><span class="line"></span><br><span class="line"># 是否啟動 SSL 支援</span><br><span class="line">ssl_enable=NO</span><br><span class="line"></span><br><span class="line"># 是否標示 vsftpd 使用 UTF-8 檔案系統</span><br><span class="line">utf8_filesystem=YES</span><br><span class="line"></span><br><span class="line"># 是否將目錄中的所有使用者和群組資訊顯示為 &quot;ftp&quot;</span><br><span class="line">hide_ids=YES</span><br><span class="line"></span><br><span class="line"># 限制同一時間可以同時連上 vsftpd 的用戶端數量</span><br><span class="line">max_clients=50</span><br><span class="line"></span><br><span class="line"># 限制同一時間同一個 IP 的最大連線數量</span><br><span class="line">max_per_ip=5</span><br><span class="line"></span><br><span class="line"># 是否支援被動式連線模式</span><br><span class="line">pasv_enable=YES</span><br><span class="line"></span><br><span class="line"># 設定被動式連線模式可用的連接埠範圍</span><br><span class="line">pasv_min_port=65400</span><br><span class="line">pasv_max_port=65410</span><br><span class="line"></span><br><span class="line"># 指定某個純文字檔作為使用者登入 vsftpd 伺服器時所顯示的歡迎訊息</span><br><span class="line">banner_file=/etc/vsftpd/banner_file</span><br><span class="line"></span><br><span class="line"># 是否同時產生 wu-ftpd 格式及 vsftpd 自有格式的記錄檔</span><br><span class="line">dual_log_enable=YES</span><br><span class="line"></span><br><span class="line"># vsftpd 格式記錄檔的所在位置</span><br><span class="line">vsftpd_log_file=/var/log/vsftpd.log</span><br><span class="line"></span><br><span class="line"># 是否支援 TCP Wrappers 的防火牆機制</span><br><span class="line">tcp_wrappers=YES</span><br><span class="line"></span><br><span class="line"># 這個選項允許根據各別用戶來覆蓋本設定檔中指定的任何設定</span><br><span class="line">user_config_dir=/etc/vsftpd/user_conf</span><br><span class="line"></span><br><span class="line"># 虛擬帳號是否將使用與本地用戶相同的權限</span><br><span class="line">virtual_use_local_privs=YES</span><br><span class="line"></span><br><span class="line"># 基於模板為每個虛擬帳號自動產生主目錄</span><br><span class="line">user_sub_token=$USER</span><br><span class="line"></span><br><span class="line"># 設定用戶家目錄</span><br><span class="line">local_root=/var/ftp/$USER</span><br><span class="line"></span><br><span class="line"># 是否允許用戶根目錄有寫入權限</span><br><span class="line">allow_writeable_chroot=YES</span><br><span class="line"></span><br><span class="line"># 若這個值設定為 YES 時，那麼任何實體帳號，均會被視為 guest</span><br><span class="line">guest_enable=YES</span><br><span class="line"></span><br><span class="line"># 指定訪客身份</span><br><span class="line">guest_username=vsftpd</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>設定虛擬帳號前仍須先建立一個實體帳號，虛擬帳號皆會使用此帳號登入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo useradd --home /home/vsftpd --gid nogroup -m --shell /bin/<span class="literal">false</span> vsftpd</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>設定虛擬帳號<br>由於要使用非實體帳號來登入，需另外建立帳號及密碼資料提供 vsftpd 作認證</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /etc/vsftpd/virtual-user</span><br></pre></td></tr></table></figure>
-<p>建立帳密文件，格式為一行帳號、一行密碼</p>
-<figure class="highlight plain"><figcaption><span>/etc/vsftpd/virtual-user</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">user1</span><br><span class="line">user1_password</span><br><span class="line">user2</span><br><span class="line">user2_password</span><br></pre></td></tr></table></figure>
-<p>接著將帳密文件轉換成資料庫檔案（Berkeley DB 格式）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo db_load -T -t <span class="built_in">hash</span> -f /etc/vsftpd/virtual-user /etc/vsftpd/virtual-user.db</span><br></pre></td></tr></table></figure>
-<p>註：若出現 <code>The program &#39;db_load&#39; is currently not installed.</code> 訊息，則用以下指令安裝必要套件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install db-util</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>因設定檔內有使用了 <code>user_config_dir</code> 設定，可在此目錄內針對各使用者套用額外設定</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mkdir /etc/vsftpd/user_conf</span><br></pre></td></tr></table></figure>
-<p>以下範例為限制 <code>user2</code> 僅擁有上傳權限</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /etc/vsftpd/user_conf/user2</span><br></pre></td></tr></table></figure>
-<p>設定內容如下</p>
-<figure class="highlight plain"><figcaption><span>/etc/vsftpd/user_conf/user2</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">download_enable=NO</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改 vsftpd 認證設定</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mv /etc/pam.d/vsftpd /etc/pam.d/vsftpd.old</span><br><span class="line">$ sudo vim /etc/pam.d/vsftpd</span><br></pre></td></tr></table></figure>
-<p>設定內容如下</p>
-<figure class="highlight plain"><figcaption><span>/etc/pam.d/vsftpd</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auth required pam_userdb.so db=/etc/vsftpd/virtual-user</span><br><span class="line">account required pam_userdb.so db=/etc/vsftpd/virtual-user</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重啟服務</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl restart vsftpd</span><br></pre></td></tr></table></figure>
-<p>現在已可透過虛擬帳號登入囉！</p>
-</li>
-</ol>
+  <a href="/tags#Linux" >
+    <span class="tag-code">Linux</span>
+  </a>
 
-          
+
+      
+      <div class="article-summary">
         
-      
-    </div>
-    
-    
-    
+          以下是在 Ubunto 16.04 LTS 安裝 vsftpd 並設定虛擬帳號的步驟
 
-    
+安裝 vsftpd
+12$ sudo apt-get update$ sudo apt-get install vsftpd
 
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.chyang.me/2016/10/16/capistrano-with-ed25519-keys/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Calvert">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Calvert's murmur">
-    </span>
-
-    
-      <header class="post-header">
-
+編輯設定檔
+1$ sudo vim /etc/vsftpd.conf
+以下設 ...
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/10/16/capistrano-with-ed25519-keys/" itemprop="url">【譯】在 Capistrano 自動化部署時使用 Ed25519 金鑰</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-16T14:43:27+08:00">2016/10/16</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
+      </div>
+      <a class="more" href="/2017/02/06/how-to-setup-virtual-users-for-vsftpd-in-ubuntu/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2016/10/16/capistrano-with-ed25519-keys/">在 Capistrano 自動化部署時使用 Ed25519 金鑰</a>
+      </h2>
+      <p class="article-date">2016年10月16日</p>
       
         
-          
-            <blockquote>
-<p>原文：<strong>steigr</strong> — <a href="https://blog.stei.gr/?p=4" target="_blank" rel="noopener">Capistrano with ED25519 keys</a></p>
-</blockquote>
-<p>我最近將我的 Capistrano 自動化部署切換到了 Ed25519 金鑰。在正常運作之前我發現到一些奇怪的錯誤，部署使用者/代理程式無法登入到主機。在檢查 authorized_keys 檔案權限、本地 SSH 代理程式後，我開始用 Google 搜尋這個問題。結果是，net-ssh 版本小於 4 不支援 Ed25519 金鑰。</p>
-<p>在 Gemfile 加入以下幾行，安裝所需的版本和 ruby gems 以啟用 Ed25519 金鑰支援：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gem <span class="string">'bcrypt_pbkdf'</span>, <span class="symbol">group:</span> <span class="symbol">:development</span></span><br><span class="line">gem <span class="string">'rbnacl-libsodium'</span>, <span class="symbol">group:</span> <span class="symbol">:development</span></span><br><span class="line">gem <span class="string">'rbnacl'</span>, <span class="symbol">group:</span> <span class="symbol">:development</span></span><br><span class="line">gem <span class="string">'net-ssh'</span>, <span class="string">'~&gt; 4.0.0.beta'</span>, <span class="symbol">group:</span> <span class="symbol">:development</span></span><br></pre></td></tr></table></figure>
-<p>確認 ruby 開發標頭檔，安裝到 <code>rbnacl</code> 及 <code>rbnacl-libsodium</code> 的 C 編譯器和相依開發標頭檔皆有原生擴充功能。</p>
-<p>現在，<code>deploy-agent@server&#39;s password:</code> 訊息應該消失了。</p>
+  <a href="/tags#Ruby on Rails" >
+    <span class="tag-code">Ruby on Rails</span>
+  </a>
 
-          
+  <a href="/tags#Ed25519" >
+    <span class="tag-code">Ed25519</span>
+  </a>
+
+
+      
+      <div class="article-summary">
         
-      
-    </div>
-    
-    
-    
+          
+原文：steigr — Capistrano with ED25519 keys
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.chyang.me/2016/10/05/upgrade_your_ssh_keys/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Calvert">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Calvert's murmur">
-    </span>
-
-    
-      <header class="post-header">
-
+我最近將我的 Capistrano 自動化部署切換到了 Ed25519 金鑰。在正常運作之前我發現到一些奇怪的錯誤，部署使用者/代理程式無法登入到主機。在檢查 authorized_keys 檔案權限、本地 ...
         
+      </div>
+      <a class="more" href="/2016/10/16/capistrano-with-ed25519-keys/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2016/10/05/upgrade_your_ssh_keys/">升級你的 SSH 金鑰！</a>
+      </h2>
+      <p class="article-date">2016年10月5日</p>
+      
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/10/05/upgrade_your_ssh_keys/" itemprop="url">【譯】升級你的 SSH 金鑰！</a></h1>
-        
+  <a href="/tags#SSH" >
+    <span class="tag-code">SSH</span>
+  </a>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-05T13:53:00+08:00">2016/10/05</time>
-            
+  <a href="/tags#Ed25519" >
+    <span class="tag-code">Ed25519</span>
+  </a>
 
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Security/" itemprop="url" rel="index"><span itemprop="name">Security</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
+      <div class="article-summary">
         
           <blockquote>
 <p>原文：<strong>Gert van Dijk</strong> — <a href="https://blog.g3rt.nl/upgrade-your-ssh-keys.html" target="_blank" rel="noopener">Upgrade your SSH keys!</a></p>
 </blockquote>
 <p>無論你是軟體開發人員或系統管理員，我敢打賭你正在使用 SSH 金鑰。比起使用密碼來推送提交到 Github 或是管理 Unix 系統，透過 SSH 公開金鑰驗證是最佳的方法。然而，隨著時光飛逝，很多人都使用舊金鑰而沒有意識到需要產生一個新的來提供私密資料更好的保護。在這篇文章，我將示範如何平穩的轉換到 Ed25519 金鑰、你為什麼會想要它以及展示一些技巧和訣竅。</p>
-<blockquote><p>長話短說，使用 <code>ssh-keygen -o -a 100 -t ed25519</code> 來產生新的金鑰並指定一個高強度的通關密語，如果你需要平穩的轉換，請繼續往下閱讀。</p>
+<blockquote>
+<p>長話短說，使用 <code>ssh-keygen -o -a 100 -t ed25519</code> 來產生新的金鑰並指定一個高強度的通關密語，如果你需要平穩的轉換，請繼續往下閱讀。</p>
 </blockquote>
-<blockquote><p>我計劃發佈更多 SSH 技巧和訣竅，所以請關注我的部落格。這篇文章的重點是關於作為使用者公開金鑰驗證的 SSH 金鑰。</p>
+<blockquote>
+<p>我計劃發佈更多 SSH 技巧和訣竅，所以請關注我的部落格。這篇文章的重點是關於作為使用者公開金鑰驗證的 SSH 金鑰。</p>
 </blockquote>
 <h3 id="DSA-和-RSA-1024-位元已經廢止"><a href="#DSA-和-RSA-1024-位元已經廢止" class="headerlink" title="DSA 和 RSA 1024 位元已經廢止"></a>DSA 和 RSA 1024 位元已經廢止</h3><p>如果你已經使用預設選項建立金鑰超過四年，它可能不安全（RSA &lt; 2048 位元）。更糟的是，我最近看到了推特迷、同事和朋友還在使用 DSA 金鑰（OpenSSH 格式裡的 <code>ssh-dss</code> 類型）。那是一種類似於 RSA 的金鑰類型，但長度受限於 1024 位元且被<a href="https://security.stackexchange.com/a/5100/12948" target="_blank" rel="noopener">推薦</a>了很長一段時間。它顯然不安全，且被最近的 OpenSSH 版本以正當理由拒絕（請參見 <a href="http://www.openssh.com/txt/release-7.0" target="_blank" rel="noopener">7.0 更新日誌</a>）。</p>
 <p>難過的是，我看到關於如何重新啟用支援 DSA 金鑰的文章，而不是轉移到一種更安全的金鑰類型。真的，依照指示更改 <code>PubkeyAcceptedKeyTypes</code> 或 <code>HostKeyAlgorithms</code> 的設定是不明智的(host keys are for a later post)。取而代之，升級你的金鑰！</p>
 <img src="/2016/10/05/upgrade_your_ssh_keys/old_key_picture.jpg" title="比較 DSA 及使用像這樣技術打造的鑰匙，你不會希望此類型的鑰匙來開啟你家的門，對吧？">
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/10/05/upgrade_your_ssh_keys/#more" rel="contents">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
+      </div>
+      <a class="more" href="/2016/10/05/upgrade_your_ssh_keys/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">使用 Mailboxer 實作站內信系統</a>
+      </h2>
+      <p class="article-date">2015年5月20日</p>
       
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.chyang.me/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Calvert">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Calvert's murmur">
-    </span>
-
-    
-      <header class="post-header">
-
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/" itemprop="url">【譯】使用 Mailboxer 實作站內信系統</a></h1>
-        
+  <a href="/tags#Ruby on Rails" >
+    <span class="tag-code">Ruby on Rails</span>
+  </a>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-05-20T01:34:00+08:00">2015/05/20</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
+      <div class="article-summary">
         
           <p>Mailboxer 是一個 Rails gem，為 <a href="https://github.com/ging/social_stream" target="_blank" rel="noopener">social_stream</a> 框架用來建立社群網路的一部分。它是具備一些通用方法的訊息系統，允許任何 model 擔任傳遞訊息的角色。</p>
 <p>使用 Mailboxer，你可以與一或多個收件人建立對話（訊息會被歸納到寄件匣、收件匣及垃圾桶）並透過電子郵件發送通知。它甚至可以在不同 model 間發送訊息和附件！唯一的缺點是缺乏文件，所以我希望這邊文章是有幫助的。</p>
@@ -1131,1087 +399,130 @@
 </ul>
 <p>此範例將使用 Rails 4，但幾乎相同的解決方案也可以實作於 Rails 3.2（Mailboxer 不再支援 3.1 版）。</p>
 <p>原始碼可以在 <a href="https://github.com/CalvertYang/Synergy" target="_blank" rel="noopener">Github</a> 找到。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/#more" rel="contents">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.chyang.me/2014/09/21/understanding-the-github-flow/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Calvert">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Calvert's murmur">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/09/21/understanding-the-github-flow/" itemprop="url">【譯】了解 GitHub Flow</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-21T14:51:00+08:00">2014/09/21</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>原文：<strong>GitHub</strong> — <a href="https://guides.github.com/introduction/flow/index.html" target="_blank" rel="noopener">Understanding the GitHub Flow</a></p>
-</blockquote>
-<p>GitHub Flow 是一個基於分支的輕量化工作流程，幫助團隊及專案定期的進行部署。</p>
-<img src="/2014/09/21/understanding-the-github-flow/create_a_branch.png">
-<p>在進行一項專案時，任何時候你可能會有一堆不同功能或想法，有些已經準備好了，而另有些則沒有。分支的存在是為了幫助你管理這些工作流程。</p>
-<p>當你在專案建立一個分支，代表建立了一個環境來測試你的新想法。在分支所做的修改不會影響 <code>master</code> 分支，所以可以自由的嘗試並提交修改。你可以放心，分支不會被合併，直到準備將它交由某位協同者來檢查。</p>
-<h3 id="進階提示"><a href="#進階提示" class="headerlink" title="進階提示"></a>進階提示</h3><p>整個 GitHub Flow 是基於分支，它是 Git 的一個核心概念。這裡只有一個規則：任何在 <code>master</code> 分支中的都是可部署的。</p>
-<p>正因為如此，當在進行一個功能或修復時，分離新分支與 master 是非常重要的。分支名稱應該具有描述性（如 <code>refactor-authentication</code>、<code>user-content-cache-key</code> 或 <code>make-retina-avatars</code>），讓其他人知道哪些正在進行中。</p>
-<img src="/2014/09/21/understanding-the-github-flow/add_commits.png">
-<p>一旦你的分支已經建立，是時候開始進行修改。無論你何時新增、修改或刪除檔案，你會提交更新並將它們加入分支。加入提交的過程讓你可以追蹤分支的工作進度。</p>
-<p>提交也產生了一個透明的工作記錄，讓其他人可以了解你做了些什麼，以及原因。每個提交都有相關的提交訊息，用以解釋為什麼做了修改。此外，每個提交被視為一個修改的獨立個體。這使你在找到錯誤或決定朝不同方向時可以復原修改。</p>
-<h3 id="進階提示-1"><a href="#進階提示-1" class="headerlink" title="進階提示"></a>進階提示</h3><p>提交訊息是很重要的，尤其當 Git 追蹤你的修改並顯示這些提交於伺服器上。透過撰寫清楚的提交訊息，你可以更容易讓其他人了解並提供回饋。</p>
-<img src="/2014/09/21/understanding-the-github-flow/open_a_pull_request.png">
-<p>Pull Requests 發起了關於提交的討論。因為它們緊密的與底層的 Git 儲存庫結合，任何人都可以清楚的看到如果他們接受你的請求，將會合併什麼修改。</p>
-<p>在任何的開發過程中，你可以開啟一個 Pull Request：當你有些許或沒有程式碼，但想分享一些截圖或想法，當你卡住了，需要幫助或建議，或者當你準備好讓某人來檢查你的工作。在 Pull Request 訊息內使用 GitHub 的 <code>@</code> 提及系統，可以要求某個人或團隊的回饋，無論他們身在何處。</p>
-<h3 id="進階提示-2"><a href="#進階提示-2" class="headerlink" title="進階提示"></a>進階提示</h3><p>Pull Requests 對於協作開源專案和管理共享儲存庫的修改很有用。如果你使用的是 Fork 及 Pull 模式，Pull Requests 提供了一個方法來通知專案維護者關於你所做的修改。如果你使用的是共享儲存庫模式，Pull Requests 協助在合併到 master 分支前的程式碼檢閱和討論關於修改的建議。</p>
-<img src="/2014/09/21/understanding-the-github-flow/discuss_and_review_your_code.png">
-<p>一旦 Pull Request 被開啟，檢閱修改的人或團隊可能會有問題或意見。也許是程式碼風格不符合專案指引、缺少單元測試，或者也許一切看起來都不錯且狀況良好。Pull Requests 旨在鼓勵這種類型的討論。</p>
-<p>在討論及回饋關於你的提交時，你還可以繼續推送到你的分支。如果有人反應說你忘了做某件事，或者在程式碼中有錯誤，你可以在分支中修正它並推送修改。GitHub 會顯示你的新提交及任何可能會收到的額外回饋在統一的 Pull Request 頁面。</p>
-<h3 id="進階提示-3"><a href="#進階提示-3" class="headerlink" title="進階提示"></a>進階提示</h3><p>Pull Request 的意見都是用 Markdown 撰寫，所以你可以插入圖片和表情符號，使用預先格式化的文字區塊，及其他輕量化的格式。</p>
-<img src="/2014/09/21/understanding-the-github-flow/merge_and_deploy.png">
-<p>一旦你的 Pull Request 進行了檢閱且分支通過測試，是時候將程式碼合併到 master 分支進行部署。如果你想在合併到 GitHub 儲存庫前測試東西，你可以先在本地進行合併。若你沒有推送到儲存庫的權限，這就派上用場了。</p>
-<p>合併後，Pull Requests 保存了一筆程式碼的修改歷史記錄。因為他們是可搜尋的，可讓任何人回頭來了解為什麼及如何作出決定。</p>
-<h3 id="進階提示-4"><a href="#進階提示-4" class="headerlink" title="進階提示"></a>進階提示</h3><p>你可以透過將特定的關鍵字放入 Pull Request 訊息中，將問題與程式碼做關聯。當你的 Pull Request 被合併，相關的問題也將被關閉。舉例來說，輸入 <code>Closes #32</code> 將會關閉儲存庫中編號 32 的問題。欲了解更多資訊，請查看我們的<a href="https://help.github.com/articles/closing-issues-via-commit-messages" target="_blank" rel="noopener">幫助文章</a>。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.chyang.me/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Calvert">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Calvert's murmur">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/" itemprop="url">修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-08-23T05:21:00+08:00">2014/08/23</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>這次 App 送審被 Apple 以違反 PLA 3.3.12 而退審，內容大致上是說 Advertising Identifier(IDFA) 僅可基於廣告目的使用於應用程式內，但審核團隊沒發現需用 IDFA 來呈現廣告的地方。</p>
-<p>因送審的 App 內僅使用 iAd，而 iAd 是不需 AdSupport framework、ASIdentifierManager 或 Advertising Identifier 的，所以唯一的可能性就是第三方 Framework 使用了 IDFA。</p>
-<p>Apple 在退審原因內提示可透過 <strong>strings</strong> 或 <strong>otool</strong> 指令來幫忙找出問題點，最終揪出兇手就是 FacebookSDK，在 <a href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m" target="_blank" rel="noopener"><code>FBUtility.m</code></a> 引入了 <a href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m#L28" target="_blank" rel="noopener"><code>AdSupport</code></a> 並使用 <a href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m#L287" target="_blank" rel="noopener"><code>advertisingIdentifier</code></a>。</p>
-<p>暫時的解決方法如下：</p>
-<ol>
-<li>git clone <a href="https://github.com/facebook/facebook-ios-sdk" target="_blank" rel="noopener">FacebookSDK</a> 到本機</li>
-<li><p>開啟 <code>src/Core/FBUtility.m</code>，將此行註解</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//#import &lt;AdSupport/AdSupport.h&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>將</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">NSString</span> *)advertiserID &#123;</span><br><span class="line">    <span class="built_in">NSString</span> *advertiserID = <span class="literal">nil</span>;</span><br><span class="line">    Class ASIdentifierManagerClass = [FBDynamicFrameworkLoader loadClass:<span class="string">@"ASIdentifierManager"</span>     withFramework:<span class="string">@"AdSupport"</span>];</span><br><span class="line">    <span class="keyword">if</span> ([ASIdentifierManagerClass <span class="keyword">class</span>]) &#123;</span><br><span class="line">        ASIdentifierManager *manager = [ASIdentifierManagerClass sharedManager];</span><br><span class="line">        advertiserID = [[manager advertisingIdentifier] UUIDString];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> advertiserID;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>改為</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">NSString</span> *)advertiserID &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">@""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>將</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">+ (FBAdvertisingTrackingStatus)advertisingTrackingStatus &#123;</span><br><span class="line">    <span class="keyword">if</span> ([FBSettings restrictedTreatment] == FBRestrictedTreatmentYES) &#123;</span><br><span class="line">        <span class="keyword">return</span> AdvertisingTrackingDisallowed;</span><br><span class="line">    &#125;</span><br><span class="line">    FBAdvertisingTrackingStatus status = AdvertisingTrackingUnspecified;</span><br><span class="line">    Class ASIdentifierManagerClass = [FBDynamicFrameworkLoader loadClass:<span class="string">@"ASIdentifierManager"</span> withFramework:<span class="string">@"AdSupport"</span>];</span><br><span class="line">    <span class="keyword">if</span> ([ASIdentifierManagerClass <span class="keyword">class</span>]) &#123;</span><br><span class="line">        ASIdentifierManager *manager = [ASIdentifierManagerClass sharedManager];</span><br><span class="line">        <span class="keyword">if</span> (manager) &#123;</span><br><span class="line">            status = [manager isAdvertisingTrackingEnabled] ? AdvertisingTrackingAllowed : AdvertisingTrackingDisallowed;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> status;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>改為</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ (FBAdvertisingTrackingStatus)advertisingTrackingStatus &#123;</span><br><span class="line">    <span class="keyword">return</span> AdvertisingTrackingDisallowed;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用 <code>scripts/build_framework.sh</code> 重新打包 FacebookSDK。</p>
-</li>
-<li><p>返回原專案引用新打包的 FacebookSDK 重建 App 並送審。</p>
-</li>
-</ol>
-<p><strong>註：若 App 內使用了 iAd 以外的廣告服務且廣告有正常顯示，應該不會因違反 PLA 3.3.12 而退審。</strong></p>
-<p>參考資料：</p>
-<ul>
-<li>Stack Overflow：<a href="http://stackoverflow.com/questions/21574680/app-rejected-because-of-advertisingidentifier-in-facebook-sdk-and-flurry-sdk" target="_blank" rel="noopener">app rejected because of advertisingIdentifier in Facebook SDK and Flurry SDK</a></li>
-<li>Github：<a href="https://github.com/facebook/facebook-ios-sdk/issues/583" target="_blank" rel="noopener">Rejection for ASIdentifierManager</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.chyang.me/2014/08/20/npm-semantic-versioner/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Calvert">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Calvert's murmur">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/08/20/npm-semantic-versioner/" itemprop="url">看懂 npm 語意化版本</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-08-20T06:14:00+08:00">2014/08/20</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>npm(Node Package Manager) 採用語意化版本 2.0.0 規範，詳細的規範內容可查看 <a href="http://semver.org/" target="_blank" rel="noopener">http://semver.org/</a>。</p>
-<p>使用 npm 管理套件時，你會注意到 package.json 內的套件版本有許多表示法，以下說明各表示法所代表的意思：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">版本</th>
-<th style="text-align:left">說明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>1.2.3</code></td>
-<td style="text-align:left">指定版本。需為完整的版號，包含<strong>主版號</strong>、<strong>次版號</strong>及<strong>修訂號</strong>。<br>需注意的是，版本編譯資訊（Metadata）會被忽略，所以 <code>1.2.3+build2012</code> 滿足此條件。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>&gt;1.2.3</code></td>
-<td style="text-align:left">大於指定版本。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>&lt;1.2.3</code></td>
-<td style="text-align:left">小於指定版本。如果沒有預先發佈版在此版本範圍，則沒有預先發佈版會被允許，即使在技術上是「小於」。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>&gt;=1.2.3</code></td>
-<td style="text-align:left">大於或等於。需注意的是，預先發佈版不等同其版本。<br>因此 <code>1.2.3-beta</code> 不滿足此條件，但 <code>2.3.0-beta</code> 則會。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>&lt;=1.2.3</code></td>
-<td style="text-align:left">小於或等於。在這種情況下，允許預先發佈版，所以 <code>1.2.3-beta</code> 滿足此條件。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>1.2.3 - 2.3.4</code></td>
-<td style="text-align:left">等同於 <code>&gt;=1.2.3 &lt;=2.3.4</code>。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>~1.2.3</code></td>
-<td style="text-align:left">等同於 <code>&gt;=1.2.3-0 &lt;1.3.0-0</code>，當使用 ~ 符號時，支援預先發佈版，但不含次版號的變更（及其預先發佈版）。<br>因此 <code>1.3.0-beta</code> 不滿足 <code>~1.2.3</code>。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>^1.2.3</code></td>
-<td style="text-align:left">等同於 <code>&gt;=1.2.3-0 &lt;2.0.0-0</code>，當使用 ^ 符號時，支援任何次版號及修訂號的變更（含預先發佈版），但不含主版號的變更（及其預先發佈版）。<br>因此 <code>1.5.1</code> 能滿足 <code>^1.2.3</code>，而 <code>1.2.2</code> 及 <code>2.0.0-beta</code> 則不會。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>^0.1.3</code></td>
-<td style="text-align:left">等同於 <code>0.1.3</code>，與 0.1.3 版相容。0.x.x 版比較特殊，因為語意化版本規範規定 0.x.x 版不作任何穩定性保證，只有指定的版本被認為是有效的。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>~0.0.2</code></td>
-<td style="text-align:left">等同於 <code>0.0.2</code>，與 0.0.2 版相容。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>~1.2</code></td>
-<td style="text-align:left">等同於 <code>&gt;=1.2.0-0 &lt;1.3.0-0</code>，任何從 1.2 開始的版本。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>^1.2</code></td>
-<td style="text-align:left">等同於 <code>&gt;=1.2.0-0 &lt;1.3.0-0</code>，任何相容於從 1.2 開始的版本。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>1.2.x</code></td>
-<td style="text-align:left">等同於 <code>&gt;=1.2.0-0 &lt;1.3.0-0</code>，任何從 1.2 開始的版本。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>1.2.*</code></td>
-<td style="text-align:left">等同於 <code>1.2.x</code>。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>1.2</code></td>
-<td style="text-align:left">等同於 <code>1.2.x</code>。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>~1</code></td>
-<td style="text-align:left">等同於 <code>&gt;=1.0.0-0 &lt;2.0.0-0</code>，任何從 1 開始的版本。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>^1</code></td>
-<td style="text-align:left">等同於 <code>&gt;=1.0.0-0 &lt;2.0.0-0</code>，任何相容於從 1 開始的版本。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>1.x</code></td>
-<td style="text-align:left">等同於 <code>&gt;=1.0.0-0 &lt;2.0.0-0</code>，任何從 1 開始的版本。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>1.*</code></td>
-<td style="text-align:left">等同於 <code>1.x</code>。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>1</code></td>
-<td style="text-align:left">等同於 <code>1.x</code>。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>*</code></td>
-<td style="text-align:left">任何版本。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>x</code></td>
-<td style="text-align:left">等同於 <code>*</code>。</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>&quot;&quot;</code></td>
-<td style="text-align:left">空字串，等同於 <code>*</code>。</td>
-</tr>
-</tbody>
-</table>
-<p>官方文件：<a href="https://www.npmjs.org/doc/misc/semver.html" target="_blank" rel="noopener">The semantic versioner for npm</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.chyang.me/2013/11/16/sql-to-aggregation-mapping-chart/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Calvert">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Calvert's murmur">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2013/11/16/sql-to-aggregation-mapping-chart/" itemprop="url">SQL 到集合(Aggregation)對應表</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2013-11-16T03:10:00+08:00">2013/11/16</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>集合管線(<a href="http://docs.mongodb.org/manual/core/aggregation/" target="_blank" rel="noopener">aggregation pipeline</a>)允許 MongoDB 提供原生集合功能，對應 SQL 中許多常見的資料集合操作。</p>
-<h5 id="下表列出了常見的-SQL-集合術語、功能及概念和相應的-MongoDB-集合運算元概觀。"><a href="#下表列出了常見的-SQL-集合術語、功能及概念和相應的-MongoDB-集合運算元概觀。" class="headerlink" title="下表列出了常見的 SQL 集合術語、功能及概念和相應的 MongoDB 集合運算元概觀。"></a>下表列出了常見的 SQL 集合術語、功能及概念和相應的 MongoDB 集合運算元概觀。</h5><table>
-<thead>
-<tr>
-<th style="text-align:left">SQL 術語、功能及概念</th>
-<th style="text-align:left">MongoDB 集合運算元</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">WHERE</td>
-<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/match/#pipe._S_match" target="_blank" rel="noopener">$match</a></td>
-</tr>
-<tr>
-<td style="text-align:left">GROUP BY</td>
-<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/group/#pipe._S_group" target="_blank" rel="noopener">$group</a></td>
-</tr>
-<tr>
-<td style="text-align:left">HAVING</td>
-<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/match/#pipe._S_match" target="_blank" rel="noopener">$match</a></td>
-</tr>
-<tr>
-<td style="text-align:left">SELECT</td>
-<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/project/#pipe._S_project" target="_blank" rel="noopener">$project</a></td>
-</tr>
-<tr>
-<td style="text-align:left">ORDER BY</td>
-<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/sort/#pipe._S_sort" target="_blank" rel="noopener">$sort</a></td>
-</tr>
-<tr>
-<td style="text-align:left">LIMIT</td>
-<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/limit/#pipe._S_limit" target="_blank" rel="noopener">$limit</a></td>
-</tr>
-<tr>
-<td style="text-align:left">SUM()</td>
-<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/sum/#grp._S_sum" target="_blank" rel="noopener">$sum</a></td>
-</tr>
-<tr>
-<td style="text-align:left">COUNT()</td>
-<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/sum/#grp._S_sum" target="_blank" rel="noopener">$sum</a></td>
-</tr>
-<tr>
-<td style="text-align:left">join</td>
-<td style="text-align:left">沒有直接對應的運算元，然而，<a href="http://docs.mongodb.org/manual/reference/operator/aggregation/unwind/#pipe._S_unwind" target="_blank" rel="noopener">$unwind</a> 運算元允許有些類似的功能，但是與嵌入的欄位在文件內。</td>
-</tr>
-</tbody>
-</table>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2013/11/16/sql-to-aggregation-mapping-chart/#more" rel="contents">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">Calvert</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives/">
-                
-                    <span class="site-state-item-count">15</span>
-                    <span class="site-state-item-name">Artikel</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-categories">
-                  <a href="/categories/index.html">
-                    <span class="site-state-item-count">4</span>
-                    <span class="site-state-item-name">Kategorien</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  <a href="/tags/index.html">
-                    <span class="site-state-item-count">22</span>
-                    <span class="site-state-item-name">Tags</span>
-                  </a>
-                </div>
-              
-            </nav>
-          
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-            
-          
-          
-
-        </div>
-      </section>
-
-      
-
-      
-
-    </div>
-  </aside>
-
-
         
       </div>
-    </main>
+      <a class="more" href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2014/09/21/understanding-the-github-flow/">了解 GitHub Flow</a>
+      </h2>
+      <p class="article-date">2014年9月21日</p>
+      
+        
+  <a href="/tags#GitHub" >
+    <span class="tag-code">GitHub</span>
+  </a>
 
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Calvert</span>
+  <a href="/tags#GitHub Flow" >
+    <span class="tag-code">GitHub Flow</span>
+  </a>
 
+  <a href="/tags#Workflow" >
+    <span class="tag-code">Workflow</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          
+原文：GitHub — Understanding the GitHub Flow
+
+GitHub Flow 是一個基於分支的輕量化工作流程，幫助團隊及專案定期的進行部署。
+
+在進行一項專案時，任何時候你可能會有一堆不同功能或想法，有些已經準備好了，而另有些則沒有。分支的存在是為了幫助你管 ...
+        
+      </div>
+      <a class="more" href="/2014/09/21/understanding-the-github-flow/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審</a>
+      </h2>
+      <p class="article-date">2014年8月23日</p>
+      
+        
+  <a href="/tags#iOS" >
+    <span class="tag-code">iOS</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          這次 App 送審被 Apple 以違反 PLA 3.3.12 而退審，內容大致上是說 Advertising Identifier(IDFA) 僅可基於廣告目的使用於應用程式內，但審核團隊沒發現需用 IDFA 來呈現廣告的地方。
+因送審的 App 內僅使用 iAd，而 iAd 是不需 Ad ...
+        
+      </div>
+      <a class="more" href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">繼續閱讀</a>
+    </article>
   
 
+  
+    <div class="guide-pager">
+  
+    <a class="unvisible" href="/"><span class="page-arrow">←</span> 上一頁</a>
+  
+  
+    <a href="/page/2/">下一頁<span class="page-arrow"> →</span></a>
   
 </div>
 
-
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a> v6.0.2</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
   
+</main>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; Calvert 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
   }
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=6.0.2"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=6.0.2"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.2"></script>
-
-
-
-  
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-</body>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+
+  </body>
 </html>
