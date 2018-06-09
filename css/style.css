@@ -541,6 +541,15 @@ h2.article-head {
 .article-summary > p {
   margin-top: 1rem;
 }
+.markdown-content li > code,
+.article-summary li > code {
+  background-color: #f8f8f8;
+  color: #e96900;
+  padding: 3px 5px;
+  margin: 0 2px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
 .markdown-content h1,
 .article-summary h1 {
   font-size: 1.8em;

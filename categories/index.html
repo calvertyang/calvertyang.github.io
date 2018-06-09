@@ -49,6 +49,18 @@
   
 
 
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-44933497-2');
+</script>
+
+
 </head>
 <div class="wechat-share">
   <img src="/css/images/logo.png" />
@@ -156,39 +168,16 @@
   <main class="app-body">
     <div id="tag-cloud">
       
-        <a class="tag0" data-name="tag-Server">Server</a>
+        <a class="tag0" data-name="tag-Programming">Programming</a>
       
-        <a class="tag3" data-name="tag-Programming">Programming</a>
+        <a class="tag2" data-name="tag-Server">Server</a>
       
-        <a class="tag0" data-name="tag-Mac">Mac</a>
+        <a class="tag1" data-name="tag-Mac">Mac</a>
       
         <a class="tag1" data-name="tag-Security">Security</a>
       
     </div>
     
-      <div class="tag-list">
-        <h3 class="tag-name" id="tag-Server">Server</h3>
-        
-          <ul class="tag-preview">
-            <li>
-              <a href="/2013/10/17/creating-a-self-signed-ssl-certificate-for-nginx/">為 Ngnix 建立自行簽章的憑證</a>
-            </li>
-          </ul>
-          
-          <ul class="tag-preview">
-            <li>
-              <a href="/2013/11/06/how-to-install-redis-in-centos-6/">如何在 CentOS 6 安裝 Redis</a>
-            </li>
-          </ul>
-          
-          <ul class="tag-preview">
-            <li>
-              <a href="/2017/02/06/how-to-setup-virtual-users-for-vsftpd-in-ubuntu/">如何在 Ubuntu 中為 vsftpd 設置虛擬帳號</a>
-            </li>
-          </ul>
-          
-      </div>
-      
       <div class="tag-list">
         <h3 class="tag-name" id="tag-Programming">Programming</h3>
         
@@ -242,7 +231,7 @@
           
           <ul class="tag-preview">
             <li>
-              <a href="/2018/05/22/active-storage-on-heroku/">在 Heroku 使用 Active Storage</a>
+              <a href="/2018/05/18/active-storage-overview/">Active Storage 概要</a>
             </li>
           </ul>
           
@@ -260,7 +249,30 @@
           
           <ul class="tag-preview">
             <li>
-              <a href="/2018/05/18/active-storage-overview/">Active Storage 概要</a>
+              <a href="/2018/05/22/active-storage-on-heroku/">在 Heroku 使用 Active Storage</a>
+            </li>
+          </ul>
+          
+      </div>
+      
+      <div class="tag-list">
+        <h3 class="tag-name" id="tag-Server">Server</h3>
+        
+          <ul class="tag-preview">
+            <li>
+              <a href="/2013/10/17/creating-a-self-signed-ssl-certificate-for-nginx/">為 Ngnix 建立自行簽章的憑證</a>
+            </li>
+          </ul>
+          
+          <ul class="tag-preview">
+            <li>
+              <a href="/2013/11/06/how-to-install-redis-in-centos-6/">如何在 CentOS 6 安裝 Redis</a>
+            </li>
+          </ul>
+          
+          <ul class="tag-preview">
+            <li>
+              <a href="/2017/02/06/how-to-setup-virtual-users-for-vsftpd-in-ubuntu/">如何在 Ubuntu 中為 vsftpd 設置虛擬帳號</a>
             </li>
           </ul>
           
@@ -292,7 +304,7 @@
 
   <script>
     (function () {
-      var url = 'https://blog.chyang.me/categories/index.html'
+      var url = 'https://calvertyang.github.io/categories/index.html'
       $('#article-banner').geopattern(url)
       $('.header').removeClass('fixed-header')
 
