@@ -165,6 +165,31 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2018/07/31/when-should-you-use-self-in-your-classes/">什麼時候應該在類別內使用 self</a>
+      </h2>
+      <p class="article-date">2018年7月31日</p>
+      
+        
+  <a href="/tags#Ruby" >
+    <span class="tag-code">Ruby</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <p>在 Ruby 類別內，你不知道什麼時候需要使用 self，而什麼時候又可以省略，本文將透過範例來做簡單的說明。</p>
+<h3 id="範例一"><a href="#範例一" class="headerlink" title="範例一"></a>範例一</h3><figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line">  <span class="keyword">attr_writer</span> <span class="symbol">:bar</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">do_something</span></span></span><br><span class="line">    bar = <span class="number">123</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>在此範例中 <code>bar = 123</code> 會建立一個名稱為 <code>bar</code> 的區域變數，而不是呼叫由 <code>attr_writer</code> 所產生的 <code>bar=</code> 方法，只要加上 <code>self</code> 就可以修正這個問題。</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line">  <span class="keyword">attr_writer</span> <span class="symbol">:bar</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">do_something</span></span></span><br><span class="line">    <span class="keyword">self</span>.bar = <span class="number">123</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><code>self.bar</code> 便會呼叫我們所預期的 <code>bar=</code> 方法。</p>
+        
+      </div>
+      <a class="more" href="/2018/07/31/when-should-you-use-self-in-your-classes/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2018/06/11/getting-started-with-engines/">Rails Engine 入門</a>
       </h2>
       <p class="article-date">2018年6月11日</p>
@@ -443,40 +468,6 @@
         
       </div>
       <a class="more" href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2014/09/21/understanding-the-github-flow/">了解 GitHub Flow</a>
-      </h2>
-      <p class="article-date">2014年9月21日</p>
-      
-        
-  <a href="/tags#GitHub" >
-    <span class="tag-code">GitHub</span>
-  </a>
-
-  <a href="/tags#GitHub-Flow" >
-    <span class="tag-code">GitHub Flow</span>
-  </a>
-
-  <a href="/tags#Workflow" >
-    <span class="tag-code">Workflow</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          
-原文：GitHub — Understanding the GitHub Flow
-
-GitHub Flow 是一個基於分支的輕量化工作流程，幫助團隊及專案定期的進行部署。
-
-在進行一項專案時，任何時候你可能會有一堆不同功能或想法，有些已經準備好了，而另有些則沒有。分支的存在是為了幫助你管 ...
-        
-      </div>
-      <a class="more" href="/2014/09/21/understanding-the-github-flow/">繼續閱讀</a>
     </article>
   
 
