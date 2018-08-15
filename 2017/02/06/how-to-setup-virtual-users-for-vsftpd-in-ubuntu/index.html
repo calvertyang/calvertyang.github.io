@@ -13,16 +13,13 @@
       如何在 Ubuntu 中為 vsftpd 設置虛擬帳號 | Calvert&#39;s murmur
     
   </title>
-  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/plugins/gitment.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   <script src="/js/qrcode.js"></script>
-<script src="/js/gitment.js"></script>
   
   
     <!-- MathJax support START -->
@@ -39,7 +36,7 @@
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
         var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
+        for (i = 0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
@@ -50,15 +47,15 @@
 
 
   
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-  gtag('config', 'UA-44933497-2');
-</script>
+    gtag('config', 'UA-44933497-2');
+  </script>
 
 
 </head>
@@ -224,13 +221,18 @@
       </div>
     
     <!-- Tags END -->
+    <!-- UpdatedDate Start -->
+     
+       <p class="post-date">最後更新時間：2018-05-21</p>
+     
+   <!-- UpdatedDate END -->
     <!-- NAV START -->
     
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
       <a class="nav-left" href="/2016/10/16/capistrano-with-ed25519-keys/">
-        <span class="nav-arrow">← </span>
+        <span class="nav-arrow">&larr; </span>
         
           在 Capistrano 自動化部署時使用 Ed25519 金鑰
         
@@ -241,7 +243,7 @@
         
           使用 RVG 繪圖
         
-        <span class="nav-arrow"> →</span>
+        <span class="nav-arrow"> &rarr;</span>
       </a>
     
   </div>
@@ -261,9 +263,6 @@
       </div>
     
     <!-- 二維條碼 END -->
-    
-      <!-- No Comment -->
-    
   </article>
   <!-- Article END -->
   <!-- Catalog START -->
@@ -284,98 +283,71 @@
 <script>
   (function () {
     var url = 'https://calvertyang.github.io/2017/02/06/how-to-setup-virtual-users-for-vsftpd-in-ubuntu/';
-    var banner = ''
+    var banner = '';
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
         'background-image': 'url(' + banner + ')'
-      })
+      });
     } else {
-      $('#article-banner').geopattern(url)
+      $('#article-banner').geopattern(url);
     }
-    $('.header').removeClass('fixed-header')
+    $('.header').removeClass('fixed-header');
 
      // error image
-    $(".markdown-content img").on('error', function() {
-      $(this).attr('src', '/css/images/error-img.png')
+    $('.markdown-content img').on('error', function() {
+      $(this).attr('src', '/css/images/error-img.png');
       $(this).css({
         'cursor': 'default'
-      })
-    })
+      });
+    });
 
     // 若圖片放在連結內，則將游標改為 pointer 並將圖片靠左
-    $(".markdown-content img").each(function() {
+    $('.markdown-content img').each(function() {
       if ($(this).parents().is('a')) {
         $(this).css({
           'cursor': 'pointer',
           'display': 'inline-block'
-        })
+        });
       }
-    })
+    });
 
     // zoom image
-    $(".markdown-content img").on('click', function(e) {
-      var src = $(this).attr('src')
+    $('.markdown-content img').on('click', function(e) {
+      var src = $(this).attr('src');
       if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
-        var imageW = $(this).width()
-        var imageH = $(this).height()
+        var imageW = $(this).width();
+        var imageH = $(this).height();
 
-        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
-        zoom = zoom < 1 ? 1 : zoom
-        zoom = zoom > 2 ? 2 : zoom
-        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        zoom = zoom < 1 ? 1 : zoom;
+        zoom = zoom > 2 ? 2 : zoom;
+        var transY = (($(window).height() - imageH) / 2).toFixed(2);
 
-        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
-        $('.image-view-wrap').addClass('wrap-active')
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
+        $('.image-view-wrap').addClass('wrap-active');
         $('.image-view-wrap img').css({
           'width': `${imageW}`,
           'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
-        })
-        $('html').css('overflow', 'hidden')
+        });
+        $('html').css('overflow', 'hidden');
 
         $('.image-view-wrap').on('click', function() {
-          $(this).remove()
-          $('html').attr('style', '')
-        })
+          $(this).remove();
+          $('html').attr('style', '');
+        });
       }
-    })
-
-    // qrcode
-    var qrcode = new QRCode(document.getElementById("share-qrcode"), {
-      text: document.location.href,
-      width : 100,
-      height : 100,
-      colorDark : "#000000",
-    	colorLight : "#ffffff",
-      correctLevel : QRCode.CorrectLevel.L,
-      useSVG: true
     });
 
-    // gitment
-    var gitmentConfig = "undefined";
-    if (gitmentConfig !== 'undefined') {
-      var gitment = new Gitment({
-        id: "如何在 Ubuntu 中為 vsftpd 設置虛擬帳號",
-        owner: "undefined",
-        repo: "",
-        oauth: {
-          client_id: "",
-          client_secret: ""
-        },
-        theme: {
-          render(state, instance) {
-            const container = document.createElement('div')
-            container.lang = "en-US"
-            container.className = 'gitment-container gitment-root-container'
-            container.appendChild(instance.renderHeader(state, instance))
-            container.appendChild(instance.renderEditor(state, instance))
-            container.appendChild(instance.renderComments(state, instance))
-            container.appendChild(instance.renderFooter(state, instance))
-            return container;
-          }
-        }
-      })
-      gitment.render(document.getElementById('comments'))
-    }
+    // qrcode
+    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
+      text: document.location.href,
+      width: 100,
+      height: 100,
+      colorDark: '#000000',
+    	colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.L,
+      useSVG: true
+    });
   })();
 </script>
 
@@ -400,33 +372,19 @@
     s.parentNode.insertBefore(o, s);
   }
 </script>
+
 <script>
-  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+  async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
     FastClick.attach(document.body);
   })
 </script>
 
 <script>
-  var hasLine = 'true';
-  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
-    $('figure pre').each(function(i, block) {
-      var figure = $(this).parents('figure');
-      if (hasLine === 'false') {
-        figure.find('.gutter').hide();
-      }
-      var lang = figure.attr('class').split(' ')[1] || 'code';
-      var codeHtml = $(this).html();
-      var codeTag = document.createElement('code');
-      codeTag.className = lang;
-      codeTag.innerHTML = codeHtml;
-      $(this).attr('class', '').empty().html(codeTag);
-      figure.attr('data-lang', lang.toUpperCase());
-      hljs.highlightBlock(block);
-    });
-  })
+  $('figure').each(function(i, block) {
+    let lang = this.classList[1] || 'codeblock';
+    this.dataset.lang = lang.toUpperCase();
+  });
 </script>
-<!-- Baidu Tongji -->
-
 <script src="/js/script.js"></script>
 
   </body>
