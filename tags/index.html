@@ -70,6 +70,7 @@
       <div class="logo"></div>
       <span>Calvert's murmur</span>
     </a>
+
     <ul class="right-list">
       
         <li class="list-item">
@@ -109,6 +110,48 @@
         </li>
       
     </ul>
+
+    
+      <div id="search-form-wrap">
+        <form class="search-form">
+          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+          <button type="submit" class="search-form-submit">
+            <span class="fa fa-search"></span>
+          </button>
+        </form>
+        <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
+      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+<script>
+  (function (window) {
+    var INSIGHT_CONFIG = {
+      TRANSLATION: {
+        POSTS: '文章',
+        PAGES: '頁面',
+        CATEGORIES: '分類',
+        TAGS: '標籤',
+        UNTITLED: '無標題',
+      },
+      ROOT_URL: '/',
+      CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+  })(window);
+</script>
+<script src="/js/insight.js"></script>
+
+      </div>
+    
+
     <div class="menu">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -165,9 +208,9 @@
 <main class="app-body">
   <div id="tag-cloud">
     
-      <a class="tag1" data-name="tag-Linux">Linux</a>
+      <a class="tag0" data-name="tag-Linux">Linux</a>
     
-      <a class="tag1" data-name="tag-SSL">SSL</a>
+      <a class="tag2" data-name="tag-SSL">SSL</a>
     
       <a class="tag2" data-name="tag-Nginx">Nginx</a>
     
@@ -175,45 +218,45 @@
     
       <a class="tag2" data-name="tag-Mac">Mac</a>
     
-      <a class="tag2" data-name="tag-Redis">Redis</a>
+      <a class="tag1" data-name="tag-Redis">Redis</a>
     
-      <a class="tag3" data-name="tag-Node.js">Node.js</a>
+      <a class="tag2" data-name="tag-SQL">SQL</a>
+    
+      <a class="tag0" data-name="tag-NoSQL">NoSQL</a>
+    
+      <a class="tag2" data-name="tag-MongoDB">MongoDB</a>
+    
+      <a class="tag0" data-name="tag-Node.js">Node.js</a>
     
       <a class="tag2" data-name="tag-npm">npm</a>
     
-      <a class="tag1" data-name="tag-SemVer">SemVer</a>
+      <a class="tag3" data-name="tag-SemVer">SemVer</a>
     
-      <a class="tag1" data-name="tag-iOS">iOS</a>
+      <a class="tag2" data-name="tag-iOS">iOS</a>
     
-      <a class="tag0" data-name="tag-SQL">SQL</a>
+      <a class="tag1" data-name="tag-GitHub">GitHub</a>
     
-      <a class="tag2" data-name="tag-NoSQL">NoSQL</a>
+      <a class="tag3" data-name="tag-GitHub-Flow">GitHub Flow</a>
     
-      <a class="tag1" data-name="tag-MongoDB">MongoDB</a>
+      <a class="tag3" data-name="tag-Workflow">Workflow</a>
     
-      <a class="tag1" data-name="tag-Ruby-on-Rails">Ruby on Rails</a>
-    
-      <a class="tag2" data-name="tag-Ed25519">Ed25519</a>
-    
-      <a class="tag0" data-name="tag-GitHub">GitHub</a>
-    
-      <a class="tag2" data-name="tag-GitHub-Flow">GitHub Flow</a>
-    
-      <a class="tag2" data-name="tag-Workflow">Workflow</a>
-    
-      <a class="tag2" data-name="tag-Electron">Electron</a>
+      <a class="tag2" data-name="tag-Ruby-on-Rails">Ruby on Rails</a>
     
       <a class="tag1" data-name="tag-SSH">SSH</a>
     
-      <a class="tag1" data-name="tag-Ruby">Ruby</a>
+      <a class="tag2" data-name="tag-Ed25519">Ed25519</a>
     
-      <a class="tag3" data-name="tag-Rmagick">Rmagick</a>
+      <a class="tag0" data-name="tag-Ruby">Ruby</a>
     
-      <a class="tag1" data-name="tag-Active-Storage">Active Storage</a>
+      <a class="tag1" data-name="tag-Rmagick">Rmagick</a>
+    
+      <a class="tag1" data-name="tag-Electron">Electron</a>
+    
+      <a class="tag0" data-name="tag-Active-Storage">Active Storage</a>
     
       <a class="tag2" data-name="tag-Heroku">Heroku</a>
     
-      <a class="tag0" data-name="tag-Rails-Engine">Rails Engine</a>
+      <a class="tag2" data-name="tag-Rails-Engine">Rails Engine</a>
     
   </div>
   
@@ -296,50 +339,6 @@
     </div>
   
     <div class="tag-list">
-      <h3 class="tag-name" id="tag-Node.js">Node.js</h3>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2014/08/20/npm-semantic-versioner/">看懂 npm 語意化版本</a>
-          </li>
-        </ul>
-      
-    </div>
-  
-    <div class="tag-list">
-      <h3 class="tag-name" id="tag-npm">npm</h3>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2014/08/20/npm-semantic-versioner/">看懂 npm 語意化版本</a>
-          </li>
-        </ul>
-      
-    </div>
-  
-    <div class="tag-list">
-      <h3 class="tag-name" id="tag-SemVer">SemVer</h3>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2014/08/20/npm-semantic-versioner/">看懂 npm 語意化版本</a>
-          </li>
-        </ul>
-      
-    </div>
-  
-    <div class="tag-list">
-      <h3 class="tag-name" id="tag-iOS">iOS</h3>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審</a>
-          </li>
-        </ul>
-      
-    </div>
-  
-    <div class="tag-list">
       <h3 class="tag-name" id="tag-SQL">SQL</h3>
       
         <ul class="tag-preview">
@@ -391,58 +390,44 @@
     </div>
   
     <div class="tag-list">
-      <h3 class="tag-name" id="tag-Ruby-on-Rails">Ruby on Rails</h3>
+      <h3 class="tag-name" id="tag-Node.js">Node.js</h3>
       
         <ul class="tag-preview">
           <li>
-            <a href="/2016/10/16/capistrano-with-ed25519-keys/">在 Capistrano 自動化部署時使用 Ed25519 金鑰</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">使用 Mailboxer 實作站內信系統</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2018/09/18/working-with-time-zones-in-ruby-on-rails/">在 Ruby on Rails 使用時區</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2018/05/18/active-storage-overview/">Active Storage 概要</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2018/05/22/active-storage-on-heroku/">在 Heroku 使用 Active Storage</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2018/06/11/getting-started-with-engines/">Rails Engine 入門</a>
+            <a href="/2014/08/20/npm-semantic-versioner/">看懂 npm 語意化版本</a>
           </li>
         </ul>
       
     </div>
   
     <div class="tag-list">
-      <h3 class="tag-name" id="tag-Ed25519">Ed25519</h3>
+      <h3 class="tag-name" id="tag-npm">npm</h3>
       
         <ul class="tag-preview">
           <li>
-            <a href="/2016/10/16/capistrano-with-ed25519-keys/">在 Capistrano 自動化部署時使用 Ed25519 金鑰</a>
+            <a href="/2014/08/20/npm-semantic-versioner/">看懂 npm 語意化版本</a>
           </li>
         </ul>
       
+    </div>
+  
+    <div class="tag-list">
+      <h3 class="tag-name" id="tag-SemVer">SemVer</h3>
+      
         <ul class="tag-preview">
           <li>
-            <a href="/2016/10/05/upgrade_your_ssh_keys/">升級你的 SSH 金鑰！</a>
+            <a href="/2014/08/20/npm-semantic-versioner/">看懂 npm 語意化版本</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="tag-list">
+      <h3 class="tag-name" id="tag-iOS">iOS</h3>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審</a>
           </li>
         </ul>
       
@@ -482,11 +467,41 @@
     </div>
   
     <div class="tag-list">
-      <h3 class="tag-name" id="tag-Electron">Electron</h3>
+      <h3 class="tag-name" id="tag-Ruby-on-Rails">Ruby on Rails</h3>
       
         <ul class="tag-preview">
           <li>
-            <a href="/2018/01/24/electron-api-demos/">Electron API 範例</a>
+            <a href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">使用 Mailboxer 實作站內信系統</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2016/10/16/capistrano-with-ed25519-keys/">在 Capistrano 自動化部署時使用 Ed25519 金鑰</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2018/05/18/active-storage-overview/">Active Storage 概要</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2018/05/22/active-storage-on-heroku/">在 Heroku 使用 Active Storage</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2018/06/11/getting-started-with-engines/">Rails Engine 入門</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2018/09/18/working-with-time-zones-in-ruby-on-rails/">在 Ruby on Rails 使用時區</a>
           </li>
         </ul>
       
@@ -498,6 +513,23 @@
         <ul class="tag-preview">
           <li>
             <a href="/2016/10/05/upgrade_your_ssh_keys/">升級你的 SSH 金鑰！</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="tag-list">
+      <h3 class="tag-name" id="tag-Ed25519">Ed25519</h3>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2016/10/05/upgrade_your_ssh_keys/">升級你的 SSH 金鑰！</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2016/10/16/capistrano-with-ed25519-keys/">在 Capistrano 自動化部署時使用 Ed25519 金鑰</a>
           </li>
         </ul>
       
@@ -526,6 +558,17 @@
         <ul class="tag-preview">
           <li>
             <a href="/2017/03/15/drawing-with-rvg/">使用 RVG 繪圖</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="tag-list">
+      <h3 class="tag-name" id="tag-Electron">Electron</h3>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2018/01/24/electron-api-demos/">Electron API 範例</a>
           </li>
         </ul>
       
