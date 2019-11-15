@@ -205,7 +205,7 @@
   <h2>SQL 及 MongoDB 基本指令對應表</h2>
   <p class="post-date">2013-11-14</p>
   <div class="arrow-down">
-    <a href="javascript:;"></a>
+    <a href="javascript:;" target="_blank" rel="noopener"></a>
   </div>
 </div>
 <main class="app-body flex-box">
@@ -215,71 +215,70 @@
 <h3 id="術語和概念-Terminology-and-Concepts"><a href="#術語和概念-Terminology-and-Concepts" class="headerlink" title="術語和概念(Terminology and Concepts)"></a>術語和概念(Terminology and Concepts)</h3><h5 id="下表列出了各種-SQL-和相應的-MongoDB-的術語和概念。"><a href="#下表列出了各種-SQL-和相應的-MongoDB-的術語和概念。" class="headerlink" title="下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。"></a>下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。</h5><table>
 <thead>
 <tr>
-<th style="text-align:left">SQL 術語/概念</th>
-<th style="text-align:left">MongoDB 術語/概念</th>
+<th align="left">SQL 術語/概念</th>
+<th align="left">MongoDB 術語/概念</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">資料庫(database)</td>
-<td style="text-align:left">資料庫(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-database" target="_blank" rel="noopener">database</a>)</td>
+<tbody><tr>
+<td align="left">資料庫(database)</td>
+<td align="left">資料庫(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-database" target="_blank" rel="noopener">database</a>)</td>
 </tr>
 <tr>
-<td style="text-align:left">資料表(table)</td>
-<td style="text-align:left">集合(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-collection" target="_blank" rel="noopener">collection</a>)</td>
+<td align="left">資料表(table)</td>
+<td align="left">集合(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-collection" target="_blank" rel="noopener">collection</a>)</td>
 </tr>
 <tr>
-<td style="text-align:left">資料列(row)</td>
-<td style="text-align:left">文件(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-document" target="_blank" rel="noopener">document</a>) 或 <a href="http://docs.mongodb.org/manual/reference/glossary/#term-bson" target="_blank" rel="noopener">BSON</a> 文件</td>
+<td align="left">資料列(row)</td>
+<td align="left">文件(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-document" target="_blank" rel="noopener">document</a>) 或 <a href="http://docs.mongodb.org/manual/reference/glossary/#term-bson" target="_blank" rel="noopener">BSON</a> 文件</td>
 </tr>
 <tr>
-<td style="text-align:left">資料行(column)</td>
-<td style="text-align:left">欄位(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-field" target="_blank" rel="noopener">field</a>)</td>
+<td align="left">資料行(column)</td>
+<td align="left">欄位(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-field" target="_blank" rel="noopener">field</a>)</td>
 </tr>
 <tr>
-<td style="text-align:left">索引(index)</td>
-<td style="text-align:left">索引(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-index" target="_blank" rel="noopener">index</a>)</td>
+<td align="left">索引(index)</td>
+<td align="left">索引(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-index" target="_blank" rel="noopener">index</a>)</td>
 </tr>
 <tr>
-<td style="text-align:left">資料表連結(table joins)</td>
-<td style="text-align:left">嵌入式文件及連結(embedded documents and linking)</td>
+<td align="left">資料表連結(table joins)</td>
+<td align="left">嵌入式文件及連結(embedded documents and linking)</td>
 </tr>
 <tr>
-<td style="text-align:left">主索引鍵(primary key)<br><br>指定任意一個或多個欄位組合為主索引鍵，資料內容須唯一不可重複。</td>
-<td style="text-align:left">主索引鍵(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-primary-key" target="_blank" rel="noopener">primary key</a>)<br><br>在 MongoDB，主索引鍵會自動設定到 <a href="http://docs.mongodb.org/manual/reference/glossary/#term-id" target="_blank" rel="noopener">_id</a> 欄位。</td>
+<td align="left">主索引鍵(primary key)<br /><br />指定任意一個或多個欄位組合為主索引鍵，資料內容須唯一不可重複。</td>
+<td align="left">主索引鍵(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-primary-key" target="_blank" rel="noopener">primary key</a>)<br /><br />在 MongoDB，主索引鍵會自動設定到 <a href="http://docs.mongodb.org/manual/reference/glossary/#term-id" target="_blank" rel="noopener">_id</a> 欄位。</td>
 </tr>
 <tr>
-<td style="text-align:left">彙總(aggregation)，例如：group by</td>
-<td style="text-align:left">彙總管線(aggregation pipeline)<br><br><a href="http://calvert.logdown.com/posts/159915-sql-to-aggregation-mapping-chart" target="_blank" rel="noopener">參閱 SQL 至彙總(Aggregation)對應表</a>.</td>
+<td align="left">彙總(aggregation)，例如：group by</td>
+<td align="left">彙總管線(aggregation pipeline)<br /><br /><a href="http://calvert.logdown.com/posts/159915-sql-to-aggregation-mapping-chart" target="_blank" rel="noopener">參閱 SQL 至彙總(Aggregation)對應表</a>.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h3 id="可執行檔案-Executables"><a href="#可執行檔案-Executables" class="headerlink" title="可執行檔案(Executables)"></a>可執行檔案(Executables)</h3><h5 id="下表列出了-MySQL-Oracle-可執行檔案和相應的-MongoDB-的可執行檔案。"><a href="#下表列出了-MySQL-Oracle-可執行檔案和相應的-MongoDB-的可執行檔案。" class="headerlink" title="下表列出了 MySQL / Oracle 可執行檔案和相應的 MongoDB 的可執行檔案。"></a>下表列出了 MySQL / Oracle 可執行檔案和相應的 MongoDB 的可執行檔案。</h5><table>
 <thead>
 <tr>
-<th style="text-align:left"></th>
-<th style="text-align:left">MySQL / Oracle</th>
-<th style="text-align:left">MongoDB</th>
+<th align="left"></th>
+<th align="left">MySQL / Oracle</th>
+<th align="left">MongoDB</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">資料庫伺服器(Database Server)</td>
-<td style="text-align:left">mysqld / oracle</td>
-<td style="text-align:left">mongod</td>
+<tbody><tr>
+<td align="left">資料庫伺服器(Database Server)</td>
+<td align="left">mysqld / oracle</td>
+<td align="left">mongod</td>
 </tr>
 <tr>
-<td style="text-align:left">資料庫用戶端(Database Client)</td>
-<td style="text-align:left">mysql / sqlplus</td>
-<td style="text-align:left">mongo</td>
+<td align="left">資料庫用戶端(Database Client)</td>
+<td align="left">mysql / sqlplus</td>
+<td align="left">mongo</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <a id="more"></a>
+
 <h3 id="範例-Examples"><a href="#範例-Examples" class="headerlink" title="範例(Examples)"></a>範例(Examples)</h3><h5 id="下表列出了各種-SQL-語句和相應的-MongoDB-語句。在表格中的範例假定有下列條件："><a href="#下表列出了各種-SQL-語句和相應的-MongoDB-語句。在表格中的範例假定有下列條件：" class="headerlink" title="下表列出了各種 SQL 語句和相應的 MongoDB 語句。在表格中的範例假定有下列條件："></a>下表列出了各種 SQL 語句和相應的 MongoDB 語句。在表格中的範例假定有下列條件：</h5><ul>
-<li>SQL 範例假設是名為 users 的資料表</li>
+<li><p>SQL 範例假設是名為 users 的資料表</p>
+</li>
 <li><p>MongoDB 範例假設是名為 users 的集合，包含的文件原型如下：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">　　_id: ObjectID("509a8fb2f3f4948bd2f983a0"),</span><br><span class="line">　　user_id: "abc123",</span><br><span class="line">　　age: 55,</span><br><span class="line">　　status: 'A'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <h4 id="建立及修改資料表-Create-and-Alter"><a href="#建立及修改資料表-Create-and-Alter" class="headerlink" title="建立及修改資料表(Create and Alter)"></a>建立及修改資料表(Create and Alter)</h4><p>下面列出了關於資料表層級操作的各種 SQL 語句和相應的 MongoDB 語句。</p>
@@ -288,7 +287,8 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">users</span> (</span><br><span class="line">　<span class="keyword">id</span> MEDIUMINT <span class="keyword">NOT</span> <span class="literal">NULL</span></span><br><span class="line">　　AUTO_INCREMENT,</span><br><span class="line">　user_id <span class="built_in">Varchar</span>(<span class="number">30</span>),</span><br><span class="line">　age <span class="built_in">Number</span>,</span><br><span class="line">　<span class="keyword">status</span> <span class="built_in">char</span>(<span class="number">1</span>),</span><br><span class="line">　PRIMARY <span class="keyword">KEY</span> (<span class="keyword">id</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>MongoDB 架構語句<br>在第一次插入資料操作時透過隱含方式建立。若未指定 _id 欄位，則會自動建立主索引鍵 _id。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.users.insert( &#123;</span><br><span class="line">　user_id: "abc123",</span><br><span class="line">　age: 55,</span><br><span class="line">　status: "A"</span><br><span class="line"> &#125; )</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.users.insert( &#123;</span><br><span class="line">　user_id: <span class="string">"abc123"</span>,</span><br><span class="line">　age: <span class="number">55</span>,</span><br><span class="line">　<span class="keyword">status</span>: <span class="string">"A"</span></span><br><span class="line"> &#125; )</span><br></pre></td></tr></table></figure>
+
 <p>然而，你也可以明確地建立一個集合：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.createCollection("users")</span><br></pre></td></tr></table></figure>
 </li>
@@ -301,7 +301,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">users</span></span><br><span class="line"><span class="keyword">ADD</span> join_date DATETIME</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>MongoDB 架構語句<br>集合不描述或強制其文件結構，即在集合層級沒有結構上的改變。<br>然而，在文件層級，update() 操作可以透過 $set 運算元加入欄位到已存在的文件。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.users.update(</span><br><span class="line">　&#123; &#125;,</span><br><span class="line">　&#123; $set: &#123; join_date: new Date() &#125; &#125;,</span><br><span class="line">　&#123; multi: true &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.users.update(</span><br><span class="line">　&#123; &#125;,</span><br><span class="line">　&#123; $<span class="keyword">set</span>: &#123; join_date: <span class="keyword">new</span> <span class="built_in">Date</span>() &#125; &#125;,</span><br><span class="line">　&#123; multi: <span class="literal">true</span> &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>參閱 <a href="http://docs.mongodb.org/manual/core/data-models/" target="_blank" rel="noopener">Data Modeling Concepts</a>、<a href="http://docs.mongodb.org/manual/reference/method/db.collection.update/#db.collection.update" target="_blank" rel="noopener">update()</a> 及 <a href="http://docs.mongodb.org/manual/reference/operator/update/set/#up._S_set" target="_blank" rel="noopener">$set</a> 取得更多改變集合中文件結構的更多資訊。</p>
 </li>
@@ -312,7 +312,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">users</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">COLUMN</span> join_date</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>MongoDB 架構語句<br>集合不描述或強制其文件結構，即在集合層級中沒有結構上的改變。<br>然而，在文件層級，update() 操作可以透過 $unset 運算元從文件移除欄位。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.users.update(</span><br><span class="line">　&#123; &#125;,</span><br><span class="line">　&#123; $unset: &#123; join_date: "" &#125; &#125;,</span><br><span class="line">　&#123; multi: true &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.users.update(</span><br><span class="line">　&#123; &#125;,</span><br><span class="line">　&#123; $unset: &#123; join_date: <span class="string">""</span> &#125; &#125;,</span><br><span class="line">　&#123; multi: <span class="literal">true</span> &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>參閱 <a href="http://docs.mongodb.org/manual/core/data-models/" target="_blank" rel="noopener">Data Modeling Concepts</a>、<a href="http://docs.mongodb.org/manual/reference/method/db.collection.update/#db.collection.update" target="_blank" rel="noopener">update()</a> 及 <a href="http://docs.mongodb.org/manual/reference/operator/update/unset/#up._S_unset" target="_blank" rel="noopener">$unset</a> 取得更多改變集合中文件結構的更多資訊。</p>
 </li>
@@ -356,7 +356,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">users</span>(</span><br><span class="line">　user_id,</span><br><span class="line">　age,</span><br><span class="line">　<span class="keyword">status</span>)</span><br><span class="line"><span class="keyword">VALUES</span> (</span><br><span class="line">　<span class="string">"bcd001"</span>,</span><br><span class="line">　<span class="number">45</span>,</span><br><span class="line">　<span class="string">"A"</span>)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>MongoDB 架構語句</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.users.insert( &#123;</span><br><span class="line">　user_id: "bcd001",</span><br><span class="line">　age: 45,</span><br><span class="line">　status: "A"</span><br><span class="line">&#125; )</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.users.insert( &#123;</span><br><span class="line">　user_id: <span class="string">"bcd001"</span>,</span><br><span class="line">　age: <span class="number">45</span>,</span><br><span class="line">　<span class="keyword">status</span>: <span class="string">"A"</span></span><br><span class="line">&#125; )</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>參閱 <a href="http://docs.mongodb.org/manual/reference/method/db.collection.insert/#db.collection.insert" target="_blank" rel="noopener">insert()</a> 取得更多資訊。</p>
 </li>
@@ -533,6 +533,7 @@
 </li>
 <li><p>MongoDB 架構語句</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.count()</span><br></pre></td></tr></table></figure>
+
 <p>或</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.find().count()</span><br></pre></td></tr></table></figure>
 </li>
@@ -546,6 +547,7 @@
 </li>
 <li><p>MongoDB 架構語句</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.count( &#123; user_id: &#123; $exists: true &#125; &#125; )</span><br></pre></td></tr></table></figure>
+
 <p>或</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.find( &#123; user_id: &#123; $exists: true &#125; &#125; ).count()</span><br></pre></td></tr></table></figure>
 </li>
@@ -559,6 +561,7 @@
 </li>
 <li><p>MongoDB 架構語句</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.count( &#123; age: &#123; $gt: 30 &#125; &#125; )</span><br></pre></td></tr></table></figure>
+
 <p>或</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.find( &#123; age: &#123; $gt: 30 &#125; &#125; ).count()</span><br></pre></td></tr></table></figure>
 </li>
@@ -583,6 +586,7 @@
 </li>
 <li><p>MongoDB 架構語句</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.findOne()</span><br></pre></td></tr></table></figure>
+
 <p>或</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.find().limit(1)</span><br></pre></td></tr></table></figure>
 </li>
@@ -617,7 +621,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">users</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">status</span> = <span class="string">"C"</span></span><br><span class="line"><span class="keyword">WHERE</span> age &gt; <span class="number">25</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>MongoDB 架構語句</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.users.update(</span><br><span class="line">　&#123; age: &#123; $gt: 25 &#125; &#125;,</span><br><span class="line">　&#123; $set: &#123; status: "C" &#125; &#125;,</span><br><span class="line">　&#123; multi: true &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.users.update(</span><br><span class="line">　&#123; age: &#123; $gt: <span class="number">25</span> &#125; &#125;,</span><br><span class="line">　&#123; $<span class="keyword">set</span>: &#123; <span class="keyword">status</span>: <span class="string">"C"</span> &#125; &#125;,</span><br><span class="line">　&#123; multi: <span class="literal">true</span> &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>參閱 <a href="http://docs.mongodb.org/manual/reference/method/db.collection.update/#db.collection.update" target="_blank" rel="noopener">update()</a>、<a href="http://docs.mongodb.org/manual/reference/operator/query/gt/#op._S_gt" target="_blank" rel="noopener">$gt</a> 及 <a href="http://docs.mongodb.org/manual/reference/operator/update/set/#up._S_set" target="_blank" rel="noopener">$set</a> 取得更多資訊。</p>
 </li>
@@ -628,7 +632,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">users</span></span><br><span class="line"><span class="keyword">SET</span> age = age + <span class="number">3</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">status</span> = <span class="string">"A"</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>MongoDB 架構語句</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.users.update(</span><br><span class="line">　&#123; status: "A" &#125; ,</span><br><span class="line">　&#123; $inc: &#123; age: 3 &#125; &#125;,</span><br><span class="line">　&#123; multi: true &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.users.update(</span><br><span class="line">　&#123; <span class="keyword">status</span>: <span class="string">"A"</span> &#125; ,</span><br><span class="line">　&#123; $inc: &#123; age: <span class="number">3</span> &#125; &#125;,</span><br><span class="line">　&#123; multi: <span class="literal">true</span> &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>參閱 <a href="http://docs.mongodb.org/manual/reference/method/db.collection.update/#db.collection.update" target="_blank" rel="noopener">update()</a>、<a href="http://docs.mongodb.org/manual/reference/operator/update/inc/#up._S_inc" target="_blank" rel="noopener">$inc</a> 及 <a href="http://docs.mongodb.org/manual/reference/operator/update/set/#up._S_set" target="_blank" rel="noopener">$set</a> 取得更多資訊。</p>
 </li>
@@ -680,7 +684,7 @@
     <!-- Tags END -->
     <!-- UpdatedDate Start -->
      
-       <p class="post-date">最後更新時間：2018-05-21</p>
+       <p class="post-date">最後更新時間：2019-06-10</p>
      
    <!-- UpdatedDate END -->
     <!-- NAV START -->
@@ -813,9 +817,9 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; Calvert 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
   </p>
 </footer>
 

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Calvert&#39;s tech blog">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Golang map 介紹 | Calvert&#39;s murmur
+    
+  </title>
+  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrcode.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-44933497-2');
+  </script>
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Calvert's murmur</span>
+    </a>
+
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/categories/" class="item-link">Categories</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+
+    
+      <div id="search-form-wrap">
+        <form class="search-form">
+          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+          <button type="submit" class="search-form-submit">
+            <span class="fa fa-search"></span>
+          </button>
+        </form>
+        <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
+      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+<script>
+  (function (window) {
+    var INSIGHT_CONFIG = {
+      TRANSLATION: {
+        POSTS: '文章',
+        PAGES: '頁面',
+        CATEGORIES: '分類',
+        TAGS: '標籤',
+        UNTITLED: '無標題',
+      },
+      ROOT_URL: '/',
+      CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+  })(window);
+</script>
+<script src="/js/insight.js"></script>
+
+      </div>
+    
+
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/categories/" class="menu-link">Categories</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Golang map 介紹</h2>
+  <p class="post-date">2019-11-14</p>
+  <div class="arrow-down">
+    <a href="javascript:;" target="_blank" rel="noopener"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-maps" target="_blank" rel="noopener">Golang Maps by Example</a></p>
+</blockquote>
+<p>map 是沒有順序的鍵-值對集合。它將鍵對應到值。鍵在 map 是唯一的，而值可能不是。</p>
+<p>map 資料結構用於基於鍵的快速尋找、取得和刪除資料。它是電腦科學中最常用的資料結構之一。</p>
+<p>Go 提供了內建的 map 型別。在本文中，我們將學習如何使用 Golang 內建的 map 型別。</p>
+<a id="more"></a>
+
+<h3 id="宣告-map"><a href="#宣告-map" class="headerlink" title="宣告 map"></a>宣告 map</h3><p>使用以下語法宣告 map：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> m <span class="keyword">map</span>[KeyType]ValueType</span><br></pre></td></tr></table></figure>
+
+<p>舉例來說，這是你如何宣告一個 <code>string</code> 鍵對應到 <code>int</code> 值的 map：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> m <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span></span><br></pre></td></tr></table></figure>
+
+<p>map 的<a href="/2019/11/05/golang-variables-zero-values-type-inference/" title="零值">零值</a>是 <code>nil</code>。<code>nil</code> 的 map 沒有鍵。此外，任何嘗試將鍵加到 <code>nil</code> 的 map 的行為將導致執行時期錯誤。</p>
+<p>我們來看一個範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> m <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(m)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> m == <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"m is nil"</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Attempting to add keys to a nil map will result in a runtime error</span></span><br><span class="line">	<span class="comment">// m["one hundred"] = 100</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">map[]</span><br><span class="line">m is nil</span><br></pre></td></tr></table></figure>
+
+<p>如果你取消陳述式 <code>m[&quot;one hundred&quot;] = 100</code> 的註解，程式將產生以下錯誤：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">panic: assignment to entry in nil map</span><br></pre></td></tr></table></figure>
+
+<p>因此，必需在加入項目之前初始化 map。</p>
+<h3 id="初始化-map"><a href="#初始化-map" class="headerlink" title="初始化 map"></a>初始化 map</h3><h4 id="1-使用內建的-make-函數初始化-map"><a href="#1-使用內建的-make-函數初始化-map" class="headerlink" title="1. 使用內建的 make() 函數初始化 map"></a>1. 使用內建的 <code>make()</code> 函數初始化 map</h4><p>你可以使用內建的 <code>make()</code> 函數初始化 map。你只需要像下面的範例將 map 型別傳遞給 <code>make()</code> 函數即可。該函數將返回已初始化及可以使用的 map：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Initializing a map using the built-in make() function</span></span><br><span class="line"><span class="keyword">var</span> m = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>)</span><br></pre></td></tr></table></figure>
+
+<p>讓我們來看一個完整範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> m = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>)</span><br><span class="line"></span><br><span class="line">	fmt.Println(m)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> m == <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"m is nil"</span>)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"m is not nil"</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// make() function returns an initialized and ready to use map.</span></span><br><span class="line">	<span class="comment">// Since it is initialized, you can add new keys to it.</span></span><br><span class="line">	m[<span class="string">"one hundred"</span>] = <span class="number">100</span></span><br><span class="line">	fmt.Println(m)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">map[]</span><br><span class="line">m is not nil</span><br><span class="line">map[one hundred:100]</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-使用-map-定數初始化-map"><a href="#2-使用-map-定數初始化-map" class="headerlink" title="2. 使用 map 定數初始化 map"></a>2. 使用 map 定數初始化 map</h4><p>map 定數是使用某些資料初始化 map 的一種非常方便的方法。你只需要像這樣在大括號內傳遞以冒號分隔的鍵-值對：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> m = <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>&#123;</span><br><span class="line">	<span class="string">"one"</span>: <span class="number">1</span>,</span><br><span class="line">	<span class="string">"two"</span>: <span class="number">2</span>,</span><br><span class="line">	<span class="string">"three"</span>: <span class="number">3</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，最後一個逗號是必要的，否則將出現編譯器錯誤。</p>
+<p>讓我們來看一個完整範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> m = <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>&#123;</span><br><span class="line">		<span class="string">"one"</span>:   <span class="number">1</span>,</span><br><span class="line">		<span class="string">"two"</span>:   <span class="number">2</span>,</span><br><span class="line">		<span class="string">"three"</span>: <span class="number">3</span>,</span><br><span class="line">		<span class="string">"four"</span>:  <span class="number">4</span>,</span><br><span class="line">		<span class="string">"five"</span>:  <span class="number">5</span>, <span class="comment">// Comma is necessary</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Println(m)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">map[one:1 two:2 three:3 four:4 five:5]</span><br></pre></td></tr></table></figure>
+
+<p>你也可以透過將大括號留空，使用 map 定數來建立一個空 map：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Initialize an empty map</span></span><br><span class="line"><span class="keyword">var</span> m = <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的陳述式在功能上與使用 <code>make()</code> 函數相同。</p>
+<h3 id="加入項目（鍵-值對）到-map"><a href="#加入項目（鍵-值對）到-map" class="headerlink" title="加入項目（鍵-值對）到 map"></a>加入項目（鍵-值對）到 map</h3><p>你可以使用以下語法將新項目加入到已初始化的 map：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m[key] = value</span><br></pre></td></tr></table></figure>
+
+<p>以下的範例使用 <code>make()</code> 函數初始化 map，並對它加入一些新項目：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Initializing a map</span></span><br><span class="line">	<span class="keyword">var</span> tinderMatch = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Adding keys to a map</span></span><br><span class="line">	tinderMatch[<span class="string">"Rajeev"</span>] = <span class="string">"Angelina"</span> <span class="comment">// Assigns the value "Angelina" to the key "Rajeev"</span></span><br><span class="line">	tinderMatch[<span class="string">"James"</span>] = <span class="string">"Sophia"</span></span><br><span class="line">	tinderMatch[<span class="string">"David"</span>] = <span class="string">"Emma"</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(tinderMatch)</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	  Adding a key that already exists will simply override</span></span><br><span class="line"><span class="comment">	  the existing key with the new value</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	tinderMatch[<span class="string">"Rajeev"</span>] = <span class="string">"Jennifer"</span></span><br><span class="line">	fmt.Println(tinderMatch)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">map[Rajeev:Angelina James:Sophia David:Emma]</span><br><span class="line">map[Rajeev:Jennifer James:Sophia David:Emma]</span><br></pre></td></tr></table></figure>
+
+<p>如果你嘗試加入一個已經存在於 map 中的鍵，那麼它將被新的值覆蓋。</p>
+<h3 id="取得-map-中特定鍵所關聯的值"><a href="#取得-map-中特定鍵所關聯的值" class="headerlink" title="取得 map 中特定鍵所關聯的值"></a>取得 map 中特定鍵所關聯的值</h3><p>你可以使用語法 <code>m[key]</code> 來取得分派給 map 中的鍵的值。如果鍵已經存在於 map，則將取得分派的值。否則，你將取得 map 的值型別的零值。</p>
+<p>讓我們看個範例來了解這一點：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> personMobileNo = <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;</span><br><span class="line">		<span class="string">"John"</span>:  <span class="string">"+33-8273658526"</span>,</span><br><span class="line">		<span class="string">"Steve"</span>: <span class="string">"+1-8579822345"</span>,</span><br><span class="line">		<span class="string">"David"</span>: <span class="string">"+44-9462834443"</span>,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> mobileNo = personMobileNo[<span class="string">"Steve"</span>]</span><br><span class="line">	fmt.Println(<span class="string">"Steve's Mobile No : "</span>, mobileNo)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// If a key doesn't exist in the map, we get the zero value of the value type</span></span><br><span class="line">	mobileNo = personMobileNo[<span class="string">"Jack"</span>]</span><br><span class="line">	fmt.Println(<span class="string">"Jack's Mobile No : "</span>, mobileNo)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Steve&apos;s Mobile No :  +1-8579822345</span><br><span class="line">Jack&apos;s Mobile No :</span><br></pre></td></tr></table></figure>
+
+<p>在上面的範例中，由於鍵 <code>&quot;Jack&quot;</code> 不存在於 map 中，我們得到 map 的值型別的零值。由於 map 的值型別是 <code>string</code>，因此我們得到 <code>&quot;&quot;</code>。</p>
+<p><em>與其他語言不同，如果鍵不存在於 map 中，不會在 Golang 中出現執行時期錯誤。</em></p>
+<p><strong>但是，如果你要檢查 key 是否存在怎麼辦？</strong> 在上面的範例中，即使鍵 <code>&quot;Jack&quot;</code> 具有值為 <code>&quot;&quot;</code>，map 也將返回 <code>&quot;&quot;</code>。那麼，如何區別鍵的值與型別的零值相同和鍵不存在的情況？</p>
+<p>嗯，讓我們來找出答案吧。</p>
+<h4 id="檢查鍵是否存在於-map"><a href="#檢查鍵是否存在於-map" class="headerlink" title="檢查鍵是否存在於 map"></a>檢查鍵是否存在於 map</h4><p>當你使用語法 <code>map[key]</code> 取得分派給特定鍵的值時，它也會返回一個額外的布林值，如果鍵存在於 map 中，則返回 <code>true</code>，否則返回 <code>false</code>。</p>
+<p>因此，你可以使用以下雙值分派來檢查鍵是否存在於 map 中：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value, ok := m[key]</span><br></pre></td></tr></table></figure>
+
+<p>如果鍵存在，則布林變數 <code>ok</code> 將為 <code>true</code>，否則為 <code>false</code>。</p>
+<p>留意以下 map 範例。它將 employeeIds 對應到名稱：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> employees = <span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>&#123;</span><br><span class="line">	<span class="number">1001</span>: <span class="string">"Rajeev"</span>,</span><br><span class="line">	<span class="number">1002</span>: <span class="string">"Sachin"</span>,</span><br><span class="line">	<span class="number">1003</span>: <span class="string">"James"</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由於鍵 <code>1001</code> 存在於 map 中，因此存取鍵 <code>1001</code> 會返回 <code>&quot;Rajeev&quot;</code> 和 <code>true</code>：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name, ok := employees[<span class="number">1001</span>] <span class="comment">// "Rajeev", true</span></span><br></pre></td></tr></table></figure>
+
+<p>但是，如果你嘗試存取不存在的鍵，map 會返回一個空字串 <code>&quot;&quot;</code>（字串的零值）和 <code>false</code>：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name, ok := employees[<span class="number">1010</span>] <span class="comment">// "", false</span></span><br></pre></td></tr></table></figure>
+
+<p>如果你只是想檢查某個鍵是否存在而無需取得與該鍵關聯的值，那麼你可以使用 <code>_</code>（底線）代替第一個值：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_, ok := employees[<span class="number">1005</span>]</span><br></pre></td></tr></table></figure>
+
+<p>現在，讓我們看一個完整範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> employees = <span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>&#123;</span><br><span class="line">		<span class="number">1001</span>: <span class="string">"John"</span>,</span><br><span class="line">		<span class="number">1002</span>: <span class="string">"Steve"</span>,</span><br><span class="line">		<span class="number">1003</span>: <span class="string">"Maria"</span>,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	printEmployee(employees, <span class="number">1001</span>)</span><br><span class="line">	printEmployee(employees, <span class="number">1010</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> isEmployeeExists(employees, <span class="number">1002</span>) &#123;</span><br><span class="line">		fmt.Println(<span class="string">"EmployeeId 1002 found"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printEmployee</span><span class="params">(employees <span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>, employeeId <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> name, ok := employees[employeeId]; ok &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"name = %s, ok = %v\n"</span>, name, ok)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"EmployeeId %d not found\n"</span>, employeeId)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">isEmployeeExists</span><span class="params">(employees <span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>, employeeId <span class="keyword">int</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">	_, ok := employees[employeeId]</span><br><span class="line">	<span class="keyword">return</span> ok</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">name = Rajeev, ok = true</span><br><span class="line">EmployeeId 1010 not found</span><br><span class="line">EmployeeId 1002 found</span><br></pre></td></tr></table></figure>
+
+<p>在上面的範例中，我在 <code>if</code> 陳述式中使用了<a href="/2019/11/11/golang-control-flow-statements/" title="簡短宣告">簡短宣告</a>來初始化 <code>name</code> 和 <code>ok</code> 值，然後測試布林值 <code>ok</code>。它使程式碼更加簡潔。</p>
+<h3 id="從-map-中刪除鍵"><a href="#從-map-中刪除鍵" class="headerlink" title="從 map 中刪除鍵"></a>從 map 中刪除鍵</h3><p>你可以使用內建的 <code>delete()</code> 函數從 map 中刪除鍵。語法如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Delete the `key` from the `map`</span></span><br><span class="line"><span class="built_in">delete</span>(<span class="keyword">map</span>, key)</span><br></pre></td></tr></table></figure>
+
+<p><code>delete()</code> 函數不會返回任何值。另外，如果該鍵不存在於 map，它也不會執行任何操作。</p>
+<p>這是一個完整範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> fileExtensions = <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;</span><br><span class="line">		<span class="string">"Python"</span>: <span class="string">".py"</span>,</span><br><span class="line">		<span class="string">"C++"</span>:    <span class="string">".cpp"</span>,</span><br><span class="line">		<span class="string">"Java"</span>:   <span class="string">".java"</span>,</span><br><span class="line">		<span class="string">"Golang"</span>: <span class="string">".go"</span>,</span><br><span class="line">		<span class="string">"Kotlin"</span>: <span class="string">".kt"</span>,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Println(fileExtensions)</span><br><span class="line"></span><br><span class="line">	<span class="built_in">delete</span>(fileExtensions, <span class="string">"Kotlin"</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// delete function doesn't do anything if the key doesn't exist</span></span><br><span class="line">	<span class="built_in">delete</span>(fileExtensions, <span class="string">"Javascript"</span>)</span><br><span class="line"></span><br><span class="line">	fmt.Println(fileExtensions)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">map[Python:.py C++:.cpp Java:.java Golang:.go Kotlin:.kt]</span><br><span class="line">map[Python:.py C++:.cpp Java:.java Golang:.go]</span><br></pre></td></tr></table></figure>
+
+<h3 id="map-是參考型別"><a href="#map-是參考型別" class="headerlink" title="map 是參考型別"></a>map 是參考型別</h3><p>map 是參考型別。當你將 map 分派給新變數時，它們都參考相同的底層資料結構。因此，一個變數完成的更改另一個變數將會看到。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> m1 = <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>&#123;</span><br><span class="line">		<span class="string">"one"</span>:   <span class="number">1</span>,</span><br><span class="line">		<span class="string">"two"</span>:   <span class="number">2</span>,</span><br><span class="line">		<span class="string">"three"</span>: <span class="number">3</span>,</span><br><span class="line">		<span class="string">"four"</span>:  <span class="number">4</span>,</span><br><span class="line">		<span class="string">"five"</span>:  <span class="number">5</span>,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> m2 = m1</span><br><span class="line">	fmt.Println(<span class="string">"m1 = "</span>, m1)</span><br><span class="line">	fmt.Println(<span class="string">"m2 = "</span>, m2)</span><br><span class="line"></span><br><span class="line">	m2[<span class="string">"ten"</span>] = <span class="number">10</span></span><br><span class="line">	fmt.Println(<span class="string">"\nm1 = "</span>, m1)</span><br><span class="line">	fmt.Println(<span class="string">"m2 = "</span>, m2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">m1 =  map[one:1 two:2 three:3 four:4 five:5]</span><br><span class="line">m2 =  map[one:1 two:2 three:3 four:4 five:5]</span><br><span class="line"></span><br><span class="line">m1 =  map[one:1 two:2 three:3 four:4 five:5 ten:10]</span><br><span class="line">m2 =  map[one:1 two:2 three:3 four:4 five:5 ten:10]</span><br></pre></td></tr></table></figure>
+
+<p>將 map 傳遞給函數時，會套用相同概念。函數內部對 map 所做的任何更改，呼叫者也看得到。</p>
+<h3 id="迭代-map"><a href="#迭代-map" class="headerlink" title="迭代 map"></a>迭代 map</h3><p>你可以使用 <code>range</code> 格式的 for 迴圈迭代 map。它在每次迭代中會給你 <code>key, value</code>：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> personAge = <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>&#123;</span><br><span class="line">		<span class="string">"Rajeev"</span>: <span class="number">25</span>,</span><br><span class="line">		<span class="string">"James"</span>:  <span class="number">32</span>,</span><br><span class="line">		<span class="string">"Sarah"</span>:  <span class="number">29</span>,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> name, age := <span class="keyword">range</span> personAge &#123;</span><br><span class="line">		fmt.Println(name, age)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">James 32</span><br><span class="line">Sarah 29</span><br><span class="line">Rajeev 25</span><br></pre></td></tr></table></figure>
+
+<p>注意，map 是沒有順序的集合，因此每次迭代時，不能保證 map 的迭代順序都相同。</p>
+<p>因此，如果多次執行上面的程式，你將得到不同順序的結果。</p>
+<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>在本文中，你學習了如何宣告和初始化 map、如何將鍵加到 map、如何取得 map 中特定鍵所關聯的值、如何檢查鍵是否存在於 map 中、如何從 map 中刪除鍵，以及如何迭代 map。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- UpdatedDate Start -->
+     
+       <p class="post-date">最後更新時間：2019-11-15</p>
+     
+   <!-- UpdatedDate END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/11/13/introduction-to-slices-in-golang/">
+        <span class="nav-arrow">&larr; </span>
+        
+          Golang Slice 介紹
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/11/15/playing-with-pointers-in-golang/">
+        
+          在 Golang 與指標共舞
+        
+        <span class="nav-arrow"> &rarr;</span>
+      </a>
+    
+  </div>
+
+
+    <!-- NAV END -->
+    <!-- 打賞 START -->
+    
+    <!-- 打賞 END -->
+    <!-- 二維條碼 START -->
+    
+      <div class="qrcode">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="share-qrcode"/>
+        </svg>
+        <p class="notice">掃描二維條碼，分享此文章</p>
+      </div>
+    
+    <!-- 二維條碼 END -->
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">目錄</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#宣告-map"><span class="toc-nav-text">宣告 map</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#初始化-map"><span class="toc-nav-text">初始化 map</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-使用內建的-make-函數初始化-map"><span class="toc-nav-text">1. 使用內建的 make() 函數初始化 map</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-使用-map-定數初始化-map"><span class="toc-nav-text">2. 使用 map 定數初始化 map</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#加入項目（鍵-值對）到-map"><span class="toc-nav-text">加入項目（鍵-值對）到 map</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#取得-map-中特定鍵所關聯的值"><span class="toc-nav-text">取得 map 中特定鍵所關聯的值</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#檢查鍵是否存在於-map"><span class="toc-nav-text">檢查鍵是否存在於 map</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#從-map-中刪除鍵"><span class="toc-nav-text">從 map 中刪除鍵</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#map-是參考型別"><span class="toc-nav-text">map 是參考型別</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#迭代-map"><span class="toc-nav-text">迭代 map</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#結論"><span class="toc-nav-text">結論</span></a></li></ol>
+    
+  </div>
+</aside>
+
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://calvertyang.github.io/2019/11/14/golang-maps-by-example/';
+    var banner = '';
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      });
+    } else {
+      $('#article-banner').geopattern(url);
+    }
+    $('.header').removeClass('fixed-header');
+
+     // error image
+    $('.markdown-content img').on('error', function() {
+      $(this).attr('src', '/css/images/error-img.png');
+      $(this).css({
+        'cursor': 'default'
+      });
+    });
+
+    // 若圖片放在連結內，則將游標改為 pointer 並將圖片靠左
+    $('.markdown-content img').each(function() {
+      if ($(this).parents().is('a')) {
+        $(this).css({
+          'cursor': 'pointer',
+          'display': 'inline-block'
+        });
+      }
+    });
+
+    // zoom image
+    $('.markdown-content img').on('click', function(e) {
+      var src = $(this).attr('src');
+      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
+        var imageW = $(this).width();
+        var imageH = $(this).height();
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        zoom = zoom < 1 ? 1 : zoom;
+        zoom = zoom > 2 ? 2 : zoom;
+        var transY = (($(window).height() - imageH) / 2).toFixed(2);
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
+        $('.image-view-wrap').addClass('wrap-active');
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        });
+        $('html').css('overflow', 'hidden');
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove();
+          $('html').attr('style', '');
+        });
+      }
+    });
+
+    // qrcode
+    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
+      text: document.location.href,
+      width: 100,
+      height: 100,
+      colorDark: '#000000',
+    	colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.L,
+      useSVG: true
+    });
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; Calvert 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+
+<script>
+  async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  $('figure').each(function(i, block) {
+    let lang = this.classList[1] || 'codeblock';
+    this.dataset.lang = lang.toUpperCase();
+  });
+</script>
+<script src="/js/script.js"></script>
+
+  </body>
+</html>

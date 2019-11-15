@@ -205,7 +205,7 @@
   <h2>如何在 CentOS 6 安裝 Redis</h2>
   <p class="post-date">2013-11-06</p>
   <div class="arrow-down">
-    <a href="javascript:;"></a>
+    <a href="javascript:;" target="_blank" rel="noopener"></a>
   </div>
 </div>
 <main class="app-body flex-box">
@@ -218,12 +218,14 @@
 </li>
 <li><p>編譯並測試是否可安裝</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ make</span><br><span class="line">$ make <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
 <p>若出現訊息，代表系統尚未安裝 tcl</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> src &amp;&amp; make <span class="built_in">test</span></span><br><span class="line">make[1]: Entering directory `/tmp/redis-stable/src<span class="string">'</span></span><br><span class="line"><span class="string">You need tcl 8.5 or newer in order to run the Redis test</span></span><br><span class="line"><span class="string">make[1]: *** [test] Error 1</span></span><br><span class="line"><span class="string">make[1]: Leaving directory `/tmp/redis-stable/src'</span></span><br><span class="line">make: *** [<span class="built_in">test</span>] Error 2</span><br></pre></td></tr></table></figure>
 <p>tcl 安裝步驟，詳見<a href="http://www.linuxfromscratch.org/blfs/view/cvs/general/tcl.html" target="_blank" rel="noopener">官方文件</a></p>
 </li>
 <li><p>安裝 redis</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ make install</span><br><span class="line"><span class="built_in">cd</span> src &amp;&amp; make install</span><br><span class="line">make[1]: Entering directory <span class="string">'/tmp/redis-stable/src'</span></span><br><span class="line">Hint: To run <span class="string">'make test'</span> is a good idea ;)</span><br><span class="line">mkdir -p /usr/<span class="built_in">local</span>/bin</span><br><span class="line">    INSTALL install</span><br><span class="line">    INSTALL install</span><br><span class="line">    INSTALL install</span><br><span class="line">    INSTALL install</span><br><span class="line">    INSTALL install</span><br><span class="line">make[1]: Leaving directory `/tmp/redis-stable/src<span class="string">'</span></span><br></pre></td></tr></table></figure>
+
 <p>到此，redis 便安裝完畢了，redis 包含了以下幾個部分：</p>
 <ul>
 <li>redis-server: is the Redis Server itself.</li>
@@ -234,16 +236,21 @@
 </li>
 <li><p>啟動 redis<br>最簡單的啟動方式為直接執行 <code>redis-server</code> 且不含任何參數。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ redis-server</span><br><span class="line">[12182] 06 Nov 13:58:15.841 <span class="comment"># Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf</span></span><br><span class="line">[12182] 06 Nov 13:58:15.842 * Max number of open files <span class="built_in">set</span> to 10032</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">[12182] 06 Nov 13:58:15.843 <span class="comment"># Server started, Redis version 2.6.16</span></span><br><span class="line">[12182] 06 Nov 13:58:15.843 * The server is now ready to accept connections on port 6379</span><br></pre></td></tr></table></figure>
+
 <p>若要啟動 redis 並帶入設定檔，只需將設定檔的完整路徑帶入即可，如：redis-server /etc/redis.conf</p>
 </li>
 <li><p>接著加入設定將 redis 作為服務於開機時啟動<br>建立工作目錄</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mkdir /var/redis</span><br></pre></td></tr></table></figure>
+
 <p>從 utils 資料夾複製啟動腳本到 /etc/init.d/</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cp utils/redis_init_script /etc/init.d/redis</span><br></pre></td></tr></table></figure>
+
 <p>編輯啟動腳本，根據需求修改 REDIS_PORT</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/init.d/redis</span><br></pre></td></tr></table></figure>
+
 <p>複製預設設定檔</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp redis.conf /etc/redis.conf</span><br></pre></td></tr></table></figure>
+
 <p>需修改以下幾個項目</p>
 <ul>
 <li>daemonize: 設定為 yes 讓 redis 可背景執行，預設為 no</li>
@@ -254,6 +261,7 @@
 </ul>
 <p>最後，將啟動腳本加入開機執行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-rc.d redis defaults</span><br></pre></td></tr></table></figure>
+
 <p>現在你可以透過以下指令啟動 redis</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service redis start</span><br></pre></td></tr></table></figure>
 </li>
@@ -278,7 +286,7 @@
     <!-- Tags END -->
     <!-- UpdatedDate Start -->
      
-       <p class="post-date">最後更新時間：2017-02-06</p>
+       <p class="post-date">最後更新時間：2019-06-10</p>
      
    <!-- UpdatedDate END -->
     <!-- NAV START -->
@@ -411,9 +419,9 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; Calvert 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
   </p>
 </footer>
 

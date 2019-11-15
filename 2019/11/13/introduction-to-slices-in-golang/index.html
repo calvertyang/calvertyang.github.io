@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Calvert&#39;s tech blog">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Golang Slice 介紹 | Calvert&#39;s murmur
+    
+  </title>
+  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrcode.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-44933497-2');
+  </script>
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Calvert's murmur</span>
+    </a>
+
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/categories/" class="item-link">Categories</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+
+    
+      <div id="search-form-wrap">
+        <form class="search-form">
+          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+          <button type="submit" class="search-form-submit">
+            <span class="fa fa-search"></span>
+          </button>
+        </form>
+        <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
+      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+<script>
+  (function (window) {
+    var INSIGHT_CONFIG = {
+      TRANSLATION: {
+        POSTS: '文章',
+        PAGES: '頁面',
+        CATEGORIES: '分類',
+        TAGS: '標籤',
+        UNTITLED: '無標題',
+      },
+      ROOT_URL: '/',
+      CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+  })(window);
+</script>
+<script src="/js/insight.js"></script>
+
+      </div>
+    
+
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/categories/" class="menu-link">Categories</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Golang Slice 介紹</h2>
+  <p class="post-date">2019-11-13</p>
+  <div class="arrow-down">
+    <a href="javascript:;" target="_blank" rel="noopener"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-slices" target="_blank" rel="noopener">Introduction to Slices in Golang</a></p>
+</blockquote>
+<p>Slice 是陣列的一部分。Slice 建構在陣列之上，與陣列相比提供了更多功能、靈活性和便利性。</p>
+<p>如同陣列一樣，Slice 是可索引的且具有長度。但與陣列不同的是，它們可以調整長度。</p>
+<p>在內部，Slice 只是對底層陣列的參考。在本文中，我們將學習如何建立和使用 Slice，並了解它們背後的運作方式。</p>
+<a id="more"></a>
+
+<h3 id="宣告-Slice"><a href="#宣告-Slice" class="headerlink" title="宣告 Slice"></a>宣告 Slice</h3><p>使用 <code>[]T</code> 宣告型別為 <code>T</code> 的 Slice。舉例來說，以下是宣告 <code>int</code> 型別的 Slice 的方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Slice of type `int`</span></span><br><span class="line"><span class="keyword">var</span> s []<span class="keyword">int</span></span><br></pre></td></tr></table></figure>
+
+<p>Slice 的宣告就像陣列一樣，只不過我們在中括號 <code>[]</code> 中未指定任何長度。</p>
+<h3 id="建立和初始化-Slice"><a href="#建立和初始化-Slice" class="headerlink" title="建立和初始化 Slice"></a>建立和初始化 Slice</h3><h4 id="1-使用-Slice-定數建立-Slice"><a href="#1-使用-Slice-定數建立-Slice" class="headerlink" title="1. 使用 Slice 定數建立 Slice"></a>1. 使用 Slice 定數建立 Slice</h4><p>你可以像這樣使用 Slice 定數來建立 Slice：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Creating a slice using a slice literal</span></span><br><span class="line"><span class="keyword">var</span> s = []<span class="keyword">int</span>&#123;<span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">11</span>, <span class="number">13</span>, <span class="number">17</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述陳述式右側的表達式是 Slice 定數。Slice 定數的宣告與<a href="/2019/11/12/working-with-arrays-in-golang/" title="陣列定數">陣列定數</a>一樣，不同之處在於沒有在中括號 <code>[]</code> 中指定任何長度。</p>
+<p>當你使用 Slice 定數建立 Slice 時，它會先建立一個陣列，然後返回參考它的 Slice。</p>
+<p>讓我們看一個完整範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Creating a slice using a slice literal</span></span><br><span class="line">	<span class="keyword">var</span> s = []<span class="keyword">int</span>&#123;<span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">11</span>, <span class="number">13</span>, <span class="number">17</span>&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Short hand declaration</span></span><br><span class="line">	t := []<span class="keyword">int</span>&#123;<span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">16</span>, <span class="number">32</span>, <span class="number">64</span>&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"s = "</span>, s)</span><br><span class="line">	fmt.Println(<span class="string">"t = "</span>, t)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">s =  [3 5 7 9 11 13 17]</span><br><span class="line">t =  [2 4 8 16 32 64]</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-從陣列建立-Slice"><a href="#2-從陣列建立-Slice" class="headerlink" title="2. 從陣列建立 Slice"></a>2. 從陣列建立 Slice</h4><p>由於 Slice 是陣列的一部分，因此我們可以從陣列建立 Slice。</p>
+<p>要從陣列 <code>a</code> 建立 Slice，我們指定兩個由冒號分隔的索引 <code>low</code>（下限）和 <code>high</code>（上限）：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Obtaining a slice from an array `a`</span></span><br><span class="line">a[low:high]</span><br></pre></td></tr></table></figure>
+
+<p>上面的表達式從陣列 <code>a</code> 選擇一個 Slice。Slice 的結果包含從索引 <code>low</code> 到 <code>high</code> 的所有元素，但不包括索引 <code>high</code> 的元素。</p>
+<p>讓我們來看一個範例，讓事情更清晰明瞭：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> a = [<span class="number">5</span>]<span class="keyword">string</span>&#123;<span class="string">"Alpha"</span>, <span class="string">"Beta"</span>, <span class="string">"Gamma"</span>, <span class="string">"Delta"</span>, <span class="string">"Epsilon"</span>&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Creating a slice from the array</span></span><br><span class="line">	<span class="keyword">var</span> s []<span class="keyword">string</span> = a[<span class="number">1</span>:<span class="number">4</span>]</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"Array a = "</span>, a)</span><br><span class="line">	fmt.Println(<span class="string">"Slice s = "</span>, s)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Array a =  [Alpha Beta Gamma Delta Epsilon]</span><br><span class="line">Slice s =  [Beta Gamma Delta]</span><br></pre></td></tr></table></figure>
+
+<p>Slice 表達式中的 <code>low</code> 和 <code>high</code> 索引是非必要的。<code>low</code> 的預設值為 <code>0</code>，而 <code>high</code> 的預設值為 Slice 的長度。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := [<span class="number">5</span>]<span class="keyword">string</span>&#123;<span class="string">"C"</span>, <span class="string">"C++"</span>, <span class="string">"Java"</span>, <span class="string">"Python"</span>, <span class="string">"Go"</span>&#125;</span><br><span class="line"></span><br><span class="line">	slice1 := a[<span class="number">1</span>:<span class="number">4</span>]</span><br><span class="line">	slice2 := a[:<span class="number">3</span>]</span><br><span class="line">	slice3 := a[<span class="number">2</span>:]</span><br><span class="line">	slice4 := a[:]</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"Array a = "</span>, a)</span><br><span class="line">	fmt.Println(<span class="string">"slice1 = "</span>, slice1)</span><br><span class="line">	fmt.Println(<span class="string">"slice2 = "</span>, slice2)</span><br><span class="line">	fmt.Println(<span class="string">"slice3 = "</span>, slice3)</span><br><span class="line">	fmt.Println(<span class="string">"slice4 = "</span>, slice4)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Array a =  [C C++ Java Python Go]</span><br><span class="line">slice1 =  [C++ Java Python]</span><br><span class="line">slice2 =  [C C++ Java]</span><br><span class="line">slice3 =  [Java Python Go]</span><br><span class="line">slice4 =  [C C++ Java Python Go]</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-從一個-Slice-建立另一個-Slice"><a href="#3-從一個-Slice-建立另一個-Slice" class="headerlink" title="3. 從一個 Slice 建立另一個 Slice"></a>3. 從一個 Slice 建立另一個 Slice</h4><p>也可以透過劃分現有的 Slice 來建立 Slice。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	cities := []<span class="keyword">string</span>&#123;<span class="string">"New York"</span>, <span class="string">"London"</span>, <span class="string">"Chicago"</span>, <span class="string">"Beijing"</span>, <span class="string">"Delhi"</span>, <span class="string">"Mumbai"</span>, <span class="string">"Bangalore"</span>, <span class="string">"Hyderabad"</span>, <span class="string">"Hong Kong"</span>&#125;</span><br><span class="line"></span><br><span class="line">	asianCities := cities[<span class="number">3</span>:]</span><br><span class="line">	indianCities := asianCities[<span class="number">1</span>:<span class="number">5</span>]</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"cities = "</span>, cities)</span><br><span class="line">	fmt.Println(<span class="string">"asianCities = "</span>, asianCities)</span><br><span class="line">	fmt.Println(<span class="string">"indianCities = "</span>, indianCities)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">cities =  [New York London Chicago Beijing Delhi Mumbai Bangalore Hyderabad Hong Kong]</span><br><span class="line">asianCities =  [Beijing Delhi Mumbai Bangalore Hyderabad Hong Kong]</span><br><span class="line">indianCities =  [Delhi Mumbai Bangalore Hyderabad]</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改-Slice"><a href="#修改-Slice" class="headerlink" title="修改 Slice"></a>修改 Slice</h3><p>Slice 是參考型別。它們參考到底層陣列。修改 Slice 的元素將會修改參考陣列中的相應元素。引用相同陣列的其他 Slice 也會看到這些修改。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := [<span class="number">7</span>]<span class="keyword">string</span>&#123;<span class="string">"Mon"</span>, <span class="string">"Tue"</span>, <span class="string">"Wed"</span>, <span class="string">"Thu"</span>, <span class="string">"Fri"</span>, <span class="string">"Sat"</span>, <span class="string">"Sun"</span>&#125;</span><br><span class="line"></span><br><span class="line">	slice1 := a[<span class="number">1</span>:]</span><br><span class="line">	slice2 := a[<span class="number">3</span>:]</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"------- Before Modifications -------"</span>)</span><br><span class="line">	fmt.Println(<span class="string">"a  = "</span>, a)</span><br><span class="line">	fmt.Println(<span class="string">"slice1 = "</span>, slice1)</span><br><span class="line">	fmt.Println(<span class="string">"slice2 = "</span>, slice2)</span><br><span class="line"></span><br><span class="line">	slice1[<span class="number">0</span>] = <span class="string">"TUE"</span></span><br><span class="line">	slice1[<span class="number">1</span>] = <span class="string">"WED"</span></span><br><span class="line">	slice1[<span class="number">2</span>] = <span class="string">"THU"</span></span><br><span class="line"></span><br><span class="line">	slice2[<span class="number">1</span>] = <span class="string">"FRIDAY"</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"\n-------- After Modifications --------"</span>)</span><br><span class="line">	fmt.Println(<span class="string">"a  = "</span>, a)</span><br><span class="line">	fmt.Println(<span class="string">"slice1 = "</span>, slice1)</span><br><span class="line">	fmt.Println(<span class="string">"slice2 = "</span>, slice2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">------- Before Modifications -------</span><br><span class="line">a  =  [Mon Tue Wed Thu Fri Sat Sun]</span><br><span class="line">slice1 =  [Tue Wed Thu Fri Sat Sun]</span><br><span class="line">slice2 =  [Thu Fri Sat Sun]</span><br><span class="line"></span><br><span class="line">-------- After Modifications --------</span><br><span class="line">a  =  [Mon TUE WED THU FRIDAY Sat Sun]</span><br><span class="line">slice1 =  [TUE WED THU FRIDAY Sat Sun]</span><br><span class="line">slice2 =  [THU FRIDAY Sat Sun]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Slice-的長度和容量"><a href="#Slice-的長度和容量" class="headerlink" title="Slice 的長度和容量"></a>Slice 的長度和容量</h3><p>Slice 由三樣東西組成：</p>
+<ul>
+<li><p>指向底層陣列的<strong>指標</strong>（參考）。</p>
+</li>
+<li><p>Slice 包含的陣列部分的<strong>長度</strong>。</p>
+</li>
+<li><p><strong>容量</strong>（該部分可以增加到的最大大小）</p>
+</li>
+</ul>
+<img src="/2019/11/13/introduction-to-slices-in-golang/golang-slices-illustration.jpg" class="">
+
+<p>讓我們用以下陣列和從中得到的 Slice 作為範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="number">6</span>]<span class="keyword">int</span>&#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>&#125;</span><br><span class="line"><span class="keyword">var</span> s = [<span class="number">1</span>:<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+
+<p>這是上面範例中的 Slice <code>s</code> 的表示方式：</p>
+<img src="/2019/11/13/introduction-to-slices-in-golang/golang-slices-length-capacity.jpg" class="">
+
+
+<p>Slice 的長度是 Slice 中元素的數量，在上面的範例中為 <code>3</code>。</p>
+<p>容量是從 Slice 中第一個元素開始的底層陣列中的元素數量，在上面的範例中為 <code>5</code>。</p>
+<p>你可以使用內建函數 <code>len()</code> 和 <code>cap()</code> 找到 Slice 的長度和容量：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := [<span class="number">6</span>]<span class="keyword">int</span>&#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>&#125;</span><br><span class="line">	s := a[<span class="number">1</span>:<span class="number">4</span>]</span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"s = %v, len = %d, cap = %d\n"</span>, s, <span class="built_in">len</span>(s), <span class="built_in">cap</span>(s))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">s = [20 30 40], len = 3, cap = 5</span><br></pre></td></tr></table></figure>
+
+<p>透過重新劃分，可以將 Slice 的長度擴充到其容量。任何嘗試將其長度擴充到可用容量之外的行為將導致執行時期錯誤。</p>
+<p>查看以下範例來了解如何重新劃分指定 Slice 來更改其長度和容量：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	s := []<span class="keyword">int</span>&#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>, <span class="number">70</span>, <span class="number">80</span>, <span class="number">90</span>, <span class="number">100</span>&#125;</span><br><span class="line">	fmt.Println(<span class="string">"Original Slice"</span>)</span><br><span class="line">	fmt.Printf(<span class="string">"s = %v, len = %d, cap = %d\n"</span>, s, <span class="built_in">len</span>(s), <span class="built_in">cap</span>(s))</span><br><span class="line"></span><br><span class="line">	s = s[<span class="number">1</span>:<span class="number">5</span>]</span><br><span class="line">	fmt.Println(<span class="string">"\nAfter slicing from index 1 to 5"</span>)</span><br><span class="line">	fmt.Printf(<span class="string">"s = %v, len = %d, cap = %d\n"</span>, s, <span class="built_in">len</span>(s), <span class="built_in">cap</span>(s))</span><br><span class="line"></span><br><span class="line">	s = s[:<span class="number">8</span>]</span><br><span class="line">	fmt.Println(<span class="string">"\nAfter extending the length"</span>)</span><br><span class="line">	fmt.Printf(<span class="string">"s = %v, len = %d, cap = %d\n"</span>, s, <span class="built_in">len</span>(s), <span class="built_in">cap</span>(s))</span><br><span class="line"></span><br><span class="line">	s = s[<span class="number">2</span>:]</span><br><span class="line">	fmt.Println(<span class="string">"\nAfter dropping the first two elements"</span>)</span><br><span class="line">	fmt.Printf(<span class="string">"s = %v, len = %d, cap = %d\n"</span>, s, <span class="built_in">len</span>(s), <span class="built_in">cap</span>(s))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Original Slice</span><br><span class="line">s = [10 20 30 40 50 60 70 80 90 100], len = 10, cap = 10</span><br><span class="line"></span><br><span class="line">After slicing from index 1 to 5</span><br><span class="line">s = [20 30 40 50], len = 4, cap = 9</span><br><span class="line"></span><br><span class="line">After extending the length</span><br><span class="line">s = [20 30 40 50 60 70 80 90], len = 8, cap = 9</span><br><span class="line"></span><br><span class="line">After dropping the first two elements</span><br><span class="line">s = [40 50 60 70 80 90], len = 6, cap = 7</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用內建-make-函數建立-Slice"><a href="#使用內建-make-函數建立-Slice" class="headerlink" title="使用內建 make() 函數建立 Slice"></a>使用內建 <code>make()</code> 函數建立 Slice</h3><p>現在我們知道了 Slice 的長度和容量。讓我們來看看建立 Slice 的另一種方法。</p>
+<p>Golang 提供了一個名為 <code>make()</code> 的函數來建立 Slice。以下是 <code>make()</code> 函數的簽名：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">make</span><span class="params">([]T, <span class="built_in">len</span>, <span class="built_in">cap</span>)</span> []<span class="title">T</span></span></span><br></pre></td></tr></table></figure>
+
+<p>make 函數需要型別、長度和容量（非必要）。它分配了長度與給定容量相同的底層陣列，並返回參考該陣列的 Slice。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Creates an array of size 10, slices it till index 5, and returns the slice reference</span></span><br><span class="line">	s := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">5</span>, <span class="number">10</span>)</span><br><span class="line">	fmt.Printf(<span class="string">"s = %v, len = %d, cap = %d\n"</span>, s, <span class="built_in">len</span>(s), <span class="built_in">cap</span>(s))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">s = [0 0 0 0 0], len = 5, cap = 10</span><br></pre></td></tr></table></figure>
+
+<p><code>make()</code> 函數中的容量參數是非必要的。如果省略，則預設為指定的長度：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Creates an array of size 5, and returns a slice reference to it</span></span><br><span class="line">	s := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">5</span>)</span><br><span class="line">	fmt.Printf(<span class="string">"s = %v, len = %d, cap = %d\n"</span>, s, <span class="built_in">len</span>(s), <span class="built_in">cap</span>(s))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">s = [0 0 0 0 0], len = 5, cap = 5</span><br></pre></td></tr></table></figure>
+
+<h3 id="Slice-的零值"><a href="#Slice-的零值" class="headerlink" title="Slice 的零值"></a>Slice 的零值</h3><p>Slice 的<a href="/2019/11/05/golang-variables-zero-values-type-inference/" title="零值">零值</a>是 <code>nil</code>。具有零值的 Slice 沒有任何底層陣列，且長度和容量為 <code>0</code>：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> s []<span class="keyword">int</span></span><br><span class="line">	fmt.Printf(<span class="string">"s = %v, len = %d, cap = %d\n"</span>, s, <span class="built_in">len</span>(s), <span class="built_in">cap</span>(s))</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> s == <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"s is nil"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">s = [], len = 0, cap = 0</span><br><span class="line">s is nil</span><br></pre></td></tr></table></figure>
+
+<h3 id="Slice-函數"><a href="#Slice-函數" class="headerlink" title="Slice 函數"></a>Slice 函數</h3><h4 id="1-copy-函數：複製-Slice"><a href="#1-copy-函數：複製-Slice" class="headerlink" title="1. copy() 函數：複製 Slice"></a>1. copy() 函數：複製 Slice</h4><p><code>copy()</code> 函數將元素從一個 Slice 複製到另一個 Slice。它的簽名看起來像樣這樣：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">copy</span><span class="params">(dst, src []T)</span> <span class="title">int</span></span></span><br></pre></td></tr></table></figure>
+
+<p>它需要兩個 Slice：來源 Slice 和目的 Slice。然後它會將元素從來源複製到目的，並返回複製的元素數量。</p>
+<p>複製的元素數量將是 <code>len(src)</code> 和 <code>len(dst)</code> 的最小值。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	src := []<span class="keyword">string</span>&#123;<span class="string">"Sublime"</span>, <span class="string">"VSCode"</span>, <span class="string">"IntelliJ"</span>, <span class="string">"Eclipse"</span>&#125;</span><br><span class="line">	dest := <span class="built_in">make</span>([]<span class="keyword">string</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">	numElementsCopied := <span class="built_in">copy</span>(dest, src)</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"src = "</span>, src)</span><br><span class="line">	fmt.Println(<span class="string">"dest = "</span>, dest)</span><br><span class="line">	fmt.Println(<span class="string">"Number of elements copied from src to dest = "</span>, numElementsCopied)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">src =  [Sublime VSCode IntelliJ Eclipse]</span><br><span class="line">dest =  [Sublime VSCode]</span><br><span class="line">Number of elements copied from src to dest =  2</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-append-函數：附加到-Slice"><a href="#2-append-函數：附加到-Slice" class="headerlink" title="2. append() 函數：附加到 Slice"></a>2. append() 函數：附加到 Slice</h4><p><code>append()</code> 函數在給定的 Slice 結尾附加新元素。以下是 <code>append</code> 函數的簽名。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">append</span><span class="params">(s []T, x ...T)</span> []<span class="title">T</span></span></span><br></pre></td></tr></table></figure>
+
+<p>它需要一個 Slice 和可變數量的參數 <strong>x …T</strong>。然後，它返回一個新的 Slice ，其中包含給定 Slice 中的所有元素及新元素。</p>
+<p>如果給定的 Slice 沒有足夠的容量來容納新元素，則將分配具有更大容量的新底層陣列。現有 Slice 的底層陣列中的所有元素都將複製到新陣列，然後附加新元素。</p>
+<p>但是，如果 Slice 具有足夠的容量來容納新元素，則 <code>append()</code> 函數將再使用其底層陣列並將新元素附加到同一陣列中。</p>
+<p>讓我們來看一個範例，以更好地理解：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	slice1 := []<span class="keyword">string</span>&#123;<span class="string">"C"</span>, <span class="string">"C++"</span>, <span class="string">"Java"</span>&#125;</span><br><span class="line">	slice2 := <span class="built_in">append</span>(slice1, <span class="string">"Python"</span>, <span class="string">"Ruby"</span>, <span class="string">"Go"</span>)</span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"slice1 = %v, len = %d, cap = %d\n"</span>, slice1, <span class="built_in">len</span>(slice1), <span class="built_in">cap</span>(slice1))</span><br><span class="line">	fmt.Printf(<span class="string">"slice2 = %v, len = %d, cap = %d\n"</span>, slice2, <span class="built_in">len</span>(slice2), <span class="built_in">cap</span>(slice2))</span><br><span class="line"></span><br><span class="line">	slice1[<span class="number">0</span>] = <span class="string">"C#"</span></span><br><span class="line">	fmt.Println(<span class="string">"\nslice1 = "</span>, slice1)</span><br><span class="line">	fmt.Println(<span class="string">"slice2 = "</span>, slice2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">slice1 = [C C++ Java], len = 3, cap = 3</span><br><span class="line">slice2 = [C C++ Java Python Ruby Go], len = 6, cap = 6</span><br><span class="line"></span><br><span class="line">slice1 =  [C# C++ Java]</span><br><span class="line">slice2 =  [C C++ Java Python Ruby Go]</span><br></pre></td></tr></table></figure>
+
+<p>在上面的範例中，由於 <code>slice1</code> 的容量為 3，它無法容納更多的元素。因此，當我們對它附加更多元素時，新的底層陣列分配了更大的容量。</p>
+<p>所以，如果你修改 <code>slice1</code>，<code>slice2</code> 將不會看到這些更改，因為它參考了另一個陣列。</p>
+<p><strong>但是，如果 <code>slice1</code> 具有足夠的容量來容納新元素呢？</strong> 嗯，在那種情況下，將不會分配新的陣列，並且會將元素附加到同一底層陣列中。</p>
+<p>同樣地，在這種情況下，對 <code>slice1</code> 的更改也會影響 <code>slice2</code>，因為兩者都參考相同的底層陣列。</p>
+<p>在以下範例中對此進行了示範：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	slice1 := <span class="built_in">make</span>([]<span class="keyword">string</span>, <span class="number">3</span>, <span class="number">10</span>)</span><br><span class="line">	<span class="built_in">copy</span>(slice1, []<span class="keyword">string</span>&#123;<span class="string">"C"</span>, <span class="string">"C++"</span>, <span class="string">"Java"</span>&#125;)</span><br><span class="line"></span><br><span class="line">	slice2 := <span class="built_in">append</span>(slice1, <span class="string">"Python"</span>, <span class="string">"Ruby"</span>, <span class="string">"Go"</span>)</span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"slice1 = %v, len = %d, cap = %d\n"</span>, slice1, <span class="built_in">len</span>(slice1), <span class="built_in">cap</span>(slice1))</span><br><span class="line">	fmt.Printf(<span class="string">"slice2 = %v, len = %d, cap = %d\n"</span>, slice2, <span class="built_in">len</span>(slice2), <span class="built_in">cap</span>(slice2))</span><br><span class="line"></span><br><span class="line">	slice1[<span class="number">0</span>] = <span class="string">"C#"</span></span><br><span class="line">	fmt.Println(<span class="string">"\nslice1 = "</span>, slice1)</span><br><span class="line">	fmt.Println(<span class="string">"slice2 = "</span>, slice2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">slice1 = [C C++ Java], len = 3, cap = 10</span><br><span class="line">slice2 = [C C++ Java Python Ruby Go], len = 6, cap = 10</span><br><span class="line"></span><br><span class="line">slice1 =  [C# C++ Java]</span><br><span class="line">slice2 =  [C# C++ Java Python Ruby Go]</span><br></pre></td></tr></table></figure>
+
+<h5 id="附加到具有零值的-Slice"><a href="#附加到具有零值的-Slice" class="headerlink" title="附加到具有零值的 Slice"></a>附加到具有零值的 Slice</h5><p>當你將值附加到 <code>nil</code> 的 Slice，它分配一個新的 Slice，並返回新 Slice 的參考。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> s []<span class="keyword">string</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Appending to a nil slice</span></span><br><span class="line">	s = <span class="built_in">append</span>(s, <span class="string">"Cat"</span>, <span class="string">"Dog"</span>, <span class="string">"Lion"</span>, <span class="string">"Tiger"</span>)</span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"s = %v, len = %d, cap = %d\n"</span>, s, <span class="built_in">len</span>(s), <span class="built_in">cap</span>(s))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">s = [Cat Dog Lion Tiger], len = 4, cap = 4</span><br></pre></td></tr></table></figure>
+
+<h5 id="將一個-Slice-附加到另一個-Slice"><a href="#將一個-Slice-附加到另一個-Slice" class="headerlink" title="將一個 Slice 附加到另一個 Slice"></a>將一個 Slice 附加到另一個 Slice</h5><p>你可以使用 <code>...</code> 運算子將一個 Slice 直接附加到另一個 Slice。該運算元將 Slice 展開為參數列表。以下的範例示範了其用法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	slice1 := []<span class="keyword">string</span>&#123;<span class="string">"Jack"</span>, <span class="string">"John"</span>, <span class="string">"Peter"</span>&#125;</span><br><span class="line">	slice2 := []<span class="keyword">string</span>&#123;<span class="string">"Bill"</span>, <span class="string">"Mark"</span>, <span class="string">"Steve"</span>&#125;</span><br><span class="line"></span><br><span class="line">	slice3 := <span class="built_in">append</span>(slice1, slice2...)</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"slice1 = "</span>, slice1)</span><br><span class="line">	fmt.Println(<span class="string">"slice2 = "</span>, slice2)</span><br><span class="line">	fmt.Println(<span class="string">"After appending slice1 &amp; slice2 = "</span>, slice3)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">slice1 =  [Jack John Peter]</span><br><span class="line">slice2 =  [Bill Mark Steve]</span><br><span class="line">After appending slice1 &amp; slice2 =  [Jack John Peter Bill Mark Steve]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Slice-中的-Slice"><a href="#Slice-中的-Slice" class="headerlink" title="Slice 中的 Slice"></a>Slice 中的 Slice</h3><p>Slice 可以是任何型別。它們還可以包含其他 Slice。以下範例建立了 Slice 中的 Slice：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	s := [][]<span class="keyword">string</span>&#123;</span><br><span class="line">		&#123;<span class="string">"India"</span>, <span class="string">"China"</span>&#125;,</span><br><span class="line">		&#123;<span class="string">"USA"</span>, <span class="string">"Canada"</span>&#125;,</span><br><span class="line">		&#123;<span class="string">"Switzerland"</span>, <span class="string">"Germany"</span>&#125;,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"Slice s = "</span>, s)</span><br><span class="line">	fmt.Println(<span class="string">"length = "</span>, <span class="built_in">len</span>(s))</span><br><span class="line">	fmt.Println(<span class="string">"capacity = "</span>, <span class="built_in">cap</span>(s))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Slice s =  [[India China] [USA Canada] [Switzerland Germany]]</span><br><span class="line">length =  3</span><br><span class="line">capacity =  3</span><br></pre></td></tr></table></figure>
+
+<h3 id="迭代-Slice"><a href="#迭代-Slice" class="headerlink" title="迭代 Slice"></a>迭代 Slice</h3><p>你可以用與迭代陣列相同的方式迭代 Slice。以下是迭代 Slice 的兩種方法：</p>
+<h4 id="1-使用-for-迴圈迭代-Slice"><a href="#1-使用-for-迴圈迭代-Slice" class="headerlink" title="1. 使用 for 迴圈迭代 Slice"></a>1. 使用 <code>for</code> 迴圈迭代 Slice</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	countries := []<span class="keyword">string</span>&#123;<span class="string">"India"</span>, <span class="string">"America"</span>, <span class="string">"Russia"</span>, <span class="string">"England"</span>&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(countries); i++ &#123;</span><br><span class="line">		fmt.Println(countries[i])</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">India</span><br><span class="line">America</span><br><span class="line">Russia</span><br><span class="line">England</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-使用-range-形式的-for-迴圈迭代-Slice"><a href="#2-使用-range-形式的-for-迴圈迭代-Slice" class="headerlink" title="2. 使用 range 形式的 for 迴圈迭代 Slice"></a>2. 使用 <code>range</code> 形式的 <code>for</code> 迴圈迭代 Slice</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	primeNumbers := []<span class="keyword">int</span>&#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">13</span>, <span class="number">17</span>, <span class="number">19</span>, <span class="number">23</span>, <span class="number">29</span>&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> index, number := <span class="keyword">range</span> primeNumbers &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"PrimeNumber(%d) = %d\n"</span>, index+<span class="number">1</span>, number)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">PrimeNumber(1) = 2</span><br><span class="line">PrimeNumber(2) = 3</span><br><span class="line">PrimeNumber(3) = 5</span><br><span class="line">PrimeNumber(4) = 7</span><br><span class="line">PrimeNumber(5) = 11</span><br><span class="line">PrimeNumber(6) = 13</span><br><span class="line">PrimeNumber(7) = 17</span><br><span class="line">PrimeNumber(8) = 19</span><br><span class="line">PrimeNumber(9) = 23</span><br><span class="line">PrimeNumber(10) = 29</span><br></pre></td></tr></table></figure>
+
+<h5 id="使用空白識別符號從-range-形式的-for-迴圈中忽略-index"><a href="#使用空白識別符號從-range-形式的-for-迴圈中忽略-index" class="headerlink" title="使用空白識別符號從 range 形式的 for 迴圈中忽略 index"></a>使用空白識別符號從 <code>range</code> 形式的 <code>for</code> 迴圈中忽略 <code>index</code></h5><p><code>range</code> 形式的 <code>for</code> 迴圈在每次迭代中為你提供 <code>index</code> 和該索引處的 <code>value</code>。如果你不想使用 <code>index</code>，可以使用底線 <code>_</code> 將其丟棄。</p>
+<p>底線（<code>_</code>）稱為空白識別字元。它用於告訴編譯器我們不需要此數值。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	numbers := []<span class="keyword">float64</span>&#123;<span class="number">3.5</span>, <span class="number">7.4</span>, <span class="number">9.2</span>, <span class="number">5.4</span>&#125;</span><br><span class="line"></span><br><span class="line">	sum := <span class="number">0.0</span></span><br><span class="line">	<span class="keyword">for</span> _, number := <span class="keyword">range</span> numbers &#123;</span><br><span class="line">		sum += number</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"Total Sum = %.2f\n"</span>, sum)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Total Sum = 25.50</span><br></pre></td></tr></table></figure>
+
+<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>在本文中，你學習了如何建立 Slice、Slice 內部如何運作，以及如何使用內建函數 <code>copy()</code> 和 <code>append()</code> 來增加 Slice。</p>
+<p>在下一篇文章中，我們將學習另一個非常有用的資料結構：map。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- UpdatedDate Start -->
+     
+       <p class="post-date">最後更新時間：2019-11-15</p>
+     
+   <!-- UpdatedDate END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/11/12/working-with-arrays-in-golang/">
+        <span class="nav-arrow">&larr; </span>
+        
+          在 Golang 中使用陣列
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/11/14/golang-maps-by-example/">
+        
+          Golang map 介紹
+        
+        <span class="nav-arrow"> &rarr;</span>
+      </a>
+    
+  </div>
+
+
+    <!-- NAV END -->
+    <!-- 打賞 START -->
+    
+    <!-- 打賞 END -->
+    <!-- 二維條碼 START -->
+    
+      <div class="qrcode">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="share-qrcode"/>
+        </svg>
+        <p class="notice">掃描二維條碼，分享此文章</p>
+      </div>
+    
+    <!-- 二維條碼 END -->
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">目錄</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#宣告-Slice"><span class="toc-nav-text">宣告 Slice</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#建立和初始化-Slice"><span class="toc-nav-text">建立和初始化 Slice</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-使用-Slice-定數建立-Slice"><span class="toc-nav-text">1. 使用 Slice 定數建立 Slice</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-從陣列建立-Slice"><span class="toc-nav-text">2. 從陣列建立 Slice</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-從一個-Slice-建立另一個-Slice"><span class="toc-nav-text">3. 從一個 Slice 建立另一個 Slice</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#修改-Slice"><span class="toc-nav-text">修改 Slice</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Slice-的長度和容量"><span class="toc-nav-text">Slice 的長度和容量</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用內建-make-函數建立-Slice"><span class="toc-nav-text">使用內建 make() 函數建立 Slice</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Slice-的零值"><span class="toc-nav-text">Slice 的零值</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Slice-函數"><span class="toc-nav-text">Slice 函數</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-copy-函數：複製-Slice"><span class="toc-nav-text">1. copy() 函數：複製 Slice</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-append-函數：附加到-Slice"><span class="toc-nav-text">2. append() 函數：附加到 Slice</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#附加到具有零值的-Slice"><span class="toc-nav-text">附加到具有零值的 Slice</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#將一個-Slice-附加到另一個-Slice"><span class="toc-nav-text">將一個 Slice 附加到另一個 Slice</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Slice-中的-Slice"><span class="toc-nav-text">Slice 中的 Slice</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#迭代-Slice"><span class="toc-nav-text">迭代 Slice</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-使用-for-迴圈迭代-Slice"><span class="toc-nav-text">1. 使用 for 迴圈迭代 Slice</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-使用-range-形式的-for-迴圈迭代-Slice"><span class="toc-nav-text">2. 使用 range 形式的 for 迴圈迭代 Slice</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#使用空白識別符號從-range-形式的-for-迴圈中忽略-index"><span class="toc-nav-text">使用空白識別符號從 range 形式的 for 迴圈中忽略 index</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#結論"><span class="toc-nav-text">結論</span></a></li></ol>
+    
+  </div>
+</aside>
+
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://calvertyang.github.io/2019/11/13/introduction-to-slices-in-golang/';
+    var banner = '';
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      });
+    } else {
+      $('#article-banner').geopattern(url);
+    }
+    $('.header').removeClass('fixed-header');
+
+     // error image
+    $('.markdown-content img').on('error', function() {
+      $(this).attr('src', '/css/images/error-img.png');
+      $(this).css({
+        'cursor': 'default'
+      });
+    });
+
+    // 若圖片放在連結內，則將游標改為 pointer 並將圖片靠左
+    $('.markdown-content img').each(function() {
+      if ($(this).parents().is('a')) {
+        $(this).css({
+          'cursor': 'pointer',
+          'display': 'inline-block'
+        });
+      }
+    });
+
+    // zoom image
+    $('.markdown-content img').on('click', function(e) {
+      var src = $(this).attr('src');
+      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
+        var imageW = $(this).width();
+        var imageH = $(this).height();
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        zoom = zoom < 1 ? 1 : zoom;
+        zoom = zoom > 2 ? 2 : zoom;
+        var transY = (($(window).height() - imageH) / 2).toFixed(2);
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
+        $('.image-view-wrap').addClass('wrap-active');
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        });
+        $('html').css('overflow', 'hidden');
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove();
+          $('html').attr('style', '');
+        });
+      }
+    });
+
+    // qrcode
+    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
+      text: document.location.href,
+      width: 100,
+      height: 100,
+      colorDark: '#000000',
+    	colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.L,
+      useSVG: true
+    });
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; Calvert 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+
+<script>
+  async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  $('figure').each(function(i, block) {
+    let lang = this.classList[1] || 'codeblock';
+    this.dataset.lang = lang.toUpperCase();
+  });
+</script>
+<script src="/js/script.js"></script>
+
+  </body>
+</html>

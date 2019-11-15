@@ -205,7 +205,7 @@
   <h2>看懂 npm 語意化版本</h2>
   <p class="post-date">2014-08-20</p>
   <div class="arrow-down">
-    <a href="javascript:;"></a>
+    <a href="javascript:;" target="_blank" rel="noopener"></a>
   </div>
 </div>
 <main class="app-body flex-box">
@@ -216,105 +216,103 @@
 <table>
 <thead>
 <tr>
-<th style="text-align:left">版本</th>
-<th style="text-align:left">說明</th>
+<th align="left">版本</th>
+<th align="left">說明</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>1.2.3</code></td>
-<td style="text-align:left">指定版本。需為完整的版號，包含<strong>主版號</strong>、<strong>次版號</strong>及<strong>修訂號</strong>。<br>需注意的是，版本編譯資訊（Metadata）會被忽略，所以 <code>1.2.3+build2012</code> 滿足此條件。</td>
+<tbody><tr>
+<td align="left"><code>1.2.3</code></td>
+<td align="left">指定版本。需為完整的版號，包含<strong>主版號</strong>、<strong>次版號</strong>及<strong>修訂號</strong>。<br/>需注意的是，版本編譯資訊（Metadata）會被忽略，所以 <code>1.2.3+build2012</code> 滿足此條件。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>&gt;1.2.3</code></td>
-<td style="text-align:left">大於指定版本。</td>
+<td align="left"><code>&gt;1.2.3</code></td>
+<td align="left">大於指定版本。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>&lt;1.2.3</code></td>
-<td style="text-align:left">小於指定版本。如果沒有預先發佈版在此版本範圍，則沒有預先發佈版會被允許，即使在技術上是「小於」。</td>
+<td align="left"><code>&lt;1.2.3</code></td>
+<td align="left">小於指定版本。如果沒有預先發佈版在此版本範圍，則沒有預先發佈版會被允許，即使在技術上是「小於」。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>&gt;=1.2.3</code></td>
-<td style="text-align:left">大於或等於。需注意的是，預先發佈版不等同其版本。<br>因此 <code>1.2.3-beta</code> 不滿足此條件，但 <code>2.3.0-beta</code> 則會。</td>
+<td align="left"><code>&gt;=1.2.3</code></td>
+<td align="left">大於或等於。需注意的是，預先發佈版不等同其版本。<br/>因此 <code>1.2.3-beta</code> 不滿足此條件，但 <code>2.3.0-beta</code> 則會。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>&lt;=1.2.3</code></td>
-<td style="text-align:left">小於或等於。在這種情況下，允許預先發佈版，所以 <code>1.2.3-beta</code> 滿足此條件。</td>
+<td align="left"><code>&lt;=1.2.3</code></td>
+<td align="left">小於或等於。在這種情況下，允許預先發佈版，所以 <code>1.2.3-beta</code> 滿足此條件。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>1.2.3 - 2.3.4</code></td>
-<td style="text-align:left">等同於 <code>&gt;=1.2.3 &lt;=2.3.4</code>。</td>
+<td align="left"><code>1.2.3 - 2.3.4</code></td>
+<td align="left">等同於 <code>&gt;=1.2.3 &lt;=2.3.4</code>。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>~1.2.3</code></td>
-<td style="text-align:left">等同於 <code>&gt;=1.2.3-0 &lt;1.3.0-0</code>，當使用 ~ 符號時，支援預先發佈版，但不含次版號的變更（及其預先發佈版）。<br>因此 <code>1.3.0-beta</code> 不滿足 <code>~1.2.3</code>。</td>
+<td align="left"><code>~1.2.3</code></td>
+<td align="left">等同於 <code>&gt;=1.2.3-0 &lt;1.3.0-0</code>，當使用 ~ 符號時，支援預先發佈版，但不含次版號的變更（及其預先發佈版）。<br/>因此 <code>1.3.0-beta</code> 不滿足 <code>~1.2.3</code>。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>^1.2.3</code></td>
-<td style="text-align:left">等同於 <code>&gt;=1.2.3-0 &lt;2.0.0-0</code>，當使用 ^ 符號時，支援任何次版號及修訂號的變更（含預先發佈版），但不含主版號的變更（及其預先發佈版）。<br>因此 <code>1.5.1</code> 能滿足 <code>^1.2.3</code>，而 <code>1.2.2</code> 及 <code>2.0.0-beta</code> 則不會。</td>
+<td align="left"><code>^1.2.3</code></td>
+<td align="left">等同於 <code>&gt;=1.2.3-0 &lt;2.0.0-0</code>，當使用 ^ 符號時，支援任何次版號及修訂號的變更（含預先發佈版），但不含主版號的變更（及其預先發佈版）。<br/>因此 <code>1.5.1</code> 能滿足 <code>^1.2.3</code>，而 <code>1.2.2</code> 及 <code>2.0.0-beta</code> 則不會。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>^0.1.3</code></td>
-<td style="text-align:left">等同於 <code>0.1.3</code>，與 0.1.3 版相容。0.x.x 版比較特殊，因為語意化版本規範規定 0.x.x 版不作任何穩定性保證，只有指定的版本被認為是有效的。</td>
+<td align="left"><code>^0.1.3</code></td>
+<td align="left">等同於 <code>0.1.3</code>，與 0.1.3 版相容。0.x.x 版比較特殊，因為語意化版本規範規定 0.x.x 版不作任何穩定性保證，只有指定的版本被認為是有效的。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>~0.0.2</code></td>
-<td style="text-align:left">等同於 <code>0.0.2</code>，與 0.0.2 版相容。</td>
+<td align="left"><code>~0.0.2</code></td>
+<td align="left">等同於 <code>0.0.2</code>，與 0.0.2 版相容。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>~1.2</code></td>
-<td style="text-align:left">等同於 <code>&gt;=1.2.0-0 &lt;1.3.0-0</code>，任何從 1.2 開始的版本。</td>
+<td align="left"><code>~1.2</code></td>
+<td align="left">等同於 <code>&gt;=1.2.0-0 &lt;1.3.0-0</code>，任何從 1.2 開始的版本。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>^1.2</code></td>
-<td style="text-align:left">等同於 <code>&gt;=1.2.0-0 &lt;1.3.0-0</code>，任何相容於從 1.2 開始的版本。</td>
+<td align="left"><code>^1.2</code></td>
+<td align="left">等同於 <code>&gt;=1.2.0-0 &lt;1.3.0-0</code>，任何相容於從 1.2 開始的版本。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>1.2.x</code></td>
-<td style="text-align:left">等同於 <code>&gt;=1.2.0-0 &lt;1.3.0-0</code>，任何從 1.2 開始的版本。</td>
+<td align="left"><code>1.2.x</code></td>
+<td align="left">等同於 <code>&gt;=1.2.0-0 &lt;1.3.0-0</code>，任何從 1.2 開始的版本。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>1.2.*</code></td>
-<td style="text-align:left">等同於 <code>1.2.x</code>。</td>
+<td align="left"><code>1.2.*</code></td>
+<td align="left">等同於 <code>1.2.x</code>。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>1.2</code></td>
-<td style="text-align:left">等同於 <code>1.2.x</code>。</td>
+<td align="left"><code>1.2</code></td>
+<td align="left">等同於 <code>1.2.x</code>。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>~1</code></td>
-<td style="text-align:left">等同於 <code>&gt;=1.0.0-0 &lt;2.0.0-0</code>，任何從 1 開始的版本。</td>
+<td align="left"><code>~1</code></td>
+<td align="left">等同於 <code>&gt;=1.0.0-0 &lt;2.0.0-0</code>，任何從 1 開始的版本。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>^1</code></td>
-<td style="text-align:left">等同於 <code>&gt;=1.0.0-0 &lt;2.0.0-0</code>，任何相容於從 1 開始的版本。</td>
+<td align="left"><code>^1</code></td>
+<td align="left">等同於 <code>&gt;=1.0.0-0 &lt;2.0.0-0</code>，任何相容於從 1 開始的版本。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>1.x</code></td>
-<td style="text-align:left">等同於 <code>&gt;=1.0.0-0 &lt;2.0.0-0</code>，任何從 1 開始的版本。</td>
+<td align="left"><code>1.x</code></td>
+<td align="left">等同於 <code>&gt;=1.0.0-0 &lt;2.0.0-0</code>，任何從 1 開始的版本。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>1.*</code></td>
-<td style="text-align:left">等同於 <code>1.x</code>。</td>
+<td align="left"><code>1.*</code></td>
+<td align="left">等同於 <code>1.x</code>。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>1</code></td>
-<td style="text-align:left">等同於 <code>1.x</code>。</td>
+<td align="left"><code>1</code></td>
+<td align="left">等同於 <code>1.x</code>。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>*</code></td>
-<td style="text-align:left">任何版本。</td>
+<td align="left"><code>*</code></td>
+<td align="left">任何版本。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>x</code></td>
-<td style="text-align:left">等同於 <code>*</code>。</td>
+<td align="left"><code>x</code></td>
+<td align="left">等同於 <code>*</code>。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>&quot;&quot;</code></td>
-<td style="text-align:left">空字串，等同於 <code>*</code>。</td>
+<td align="left"><code>&quot;&quot;</code></td>
+<td align="left">空字串，等同於 <code>*</code>。</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>官方文件：<a href="https://www.npmjs.org/doc/misc/semver.html" target="_blank" rel="noopener">The semantic versioner for npm</a></p>
 </section>
     <!-- Tags START -->
@@ -340,7 +338,7 @@
     <!-- Tags END -->
     <!-- UpdatedDate Start -->
      
-       <p class="post-date">最後更新時間：2017-02-06</p>
+       <p class="post-date">最後更新時間：2019-06-10</p>
      
    <!-- UpdatedDate END -->
     <!-- NAV START -->
@@ -473,9 +471,9 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; Calvert 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
   </p>
 </footer>
 

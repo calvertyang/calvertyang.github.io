@@ -205,19 +205,22 @@
   <h2>Mac OS X 延長 SSD 壽命</h2>
   <p class="post-date">2013-10-26</p>
   <div class="arrow-down">
-    <a href="javascript:;"></a>
+    <a href="javascript:;" target="_blank" rel="noopener"></a>
   </div>
 </div>
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><p>由於有時候會重灌電腦，所以在這記錄一下重灌之後要延長 SSD 所做的步驟。</p>
-<h3 id="關閉-Time-Machine-的本機備份模式"><a href="#關閉-Time-Machine-的本機備份模式" class="headerlink" title="關閉 Time Machine 的本機備份模式"></a>關閉 Time Machine 的本機備份模式</h3><p>如果有開啟 Time Machine 功能，當備份磁碟無法使用時，系統還是會每小時建立快照摒除存在本機硬碟，使用以下指令可以禁止系統在本地端備份檔案<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo tmutil disablelocal</span><br></pre></td></tr></table></figure></p>
-<p>往後也可以使用以下的指令重新開啟這個功能<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo tmutil enablelocal</span><br></pre></td></tr></table></figure></p>
+<h3 id="關閉-Time-Machine-的本機備份模式"><a href="#關閉-Time-Machine-的本機備份模式" class="headerlink" title="關閉 Time Machine 的本機備份模式"></a>關閉 Time Machine 的本機備份模式</h3><p>如果有開啟 Time Machine 功能，當備份磁碟無法使用時，系統還是會每小時建立快照摒除存在本機硬碟，使用以下指令可以禁止系統在本地端備份檔案</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo tmutil disablelocal</span><br></pre></td></tr></table></figure>
+<p>往後也可以使用以下的指令重新開啟這個功能</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo tmutil enablelocal</span><br></pre></td></tr></table></figure>
+
 <h3 id="設定-noatime-掛載"><a href="#設定-noatime-掛載" class="headerlink" title="設定 noatime 掛載"></a>設定 noatime 掛載</h3><p>Unix like 的作業系統，會在每次存取檔案時修改 Access time 的屬性，可以令如 Spotlight 的程式找到最近存取的檔案。但是每次存取檔案時皆會對硬碟寫入資料，對有存取次數限制的 SSD 來說便會縮短壽命，以下的步驟可以取消記錄存取時間。</p>
 <ol>
 <li><p>在家目錄建立 com.disk.noatime.plist 檔案，內容如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="meta">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plist</span> <span class="attr">version</span>=<span class="string">"1.0"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>Label<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>com.disk.noatime<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>ProgramArguments<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>mount<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>-vuwo<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>noatime<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>/<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>RunAtLoad<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plist</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plist</span> <span class="attr">version</span>=<span class="string">"1.0"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>Label<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>com.disk.noatime<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>ProgramArguments<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>mount<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>-vuwo<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>noatime<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>/<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>RunAtLoad<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plist</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>搬移檔案到 LaunchDaemons 資料夾</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mv ~/com.disk.noatime.plist /Library/LaunchDaemons/</span><br></pre></td></tr></table></figure>
@@ -227,6 +230,7 @@
 </li>
 <li><p>重開機後，於終端機內輸入 mount 看到 noatime 代表已使用 noatime 掛載</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mount</span><br><span class="line">/dev/disk0s2 on / (hfs, <span class="built_in">local</span>, journaled, noatime)</span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
 <h3 id="變更睡眠時資料儲存位置"><a href="#變更睡眠時資料儲存位置" class="headerlink" title="變更睡眠時資料儲存位置"></a>變更睡眠時資料儲存位置</h3><p>當系統進入睡眠狀態時，OS X 預設將資料保存於記憶體內，另外再將記憶體資料寫入硬碟，防止電腦沒電時資料遺失。<br>假設記憶體有 8 GB，代表睡眠時若電腦電力不足都會將 8 GB 資料寫入硬碟，長期下來 SSD 的壽命將會大打折扣，因此我們要變更睡眠時的資料存放位置，改為只存於記憶體中，但若是電腦沒電時，資料便會遺失。</p>
@@ -236,16 +240,18 @@
 </li>
 <li><p>刪除在硬碟上的睡眠備份檔</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo rm /var/vm/sleepimage</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>若要改回預設的模式，則輸入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pmset -a hibernatemode 3</span><br></pre></td></tr></table></figure></p>
-<p>輸入下列指令可以查看目前模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pmset -g | grep hibernatemode</span><br></pre></td></tr></table></figure></p>
+<p>若要改回預設的模式，則輸入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pmset -a hibernatemode 3</span><br></pre></td></tr></table></figure>
+<p>輸入下列指令可以查看目前模式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pmset -g | grep hibernatemode</span><br></pre></td></tr></table></figure>
 <p>hibernatemode 0</p>
-<ol start="3">
-<li>建立一個空檔案，防止系統再產生 sleepimage<br>建立檔案<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo touch /var/vm/sleepimage</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立一個空檔案，防止系統再產生 sleepimage<br>建立檔案</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo touch /var/vm/sleepimage</span><br></pre></td></tr></table></figure>
+<p>防止系統修改此檔案</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chflags uchg /var/vm/sleepimage</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>防止系統修改此檔案<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chflags uchg /var/vm/sleepimage</span><br></pre></td></tr></table></figure></p>
 </section>
     <!-- Tags START -->
     
@@ -262,7 +268,7 @@
     <!-- Tags END -->
     <!-- UpdatedDate Start -->
      
-       <p class="post-date">最後更新時間：2017-02-06</p>
+       <p class="post-date">最後更新時間：2019-06-10</p>
      
    <!-- UpdatedDate END -->
     <!-- NAV START -->
@@ -395,9 +401,9 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; Calvert 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
   </p>
 </footer>
 

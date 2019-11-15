@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Calvert&#39;s tech blog">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      在 Golang 與指標共舞 | Calvert&#39;s murmur
+    
+  </title>
+  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrcode.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-44933497-2');
+  </script>
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Calvert's murmur</span>
+    </a>
+
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/categories/" class="item-link">Categories</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+
+    
+      <div id="search-form-wrap">
+        <form class="search-form">
+          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+          <button type="submit" class="search-form-submit">
+            <span class="fa fa-search"></span>
+          </button>
+        </form>
+        <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
+      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+<script>
+  (function (window) {
+    var INSIGHT_CONFIG = {
+      TRANSLATION: {
+        POSTS: '文章',
+        PAGES: '頁面',
+        CATEGORIES: '分類',
+        TAGS: '標籤',
+        UNTITLED: '無標題',
+      },
+      ROOT_URL: '/',
+      CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+  })(window);
+</script>
+<script src="/js/insight.js"></script>
+
+      </div>
+    
+
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/categories/" class="menu-link">Categories</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>在 Golang 與指標共舞</h2>
+  <p class="post-date">2019-11-15</p>
+  <div class="arrow-down">
+    <a href="javascript:;" target="_blank" rel="noopener"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-pointers" target="_blank" rel="noopener">Playing with Pointers in Golang</a></p>
+</blockquote>
+<p>指標是一個變數，用來儲存另一個變數的記憶體位址。疑惑嗎？讓我來解釋一下。</p>
+<p>首先讓我們來了解什麼是變數。當我們在撰寫任何程式時，我們需要在記憶體中儲存一些資料。資料儲存在記憶體中的特定位址。記憶體位址看起來會像 <code>0xAFFFF</code>（這是以十六進制來表示記憶體位址）。</p>
+<a id="more"></a>
+
+<p>現在，要存取資料的話，我們需要知道資料的儲存位址。我們可以追蹤所有與我們的程式相關的儲存資料的記憶體位址。但是，想像一下要記住所有記憶體位址並使用它們存取資料有多麼困難。</p>
+<p>這就是為什麼我們有變數的概念。變數只是為儲存資料的記憶體位置所取的一個方便的名稱。</p>
+<p>指標也是一個變數。但它是一種特殊的變數，因為它儲存的資料不是一般的數值，如簡單的整數或字串，它是另一個變數的記憶體位址。</p>
+<img src="/2019/11/15/playing-with-pointers-in-golang/golang-pointers-illustration.jpg" class="">
+
+<p>在上面的例子中，指標 <code>p</code> 含有數值 <code>0x0001</code>，它是變數 <code>a</code> 的位址。</p>
+<h3 id="宣告指標"><a href="#宣告指標" class="headerlink" title="宣告指標"></a>宣告指標</h3><p>使用以下語法宣告一個型別為 T 的指標：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A pointer of type T</span></span><br><span class="line"><span class="keyword">var</span> p *T</span><br></pre></td></tr></table></figure>
+
+<p>型別 <code>T</code> 是指標指向的變數的型別。舉例來說，以下是型別為 <code>int</code> 的指標：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A pointer of type int</span></span><br><span class="line"><span class="keyword">var</span> p *<span class="keyword">int</span></span><br></pre></td></tr></table></figure>
+
+<p>上面的指標只能儲存 <code>int</code> 變數的記憶體位址。</p>
+<p>指標的<a href="/2019/11/05/golang-variables-zero-values-type-inference/" title="零值">零值</a>為 <code>nil</code>。也就是說，任何未初始化的指標都會是 <code>nil</code>。讓我們來看一個完整範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> p *<span class="keyword">int</span></span><br><span class="line">	fmt.Println(<span class="string">"p = "</span>, p)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">p =  &lt;nil&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="初始化指標"><a href="#初始化指標" class="headerlink" title="初始化指標"></a>初始化指標</h3><p>你可以使用另一個變數的記憶體位址來初始化指標。可以使用 <code>&amp;</code> 運算子取得變數的位址：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">100</span></span><br><span class="line"><span class="keyword">var</span> p *<span class="keyword">int</span> = &amp;x</span><br></pre></td></tr></table></figure>
+
+<p>注意我們如何使用 <code>&amp;</code> 運算子與變數 <code>x</code> 來取得它的位址，然後將位址指派給指標 <code>p</code>。</p>
+<p>與 Golang 中的其他變數一樣，編譯器也可以推斷出指標變數的型別。因此，你可以省略上面範例中指標 <code>p</code> 的型別宣告，並像這樣撰寫它：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = &amp;a</span><br></pre></td></tr></table></figure>
+
+<p>讓我們看一個完整範例來更清楚的了解：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">5.67</span></span><br><span class="line">	<span class="keyword">var</span> p = &amp;a</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"Value stored in variable a = "</span>, a)</span><br><span class="line">	fmt.Println(<span class="string">"Address of variable a = "</span>, &amp;a)</span><br><span class="line">	fmt.Println(<span class="string">"Value stored in variable p = "</span>, p)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Value stored in variable a =  5.67</span><br><span class="line">Address of variable a =  0xc4200120a8</span><br><span class="line">Value stored in variable p =  0xc4200120a8</span><br></pre></td></tr></table></figure>
+
+<h3 id="解參考指標"><a href="#解參考指標" class="headerlink" title="解參考指標"></a>解參考指標</h3><p>你可以對指標使用 <code>*</code> 運算子來存取儲存在指標所指向的變數中的值。這稱為_解參考<em>或</em>間接取值_：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">100</span></span><br><span class="line">	<span class="keyword">var</span> p = &amp;a</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"a = "</span>, a)</span><br><span class="line">	fmt.Println(<span class="string">"p = "</span>, p)</span><br><span class="line">	fmt.Println(<span class="string">"*p = "</span>, *p)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">a =  100</span><br><span class="line">p =  0xc4200120a8</span><br><span class="line">*p =  100</span><br></pre></td></tr></table></figure>
+
+<p>你不僅可以使用 <code>*</code> 運算子來存取所指向變數的值，還可以對其進行修改。以下範例透過指標 <code>p</code> 來設定儲存在變數 <code>a</code> 中的值：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">1000</span></span><br><span class="line">	<span class="keyword">var</span> p = &amp;a</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"a (before) = "</span>, a)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Changing the value stored in the pointed variable through the pointer</span></span><br><span class="line">	*p = <span class="number">2000</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"a (after) = "</span>, a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">a (before) =  1000</span><br><span class="line">a (after) =  2000</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用內建的-new-函數建立指標"><a href="#使用內建的-new-函數建立指標" class="headerlink" title="使用內建的 new() 函數建立指標"></a>使用內建的 new() 函數建立指標</h3><p>你也可以使用內建的 <code>new()</code> 函數建立指標。<code>new()</code> 函數將型別當作參數，分配足夠的記憶體來容納該型別的值，然後回傳指向該型別的指標。</p>
+<p>這有一個範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	ptr := <span class="built_in">new</span>(<span class="keyword">int</span>) <span class="comment">// Pointer to an `int` type</span></span><br><span class="line">	*ptr = <span class="number">100</span></span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"Ptr = %#x, Ptr value = %d\n"</span>, ptr, *ptr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Ptr = 0xc420014058, Ptr value = 100</span><br></pre></td></tr></table></figure>
+
+<h3 id="指標的指標"><a href="#指標的指標" class="headerlink" title="指標的指標"></a>指標的指標</h3><p>指標可以指向任何型別的變數。它也可以指向另一個指標。下面的範例展示了如何建立指向另一個指標的指標：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">7.98</span></span><br><span class="line">	<span class="keyword">var</span> p = &amp;a</span><br><span class="line">	<span class="keyword">var</span> pp = &amp;p</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"a = "</span>, a)</span><br><span class="line">	fmt.Println(<span class="string">"address of a = "</span>, &amp;a)</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"p = "</span>, p)</span><br><span class="line">	fmt.Println(<span class="string">"address of p = "</span>, &amp;p)</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"pp = "</span>, pp)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Dereferencing a pointer to pointer</span></span><br><span class="line">	fmt.Println(<span class="string">"*pp = "</span>, *pp)</span><br><span class="line">	fmt.Println(<span class="string">"**pp = "</span>, **pp)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">a =  7.98</span><br><span class="line">address of a =  0xc4200120a8</span><br><span class="line">p =  0xc4200120a8</span><br><span class="line">address of p =  0xc42000c028</span><br><span class="line">pp =  0xc42000c028</span><br><span class="line">*pp =  0xc4200120a8</span><br><span class="line">**pp =  7.98</span><br></pre></td></tr></table></figure>
+
+<h3 id="Go-沒有指標運算"><a href="#Go-沒有指標運算" class="headerlink" title="Go 沒有指標運算"></a>Go 沒有指標運算</h3><p>如果你使用過 C/C++，那麼你必須知道這些語言支援指標運算。<br>舉例來說，你可以遞增/遞減指標來移動到下一個/上一個記憶體位址。<br>你可以對指標增加或減去一個整數值，你也可以使用關係運算子 <code>==</code>、<code>&lt;</code>、<code>&gt;</code> 等比較兩個指標。</p>
+<p>但是 Go 不支援對指標進行此類算術運算。任何此類運算都會導致編譯時期錯誤：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> x = <span class="number">67</span></span><br><span class="line">	<span class="keyword">var</span> p = &amp;x</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> p1 = p + <span class="number">1</span> <span class="comment">// Compiler Error: invalid operation</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是，你可以使用 <code>==</code> 運算子比較兩個相同型別的指標是否相等。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">75</span></span><br><span class="line">	<span class="keyword">var</span> p1 = &amp;a</span><br><span class="line">	<span class="keyword">var</span> p2 = &amp;a</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> p1 == p2 &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Both pointers p1 and p2 point to the same variable."</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>我希望你了解什麼是指標、如何宣告和初始化指標，以及如何解參考指標。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+  <a href="/tags#Pointer" >
+    <span class="tag-code">Pointer</span>
+  </a>
+
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- UpdatedDate Start -->
+     
+       <p class="post-date">最後更新時間：2019-11-15</p>
+     
+   <!-- UpdatedDate END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/11/14/golang-maps-by-example/">
+        <span class="nav-arrow">&larr; </span>
+        
+          Golang map 介紹
+        
+      </a>
+    
+    
+  </div>
+
+
+    <!-- NAV END -->
+    <!-- 打賞 START -->
+    
+    <!-- 打賞 END -->
+    <!-- 二維條碼 START -->
+    
+      <div class="qrcode">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="share-qrcode"/>
+        </svg>
+        <p class="notice">掃描二維條碼，分享此文章</p>
+      </div>
+    
+    <!-- 二維條碼 END -->
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">目錄</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#宣告指標"><span class="toc-nav-text">宣告指標</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#初始化指標"><span class="toc-nav-text">初始化指標</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#解參考指標"><span class="toc-nav-text">解參考指標</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用內建的-new-函數建立指標"><span class="toc-nav-text">使用內建的 new() 函數建立指標</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#指標的指標"><span class="toc-nav-text">指標的指標</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Go-沒有指標運算"><span class="toc-nav-text">Go 沒有指標運算</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#結論"><span class="toc-nav-text">結論</span></a></li></ol>
+    
+  </div>
+</aside>
+
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://calvertyang.github.io/2019/11/15/playing-with-pointers-in-golang/';
+    var banner = '';
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      });
+    } else {
+      $('#article-banner').geopattern(url);
+    }
+    $('.header').removeClass('fixed-header');
+
+     // error image
+    $('.markdown-content img').on('error', function() {
+      $(this).attr('src', '/css/images/error-img.png');
+      $(this).css({
+        'cursor': 'default'
+      });
+    });
+
+    // 若圖片放在連結內，則將游標改為 pointer 並將圖片靠左
+    $('.markdown-content img').each(function() {
+      if ($(this).parents().is('a')) {
+        $(this).css({
+          'cursor': 'pointer',
+          'display': 'inline-block'
+        });
+      }
+    });
+
+    // zoom image
+    $('.markdown-content img').on('click', function(e) {
+      var src = $(this).attr('src');
+      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
+        var imageW = $(this).width();
+        var imageH = $(this).height();
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        zoom = zoom < 1 ? 1 : zoom;
+        zoom = zoom > 2 ? 2 : zoom;
+        var transY = (($(window).height() - imageH) / 2).toFixed(2);
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
+        $('.image-view-wrap').addClass('wrap-active');
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        });
+        $('html').css('overflow', 'hidden');
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove();
+          $('html').attr('style', '');
+        });
+      }
+    });
+
+    // qrcode
+    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
+      text: document.location.href,
+      width: 100,
+      height: 100,
+      colorDark: '#000000',
+    	colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.L,
+      useSVG: true
+    });
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; Calvert 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+
+<script>
+  async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  $('figure').each(function(i, block) {
+    let lang = this.classList[1] || 'codeblock';
+    this.dataset.lang = lang.toUpperCase();
+  });
+</script>
+<script src="/js/script.js"></script>
+
+  </body>
+</html>

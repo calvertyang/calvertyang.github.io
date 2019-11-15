@@ -205,6 +205,284 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2018/07/31/when-should-you-use-self-in-your-classes/">什麼時候應該在類別內使用 self</a>
+      </h2>
+      <p class="article-date">2018年7月31日</p>
+      
+        
+  <a href="/tags#Ruby" >
+    <span class="tag-code">Ruby</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <p>在 Ruby 類別內，你不知道什麼時候需要使用 self，而什麼時候又可以省略，本文將透過範例來做簡單的說明。</p>
+<h3 id="範例一"><a href="#範例一" class="headerlink" title="範例一"></a>範例一</h3><figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line">  <span class="keyword">attr_writer</span> <span class="symbol">:bar</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">do_something</span></span></span><br><span class="line">    bar = <span class="number">123</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>在此範例中 <code>bar = 123</code> 會建立一個名稱為 <code>bar</code> 的區域變數，而不是呼叫由 <code>attr_writer</code> 所產生的 <code>bar=</code> 方法，只要加上 <code>self</code> 就可以修正這個問題。</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line">  <span class="keyword">attr_writer</span> <span class="symbol">:bar</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">do_something</span></span></span><br><span class="line">    <span class="keyword">self</span>.bar = <span class="number">123</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p><code>self.bar</code> 便會呼叫我們所預期的 <code>bar=</code> 方法。</p>
+        
+      </div>
+      <a class="more" href="/2018/07/31/when-should-you-use-self-in-your-classes/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2018/06/11/getting-started-with-engines/">Rails Engine 入門</a>
+      </h2>
+      <p class="article-date">2018年6月11日</p>
+      
+        
+  <a href="/tags#Ruby-on-Rails" >
+    <span class="tag-code">Ruby on Rails</span>
+  </a>
+
+  <a href="/tags#Rails-Engine" >
+    <span class="tag-code">Rails Engine</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>Ruby on Rails Guides</strong> — <a href="http://guides.rubyonrails.org/engines.html" target="_blank" rel="noopener">Getting Started with Engines</a></p>
+</blockquote>
+<p><code>Rails::Engine</code> 允許你包裝特定的 Rails 應用程式或功能子集，並與其他應用程式共享或在更大的封裝應用程式中。每個 <code>Rails::Application</code> 都只是一個引擎，它允許簡單的功能及應用程式共享。</p>
+<p>任何 <code>Rails::Engine</code> 也是一個 <code>Rails::Railtie</code>，所以在 railties 可用的相同方法（如 <code>rake_tasks</code> 和 <code>generators</code>）和配置選項也可用於引擎。</p>
+<p>在本指南中，你將瞭解引擎以及如何透過乾淨且非常易於使用的介面，為主應用程式提供附加功能。</p>
+        
+      </div>
+      <a class="more" href="/2018/06/11/getting-started-with-engines/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2018/05/22/active-storage-on-heroku/">在 Heroku 使用 Active Storage</a>
+      </h2>
+      <p class="article-date">2018年5月22日</p>
+      
+        
+  <a href="/tags#Ruby-on-Rails" >
+    <span class="tag-code">Ruby on Rails</span>
+  </a>
+
+  <a href="/tags#Active-Storage" >
+    <span class="tag-code">Active Storage</span>
+  </a>
+
+  <a href="/tags#Heroku" >
+    <span class="tag-code">Heroku</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>HEROKU BLOG</strong> — <a href="https://blog.heroku.com/rails-active-storage" target="_blank" rel="noopener">Rails 5.2 Active Storage: Previews, Poppler, and Solving Licensing Pitfalls</a></p>
+</blockquote>
+<p>上個月剛剛發佈的 Rails 5.2 有一個重要的新功能：Active Storage。Active Storage 支援各種後端服務（如 AWS S3），為 Active Record 模型提供檔案上傳和附件功能。雖然有像 <a href="https://github.com/thoughtbot/paperclip" target="_blank" rel="noopener">Paperclip</a> 這樣的函式庫來做類似的工作，但這是 Rails 第一次發佈這樣的功能。在 Heroku，我們認為雲端儲存是最佳實作規範，所以我們確保它能在我們的平台上執行。在這篇文章中，我們將分享如何準備發佈 Rails 5.2，以及如何在部署的應用程式中使用新的 Active Storage 功能。</p>
+        
+      </div>
+      <a class="more" href="/2018/05/22/active-storage-on-heroku/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2018/05/18/active-storage-overview/">Active Storage 概要</a>
+      </h2>
+      <p class="article-date">2018年5月18日</p>
+      
+        
+  <a href="/tags#Ruby-on-Rails" >
+    <span class="tag-code">Ruby on Rails</span>
+  </a>
+
+  <a href="/tags#Active-Storage" >
+    <span class="tag-code">Active Storage</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>Ruby on Rails Guides</strong> — <a href="http://guides.rubyonrails.org/active_storage_overview.html" target="_blank" rel="noopener">Active Storage Overview</a></p>
+</blockquote>
+<p>Active Storage 是 Rails 5.2 所新增的功能，它可以讓你輕鬆的將檔案傳送到 <a href="https://aws.amazon.com/s3/" target="_blank" rel="noopener">Amazon S3</a>、<a href="https://cloud.google.com/storage/docs/" target="_blank" rel="noopener">Google Cloud Storage</a> 或 <a href="https://azure.microsoft.com/en-us/services/storage/" target="_blank" rel="noopener">Microsoft Azure Storage</a> 等雲端儲存服務，並將這些檔案附加到 Active Record。</p>
+<p>支援一個主要雲端儲存服務，並在其它服務中建立鏡像以實現備援機制，它也提供了用於測試或本地部署的磁碟服務，但重點還是放在雲端儲存。</p>
+<p>檔案可以從伺服器上傳到雲端或直接從客戶端上傳到雲端。</p>
+        
+      </div>
+      <a class="more" href="/2018/05/18/active-storage-overview/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2018/01/24/electron-api-demos/">Electron API 範例</a>
+      </h2>
+      <p class="article-date">2018年1月24日</p>
+      
+        
+  <a href="/tags#Electron" >
+    <span class="tag-code">Electron</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          
+因為最近在工作時需要使用 Electron，發現官方提供的 Electron API 應用程式範例很適合讓想入門的人了解一些基本 API 的用法以及實際執行的效果。
+在 Github 上搜尋這個範例程式發現沒有正體中文版覺得有點可惜，於是就花了點時間來翻譯此範例程式。
+原始碼可從 Gith ...
+        
+      </div>
+      <a class="more" href="/2018/01/24/electron-api-demos/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/03/15/drawing-with-rvg/">使用 RVG 繪圖</a>
+      </h2>
+      <p class="article-date">2017年3月15日</p>
+      
+        
+  <a href="/tags#Ruby" >
+    <span class="tag-code">Ruby</span>
+  </a>
+
+  <a href="/tags#Rmagick" >
+    <span class="tag-code">Rmagick</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>RMagick User’s Guide and Reference</strong> — <a href="https://rmagick.github.io/rvgtut.html" target="_blank" rel="noopener">Drawing with RVG</a></p>
+</blockquote>
+<h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><p>RVG（Ruby 向量圖形）是 RMagick 的 Draw 類別的外觀，它提供了基於 W3C 推薦的可縮放向量圖形（Scalable Vector Graphics）的繪圖 API。</p>
+<p>RVG 是一個可縮放向量繪圖函式庫。可縮放意味著圖形不是固定的像素尺寸。相同的圖形可以被呈現在螢幕上或列印出來。向量圖使用了幾何物件，如直線和圓。與點陣圖不同，向量圖在放大時不會「像素化」。</p>
+<img src="/2017/03/15/drawing-with-rvg/duck.gif" class="">
+
+<p>作為 RVG 函式庫的介紹，讓我們來看看如何畫出上面這隻小鴨。以下是完整的程式。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">'rvg/rvg'</span></span><br><span class="line"><span class="keyword">include</span> Magick</span><br><span class="line"></span><br><span class="line">RVG::dpi = <span class="number">72</span></span><br><span class="line"></span><br><span class="line">rvg = RVG.new(<span class="number">2.5</span>.<span class="keyword">in</span>, <span class="number">2.5</span>.<span class="keyword">in</span>).viewbox(<span class="number">0</span>,<span class="number">0</span>,<span class="number">250</span>,<span class="number">250</span>) <span class="keyword">do</span> <span class="params">|canvas|</span></span><br><span class="line">  canvas.background_fill = <span class="string">'white'</span></span><br><span class="line"></span><br><span class="line">  canvas.g.translate(<span class="number">100</span>, <span class="number">150</span>).rotate(-<span class="number">30</span>) <span class="keyword">do</span> <span class="params">|body|</span></span><br><span class="line">    body.styles(<span class="symbol">:fill=&gt;<span class="string">'yellow'</span></span>, <span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>, <span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>)</span><br><span class="line">    body.ellipse(<span class="number">50</span>, <span class="number">30</span>)</span><br><span class="line">    body.rect(<span class="number">45</span>, <span class="number">20</span>, -<span class="number">20</span>, -<span class="number">10</span>).skewX(-<span class="number">35</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  canvas.g.translate(<span class="number">130</span>, <span class="number">83</span>) <span class="keyword">do</span> <span class="params">|head|</span></span><br><span class="line">    head.styles(<span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>, <span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>)</span><br><span class="line">    head.circle(<span class="number">30</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'yellow'</span></span>)</span><br><span class="line">    head.circle(<span class="number">5</span>, <span class="number">10</span>, -<span class="number">5</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'black'</span></span>)</span><br><span class="line">    head.polygon(<span class="number">30</span>,<span class="number">0</span>, <span class="number">70</span>,<span class="number">5</span>, <span class="number">30</span>,<span class="number">10</span>, <span class="number">62</span>,<span class="number">25</span>, <span class="number">23</span>,<span class="number">20</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'orange'</span></span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  foot = RVG::Group.new <span class="keyword">do</span> <span class="params">|_foot|</span></span><br><span class="line">    _foot.path(<span class="string">'m0,0 v30 l30,10 l5,-10, l-5,-10 l-30,10z'</span>).</span><br><span class="line">    styles(<span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>, <span class="symbol">:fill=&gt;<span class="string">'orange'</span></span>, <span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  canvas.use(foot).translate(<span class="number">75</span>, <span class="number">188</span>).rotate(<span class="number">15</span>)</span><br><span class="line">  canvas.use(foot).translate(<span class="number">100</span>, <span class="number">185</span>).rotate(-<span class="number">15</span>)</span><br><span class="line"></span><br><span class="line">  canvas.text(<span class="number">125</span>, <span class="number">30</span>) <span class="keyword">do</span> <span class="params">|title|</span></span><br><span class="line">    title.tspan(<span class="string">"duck|"</span>).styles(<span class="symbol">:text_anchor=&gt;<span class="string">'end'</span></span>, <span class="symbol">:font_size=&gt;</span><span class="number">20</span>,</span><br><span class="line">      <span class="symbol">:font_family=&gt;<span class="string">'helvetica'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'black'</span></span>)</span><br><span class="line">    title.tspan(<span class="string">"type"</span>).styles(<span class="symbol">:font_size=&gt;</span><span class="number">22</span>,</span><br><span class="line">      <span class="symbol">:font_family=&gt;<span class="string">'times'</span></span>, <span class="symbol">:font_style=&gt;<span class="string">'italic'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'red'</span></span>)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    canvas.rect(<span class="number">249</span>,<span class="number">249</span>).styles(<span class="symbol">:stroke=&gt;<span class="string">'blue'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'none'</span></span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">rvg.draw.write(<span class="string">'duck.gif'</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>所有的繪圖都遵循相同的 3 個步驟：</p>
+<ol>
+<li>建立一個 RVG 物件。指定最終圖片的寬度和高度。轉交程式碼區塊給 <code>RVG.new</code> 方法。</li>
+<li>在程式區塊內，在 RVG 物件調用方法來指定背景，加入形狀、文字或點陣圖，或加入一組形狀、文字或點陣圖。</li>
+<li>調用 <code>draw</code> 方法在背景繪出形狀、文字或點陣圖。</li>
+</ol>
+<p>我將逐行介紹範例。</p>
+        
+      </div>
+      <a class="more" href="/2017/03/15/drawing-with-rvg/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/02/06/how-to-setup-virtual-users-for-vsftpd-in-ubuntu/">如何在 Ubuntu 中為 vsftpd 設置虛擬帳號</a>
+      </h2>
+      <p class="article-date">2017年2月6日</p>
+      
+        
+  <a href="/tags#Linux" >
+    <span class="tag-code">Linux</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          以下是在 Ubunto 16.04 LTS 安裝 vsftpd 並設定虛擬帳號的步驟
+
+安裝 vsftpd
+12$ sudo apt-get update$ sudo apt-get install vsftpd
+
+編輯設定檔
+1$ sudo vim /etc/vsftpd.conf
+
+以下 ...
+        
+      </div>
+      <a class="more" href="/2017/02/06/how-to-setup-virtual-users-for-vsftpd-in-ubuntu/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2016/10/16/capistrano-with-ed25519-keys/">在 Capistrano 自動化部署時使用 Ed25519 金鑰</a>
+      </h2>
+      <p class="article-date">2016年10月16日</p>
+      
+        
+  <a href="/tags#Ruby-on-Rails" >
+    <span class="tag-code">Ruby on Rails</span>
+  </a>
+
+  <a href="/tags#Ed25519" >
+    <span class="tag-code">Ed25519</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          
+原文：steigr — Capistrano with ED25519 keys
+
+我最近將我的 Capistrano 自動化部署切換到了 Ed25519 金鑰。在正常運作之前我發現到一些奇怪的錯誤，部署使用者/代理程式無法登入到主機。在檢查 authorized_keys 檔案權限、本地 ...
+        
+      </div>
+      <a class="more" href="/2016/10/16/capistrano-with-ed25519-keys/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2016/10/05/upgrade_your_ssh_keys/">升級你的 SSH 金鑰！</a>
+      </h2>
+      <p class="article-date">2016年10月5日</p>
+      
+        
+  <a href="/tags#Ed25519" >
+    <span class="tag-code">Ed25519</span>
+  </a>
+
+  <a href="/tags#SSH" >
+    <span class="tag-code">SSH</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>Gert van Dijk</strong> — <a href="https://blog.g3rt.nl/upgrade-your-ssh-keys.html" target="_blank" rel="noopener">Upgrade your SSH keys!</a></p>
+</blockquote>
+<p>無論你是軟體開發人員或系統管理員，我敢打賭你正在使用 SSH 金鑰。比起使用密碼來推送提交到 Github 或是管理 Unix 系統，透過 SSH 公開金鑰驗證是最佳的方法。然而，隨著時光飛逝，很多人都使用舊金鑰而沒有意識到需要產生一個新的來提供私密資料更好的保護。在這篇文章，我將示範如何平穩的轉換到 Ed25519 金鑰、你為什麼會想要它以及展示一些技巧和訣竅。</p>
+<blockquote>
+<p>長話短說，使用 <code>ssh-keygen -o -a 100 -t ed25519</code> 來產生新的金鑰並指定一個高強度的通關密語，如果你需要平穩的轉換，請繼續往下閱讀。</p>
+</blockquote>
+<blockquote>
+<p>我計劃發佈更多 SSH 技巧和訣竅，所以請關注我的部落格。這篇文章的重點是關於作為使用者公開金鑰驗證的 SSH 金鑰。</p>
+</blockquote>
+<h3 id="DSA-和-RSA-1024-位元已經廢止"><a href="#DSA-和-RSA-1024-位元已經廢止" class="headerlink" title="DSA 和 RSA 1024 位元已經廢止"></a>DSA 和 RSA 1024 位元已經廢止</h3><p>如果你已經使用預設選項建立金鑰超過四年，它可能不安全（RSA &lt; 2048 位元）。更糟的是，我最近看到了推特迷、同事和朋友還在使用 DSA 金鑰（OpenSSH 格式裡的 <code>ssh-dss</code> 類型）。那是一種類似於 RSA 的金鑰類型，但長度受限於 1024 位元且被<a href="https://security.stackexchange.com/a/5100/12948" target="_blank" rel="noopener">推薦</a>了很長一段時間。它顯然不安全，且被最近的 OpenSSH 版本以正當理由拒絕（請參見 <a href="http://www.openssh.com/txt/release-7.0" target="_blank" rel="noopener">7.0 更新日誌</a>）。</p>
+<p>難過的是，我看到關於如何重新啟用支援 DSA 金鑰的文章，而不是轉移到一種更安全的金鑰類型。真的，依照指示更改 <code>PubkeyAcceptedKeyTypes</code> 或 <code>HostKeyAlgorithms</code> 的設定是不明智的(host keys are for a later post)。取而代之，升級你的金鑰！</p>
+<img src="/2016/10/05/upgrade_your_ssh_keys/old_key_picture.jpg" class="" title="比較 DSA 及使用像這樣技術打造的鑰匙，你不會希望此類型的鑰匙來開啟你家的門，對吧？">
+        
+      </div>
+      <a class="more" href="/2016/10/05/upgrade_your_ssh_keys/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">使用 Mailboxer 實作站內信系統</a>
       </h2>
       <p class="article-date">2015年5月20日</p>
@@ -237,381 +515,6 @@
       <a class="more" href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">繼續閱讀</a>
     </article>
   
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2014/09/21/understanding-the-github-flow/">了解 GitHub Flow</a>
-      </h2>
-      <p class="article-date">2014年9月21日</p>
-      
-        
-  <a href="/tags#GitHub" >
-    <span class="tag-code">GitHub</span>
-  </a>
-
-  <a href="/tags#GitHub-Flow" >
-    <span class="tag-code">GitHub Flow</span>
-  </a>
-
-  <a href="/tags#Workflow" >
-    <span class="tag-code">Workflow</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          
-原文：GitHub — Understanding the GitHub Flow
-
-GitHub Flow 是一個基於分支的輕量化工作流程，幫助團隊及專案定期的進行部署。
-
-在進行一項專案時，任何時候你可能會有一堆不同功能或想法，有些已經準備好了，而另有些則沒有。分支的存在是為了幫助你管 ...
-        
-      </div>
-      <a class="more" href="/2014/09/21/understanding-the-github-flow/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審</a>
-      </h2>
-      <p class="article-date">2014年8月23日</p>
-      
-        
-  <a href="/tags#iOS" >
-    <span class="tag-code">iOS</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          這次 App 送審被 Apple 以違反 PLA 3.3.12 而退審，內容大致上是說 Advertising Identifier(IDFA) 僅可基於廣告目的使用於應用程式內，但審核團隊沒發現需用 IDFA 來呈現廣告的地方。
-因送審的 App 內僅使用 iAd，而 iAd 是不需 Ad ...
-        
-      </div>
-      <a class="more" href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2014/08/20/npm-semantic-versioner/">看懂 npm 語意化版本</a>
-      </h2>
-      <p class="article-date">2014年8月20日</p>
-      
-        
-  <a href="/tags#Node.js" >
-    <span class="tag-code">Node.js</span>
-  </a>
-
-  <a href="/tags#npm" >
-    <span class="tag-code">npm</span>
-  </a>
-
-  <a href="/tags#SemVer" >
-    <span class="tag-code">SemVer</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          npm(Node Package Manager) 採用語意化版本 2.0.0 規範，詳細的規範內容可查看 http://semver.org/。
-使用 npm 管理套件時，你會注意到 package.json 內的套件版本有許多表示法，以下說明各表示法所代表的意思：
-
-
-
-版本
-說明
-
-
- ...
-        
-      </div>
-      <a class="more" href="/2014/08/20/npm-semantic-versioner/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2013/11/16/sql-to-aggregation-mapping-chart/">SQL 及 MongoDB 集合(Aggregation)指令對應表</a>
-      </h2>
-      <p class="article-date">2013年11月16日</p>
-      
-        
-  <a href="/tags#SQL" >
-    <span class="tag-code">SQL</span>
-  </a>
-
-  <a href="/tags#NoSQL" >
-    <span class="tag-code">NoSQL</span>
-  </a>
-
-  <a href="/tags#MongoDB" >
-    <span class="tag-code">MongoDB</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          <p>集合管線(<a href="http://docs.mongodb.org/manual/core/aggregation/" target="_blank" rel="noopener">aggregation pipeline</a>)允許 MongoDB 提供原生集合功能，對應 SQL 中許多常見的資料集合操作。</p>
-<h5 id="下表列出了常見的-SQL-集合術語、功能及概念和相應的-MongoDB-集合運算元概觀。"><a href="#下表列出了常見的-SQL-集合術語、功能及概念和相應的-MongoDB-集合運算元概觀。" class="headerlink" title="下表列出了常見的 SQL 集合術語、功能及概念和相應的 MongoDB 集合運算元概觀。"></a>下表列出了常見的 SQL 集合術語、功能及概念和相應的 MongoDB 集合運算元概觀。</h5><table>
-<thead>
-<tr>
-<th style="text-align:left">SQL 術語、功能及概念</th>
-<th style="text-align:left">MongoDB 集合運算元</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">WHERE</td>
-<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/match/#pipe._S_match" target="_blank" rel="noopener">$match</a></td>
-</tr>
-<tr>
-<td style="text-align:left">GROUP BY</td>
-<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/group/#pipe._S_group" target="_blank" rel="noopener">$group</a></td>
-</tr>
-<tr>
-<td style="text-align:left">HAVING</td>
-<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/match/#pipe._S_match" target="_blank" rel="noopener">$match</a></td>
-</tr>
-<tr>
-<td style="text-align:left">SELECT</td>
-<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/project/#pipe._S_project" target="_blank" rel="noopener">$project</a></td>
-</tr>
-<tr>
-<td style="text-align:left">ORDER BY</td>
-<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/sort/#pipe._S_sort" target="_blank" rel="noopener">$sort</a></td>
-</tr>
-<tr>
-<td style="text-align:left">LIMIT</td>
-<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/limit/#pipe._S_limit" target="_blank" rel="noopener">$limit</a></td>
-</tr>
-<tr>
-<td style="text-align:left">SUM()</td>
-<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/sum/#grp._S_sum" target="_blank" rel="noopener">$sum</a></td>
-</tr>
-<tr>
-<td style="text-align:left">COUNT()</td>
-<td style="text-align:left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/sum/#grp._S_sum" target="_blank" rel="noopener">$sum</a></td>
-</tr>
-<tr>
-<td style="text-align:left">join</td>
-<td style="text-align:left">沒有直接對應的運算元，然而，<a href="http://docs.mongodb.org/manual/reference/operator/aggregation/unwind/#pipe._S_unwind" target="_blank" rel="noopener">$unwind</a> 運算元允許有些類似的功能，但是與嵌入的欄位在文件內。</td>
-</tr>
-</tbody>
-</table>
-        
-      </div>
-      <a class="more" href="/2013/11/16/sql-to-aggregation-mapping-chart/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2013/11/14/sql-to-mongodb-mapping-chart/">SQL 及 MongoDB 基本指令對應表</a>
-      </h2>
-      <p class="article-date">2013年11月14日</p>
-      
-        
-  <a href="/tags#SQL" >
-    <span class="tag-code">SQL</span>
-  </a>
-
-  <a href="/tags#NoSQL" >
-    <span class="tag-code">NoSQL</span>
-  </a>
-
-  <a href="/tags#MongoDB" >
-    <span class="tag-code">MongoDB</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          <p>由於新專案採用了 <a href="http://nodejs.org/" target="_blank" rel="noopener">Node.js</a> 開發且使用 <a href="http://www.mongodb.org/" target="_blank" rel="noopener">MongoDB</a> 作為儲存媒介，所以動手翻譯了官方文件方便查閱相關指令用法。</p>
-<h3 id="術語和概念-Terminology-and-Concepts"><a href="#術語和概念-Terminology-and-Concepts" class="headerlink" title="術語和概念(Terminology and Concepts)"></a>術語和概念(Terminology and Concepts)</h3><h5 id="下表列出了各種-SQL-和相應的-MongoDB-的術語和概念。"><a href="#下表列出了各種-SQL-和相應的-MongoDB-的術語和概念。" class="headerlink" title="下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。"></a>下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。</h5><table>
-<thead>
-<tr>
-<th style="text-align:left">SQL 術語/概念</th>
-<th style="text-align:left">MongoDB 術語/概念</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">資料庫(database)</td>
-<td style="text-align:left">資料庫(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-database" target="_blank" rel="noopener">database</a>)</td>
-</tr>
-<tr>
-<td style="text-align:left">資料表(table)</td>
-<td style="text-align:left">集合(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-collection" target="_blank" rel="noopener">collection</a>)</td>
-</tr>
-<tr>
-<td style="text-align:left">資料列(row)</td>
-<td style="text-align:left">文件(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-document" target="_blank" rel="noopener">document</a>) 或 <a href="http://docs.mongodb.org/manual/reference/glossary/#term-bson" target="_blank" rel="noopener">BSON</a> 文件</td>
-</tr>
-<tr>
-<td style="text-align:left">資料行(column)</td>
-<td style="text-align:left">欄位(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-field" target="_blank" rel="noopener">field</a>)</td>
-</tr>
-<tr>
-<td style="text-align:left">索引(index)</td>
-<td style="text-align:left">索引(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-index" target="_blank" rel="noopener">index</a>)</td>
-</tr>
-<tr>
-<td style="text-align:left">資料表連結(table joins)</td>
-<td style="text-align:left">嵌入式文件及連結(embedded documents and linking)</td>
-</tr>
-<tr>
-<td style="text-align:left">主索引鍵(primary key)<br><br>指定任意一個或多個欄位組合為主索引鍵，資料內容須唯一不可重複。</td>
-<td style="text-align:left">主索引鍵(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-primary-key" target="_blank" rel="noopener">primary key</a>)<br><br>在 MongoDB，主索引鍵會自動設定到 <a href="http://docs.mongodb.org/manual/reference/glossary/#term-id" target="_blank" rel="noopener">_id</a> 欄位。</td>
-</tr>
-<tr>
-<td style="text-align:left">彙總(aggregation)，例如：group by</td>
-<td style="text-align:left">彙總管線(aggregation pipeline)<br><br><a href="http://calvert.logdown.com/posts/159915-sql-to-aggregation-mapping-chart" target="_blank" rel="noopener">參閱 SQL 至彙總(Aggregation)對應表</a>.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="可執行檔案-Executables"><a href="#可執行檔案-Executables" class="headerlink" title="可執行檔案(Executables)"></a>可執行檔案(Executables)</h3><h5 id="下表列出了-MySQL-Oracle-可執行檔案和相應的-MongoDB-的可執行檔案。"><a href="#下表列出了-MySQL-Oracle-可執行檔案和相應的-MongoDB-的可執行檔案。" class="headerlink" title="下表列出了 MySQL / Oracle 可執行檔案和相應的 MongoDB 的可執行檔案。"></a>下表列出了 MySQL / Oracle 可執行檔案和相應的 MongoDB 的可執行檔案。</h5><table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:left">MySQL / Oracle</th>
-<th style="text-align:left">MongoDB</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">資料庫伺服器(Database Server)</td>
-<td style="text-align:left">mysqld / oracle</td>
-<td style="text-align:left">mongod</td>
-</tr>
-<tr>
-<td style="text-align:left">資料庫用戶端(Database Client)</td>
-<td style="text-align:left">mysql / sqlplus</td>
-<td style="text-align:left">mongo</td>
-</tr>
-</tbody>
-</table>
-        
-      </div>
-      <a class="more" href="/2013/11/14/sql-to-mongodb-mapping-chart/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2013/11/06/how-to-install-redis-in-centos-6/">如何在 CentOS 6 安裝 Redis</a>
-      </h2>
-      <p class="article-date">2013年11月6日</p>
-      
-        
-  <a href="/tags#Linux" >
-    <span class="tag-code">Linux</span>
-  </a>
-
-  <a href="/tags#Redis" >
-    <span class="tag-code">Redis</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          Redis 是一個開源、遵守 BSD 授權、先進的鍵值對儲存庫。它通常被稱為資料結構伺服器，因為值可以是字串(String)、雜湊(Hash)、列表(List)、集合(Set)及序列集合(Sorted Set)等類型。
-
-下載並解壓縮
-123$ wget http://download.re ...
-        
-      </div>
-      <a class="more" href="/2013/11/06/how-to-install-redis-in-centos-6/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2013/10/26/mac-os-x-ssd-performance-optimization/">Mac OS X 延長 SSD 壽命</a>
-      </h2>
-      <p class="article-date">2013年10月26日</p>
-      
-        
-  <a href="/tags#Mac" >
-    <span class="tag-code">Mac</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          由於有時候會重灌電腦，所以在這記錄一下重灌之後要延長 SSD 所做的步驟。
-關閉 Time Machine 的本機備份模式如果有開啟 Time Machine 功能，當備份磁碟無法使用時，系統還是會每小時建立快照摒除存在本機硬碟，使用以下指令可以禁止系統在本地端備份檔案1$ sudo tmu ...
-        
-      </div>
-      <a class="more" href="/2013/10/26/mac-os-x-ssd-performance-optimization/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2013/10/20/jquery-validation-plugin-for-array-of-elements/">使用 jQuery Validation Plugin 驗證元素陣列</a>
-      </h2>
-      <p class="article-date">2013年10月20日</p>
-      
-        
-  <a href="/tags#JavaScript" >
-    <span class="tag-code">JavaScript</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          有時候我們會需要驗證表單中的元素陣列，例如：1234567891011121314151617181920212223242526272829&lt;form id="userDataForm" name="userDataForm" method="post" action=""&gt;  ...
-        
-      </div>
-      <a class="more" href="/2013/10/20/jquery-validation-plugin-for-array-of-elements/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2013/10/17/creating-a-self-signed-ssl-certificate-for-nginx/">為 Ngnix 建立自行簽章的憑證</a>
-      </h2>
-      <p class="article-date">2013年10月17日</p>
-      
-        
-  <a href="/tags#Linux" >
-    <span class="tag-code">Linux</span>
-  </a>
-
-  <a href="/tags#SSL" >
-    <span class="tag-code">SSL</span>
-  </a>
-
-  <a href="/tags#Nginx" >
-    <span class="tag-code">Nginx</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          <h3 id="必要條件"><a href="#必要條件" class="headerlink" title="必要條件"></a>必要條件</h3><p>產生憑證需要 OpenSSL 類別庫，請先確認系統是否已安裝 OpenSSL。</p>
-<p>若尚未安裝，可透過以下方式安裝：</p>
-<ul>
-<li><p>Mac OS X 使用 <a href="http://mxcl.github.com/homebrew/" target="_blank" rel="noopener">Homebrew</a> 安裝</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install openssl</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Windows 可到此網站下載安裝檔：<a href="http://www.slproweb.com/products/Win32OpenSSL.html" target="_blank" rel="noopener">OpenSSL for Windows </a></p>
-</li>
-<li><p>Ubuntu/Debian Linux</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install openssl</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>RedHat/CentOS Linux</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install openssl</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-        
-      </div>
-      <a class="more" href="/2013/10/17/creating-a-self-signed-ssl-certificate-for-nginx/">繼續閱讀</a>
-    </article>
-  
 
   
     <div class="guide-pager">
@@ -619,7 +522,7 @@ GitHub Flow 是一個基於分支的輕量化工作流程，幫助團隊及專�
     <a href="/"><span class="page-arrow">&larr; </span>上一頁</a>
   
   
-    <a class="unvisible" href="/">下一頁 <span class="page-arrow">&rarr;</span></a>
+    <a href="/page/3/">下一頁<span class="page-arrow"> &rarr;</span></a>
   
 </div>
 
@@ -631,9 +534,9 @@ GitHub Flow 是一個基於分支的輕量化工作流程，幫助團隊及專�
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; Calvert 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
   </p>
 </footer>
 

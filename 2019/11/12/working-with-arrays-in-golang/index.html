@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Calvert&#39;s tech blog">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      在 Golang 中使用陣列 | Calvert&#39;s murmur
+    
+  </title>
+  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrcode.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-44933497-2');
+  </script>
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Calvert's murmur</span>
+    </a>
+
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/categories/" class="item-link">Categories</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+
+    
+      <div id="search-form-wrap">
+        <form class="search-form">
+          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+          <button type="submit" class="search-form-submit">
+            <span class="fa fa-search"></span>
+          </button>
+        </form>
+        <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
+      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+<script>
+  (function (window) {
+    var INSIGHT_CONFIG = {
+      TRANSLATION: {
+        POSTS: '文章',
+        PAGES: '頁面',
+        CATEGORIES: '分類',
+        TAGS: '標籤',
+        UNTITLED: '無標題',
+      },
+      ROOT_URL: '/',
+      CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+  })(window);
+</script>
+<script src="/js/insight.js"></script>
+
+      </div>
+    
+
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/categories/" class="menu-link">Categories</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>在 Golang 中使用陣列</h2>
+  <p class="post-date">2019-11-12</p>
+  <div class="arrow-down">
+    <a href="javascript:;" target="_blank" rel="noopener"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-arrays" target="_blank" rel="noopener">Working with Arrays in Golang</a></p>
+</blockquote>
+<p>陣列是固定長度的相同型別元素的集合。陣列的元素按順序儲存，並且可以使用它們的 <code>index</code> 來存取。</p>
+<img src="/2019/11/12/working-with-arrays-in-golang/golang-array.jpg" class="">
+
+<a id="more"></a>
+
+<h3 id="在-Golang-中宣告陣列"><a href="#在-Golang-中宣告陣列" class="headerlink" title="在 Golang 中宣告陣列"></a>在 Golang 中宣告陣列</h3><p>你可以像這樣宣告一個長度為 <code>n</code> 且型別為 <code>T</code> 的陣列：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a[n]T</span><br></pre></td></tr></table></figure>
+
+<p>舉例來說，以下是如何宣告一個長度為 10 的整數陣列：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// An array of 10 integers</span></span><br><span class="line"><span class="keyword">var</span> a[<span class="number">10</span>]<span class="keyword">int</span></span><br></pre></td></tr></table></figure>
+
+<p>現在，讓我們看一個完整範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> x [<span class="number">5</span>]<span class="keyword">int</span> <span class="comment">// An array of 5 integers</span></span><br><span class="line">	fmt.Println(x)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> y [<span class="number">8</span>]<span class="keyword">string</span> <span class="comment">// An array of 8 strings</span></span><br><span class="line">	fmt.Println(y)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> z [<span class="number">3</span>]<span class="keyword">complex128</span> <span class="comment">// An array of 3 complex numbers</span></span><br><span class="line">	fmt.Println(z)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">[0 0 0 0 0]</span><br><span class="line">[       ]</span><br><span class="line">[(0+0i) (0+0i) (0+0i)]</span><br></pre></td></tr></table></figure>
+
+<p>預設情況下，所有陣列元素皆使用與陣列型別一致的<a href="/2019/11/05/golang-variables-zero-values-type-inference/" title="零值">零值</a>初始化。</p>
+<p>舉例來說，如果我們宣告一個整數陣列，則所有元素都將以 <code>0</code> 初始化。如果我們宣告一個字串陣列，則所有元素都將以空字串 <code>&quot;&quot;</code> 初始化，依此類推。</p>
+<h3 id="透過索引存取陣列元素"><a href="#透過索引存取陣列元素" class="headerlink" title="透過索引存取陣列元素"></a>透過索引存取陣列元素</h3><p>陣列的元素按順序儲存，可以透過它們的 <code>index</code> 存取。<code>index</code> 從零開始，結束於 <code>length - 1</code>。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> x [<span class="number">5</span>]<span class="keyword">int</span> <span class="comment">// An array of 5 integers</span></span><br><span class="line"></span><br><span class="line">	x[<span class="number">0</span>] = <span class="number">100</span></span><br><span class="line">	x[<span class="number">1</span>] = <span class="number">101</span></span><br><span class="line">	x[<span class="number">3</span>] = <span class="number">103</span></span><br><span class="line">	x[<span class="number">4</span>] = <span class="number">105</span></span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"x[0] = %d, x[1] = %d, x[2] = %d\n"</span>, x[<span class="number">0</span>], x[<span class="number">1</span>], x[<span class="number">2</span>])</span><br><span class="line">	fmt.Println(<span class="string">"x = "</span>, x)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">x[0] = 100, x[1] = 101, x[2] = 0</span><br><span class="line">x =  [100 101 0 103 105]</span><br></pre></td></tr></table></figure>
+
+<p>在上面的範例中，由於我們沒有分派 <code>x[2]</code> 任何值，因此它的值為 <code>0</code>（整數的零值）。</p>
+<h3 id="使用陣列定數初始化陣列"><a href="#使用陣列定數初始化陣列" class="headerlink" title="使用陣列定數初始化陣列"></a>使用陣列定數初始化陣列</h3><p>你可以像這樣同時宣告並初始化陣列：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Declaring and initializing an array at the same time</span></span><br><span class="line"><span class="keyword">var</span> a = [<span class="number">5</span>]<span class="keyword">int</span>&#123;<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面表達式右側的陳述式稱為陣列定數。</p>
+<p>注意，我們不需要像 <code>var a [5]int</code> 中那樣指定變數 <code>a</code> 的型別，因為編譯器可以從右側的表達式自動推斷型別。</p>
+<p>你也可以使用 Golang 的<a href="/2019/11/05/golang-variables-zero-values-type-inference/" title="簡短變數宣告">簡短變數宣告</a>來宣告和初始化陣列。上面的陣列宣告也可以在任何函數內撰寫如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Short hand declaration</span></span><br><span class="line">a := [<span class="number">5</span>]<span class="keyword">int</span>&#123;<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這是一個完整範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Declaring and initializing an array at the same time</span></span><br><span class="line">	<span class="keyword">var</span> a = [<span class="number">5</span>]<span class="keyword">int</span>&#123;<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>&#125;</span><br><span class="line">	fmt.Println(a)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Short declaration for declaring and initializing an array</span></span><br><span class="line">	b := [<span class="number">5</span>]<span class="keyword">int</span>&#123;<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>&#125;</span><br><span class="line">	fmt.Println(b)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// You don't need to initialize all the elements of the array.</span></span><br><span class="line">	<span class="comment">// The un-initialized elements will be assigned the zero value of the corresponding array type</span></span><br><span class="line">	c := [<span class="number">5</span>]<span class="keyword">int</span>&#123;<span class="number">2</span>&#125;</span><br><span class="line">	fmt.Println(c)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">[2 4 6 8 10]</span><br><span class="line">[2 4 6 8 10]</span><br><span class="line">[2 0 0 0 0]</span><br></pre></td></tr></table></figure>
+
+<h4 id="讓-Go-編譯器推斷陣列的長度"><a href="#讓-Go-編譯器推斷陣列的長度" class="headerlink" title="讓 Go 編譯器推斷陣列的長度"></a>讓 Go 編譯器推斷陣列的長度</h4><p>你還可以從陣列的初始化表達式中省略長度宣告，並讓編譯器為你計算元素的數量：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Letting Go compiler infer the length of the array</span></span><br><span class="line">	a := [...]<span class="keyword">int</span>&#123;<span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">11</span>, <span class="number">13</span>, <span class="number">17</span>&#125;</span><br><span class="line">	fmt.Println(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">[3 5 7 9 11 13 17]</span><br></pre></td></tr></table></figure>
+
+<h3 id="探索有關-Golang-陣列的更多資訊"><a href="#探索有關-Golang-陣列的更多資訊" class="headerlink" title="探索有關 Golang 陣列的更多資訊"></a>探索有關 Golang 陣列的更多資訊</h3><ol>
+<li><p><strong>陣列的長度是其型別的一部分</strong></p>
+<p>陣列的長度是其型別的一部分。因此陣列 <code>a[5]int</code> 和 <code>a[10]int</code> 是完全不同的型別，且你不能將一個分派給另一個。</p>
+<p>也就是說你無法調整陣列長度，因為調整陣列的長度將意味著更改其型別，而你無法在 Golang 中更改變數的型別。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> a = [<span class="number">5</span>]<span class="keyword">int</span>&#123;<span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">11</span>&#125;</span><br><span class="line">	<span class="keyword">var</span> b [<span class="number">10</span>]<span class="keyword">int</span> = a  <span class="comment">// Error, a and b are distinct types</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Golang 中的陣列是數值型別</strong></p>
+<p>Golang 中的陣列是數值型別，不像其他語言，如 C、C++ 和 Java 的陣列是參考型別。</p>
+<p>這意味著當你將陣列賦值給新變數或將陣列傳遞給函數時，將複製整個陣列。因此，如果你對此複製的陣列進行任何更改，原始陣列將不會受到影響且保持不變。</p>
+<p>這有一個範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a1 := [<span class="number">5</span>]<span class="keyword">string</span>&#123;<span class="string">"English"</span>, <span class="string">"Japanese"</span>, <span class="string">"Spanish"</span>, <span class="string">"French"</span>, <span class="string">"Hindi"</span>&#125;</span><br><span class="line">	a2 := a1 <span class="comment">// A copy of the array `a1` is assigned to `a2`</span></span><br><span class="line"></span><br><span class="line">	a2[<span class="number">1</span>] = <span class="string">"German"</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"a1 = "</span>, a1) <span class="comment">// The array `a1` remains unchanged</span></span><br><span class="line">	fmt.Println(<span class="string">"a2 = "</span>, a2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">a1 =  [English Japanese Spanish French Hindi]</span><br><span class="line">a2 =  [English German Spanish French Hindi]</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="在-Golang-中迭代陣列"><a href="#在-Golang-中迭代陣列" class="headerlink" title="在 Golang 中迭代陣列"></a>在 Golang 中迭代陣列</h3><p>你可以像這樣使用 <code>for</code> 迴圈迭代陣列：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	names := [<span class="number">3</span>]<span class="keyword">string</span>&#123;<span class="string">"Mark Zuckerberg"</span>, <span class="string">"Bill Gates"</span>, <span class="string">"Larry Page"</span>&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(names); i++ &#123;</span><br><span class="line">		fmt.Println(names[i])</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Mark Zuckerberg</span><br><span class="line">Bill Gates</span><br><span class="line">Larry Page</span><br></pre></td></tr></table></figure>
+
+<p>上面的範例中，<code>len()</code> 函數用於找出陣列的長度。</p>
+<p>讓我們來看另一個範例。在下面的範例中，我們透過迭代陣列，將元素逐一加到變數 <code>sum</code> 中，找出陣列所有元素的總和：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := [<span class="number">4</span>]<span class="keyword">float64</span>&#123;<span class="number">3.5</span>, <span class="number">7.2</span>, <span class="number">4.8</span>, <span class="number">9.5</span>&#125;</span><br><span class="line">	sum := <span class="keyword">float64</span>(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(a); i++ &#123;</span><br><span class="line">		sum = sum + a[i]</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"Sum of all the elements in array  %v = %f\n"</span>, a, sum)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Sum of all the elements in array  [3.5 7.2 4.8 9.5] = 25.000000</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用-range-迭代陣列"><a href="#使用-range-迭代陣列" class="headerlink" title="使用 range 迭代陣列"></a>使用 <code>range</code> 迭代陣列</h3><p>Golang 使用 <code>range</code> 運算子提供了一種更強大的 <code>for</code> 迴圈形式。以下是如何將 <code>range</code> 運算子與 <code>for</code> 迴圈一起使用來迭代陣列：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	daysOfWeek := [<span class="number">7</span>]<span class="keyword">string</span>&#123;<span class="string">"Mon"</span>, <span class="string">"Tue"</span>, <span class="string">"Wed"</span>, <span class="string">"Thu"</span>, <span class="string">"Fri"</span>, <span class="string">"Sat"</span>, <span class="string">"Sun"</span>&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> index, value := <span class="keyword">range</span> daysOfWeek &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"Day %d of week = %s\n"</span>, index, value)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Day 0 of week = Mon</span><br><span class="line">Day 1 of week = Tue</span><br><span class="line">Day 2 of week = Wed</span><br><span class="line">Day 3 of week = Thu</span><br><span class="line">Day 4 of week = Fri</span><br><span class="line">Day 5 of week = Sat</span><br><span class="line">Day 6 of week = Sun</span><br></pre></td></tr></table></figure>
+
+<p>現在，讓我們使用 <code>range</code> 形式的 <code>for</code> 迴圈來撰寫一個與普通 <code>for</code> 迴圈相同的 <code>sum</code> 範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := [<span class="number">4</span>]<span class="keyword">float64</span>&#123;<span class="number">3.5</span>, <span class="number">7.2</span>, <span class="number">4.8</span>, <span class="number">9.5</span>&#125;</span><br><span class="line">	sum := <span class="keyword">float64</span>(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> index, value := <span class="keyword">range</span> a &#123;</span><br><span class="line">		sum = sum + value</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"Sum of all the elements in array %v = %f"</span>, a, sum)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>當你執行上面的程式時，它會產生以下錯誤：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">./array_iteration_range.go:9:13: index declared and not used</span><br></pre></td></tr></table></figure>
+
+<p>Go 編譯器不允許建立從未使用過的變數。你可以透過使用 <code>_</code>（底線） 代替 <code>index</code> 來解決此問題：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := [<span class="number">4</span>]<span class="keyword">float64</span>&#123;<span class="number">3.5</span>, <span class="number">7.2</span>, <span class="number">4.8</span>, <span class="number">9.5</span>&#125;</span><br><span class="line">	sum := <span class="keyword">float64</span>(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> _, value := <span class="keyword">range</span> a &#123;</span><br><span class="line">		sum = sum + value</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"Sum of all the elements in array %v = %f"</span>, a, sum)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>底線（<code>_</code>）用於告訴編譯器我們不需要此變數。上面的程式現在可以成功執行並輸出陣列的總和：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Sum of all the elements in array [3.5 7.2 4.8 9.5] = 25.000000</span><br></pre></td></tr></table></figure>
+
+<h3 id="Golang-中的多維陣列"><a href="#Golang-中的多維陣列" class="headerlink" title="Golang 中的多維陣列"></a>Golang 中的多維陣列</h3><p>到目前為止，我們在本文中建立的所有陣列都是一維的。你也可以在 Golang 中建立多維陣列。</p>
+<p>以下範例示範如何建立多維陣列：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := [<span class="number">2</span>][<span class="number">2</span>]<span class="keyword">int</span>&#123;</span><br><span class="line">		&#123;<span class="number">3</span>, <span class="number">5</span>&#125;,</span><br><span class="line">		&#123;<span class="number">7</span>, <span class="number">9</span>&#125;,	<span class="comment">// This trailing comma is mandatory</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(a)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Just like 1D arrays, you don't need to initialize all the elements in a multi-dimensional array.</span></span><br><span class="line">	<span class="comment">// Un-initialized array elements will be assigned the zero value of the array type.</span></span><br><span class="line">	b := [<span class="number">3</span>][<span class="number">4</span>]<span class="keyword">float64</span>&#123;</span><br><span class="line">		&#123;<span class="number">1</span>, <span class="number">3</span>&#125;,</span><br><span class="line">		&#123;<span class="number">4.5</span>, <span class="number">-3</span>, <span class="number">7.4</span>, <span class="number">2</span>&#125;,</span><br><span class="line">		&#123;<span class="number">6</span>, <span class="number">2</span>, <span class="number">11</span>&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(b)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">[[3 5] [7 9]]</span><br><span class="line">[[1 3 0 0] [4.5 -3 7.4 2] [6 2 11 0]]</span><br></pre></td></tr></table></figure>
+
+<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>陣列很有用，但由於其固定長度而造成的限制而有些不靈活。這就是為什麼 Go 提供了另一個名為 Slice 的資料結構，該資料結構建構在陣列之上，並提供了我們所需的所有靈活性。在下一篇文章中，我們將學習 Slice。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- UpdatedDate Start -->
+     
+       <p class="post-date">最後更新時間：2019-11-15</p>
+     
+   <!-- UpdatedDate END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/11/11/introduction-to-functions-in-golang/">
+        <span class="nav-arrow">&larr; </span>
+        
+          Golang 函數介紹
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/11/13/introduction-to-slices-in-golang/">
+        
+          Golang Slice 介紹
+        
+        <span class="nav-arrow"> &rarr;</span>
+      </a>
+    
+  </div>
+
+
+    <!-- NAV END -->
+    <!-- 打賞 START -->
+    
+    <!-- 打賞 END -->
+    <!-- 二維條碼 START -->
+    
+      <div class="qrcode">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="share-qrcode"/>
+        </svg>
+        <p class="notice">掃描二維條碼，分享此文章</p>
+      </div>
+    
+    <!-- 二維條碼 END -->
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">目錄</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#在-Golang-中宣告陣列"><span class="toc-nav-text">在 Golang 中宣告陣列</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#透過索引存取陣列元素"><span class="toc-nav-text">透過索引存取陣列元素</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用陣列定數初始化陣列"><span class="toc-nav-text">使用陣列定數初始化陣列</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#讓-Go-編譯器推斷陣列的長度"><span class="toc-nav-text">讓 Go 編譯器推斷陣列的長度</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#探索有關-Golang-陣列的更多資訊"><span class="toc-nav-text">探索有關 Golang 陣列的更多資訊</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#在-Golang-中迭代陣列"><span class="toc-nav-text">在 Golang 中迭代陣列</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用-range-迭代陣列"><span class="toc-nav-text">使用 range 迭代陣列</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Golang-中的多維陣列"><span class="toc-nav-text">Golang 中的多維陣列</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#結論"><span class="toc-nav-text">結論</span></a></li></ol>
+    
+  </div>
+</aside>
+
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://calvertyang.github.io/2019/11/12/working-with-arrays-in-golang/';
+    var banner = '';
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      });
+    } else {
+      $('#article-banner').geopattern(url);
+    }
+    $('.header').removeClass('fixed-header');
+
+     // error image
+    $('.markdown-content img').on('error', function() {
+      $(this).attr('src', '/css/images/error-img.png');
+      $(this).css({
+        'cursor': 'default'
+      });
+    });
+
+    // 若圖片放在連結內，則將游標改為 pointer 並將圖片靠左
+    $('.markdown-content img').each(function() {
+      if ($(this).parents().is('a')) {
+        $(this).css({
+          'cursor': 'pointer',
+          'display': 'inline-block'
+        });
+      }
+    });
+
+    // zoom image
+    $('.markdown-content img').on('click', function(e) {
+      var src = $(this).attr('src');
+      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
+        var imageW = $(this).width();
+        var imageH = $(this).height();
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        zoom = zoom < 1 ? 1 : zoom;
+        zoom = zoom > 2 ? 2 : zoom;
+        var transY = (($(window).height() - imageH) / 2).toFixed(2);
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
+        $('.image-view-wrap').addClass('wrap-active');
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        });
+        $('html').css('overflow', 'hidden');
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove();
+          $('html').attr('style', '');
+        });
+      }
+    });
+
+    // qrcode
+    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
+      text: document.location.href,
+      width: 100,
+      height: 100,
+      colorDark: '#000000',
+    	colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.L,
+      useSVG: true
+    });
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; Calvert 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+
+<script>
+  async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  $('figure').each(function(i, block) {
+    let lang = this.classList[1] || 'codeblock';
+    this.dataset.lang = lang.toUpperCase();
+  });
+</script>
+<script src="/js/script.js"></script>
+
+  </body>
+</html>

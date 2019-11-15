@@ -205,7 +205,7 @@
   <h2>修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審</h2>
   <p class="post-date">2014-08-23</p>
   <div class="arrow-down">
-    <a href="javascript:;"></a>
+    <a href="javascript:;" target="_blank" rel="noopener"></a>
   </div>
 </div>
 <main class="app-body flex-box">
@@ -216,7 +216,8 @@
 <p>Apple 在退審原因內提示可透過 <strong>strings</strong> 或 <strong>otool</strong> 指令來幫忙找出問題點，最終揪出兇手就是 FacebookSDK，在 <a href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m" target="_blank" rel="noopener"><code>FBUtility.m</code></a> 引入了 <a href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m#L28" target="_blank" rel="noopener"><code>AdSupport</code></a> 並使用 <a href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m#L287" target="_blank" rel="noopener"><code>advertisingIdentifier</code></a>。</p>
 <p>暫時的解決方法如下：</p>
 <ol>
-<li>git clone <a href="https://github.com/facebook/facebook-ios-sdk" target="_blank" rel="noopener">FacebookSDK</a> 到本機</li>
+<li><p>git clone <a href="https://github.com/facebook/facebook-ios-sdk" target="_blank" rel="noopener">FacebookSDK</a> 到本機</p>
+</li>
 <li><p>開啟 <code>src/Core/FBUtility.m</code>，將此行註解</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//#import &lt;AdSupport/AdSupport.h&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -257,7 +258,7 @@
     <!-- Tags END -->
     <!-- UpdatedDate Start -->
      
-       <p class="post-date">最後更新時間：2016-11-01</p>
+       <p class="post-date">最後更新時間：2019-06-10</p>
      
    <!-- UpdatedDate END -->
     <!-- NAV START -->
@@ -390,9 +391,9 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; Calvert 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
   </p>
 </footer>
 

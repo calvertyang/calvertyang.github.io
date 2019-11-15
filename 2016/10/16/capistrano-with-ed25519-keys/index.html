@@ -205,7 +205,7 @@
   <h2>在 Capistrano 自動化部署時使用 Ed25519 金鑰</h2>
   <p class="post-date">2016-10-16</p>
   <div class="arrow-down">
-    <a href="javascript:;"></a>
+    <a href="javascript:;" target="_blank" rel="noopener"></a>
   </div>
 </div>
 <main class="app-body flex-box">
@@ -217,6 +217,7 @@
 <p>我最近將我的 Capistrano 自動化部署切換到了 Ed25519 金鑰。在正常運作之前我發現到一些奇怪的錯誤，部署使用者/代理程式無法登入到主機。在檢查 authorized_keys 檔案權限、本地 SSH 代理程式後，我開始用 Google 搜尋這個問題。結果是，net-ssh 版本小於 4 不支援 Ed25519 金鑰。</p>
 <p>在 Gemfile 加入以下幾行，安裝所需的版本和 ruby gems 以啟用 Ed25519 金鑰支援：</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gem <span class="string">'bcrypt_pbkdf'</span>, <span class="symbol">group:</span> <span class="symbol">:development</span></span><br><span class="line">gem <span class="string">'rbnacl-libsodium'</span>, <span class="symbol">group:</span> <span class="symbol">:development</span></span><br><span class="line">gem <span class="string">'rbnacl'</span>, <span class="symbol">group:</span> <span class="symbol">:development</span></span><br><span class="line">gem <span class="string">'net-ssh'</span>, <span class="string">'~&gt; 4.0.0.beta'</span>, <span class="symbol">group:</span> <span class="symbol">:development</span></span><br></pre></td></tr></table></figure>
+
 <p>確認 ruby 開發標頭檔，安裝到 <code>rbnacl</code> 及 <code>rbnacl-libsodium</code> 的 C 編譯器和相依開發標頭檔皆有原生擴充功能。</p>
 <p>現在，<code>deploy-agent@server&#39;s password:</code> 訊息應該消失了。</p>
 </section>
@@ -239,7 +240,7 @@
     <!-- Tags END -->
     <!-- UpdatedDate Start -->
      
-       <p class="post-date">最後更新時間：2018-05-21</p>
+       <p class="post-date">最後更新時間：2019-06-10</p>
      
    <!-- UpdatedDate END -->
     <!-- NAV START -->
@@ -372,9 +373,9 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; Calvert 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
   </p>
 </footer>
 

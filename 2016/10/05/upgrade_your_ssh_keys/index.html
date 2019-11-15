@@ -205,7 +205,7 @@
   <h2>升級你的 SSH 金鑰！</h2>
   <p class="post-date">2016-10-05</p>
   <div class="arrow-down">
-    <a href="javascript:;"></a>
+    <a href="javascript:;" target="_blank" rel="noopener"></a>
   </div>
 </div>
 <main class="app-body flex-box">
@@ -223,10 +223,11 @@
 </blockquote>
 <h3 id="DSA-和-RSA-1024-位元已經廢止"><a href="#DSA-和-RSA-1024-位元已經廢止" class="headerlink" title="DSA 和 RSA 1024 位元已經廢止"></a>DSA 和 RSA 1024 位元已經廢止</h3><p>如果你已經使用預設選項建立金鑰超過四年，它可能不安全（RSA &lt; 2048 位元）。更糟的是，我最近看到了推特迷、同事和朋友還在使用 DSA 金鑰（OpenSSH 格式裡的 <code>ssh-dss</code> 類型）。那是一種類似於 RSA 的金鑰類型，但長度受限於 1024 位元且被<a href="https://security.stackexchange.com/a/5100/12948" target="_blank" rel="noopener">推薦</a>了很長一段時間。它顯然不安全，且被最近的 OpenSSH 版本以正當理由拒絕（請參見 <a href="http://www.openssh.com/txt/release-7.0" target="_blank" rel="noopener">7.0 更新日誌</a>）。</p>
 <p>難過的是，我看到關於如何重新啟用支援 DSA 金鑰的文章，而不是轉移到一種更安全的金鑰類型。真的，依照指示更改 <code>PubkeyAcceptedKeyTypes</code> 或 <code>HostKeyAlgorithms</code> 的設定是不明智的(host keys are for a later post)。取而代之，升級你的金鑰！</p>
-<img src="/2016/10/05/upgrade_your_ssh_keys/old_key_picture.jpg" title="比較 DSA 及使用像這樣技術打造的鑰匙，你不會希望此類型的鑰匙來開啟你家的門，對吧？">
+<img src="/2016/10/05/upgrade_your_ssh_keys/old_key_picture.jpg" class="" title="比較 DSA 及使用像這樣技術打造的鑰匙，你不會希望此類型的鑰匙來開啟你家的門，對吧？">
 <a id="more"></a>
 <h3 id="確定你目前的狀況"><a href="#確定你目前的狀況" class="headerlink" title="確定你目前的狀況"></a>確定你目前的狀況</h3><p>列出你的所有金鑰：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">for</span> keyfile <span class="keyword">in</span> ~/.ssh/id_*; <span class="keyword">do</span> ssh-keygen -l -f <span class="string">"<span class="variable">$&#123;keyfile&#125;</span>"</span>; <span class="keyword">done</span> | uniq</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>DSA 或 RSA 1024 位元：不安全的</li>
 <li>RSA 2048：建議更改</li>
@@ -249,22 +250,28 @@
 <p>提示：使用相同的密碼短語在你所有的金鑰類型來獲得更多便利性。（參見：<a href="#multi-key-aware-ssh-client">知道多個金鑰的 SSH 客戶端</a>。）</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -o -a 100 -t ed25519</span><br><span class="line">Generating public/private ed25519 key pair.</span><br><span class="line">Enter passphrase (empty for no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved in /home/gert/.ssh/id_ed25519.</span><br><span class="line">Your public key has been saved in /home/gert/.ssh/id_ed25519.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256: [...] gert@hostname</span><br><span class="line">The key&apos;s randomart image is: [...]</span><br></pre></td></tr></table></figure>
+
 <p>注意那行「Your identification has been saved in /home/gert/.ssh/id_ed25519」。你現在的 RSA/DSA 金鑰都在相同的 <code>~/.ssh</code> 資料夾內。如同其它金鑰，你可以複製在 <code>~/.ssh/id_ed25519.pub</code> 的公鑰到目的主機以便驗證。</p>
 <p><a name="multi-key-aware-ssh-client"></a></p>
 <h3 id="知道多個金鑰的-SSH-客戶端"><a href="#知道多個金鑰的-SSH-客戶端" class="headerlink" title="知道多個金鑰的 SSH 客戶端"></a>知道多個金鑰的 SSH 客戶端</h3><p>所有在預設路徑內的金鑰會被 SSH 客戶端應用程式自動偵測，包含透過 ssh-add 的 SSH 金鑰管理器。所以，如果你像以前一樣使用 ssh、scp、rsync 等應用程式⋯</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh user@host</span><br></pre></td></tr></table></figure>
+
 <p>現在將提供多個公鑰給伺服器，伺服器會對匹配的項目要求證明所有權以便驗證。你日常使用的 <code>ssh-add</code> 指令不會改變，且自動找到 Ed25519 金鑰：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-add</span><br><span class="line">Enter passphrase <span class="keyword">for</span> /home/gert/.ssh/id_rsa:</span><br><span class="line">Identity added: /home/gert/.ssh/id_rsa (gert@hostname)</span><br><span class="line">Identity added: /home/gert/.ssh/id_ed25519 (gert@hostname)</span><br></pre></td></tr></table></figure>
+
 <p>它不僅找到這些金鑰，也載入它們僅透過輸入一次密碼短語（因為是相同的）！</p>
 <p>我們現在已經達成重要的目標。在沒有改變你任何的日常工作下，我們可以慢慢的更改原端主機上現有的設定來接受 Ed25519 金鑰。在此期間 RSA 金鑰仍然可運作。很棒對吧！？</p>
 <h3 id="變更或設定密碼短語"><a href="#變更或設定密碼短語" class="headerlink" title="變更或設定密碼短語"></a>變更或設定密碼短語</h3><p>如果你害怕這會改變你的金鑰，別擔心。使用密碼短語加密的金鑰對私有部分，僅存在於你的本地機器上。只要你喜歡，可以經常改變它。這個建議是防止金鑰落入不法分子手中時遭到濫用。重複所有的金鑰檔案，以確保新的金鑰格式使用 100 次 bcrypt KDF：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -f ~/.ssh/id_rsa -p -o -a 100</span><br></pre></td></tr></table></figure>
+
 <h3 id="升級你現在的-RSA-金鑰"><a href="#升級你現在的-RSA-金鑰" class="headerlink" title="升級你現在的 RSA 金鑰"></a>升級你現在的 RSA 金鑰</h3><p>現在使用 Ed25519 在大多數情況下會（也應該）正常運作，但是舊式系統可能不支援。最好的應急辦法是使用高強度 RSA 金鑰對。</p>
 <p>雖然 OpenSSH 客戶端支援多個 RSA 金鑰，它需要設定或命令列選項來指定路徑，所以相當容易出錯。取而代之，我建議你升級現有的金鑰，這樣做會讓事情變得簡單。根據你目前的 RSA 金鑰強度，你可以立即或悠閒的更新。</p>
 <p>如果你仍然有弱的 RSA 金鑰，將它從標準路徑移出來並產生一個長度 4096 位元的新金鑰：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mv ~/.ssh/id_rsa ~/.ssh/id_rsa_legacy</span><br><span class="line">$ mv ~/.ssh/id_rsa.pub ~/.ssh/id_rsa_legacy.pub</span><br><span class="line">$ ssh-keygen -t rsa -b 4096 -o -a 100</span><br></pre></td></tr></table></figure>
+
 <p>如果你使用金鑰管理器，手動將其指定到所有的金鑰：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-add ~/.ssh/id_rsa ~/.ssh/id_rsa_legacy ~/.ssh/id_ed25519</span><br></pre></td></tr></table></figure>
+
 <p>一旦你完成了所有遠端目標的更新，你可以回到便利的方式，讓它自動找到新的 RSA 和 Ed25519 金鑰；只要忽略金鑰檔案參數。</p>
 <h3 id="支援-Ed25519-的軟體"><a href="#支援-Ed25519-的軟體" class="headerlink" title="支援 Ed25519 的軟體"></a>支援 Ed25519 的軟體</h3><p>自 OpenSSH 6.5 開始支援，在提供給工作站的 Unix 作業系統也已經採用。Ubuntu 14.04+、Debian 8+、CentOS/RedHat 7+ 等等都支援它了。（如果你有關於 Mac OS X 的詳細訊息，請留個訊息，無法快速搜尋到它）。某些軟體如自訂的桌面版金鑰管理器也許有幾個不喜歡新的金鑰的原因（見下文「<a href="#my-gnome-keyring-doesnt-work-anymore">我的 Gnome-keyring 不再運作</a>」）。</p>
 <p>順帶一提，Github 上也運作的很好。不幸的是，Launchpad 和 Gerrit 程式碼審查看來需要 RSA 金鑰。在 Windows 使用 PuTTY 嗎？見下文。</p>
@@ -278,12 +285,12 @@
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#SSH" >
-    <span class="tag-code">SSH</span>
-  </a>
-
   <a href="/tags#Ed25519" >
     <span class="tag-code">Ed25519</span>
+  </a>
+
+  <a href="/tags#SSH" >
+    <span class="tag-code">SSH</span>
   </a>
 
 
@@ -292,7 +299,7 @@
     <!-- Tags END -->
     <!-- UpdatedDate Start -->
      
-       <p class="post-date">最後更新時間：2018-05-21</p>
+       <p class="post-date">最後更新時間：2019-06-10</p>
      
    <!-- UpdatedDate END -->
     <!-- NAV START -->
@@ -425,9 +432,9 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; Calvert 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
   </p>
 </footer>
 

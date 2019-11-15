@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Calvert&#39;s tech blog">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Golang 基本型別、運算子和型別轉換 | Calvert&#39;s murmur
+    
+  </title>
+  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrcode.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-44933497-2');
+  </script>
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Calvert's murmur</span>
+    </a>
+
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/categories/" class="item-link">Categories</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+
+    
+      <div id="search-form-wrap">
+        <form class="search-form">
+          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+          <button type="submit" class="search-form-submit">
+            <span class="fa fa-search"></span>
+          </button>
+        </form>
+        <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
+      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+<script>
+  (function (window) {
+    var INSIGHT_CONFIG = {
+      TRANSLATION: {
+        POSTS: '文章',
+        PAGES: '頁面',
+        CATEGORIES: '分類',
+        TAGS: '標籤',
+        UNTITLED: '無標題',
+      },
+      ROOT_URL: '/',
+      CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+  })(window);
+</script>
+<script src="/js/insight.js"></script>
+
+      </div>
+    
+
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/categories/" class="menu-link">Categories</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Golang 基本型別、運算子和型別轉換</h2>
+  <p class="post-date">2019-11-05</p>
+  <div class="arrow-down">
+    <a href="javascript:;" target="_blank" rel="noopener"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-basic-types-operators-type-conversion" target="_blank" rel="noopener">Golang Basic Types, Operators and Type Conversion</a></p>
+</blockquote>
+<p>Go 是靜態型別的程式語言。Golang 中的每個變數都有關聯的型別。</p>
+<p>資料型別會對一組相關的資料集進行分類。它們定義了資料如何儲存在記憶體中、特定資料型別的變數可能儲存的值以及可以對其執行的運算。</p>
+<p>Golang 具有多種內建的資料型別，用於表示常見的值，如數字、布林值、字串等。在本文中，我們將逐一介紹這些基本資料型別，並了解它們的工作原理。</p>
+<a id="more"></a>
+
+<h3 id="數字型別"><a href="#數字型別" class="headerlink" title="數字型別"></a>數字型別</h3><p>數字型別用於表示數字。可以分為整數和浮點數型別：</p>
+<h4 id="1-整數"><a href="#1-整數" class="headerlink" title="1. 整數"></a>1. 整數</h4><p>整數用於儲存整數。Go 具有多種大小不一的內建整數型別，用於儲存有號數和無號數：</p>
+<h5 id="有號數"><a href="#有號數" class="headerlink" title="有號數"></a>有號數</h5><table>
+<thead>
+<tr>
+<th>型別</th>
+<th>大小</th>
+<th>範圍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int8</td>
+<td>8 bits</td>
+<td>-128 到 127</td>
+</tr>
+<tr>
+<td>int16</td>
+<td>16 bits</td>
+<td>-2<sup>15</sup> 到 2<sup>15</sup> -1</td>
+</tr>
+<tr>
+<td>int32</td>
+<td>32 bits</td>
+<td>-2<sup>31</sup> 到 2<sup>31</sup> -1</td>
+</tr>
+<tr>
+<td>int64</td>
+<td>64 bits</td>
+<td>-2<sup>63</sup> 到 2<sup>63</sup> -1</td>
+</tr>
+<tr>
+<td>int</td>
+<td>取決於平台</td>
+<td>取決於平台</td>
+</tr>
+</tbody></table>
+<p>泛型 <code>int</code> 型別的大小取決於平台。在 32 位元系統上，它的大小為 32 位元，在 64 位元系統上，它的大小為 64 位元。</p>
+<h5 id="無號數"><a href="#無號數" class="headerlink" title="無號數"></a>無號數</h5><table>
+<thead>
+<tr>
+<th>型別</th>
+<th>大小</th>
+<th>範圍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>uint8</td>
+<td>8 bits</td>
+<td>0 到 255</td>
+</tr>
+<tr>
+<td>uint16</td>
+<td>16 bits</td>
+<td>0 到 2<sup>16</sup> -1</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>32 bits</td>
+<td>0 到 2<sup>32</sup> -1</td>
+</tr>
+<tr>
+<td>uint64</td>
+<td>64 bits</td>
+<td>0 到 2<sup>64</sup> -1</td>
+</tr>
+<tr>
+<td>uint</td>
+<td>取決於平台</td>
+<td>取決於平台</td>
+</tr>
+</tbody></table>
+<p><code>uint</code> 型別的大小取決於平台。在 32 位元系統上，它的大小為 32 位元，在 64 位元系統上，它的大小為 64 位元。</p>
+<p><em>使用整數值時，除非有充分的理由使用有號數或無號數，否則應該始終使用 <code>int</code> 資料型別。</em></p>
+<p>在 Golang 中，你可以使用前綴 <code>0</code> 來宣告八進制數字，以及使用前綴 <code>0x</code> 或 <code>0X</code> 來宣告十六進制數字。以下是整數型別的完整範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> myInt8 <span class="keyword">int8</span> = <span class="number">97</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	  When you don't declare any type explicitly, the type inferred is `int`</span></span><br><span class="line"><span class="comment">	  (The default type for integers)</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="keyword">var</span> myInt = <span class="number">1200</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> myUint <span class="keyword">uint</span> = <span class="number">500</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> myHexNumber = <span class="number">0xFF</span>  <span class="comment">// Use prefix '0x' or '0X' for declaring hexadecimal numbers</span></span><br><span class="line">	<span class="keyword">var</span> myOctalNumber = <span class="number">034</span> <span class="comment">// Use prefix '0' for declaring octal numbers</span></span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"%d, %d, %d, %#x, %#o\n"</span>, myInt8, myInt, myUint, myHexNumber, myOctalNumber)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">97, 1200, 500, 0xff, 034</span><br></pre></td></tr></table></figure>
+
+<h5 id="整數型別別名"><a href="#整數型別別名" class="headerlink" title="整數型別別名"></a>整數型別別名</h5><p>Golang 還有另外兩個稱為 <code>byte</code> 和 <code>rune</code> 的整數型別，分別是 <code>uint8</code> 和 <code>int32</code> 資料型別的別名。</p>
+<table>
+<thead>
+<tr>
+<th>別名</th>
+<th>型別</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>byte</td>
+<td>uint8</td>
+</tr>
+<tr>
+<td>rune</td>
+<td>int32</td>
+</tr>
+</tbody></table>
+<p>在 Go 語言中，<code>byte</code> 和 <code>rune</code> 資料型別用於區分字元和整數值。</p>
+<p>Golang 沒有 <code>char</code> 資料型別。它使用 <code>byte</code> 和 <code>rune</code> 來表示字元值。<code>byte</code> 資料型別用於表示 <a href="https://en.wikipedia.org/wiki/ASCII" target="_blank" rel="noopener">ASCII</a> 字元，以及 <code>rune</code> 資料型別用於表示以 <a href="http://www.utf-8.com/" target="_blank" rel="noopener">UTF-8</a> 格式編碼的一組更廣泛的 <a href="http://www.unicode.org/" target="_blank" rel="noopener">Unicode</a> 字元。</p>
+<p>要在 Golang 中表示字元可以像這樣透過單引號將它們括起來：<code>&#39;A&#39;</code>。</p>
+<p>字元值的預設型別是 <code>rune</code>。也就是說，當宣告帶有字元值的變數而未明確指定型別時，則 Go 會將型別推斷為 <code>rune</code>：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> firstLetter = <span class="string">'A'</span> <span class="comment">// Type inferred as `rune` (Default type for character values)</span></span><br></pre></td></tr></table></figure>
+
+<p>你可以透過明確地指定型別來建立 <code>byte</code> 變數：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lastLetter <span class="keyword">byte</span> = <span class="string">'Z'</span></span><br></pre></td></tr></table></figure>
+
+<p><code>byte</code> 和 <code>rune</code> 資料型別本質上都是整數。舉例來說，具有值 <code>&#39;a&#39;</code> 的 <code>byte</code> 變數會轉換為整數 97。</p>
+<p>相同的，具有 Unicode 值 <code>&#39;♥&#39;</code> 的 <code>rune</code> 變數會轉換為相應的 Unicode 代碼點 <code>U + 2665</code>，其中 <code>U+</code> 代表 Unicode，且數字是十六進制，本質上是整數。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> myByte <span class="keyword">byte</span> = <span class="string">'a'</span></span><br><span class="line">	<span class="keyword">var</span> myRune <span class="keyword">rune</span> = <span class="string">'♥'</span></span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"%c = %d and %c = %U\n"</span>, myByte, myByte, myRune, myRune)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">a = 97 and ♥ = U+2665</span><br></pre></td></tr></table></figure>
+
+<p>在上面的範例中，我以字元和十進制格式印出變數 <code>myByte</code>，並以字元和 Unicode 格式印出變數 <code>myRune</code>。</p>
+<h4 id="2-浮點數型別"><a href="#2-浮點數型別" class="headerlink" title="2. 浮點數型別"></a>2. 浮點數型別</h4><p>浮點數型別用於儲存帶小數部分的數字（如：1.24、4.50000）。Go 有兩種浮點數型別：<code>float32</code> 和 <code>float64</code>。</p>
+<ul>
+<li><code>float32</code> 在記憶體中佔用 32 位元，並以單精度浮點數格式儲存數值。</li>
+<li><code>float64</code> 在記憶體中佔用 64 位元，並以雙精度浮點數格式儲存數值。</li>
+</ul>
+<p>浮點數的預設型別是 <code>float64</code>。因此，當你使用初始值初始化浮點數變數而未明確指定型別時，編譯器會將型別推斷為 <code>float64</code>：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">9715.635</span>   <span class="comment">// Type inferred as `float64` (the default type for floating-point numbers)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="數字型別的運算"><a href="#數字型別的運算" class="headerlink" title="數字型別的運算"></a>數字型別的運算</h4><p>Go 提供了多種用於對數字型別執行運算的運算子：</p>
+<ul>
+<li>算術運算子：<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code></li>
+<li>比較運算子：<code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></li>
+<li>位元運算子：<code>&amp;</code>, <code>|</code>, <code>^</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code></li>
+<li>遞增和遞減運算子：<code>++</code>, <code>--</code></li>
+<li>賦值運算子：<code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code>, <code>&lt;&lt;=</code>, <code>&gt;&gt;=</code>, <code>&amp;=</code>, <code>|=</code>, <code>^=</code></li>
+</ul>
+<p>以下是上述一些運算子的範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"math"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> a, b = <span class="number">4</span>, <span class="number">5</span></span><br><span class="line">	<span class="keyword">var</span> res1 = (a + b) * (a + b) / <span class="number">2</span> <span class="comment">// Arithmetic operations</span></span><br><span class="line"></span><br><span class="line">	a++ <span class="comment">// Increment a by 1</span></span><br><span class="line"></span><br><span class="line">	b += <span class="number">10</span> <span class="comment">// Increment b by 10</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> res2 = a ^ b <span class="comment">// Bitwise XOR</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> r = <span class="number">3.5</span></span><br><span class="line">	<span class="keyword">var</span> res3 = math.Pi * r * r <span class="comment">// Operations on floating-point type</span></span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"res1 : %v, res2 : %v, res3 : %v\n"</span>, res1, res2, res3)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">res1 : 40, res2 : 10, res3 : 38.48451000647496</span><br></pre></td></tr></table></figure>
+
+<h3 id="布林值"><a href="#布林值" class="headerlink" title="布林值"></a>布林值</h3><p>Go 提供了一種稱為 <code>bool</code> 的資料型別來儲存布林值。它有兩個可能的值：<code>true</code> 和 <code>false</code>。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myBoolean = <span class="literal">true</span></span><br><span class="line"><span class="keyword">var</span> anotherBoolean <span class="keyword">bool</span> = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="布林值型別的運算"><a href="#布林值型別的運算" class="headerlink" title="布林值型別的運算"></a>布林值型別的運算</h4><p>你可以對布林值使用以下運算子：</p>
+<p><strong>邏輯運算子：</strong></p>
+<ul>
+<li><code>&amp;&amp;</code>（與，and）</li>
+<li><code>||</code>（或，or）</li>
+<li><code>!</code> （否定）</li>
+</ul>
+<p><strong>相等和不相等：</strong> <code>==</code>, <code>!=</code></p>
+<p>運算子 <code>&amp;&amp;</code> 和 <code>||</code> 遵循短路規則。也就是說，在表達式 <code>E1 &amp;&amp; E2</code> 中，如果 <code>E1</code> 的評估結果為 <code>false</code>，則不會評估 <code>E2</code>。相同的，在表達式 <code>E1 || E2</code> 中，如果 <code>E1</code> 的評估結果為 <code>true</code>，則不會評估 <code>E2</code>。</p>
+<p>以下是布林值型別的範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> truth = <span class="number">3</span> &lt;= <span class="number">5</span></span><br><span class="line">	<span class="keyword">var</span> falsehood = <span class="number">10</span> != <span class="number">10</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Short Circuiting</span></span><br><span class="line">	<span class="keyword">var</span> res1 = <span class="number">10</span> &gt; <span class="number">20</span> &amp;&amp; <span class="number">5</span> == <span class="number">5</span>     <span class="comment">// Second operand is not evaluated since first evaluates to false</span></span><br><span class="line">	<span class="keyword">var</span> res2 = <span class="number">2</span>*<span class="number">2</span> == <span class="number">4</span> || <span class="number">10</span>%<span class="number">3</span> == <span class="number">0</span> <span class="comment">// Second operand is not evaluated since first evaluates to true</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(truth, falsehood, res1, res2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">true false false true</span><br></pre></td></tr></table></figure>
+
+<h3 id="複數"><a href="#複數" class="headerlink" title="複數"></a>複數</h3><p>複數是 Golang 中的基本型別之一。Go 有兩種不同大小的複數型別：</p>
+<ul>
+<li><code>complex64</code>：實部和虛部都是 <code>float32</code> 型別。</li>
+<li><code>complex128</code>：實部和虛部都是 <code>float64</code> 型別。</li>
+</ul>
+<p>Golang 中複數的預設型別是 <code>complex128</code>。你可以像這樣建立一個複數：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">5</span> + <span class="number">7i</span>  <span class="comment">// Type inferred as `complex128`</span></span><br></pre></td></tr></table></figure>
+
+<p>Go 還提供了一個名為 <code>complex</code> 的內建函數，用於建立複數。如果你要使用變數而不是文字來建立複數，則需要使用 <code>complex</code> 函數：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">3.57</span></span><br><span class="line"><span class="keyword">var</span> b = <span class="number">6.23</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// var c = a + bi won't work. Create the complex number like this -</span></span><br><span class="line"><span class="keyword">var</span> c = <span class="built_in">complex</span>(a, b)</span><br></pre></td></tr></table></figure>
+
+<p>要注意的是，複數的實部和虛部都必須是相同的浮點數型別。如果你嘗試建立具有不同實部和虛部型別的複數，則編譯器將拋出錯誤：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a <span class="keyword">float32</span> = <span class="number">4.92</span></span><br><span class="line"><span class="keyword">var</span> b <span class="keyword">float64</span> = <span class="number">7.38</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">   The Following statement Won't compile.</span></span><br><span class="line"><span class="comment">   (Both real and imaginary parts must be of the same floating-point type)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">var</span> c = <span class="built_in">complex</span>(a, b)  <span class="comment">// Compiler Error</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="複數型別的運算"><a href="#複數型別的運算" class="headerlink" title="複數型別的運算"></a>複數型別的運算</h4><p>你可以對複數執行算術運算，如加、減、乘和除：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">3</span> + <span class="number">5i</span></span><br><span class="line">	<span class="keyword">var</span> b = <span class="number">2</span> + <span class="number">4i</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> res1 = a + b</span><br><span class="line">	<span class="keyword">var</span> res2 = a - b</span><br><span class="line">	<span class="keyword">var</span> res3 = a * b</span><br><span class="line">	<span class="keyword">var</span> res4 = a / b</span><br><span class="line"></span><br><span class="line">	fmt.Println(res1, res2, res3, res4)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">(5+9i) (1+1i) (-14+22i) (1.3-0.1i)</span><br></pre></td></tr></table></figure>
+
+<h3 id="字串"><a href="#字串" class="headerlink" title="字串"></a>字串</h3><p>在 Go 中，字串是字元組序列。</p>
+<p>Golang 中的字串可以使用如 <code>&quot;Hello World&quot;</code> 中的雙引號宣告，也可以使用如 <code>`Hello World`</code> 中的反引號宣告。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Normal String (Can not contain newlines, and can have escape characters like `\n`, `\t` etc)</span></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">"Steve Jobs"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Raw String (Can span multiple lines. Escape characters are not interpreted)</span></span><br><span class="line"><span class="keyword">var</span> bio = <span class="string">`Steve Jobs was an American entrepreneur and inventor.</span></span><br><span class="line"><span class="string">           He was the CEO and co-founder of Apple Inc.`</span></span><br></pre></td></tr></table></figure>
+
+<p>用雙引號括起來的字串不能包含換行，但可以包含跳脫字元，如 <code>\n</code>、<code>\t</code> 等。在雙引號字串中，會用換行字元替換 <code>\n</code> 字元，並用 tab 空格替換 <code>\t</code> 字元，依此類推。</p>
+<p>反引號內包含的字串是原始字串。它們可以跨越多行。此外，跳脫字元在原始字串中沒有任何特殊含義。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> website = <span class="string">"\thttps://www.callicoder.com\t\n"</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> siteDescription = <span class="string">`\t\tCalliCoder is a programming blog where you can find</span></span><br><span class="line"><span class="string">                           practical guides and tutorials on programming languages,</span></span><br><span class="line"><span class="string">                           web development, and desktop app development.\t\n`</span></span><br><span class="line"></span><br><span class="line">    fmt.Println(website, siteDescription)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">        https://www.callicoder.com      </span><br><span class="line"> \t\tCalliCoder is a programming blog where you can find</span><br><span class="line">                           practical guides and tutorials on programming languages,</span><br><span class="line">                           web development, and desktop app development.\t\n</span><br></pre></td></tr></table></figure>
+
+<p>以上就是本文關於字串的全部內容。但還有很多關於字串的知識要了解，包括字串索引、處理 Unicode 字元以及執行各種操作如字串連接、分離等。我們將在以後的文章中了解它們。</p>
+<h3 id="型別轉換"><a href="#型別轉換" class="headerlink" title="型別轉換"></a>型別轉換</h3><p>Golang 有個強型別系統。它不允許你在表達式中混合數字型別。舉例來說，你不能將 <code>int</code> 變數加到 <code>float64</code> 變數中，也不能將 <code>int</code> 變數加到 <code>int64</code> 變數中。你甚至無法在混合型別之間執行分派：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a <span class="keyword">int64</span> = <span class="number">4</span></span><br><span class="line"><span class="keyword">var</span> b <span class="keyword">int</span> = a <span class="comment">// Compiler Error (Cannot use a (type in64) as type int in assignment)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c <span class="keyword">int</span> = <span class="number">500</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = a + c <span class="comment">// Compiler Error (Invalid Operation: mismatched types int64 and int)</span></span><br></pre></td></tr></table></figure>
+
+<p>與 C、C++ 和 Java 等其他靜態型別語言不同，Go 不提供任何隱式型別轉換。要了解為何採用這種方式設計 Go，請查看下一篇文章：<a href="/2019/11/06/working-with-constants-in-golang/" title="在 Golang 中使用常數">在 Golang 中使用常數</a>。</p>
+<p>好吧！即使它們是數字型別，我們也不能對兩種不同型別進行加、減、比較或任何類型的運算。但如果我們需要執行這樣的運算該怎麼辦？</p>
+<p>嗯，你需要將變數明確地轉換為目標型別：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a <span class="keyword">int64</span> = <span class="number">4</span></span><br><span class="line"><span class="keyword">var</span> b <span class="keyword">int</span> = <span class="keyword">int</span>(a) <span class="comment">// Explicit Type Conversion</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c <span class="keyword">float64</span> = <span class="number">6.5</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Explicit Type Conversion</span></span><br><span class="line"><span class="keyword">var</span> result = <span class="keyword">float64</span>(b) + c <span class="comment">// Works</span></span><br></pre></td></tr></table></figure>
+
+<p>一般將值 <code>v</code> 轉換為型別 <code>T</code> 的語法是 <code>T(v)</code>。這裡有幾個範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myInt <span class="keyword">int</span> = <span class="number">65</span></span><br><span class="line"><span class="keyword">var</span> myUint <span class="keyword">uint</span> = <span class="keyword">uint</span>(myInt)</span><br><span class="line"><span class="keyword">var</span> myFloat <span class="keyword">float64</span> = <span class="keyword">float64</span>(myInt)</span><br></pre></td></tr></table></figure>
+
+<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>在本文中，你了解了 Golang 提供的各種基本資料型別、可以對這些型別執行的操作，以及如何將一種型別轉換為另一種型別。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- UpdatedDate Start -->
+     
+       <p class="post-date">最後更新時間：2019-11-15</p>
+     
+   <!-- UpdatedDate END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/11/05/golang-variables-zero-values-type-inference/">
+        <span class="nav-arrow">&larr; </span>
+        
+          Golang 變數、零值和型別推斷
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/11/06/working-with-constants-in-golang/">
+        
+          在 Golang 中使用常數
+        
+        <span class="nav-arrow"> &rarr;</span>
+      </a>
+    
+  </div>
+
+
+    <!-- NAV END -->
+    <!-- 打賞 START -->
+    
+    <!-- 打賞 END -->
+    <!-- 二維條碼 START -->
+    
+      <div class="qrcode">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="share-qrcode"/>
+        </svg>
+        <p class="notice">掃描二維條碼，分享此文章</p>
+      </div>
+    
+    <!-- 二維條碼 END -->
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">目錄</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#數字型別"><span class="toc-nav-text">數字型別</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-整數"><span class="toc-nav-text">1. 整數</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#有號數"><span class="toc-nav-text">有號數</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#無號數"><span class="toc-nav-text">無號數</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#整數型別別名"><span class="toc-nav-text">整數型別別名</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-浮點數型別"><span class="toc-nav-text">2. 浮點數型別</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#數字型別的運算"><span class="toc-nav-text">數字型別的運算</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#布林值"><span class="toc-nav-text">布林值</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#布林值型別的運算"><span class="toc-nav-text">布林值型別的運算</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#複數"><span class="toc-nav-text">複數</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#複數型別的運算"><span class="toc-nav-text">複數型別的運算</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#字串"><span class="toc-nav-text">字串</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#型別轉換"><span class="toc-nav-text">型別轉換</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#結論"><span class="toc-nav-text">結論</span></a></li></ol>
+    
+  </div>
+</aside>
+
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://calvertyang.github.io/2019/11/05/golang-basic-types-operators-type-conversion/';
+    var banner = '';
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      });
+    } else {
+      $('#article-banner').geopattern(url);
+    }
+    $('.header').removeClass('fixed-header');
+
+     // error image
+    $('.markdown-content img').on('error', function() {
+      $(this).attr('src', '/css/images/error-img.png');
+      $(this).css({
+        'cursor': 'default'
+      });
+    });
+
+    // 若圖片放在連結內，則將游標改為 pointer 並將圖片靠左
+    $('.markdown-content img').each(function() {
+      if ($(this).parents().is('a')) {
+        $(this).css({
+          'cursor': 'pointer',
+          'display': 'inline-block'
+        });
+      }
+    });
+
+    // zoom image
+    $('.markdown-content img').on('click', function(e) {
+      var src = $(this).attr('src');
+      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
+        var imageW = $(this).width();
+        var imageH = $(this).height();
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        zoom = zoom < 1 ? 1 : zoom;
+        zoom = zoom > 2 ? 2 : zoom;
+        var transY = (($(window).height() - imageH) / 2).toFixed(2);
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
+        $('.image-view-wrap').addClass('wrap-active');
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        });
+        $('html').css('overflow', 'hidden');
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove();
+          $('html').attr('style', '');
+        });
+      }
+    });
+
+    // qrcode
+    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
+      text: document.location.href,
+      width: 100,
+      height: 100,
+      colorDark: '#000000',
+    	colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.L,
+      useSVG: true
+    });
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; Calvert 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+
+<script>
+  async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  $('figure').each(function(i, block) {
+    let lang = this.classList[1] || 'codeblock';
+    this.dataset.lang = lang.toUpperCase();
+  });
+</script>
+<script src="/js/script.js"></script>
+
+  </body>
+</html>

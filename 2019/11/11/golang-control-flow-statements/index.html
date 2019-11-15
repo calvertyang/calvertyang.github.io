@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Calvert&#39;s tech blog">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Golang 流程控制陳述式：if、switch 與 for | Calvert&#39;s murmur
+    
+  </title>
+  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrcode.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-44933497-2');
+  </script>
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Calvert's murmur</span>
+    </a>
+
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/categories/" class="item-link">Categories</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+
+    
+      <div id="search-form-wrap">
+        <form class="search-form">
+          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+          <button type="submit" class="search-form-submit">
+            <span class="fa fa-search"></span>
+          </button>
+        </form>
+        <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
+      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+<script>
+  (function (window) {
+    var INSIGHT_CONFIG = {
+      TRANSLATION: {
+        POSTS: '文章',
+        PAGES: '頁面',
+        CATEGORIES: '分類',
+        TAGS: '標籤',
+        UNTITLED: '無標題',
+      },
+      ROOT_URL: '/',
+      CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+  })(window);
+</script>
+<script src="/js/insight.js"></script>
+
+      </div>
+    
+
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/categories/" class="menu-link">Categories</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Golang 流程控制陳述式：if、switch 與 for</h2>
+  <p class="post-date">2019-11-11</p>
+  <div class="arrow-down">
+    <a href="javascript:;" target="_blank" rel="noopener"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-control-flow" target="_blank" rel="noopener">Golang Control Flow Statements: If, Switch and For</a></p>
+</blockquote>
+<h3 id="if-陳述式"><a href="#if-陳述式" class="headerlink" title="if 陳述式"></a>if 陳述式</h3><p><code>if</code> 陳述式用於根據給定的條件，決定是否應執行程式碼區塊。</p>
+<p>以下是 Golang 中 <code>if</code> 陳述式的語法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(condition) &#123;</span><br><span class="line">	<span class="comment">// Code to be executed if the condition is true.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這裡有個簡單的範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> x = <span class="number">25</span></span><br><span class="line">	<span class="keyword">if</span> x%<span class="number">5</span> == <span class="number">0</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"%d is a multiple of 5\n"</span>, x)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">25 is a multiple of 5</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p><strong>注意</strong>，你可以在 Golang 中的 <code>if</code> 陳述式省略 <code>()</code>，但大括號 <code>{}</code> 是必需的：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> y = <span class="number">-1</span></span><br><span class="line"><span class="keyword">if</span> y &lt; <span class="number">0</span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">"%d is negative\n"</span>, y)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如下所示，你可以使用捷徑運算子 <code>&amp;&amp;</code> 和 <code>||</code> 來組合多個條件：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = <span class="number">21</span></span><br><span class="line"><span class="keyword">if</span> age &gt;= <span class="number">17</span> &amp;&amp; age &lt;= <span class="number">30</span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"My Age is between 17 and 30"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="if-Else-陳述式"><a href="#if-Else-陳述式" class="headerlink" title="if-Else 陳述式"></a>if-Else 陳述式</h4><p><code>if</code> 陳述式可以與 <code>else</code> 區塊結合使用。如果 <code>if</code> 陳述式中指定的條件不成立，則執行 <code>else</code> 區塊。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> condition &#123;</span><br><span class="line">	<span class="comment">// code to be executed if the condition is true</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="comment">// code to be executed if the condition is false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這裡有個簡單的範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> age = <span class="number">18</span></span><br><span class="line">	<span class="keyword">if</span> age &gt;= <span class="number">18</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"You're eligible to vote!"</span>)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"You're not eligible to vote!"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">You&apos;re eligible to vote!</span><br></pre></td></tr></table></figure>
+
+<h4 id="if-else-if-鏈"><a href="#if-else-if-鏈" class="headerlink" title="if-else-if 鏈"></a>if-else-if 鏈</h4><p><code>if</code> 陳述式也可以包含多個 <code>else if</code> 部分，從而構成一系列條件，例如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> BMI = <span class="number">21.0</span></span><br><span class="line">	<span class="keyword">if</span> BMI &lt; <span class="number">18.5</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"You are underweight"</span>);</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> BMI &gt;= <span class="number">18.5</span> &amp;&amp; BMI &lt; <span class="number">25.0</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Your weight is normal"</span>);</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> BMI &gt;= <span class="number">25.0</span> &amp;&amp; BMI &lt; <span class="number">30.0</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"You're overweight"</span>)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"You're obese"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Your weight is normal</span><br></pre></td></tr></table></figure>
+
+<h4 id="if-搭配簡短宣告"><a href="#if-搭配簡短宣告" class="headerlink" title="if 搭配簡短宣告"></a>if 搭配簡短宣告</h4><p>Golang 中的 <code>if</code> 陳述式還可以在條件表達式之前包含一個<a href="/2019/11/05/golang-variables-zero-values-type-inference/" title="簡短宣告">簡短宣告</a>：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> n := <span class="number">10</span>; n%<span class="number">2</span> == <span class="number">0</span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">"%d is even\n"</span>, n)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在簡短宣告中宣告的變數僅可在 <code>if</code> 區塊及它的 <code>else</code> 或 <code>else-if</code> 分支內使用：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> n := <span class="number">15</span>; n%<span class="number">2</span> == <span class="number">0</span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">"%d is even\n"</span>, n)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">"%d is odd\n"</span>, n)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，如果你使用簡短陳述式，則不能使用括號。因此，以下程式碼將產生語法錯誤：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// You can't use parentheses when `if` contains a short statement</span></span><br><span class="line"><span class="keyword">if</span> (n := <span class="number">15</span>; n%<span class="number">2</span> == <span class="number">0</span>) &#123; <span class="comment">// Syntax Error</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="switch-陳述式"><a href="#switch-陳述式" class="headerlink" title="switch 陳述式"></a>switch 陳述式</h3><p>Switch 陳述式採用表達式並將其與可能的條件清單匹配。找到匹配項目後，它會執行指定匹配條件區塊內的程式碼。</p>
+<p>這裡有個簡單的 switch 陳述式範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> dayOfWeek = <span class="number">6</span></span><br><span class="line">	<span class="keyword">switch</span> dayOfWeek &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">1</span>: fmt.Println(<span class="string">"Monday"</span>)</span><br><span class="line">		<span class="keyword">case</span> <span class="number">2</span>: fmt.Println(<span class="string">"Tuesday"</span>)</span><br><span class="line">		<span class="keyword">case</span> <span class="number">3</span>: fmt.Println(<span class="string">"Wednesday"</span>)</span><br><span class="line">		<span class="keyword">case</span> <span class="number">4</span>: fmt.Println(<span class="string">"Thursday"</span>)</span><br><span class="line">		<span class="keyword">case</span> <span class="number">5</span>: fmt.Println(<span class="string">"Friday"</span>)</span><br><span class="line">		<span class="keyword">case</span> <span class="number">6</span>: &#123;</span><br><span class="line">			fmt.Println(<span class="string">"Saturday"</span>)</span><br><span class="line">			fmt.Println(<span class="string">"Weekend. Yaay!"</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">7</span>: &#123;</span><br><span class="line">			fmt.Println(<span class="string">"Sunday"</span>)</span><br><span class="line">			fmt.Println(<span class="string">"Weekend. Yaay!"</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">default</span>: fmt.Println(<span class="string">"Invalid day"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Saturday</span><br><span class="line">Weekend. Yaay!</span><br></pre></td></tr></table></figure>
+
+<p>Go 會從上到下逐一評估所有 switch 條件，直到條件成功為止。它會執行該指定條件區塊內的程式碼，然後停止（不會再評估其他條件）。</p>
+<p>與其他語言如 C、C++ 和 Java 相反的是，你需要明確地在每個條件區塊之後插入一個 <code>break</code> 陳述式，來停止對後續條件的評估。</p>
+<p>如果所有條件都不成功，則執行預設條件。</p>
+<h4 id="switch-搭配簡短宣告"><a href="#switch-搭配簡短宣告" class="headerlink" title="switch 搭配簡短宣告"></a>switch 搭配簡短宣告</h4><p>就像 <code>if</code> 一樣，<code>switch</code> 也可以在條件表達式之前包含一個簡短宣告。因此，你也可以像這樣撰寫先前的 switch 範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> dayOfWeek := <span class="number">6</span>; dayOfWeek &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">1</span>: fmt.Println(<span class="string">"Monday"</span>)</span><br><span class="line">	<span class="keyword">case</span> <span class="number">2</span>: fmt.Println(<span class="string">"Tuesday"</span>)</span><br><span class="line">	<span class="keyword">case</span> <span class="number">3</span>: fmt.Println(<span class="string">"Wednesday"</span>)</span><br><span class="line">	<span class="keyword">case</span> <span class="number">4</span>: fmt.Println(<span class="string">"Thursday"</span>)</span><br><span class="line">	<span class="keyword">case</span> <span class="number">5</span>: fmt.Println(<span class="string">"Friday"</span>)</span><br><span class="line">	<span class="keyword">case</span> <span class="number">6</span>: &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Saturday"</span>)</span><br><span class="line">		fmt.Println(<span class="string">"Weekend. Yaay!"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">7</span>: &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Sunday"</span>)</span><br><span class="line">		fmt.Println(<span class="string">"Weekend. Yaay!"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">default</span>: fmt.Println(<span class="string">"Invalid day"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>唯一不同的是，簡短陳述式宣告的變數 <code>dayOfWeek</code> 僅可在 switch 區塊內使用。</p>
+<h4 id="合併多個-switch-條件"><a href="#合併多個-switch-條件" class="headerlink" title="合併多個 switch 條件"></a>合併多個 switch 條件</h4><p>你可以像這樣將多個 <code>switch</code> 條件合併成一個：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">switch</span> dayOfWeek := <span class="number">5</span>; dayOfWeek &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>:</span><br><span class="line">			fmt.Println(<span class="string">"Weekday"</span>)</span><br><span class="line">		<span class="keyword">case</span> <span class="number">6</span>, <span class="number">7</span>:</span><br><span class="line">			fmt.Println(<span class="string">"Weekend"</span>)</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			fmt.Println(<span class="string">"Invalid Day"</span>)		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Weekday</span><br></pre></td></tr></table></figure>
+
+<p>當你需要針對多種情況執行共同的邏輯時，這非常方便。</p>
+<h4 id="不帶表達式的-switch"><a href="#不帶表達式的-switch" class="headerlink" title="不帶表達式的 switch"></a>不帶表達式的 switch</h4><p>在 Golang 中，我們在 <code>switch</code> 陳述式中指定的表達式是非必要的。不帶表達式的 <code>switch</code> 與 <code>switch true</code> 相同。它逐一評估所有條件，並執行第一個條件成功的區塊：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> BMI = <span class="number">21.0</span></span><br><span class="line">	<span class="keyword">switch</span> &#123;</span><br><span class="line">		<span class="keyword">case</span> BMI &lt; <span class="number">18.5</span>:</span><br><span class="line">			fmt.Println(<span class="string">"You're underweight"</span>)</span><br><span class="line">		<span class="keyword">case</span> BMI &gt;= <span class="number">18.5</span> &amp;&amp; BMI &lt; <span class="number">25.0</span>:</span><br><span class="line">			fmt.Println(<span class="string">"Your weight is normal"</span>)</span><br><span class="line">		<span class="keyword">case</span> BMI &gt;= <span class="number">25.0</span> &amp;&amp; BMI &lt; <span class="number">30.0</span>:</span><br><span class="line">			fmt.Println(<span class="string">"You're overweight"</span>)</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			fmt.Println(<span class="string">"You're obese"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不帶表達式的 switch 只是一個撰寫 <code>if-else-if</code> 鏈的簡潔方式。</p>
+<h3 id="for-迴圈"><a href="#for-迴圈" class="headerlink" title="for 迴圈"></a>for 迴圈</h3><p>迴圈用於重複執行程式碼區塊。Golang 只有一個迴圈陳述式：<code>for</code> 迴圈。</p>
+<p>以下是 Go 中 <code>for</code> 迴圈的一般語法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> initialization; condition; increment &#123;</span><br><span class="line">	<span class="comment">// loop body</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>初始化</strong>陳述式只會在迴圈的第一次迭代前執行一次。在每次迭代時，都會檢查<strong>條件</strong>。如果條件評估為 <code>true</code>，則執行迴圈的主體，否則就終止迴圈。每次迭代結束時都會執行<strong>遞增</strong>陳述式。</p>
+<p>這裡有個簡單的 for 迴圈範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"%d "</span>, i)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">0 1 2 3 4 5 6 7 8 9</span><br></pre></td></tr></table></figure>
+
+<p>與 C、C++ 和 Java 等其他語言不同，Go 的 for 迴圈不包含括號，但大括號 <code>{}</code> 是必需的。</p>
+<p><strong>注意，<code>for</code> 迴圈的初始化和遞增陳述式都是非必要的，可以省略</strong></p>
+<ul>
+<li><p>省略初始化陳述式</p>
+  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	i := <span class="number">2</span></span><br><span class="line">	<span class="keyword">for</span> ;i &lt;= <span class="number">10</span>; i += <span class="number">2</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"%d "</span>, i)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">2 4 6 8 10</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>省略遞增陳述式</p>
+  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	i := <span class="number">2</span></span><br><span class="line">	<span class="keyword">for</span> ;i &lt;= <span class="number">20</span>; &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"%d "</span>, i)</span><br><span class="line">		i *= <span class="number">2</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">2 4 8 16</span><br></pre></td></tr></table></figure>
+
+<p>  注意，在上面的 <code>for</code> 迴圈範例中，你也可以省略分號，並這樣寫：</p>
+  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	i := <span class="number">2</span></span><br><span class="line">	<span class="keyword">for</span> i &lt;= <span class="number">20</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"%d "</span>, i)</span><br><span class="line">		i *= <span class="number">2</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  上面的 <code>for</code> 迴圈與其他語言中的 <code>while</code> 迴圈類似。Go 沒有 <code>while</code> 迴圈，因為我們可以使用 <code>for</code> 輕鬆表示 <code>white</code> 迴圈。</p>
+<p>  <strong>最後，在 Golang 中你也可以省略 <code>for</code> 迴圈的條件。這會給你一個無限迴圈：</strong></p>
+  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Infinite Loop</span></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="break-陳述式"><a href="#break-陳述式" class="headerlink" title="break 陳述式"></a>break 陳述式</h4><p>你可以使用 <code>break</code> 陳述式在正常終止之前中斷循環。這裡有個範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> num := <span class="number">1</span>; num &lt;= <span class="number">100</span>; num++ &#123;</span><br><span class="line">		<span class="keyword">if</span> num%<span class="number">3</span> == <span class="number">0</span> &amp;&amp; num%<span class="number">5</span> == <span class="number">0</span> &#123;</span><br><span class="line">			fmt.Printf(<span class="string">"First positive number divisible by both 3 and 5 is %d\n"</span>, num)</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">First positive number divisible by both 3 and 5 is 15</span><br></pre></td></tr></table></figure>
+
+<h4 id="continue-陳述式"><a href="#continue-陳述式" class="headerlink" title="continue 陳述式"></a>continue 陳述式</h4><p><code>continue</code> 陳述式用於中途停止執行迴圈主體，並繼續執行迴圈的下一個迭代。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> num := <span class="number">1</span>; num &lt;= <span class="number">10</span>; num++ &#123;</span><br><span class="line">		<span class="keyword">if</span> num%<span class="number">2</span> == <span class="number">0</span> &#123;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		fmt.Printf(<span class="string">"%d "</span>, num)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">1 3 5 7 9</span><br></pre></td></tr></table></figure>
+
+<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>在本文中，你學習了如何在 Golang 中使用流程控制陳述式，如 <code>if</code>、<code>switch</code> 和 <code>for</code>。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- UpdatedDate Start -->
+     
+       <p class="post-date">最後更新時間：2019-11-13</p>
+     
+   <!-- UpdatedDate END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/11/06/working-with-constants-in-golang/">
+        <span class="nav-arrow">&larr; </span>
+        
+          在 Golang 中使用常數
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/11/11/introduction-to-functions-in-golang/">
+        
+          Golang 函數介紹
+        
+        <span class="nav-arrow"> &rarr;</span>
+      </a>
+    
+  </div>
+
+
+    <!-- NAV END -->
+    <!-- 打賞 START -->
+    
+    <!-- 打賞 END -->
+    <!-- 二維條碼 START -->
+    
+      <div class="qrcode">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="share-qrcode"/>
+        </svg>
+        <p class="notice">掃描二維條碼，分享此文章</p>
+      </div>
+    
+    <!-- 二維條碼 END -->
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">目錄</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#if-陳述式"><span class="toc-nav-text">if 陳述式</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#if-Else-陳述式"><span class="toc-nav-text">if-Else 陳述式</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#if-else-if-鏈"><span class="toc-nav-text">if-else-if 鏈</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#if-搭配簡短宣告"><span class="toc-nav-text">if 搭配簡短宣告</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#switch-陳述式"><span class="toc-nav-text">switch 陳述式</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#switch-搭配簡短宣告"><span class="toc-nav-text">switch 搭配簡短宣告</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#合併多個-switch-條件"><span class="toc-nav-text">合併多個 switch 條件</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#不帶表達式的-switch"><span class="toc-nav-text">不帶表達式的 switch</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#for-迴圈"><span class="toc-nav-text">for 迴圈</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#break-陳述式"><span class="toc-nav-text">break 陳述式</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#continue-陳述式"><span class="toc-nav-text">continue 陳述式</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#結論"><span class="toc-nav-text">結論</span></a></li></ol>
+    
+  </div>
+</aside>
+
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://calvertyang.github.io/2019/11/11/golang-control-flow-statements/';
+    var banner = '';
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      });
+    } else {
+      $('#article-banner').geopattern(url);
+    }
+    $('.header').removeClass('fixed-header');
+
+     // error image
+    $('.markdown-content img').on('error', function() {
+      $(this).attr('src', '/css/images/error-img.png');
+      $(this).css({
+        'cursor': 'default'
+      });
+    });
+
+    // 若圖片放在連結內，則將游標改為 pointer 並將圖片靠左
+    $('.markdown-content img').each(function() {
+      if ($(this).parents().is('a')) {
+        $(this).css({
+          'cursor': 'pointer',
+          'display': 'inline-block'
+        });
+      }
+    });
+
+    // zoom image
+    $('.markdown-content img').on('click', function(e) {
+      var src = $(this).attr('src');
+      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
+        var imageW = $(this).width();
+        var imageH = $(this).height();
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        zoom = zoom < 1 ? 1 : zoom;
+        zoom = zoom > 2 ? 2 : zoom;
+        var transY = (($(window).height() - imageH) / 2).toFixed(2);
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
+        $('.image-view-wrap').addClass('wrap-active');
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        });
+        $('html').css('overflow', 'hidden');
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove();
+          $('html').attr('style', '');
+        });
+      }
+    });
+
+    // qrcode
+    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
+      text: document.location.href,
+      width: 100,
+      height: 100,
+      colorDark: '#000000',
+    	colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.L,
+      useSVG: true
+    });
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; Calvert 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+
+<script>
+  async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  $('figure').each(function(i, block) {
+    let lang = this.classList[1] || 'codeblock';
+    this.dataset.lang = lang.toUpperCase();
+  });
+</script>
+<script src="/js/script.js"></script>
+
+  </body>
+</html>
