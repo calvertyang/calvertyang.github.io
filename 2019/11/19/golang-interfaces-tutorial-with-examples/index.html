@@ -219,6 +219,8 @@
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Go Interface - `Shape`</span></span><br><span class="line"><span class="keyword">type</span> Shape <span class="keyword">interface</span> &#123;</span><br><span class="line">	Area() <span class="keyword">float64</span></span><br><span class="line">	Perimeter() <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>使用 <strong>type</strong> 關鍵字定義介面，後面接著介面名稱和關鍵字 <code>interface</code>。然後，在大括號內指定一組方法簽名。</p>
+<a id="more"></a>
+
 <h3 id="在-Go-中實作介面"><a href="#在-Go-中實作介面" class="headerlink" title="在 Go 中實作介面"></a>在 Go 中實作介面</h3><p>要實作介面，你只需要實作介面中宣告的所有方法。</p>
 <p><em><strong>Go 的介面是隱含實作的</strong></em></p>
 <p>與 Java 等其他語言不同，你不需要使用如 <code>implements</code> 關鍵字之類的方法來明確指定一種型別來實作介面。</p>

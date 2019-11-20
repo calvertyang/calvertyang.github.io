@@ -218,12 +218,14 @@
       
       <div class="article-summary">
         
-          
-原文：CalliCoder — Golang Interfaces Tutorial with Examples
+          <blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-interfaces" target="_blank" rel="noopener">Golang Interfaces Tutorial with Examples</a></p>
+</blockquote>
+<h3 id="Go-的介面"><a href="#Go-的介面" class="headerlink" title="Go 的介面"></a>Go 的介面</h3><p>Go 中的介面是使用一組方法簽名定義的<strong>型別</strong>。介面定義了類似物件型別的行為。</p>
+<p>舉例來說，這是一個定義幾何形狀行為的介面：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Go Interface - `Shape`</span></span><br><span class="line"><span class="keyword">type</span> Shape <span class="keyword">interface</span> &#123;</span><br><span class="line">	Area() <span class="keyword">float64</span></span><br><span class="line">	Perimeter() <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-Go 的介面Go 中的介面是使用一組方法簽名定義的型別。介面定義了類似物件型別的行為。
-舉例來說，這是一個定義幾何形狀行為的介面：
-12345// Go Interface  ...
+<p>使用 <strong>type</strong> 關鍵字定義介面，後面接著介面名稱和關鍵字 <code>interface</code>。然後，在大括號內指定一組方法簽名。</p>
         
       </div>
       <a class="more" href="/2019/11/19/golang-interfaces-tutorial-with-examples/">繼續閱讀</a>
