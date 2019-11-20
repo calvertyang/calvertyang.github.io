@@ -205,7 +205,59 @@
   
     <article class="article-card">
       <h2 class="article-head">
-        <a href="/2019/11/15/playing-with-pointers-in-golang/">在 Golang 與指標共舞</a>
+        <a href="/2019/11/19/golang-interfaces-tutorial-with-examples/">Golang 介面教學與範例</a>
+      </h2>
+      <p class="article-date">2019年11月19日</p>
+      
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          
+原文：CalliCoder — Golang Interfaces Tutorial with Examples
+
+Go 的介面Go 中的介面是使用一組方法簽名定義的型別。介面定義了類似物件型別的行為。
+舉例來說，這是一個定義幾何形狀行為的介面：
+12345// Go Interface  ...
+        
+      </div>
+      <a class="more" href="/2019/11/19/golang-interfaces-tutorial-with-examples/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/11/19/golang-methods-tutorial-with-examples/">Golang 方法教學與範例</a>
+      </h2>
+      <p class="article-date">2019年11月19日</p>
+      
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-methods-tutorial" target="_blank" rel="noopener">Golang Methods Tutorial with Examples</a></p>
+</blockquote>
+<p>技術上來說，Go 不是物件導向程式語言。它沒有類別、物件和繼承。</p>
+<p>但是，Go 有型別。並且，你可以在型別上定義<strong>方法</strong>。這讓 Go 有物件導向程式的風格。</p>
+<p>讓我們深入了解，看看如何辦到？</p>
+        
+      </div>
+      <a class="more" href="/2019/11/19/golang-methods-tutorial-with-examples/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/11/15/golang-structs-tutorial-with-examples/">Golang struct 教學與範例</a>
       </h2>
       <p class="article-date">2019年11月15日</p>
       
@@ -214,8 +266,31 @@
     <span class="tag-code">Golang</span>
   </a>
 
-  <a href="/tags#Pointer" >
-    <span class="tag-code">Pointer</span>
+
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-structs" target="_blank" rel="noopener">Golang Structs Tutorial with Examples</a></p>
+</blockquote>
+<p><code>struct</code> 是使用者定義的型別，包含已命名欄位/屬性的集合。它用於將相關資料分組在一起形成一個單位。任何具有一組屬性的現實世界實體都可以使用結構表示。</p>
+<p>如果你有物件導向的背景知識，你可以將 <code>struct</code> 視為支援複合但不支援繼承的輕量級類別。</p>
+<h3 id="定義-struct-型別"><a href="#定義-struct-型別" class="headerlink" title="定義 struct 型別"></a>定義 struct 型別</h3><p>你可以像這樣定義新的 <code>struct</code> 型別：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;</span><br><span class="line">	FirstName <span class="keyword">string</span></span><br><span class="line">	LastName  <span class="keyword">string</span></span><br><span class="line">	Age       <span class="keyword">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+      </div>
+      <a class="more" href="/2019/11/15/golang-structs-tutorial-with-examples/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/11/15/playing-with-pointers-in-golang/">在 Golang 與指標共舞</a>
+      </h2>
+      <p class="article-date">2019年11月15日</p>
+      
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
   </a>
 
 
@@ -422,82 +497,6 @@
         
       </div>
       <a class="more" href="/2019/11/06/working-with-constants-in-golang/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2019/11/05/golang-basic-types-operators-type-conversion/">Golang 基本型別、運算子和型別轉換</a>
-      </h2>
-      <p class="article-date">2019年11月5日</p>
-      
-        
-  <a href="/tags#Golang" >
-    <span class="tag-code">Golang</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-basic-types-operators-type-conversion" target="_blank" rel="noopener">Golang Basic Types, Operators and Type Conversion</a></p>
-</blockquote>
-<p>Go 是靜態型別的程式語言。Golang 中的每個變數都有關聯的型別。</p>
-<p>資料型別會對一組相關的資料集進行分類。它們定義了資料如何儲存在記憶體中、特定資料型別的變數可能儲存的值以及可以對其執行的運算。</p>
-<p>Golang 具有多種內建的資料型別，用於表示常見的值，如數字、布林值、字串等。在本文中，我們將逐一介紹這些基本資料型別，並了解它們的工作原理。</p>
-        
-      </div>
-      <a class="more" href="/2019/11/05/golang-basic-types-operators-type-conversion/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2019/11/05/golang-variables-zero-values-type-inference/">Golang 變數、零值和型別推斷</a>
-      </h2>
-      <p class="article-date">2019年11月5日</p>
-      
-        
-  <a href="/tags#Golang" >
-    <span class="tag-code">Golang</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-variables-zero-values-type-inference" target="_blank" rel="noopener">Golang Variables, Zero Values, and Type inference</a></p>
-</blockquote>
-<h3 id="變數和資料型別入門"><a href="#變數和資料型別入門" class="headerlink" title="變數和資料型別入門"></a>變數和資料型別入門</h3><p>每個程式都需要在記憶體中儲存一些資料。資料被儲存在特定的記憶體位置。</p>
-<p>變數只是為儲存資料的記憶體位置所取的一個方便的名稱。除了名稱外，每個變數還有關聯的型別。</p>
-        
-      </div>
-      <a class="more" href="/2019/11/05/golang-variables-zero-values-type-inference/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2018/09/18/working-with-time-zones-in-ruby-on-rails/">在 Ruby on Rails 使用時區</a>
-      </h2>
-      <p class="article-date">2018年9月18日</p>
-      
-        
-  <a href="/tags#Ruby-on-Rails" >
-    <span class="tag-code">Ruby on Rails</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          <blockquote>
-<p>原文：<strong>VARVET BLOG</strong> — <a href="https://www.varvet.com/blog/working-with-time-zones-in-ruby-on-rails" target="_blank" rel="noopener">WORKING WITH TIME ZONES IN RUBY ON RAILS</a></p>
-</blockquote>
-<p>Rails 提供了很好的工具來處理時區，但仍有很多事情可能會出錯。這篇文章會點出這些問題並提供解決方案。</p>
-<p>讓我被欺騙最多次的應該是，Rails 會愚弄你，讓你誤以為它替你處理好了所有和時間有關的部分。別誤會我的意思，我希望 Rails 盡可能的為我做更多事情，但在學習的過程中由於不夠熟悉 Rails 為我做了些什麼，因此碰到了許多困難。另外需要注意的是，在處理時區上，有更多是你意想不到需要處理的。需要考慮資料庫、伺服器、開發機器、系統設定、使用者設定和瀏覽器。</p>
-        
-      </div>
-      <a class="more" href="/2018/09/18/working-with-time-zones-in-ruby-on-rails/">繼續閱讀</a>
     </article>
   
 

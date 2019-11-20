@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Calvert&#39;s tech blog">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Calvert&#39;s murmur
+    
+  </title>
+  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrcode.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-44933497-2');
+  </script>
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Calvert's murmur</span>
+    </a>
+
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/categories/" class="item-link">Categories</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+
+    
+      <div id="search-form-wrap">
+        <form class="search-form">
+          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+          <button type="submit" class="search-form-submit">
+            <span class="fa fa-search"></span>
+          </button>
+        </form>
+        <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
+      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+<script>
+  (function (window) {
+    var INSIGHT_CONFIG = {
+      TRANSLATION: {
+        POSTS: '文章',
+        PAGES: '頁面',
+        CATEGORIES: '分類',
+        TAGS: '標籤',
+        UNTITLED: '無標題',
+      },
+      ROOT_URL: '/',
+      CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+  })(window);
+</script>
+<script src="/js/insight.js"></script>
+
+      </div>
+    
+
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/categories/" class="menu-link">Categories</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2013/10/20/jquery-validation-plugin-for-array-of-elements/">使用 jQuery Validation Plugin 驗證元素陣列</a>
+      </h2>
+      <p class="article-date">2013年10月20日</p>
+      
+        
+  <a href="/tags#JavaScript" >
+    <span class="tag-code">JavaScript</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          有時候我們會需要驗證表單中的元素陣列，例如：
+1234567891011121314151617181920212223242526272829&lt;form id="userDataForm" name="userDataForm" method="post" action=""&gt; ...
+        
+      </div>
+      <a class="more" href="/2013/10/20/jquery-validation-plugin-for-array-of-elements/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2013/10/17/creating-a-self-signed-ssl-certificate-for-nginx/">為 Ngnix 建立自行簽章的憑證</a>
+      </h2>
+      <p class="article-date">2013年10月17日</p>
+      
+        
+  <a href="/tags#Linux" >
+    <span class="tag-code">Linux</span>
+  </a>
+
+  <a href="/tags#SSL" >
+    <span class="tag-code">SSL</span>
+  </a>
+
+  <a href="/tags#Nginx" >
+    <span class="tag-code">Nginx</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <h3 id="必要條件"><a href="#必要條件" class="headerlink" title="必要條件"></a>必要條件</h3><p>產生憑證需要 OpenSSL 類別庫，請先確認系統是否已安裝 OpenSSL。</p>
+<p>若尚未安裝，可透過以下方式安裝：</p>
+<ul>
+<li><p>Mac OS X 使用 <a href="http://mxcl.github.com/homebrew/" target="_blank" rel="noopener">Homebrew</a> 安裝</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install openssl</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Windows 可到此網站下載安裝檔：<a href="http://www.slproweb.com/products/Win32OpenSSL.html" target="_blank" rel="noopener">OpenSSL for Windows </a></p>
+</li>
+<li><p>Ubuntu/Debian Linux</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install openssl</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>RedHat/CentOS Linux</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install openssl</span><br></pre></td></tr></table></figure>
+        
+      </div>
+      <a class="more" href="/2013/10/17/creating-a-self-signed-ssl-certificate-for-nginx/">繼續閱讀</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/page/3/"><span class="page-arrow">&larr; </span>上一頁</a>
+  
+  
+    <a class="unvisible" href="/">下一頁 <span class="page-arrow">&rarr;</span></a>
+  
+</div>
+
+  
+</main>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; Calvert 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+
+<script>
+  async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  $('figure').each(function(i, block) {
+    let lang = this.classList[1] || 'codeblock';
+    this.dataset.lang = lang.toUpperCase();
+  });
+</script>
+<script src="/js/script.js"></script>
+
+  </body>
+</html>
