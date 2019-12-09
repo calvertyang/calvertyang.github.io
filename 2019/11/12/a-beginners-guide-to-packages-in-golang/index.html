@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Calvert&#39;s tech blog">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Golang Package 初學者指南 | Calvert&#39;s murmur
+    
+  </title>
+  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrcode.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-44933497-2');
+  </script>
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Calvert's murmur</span>
+    </a>
+
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/categories/" class="item-link">Categories</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+
+    
+      <div id="search-form-wrap">
+        <form class="search-form">
+          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
+          <button type="submit" class="search-form-submit">
+            <span class="fa fa-search"></span>
+          </button>
+        </form>
+        <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
+      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+<script>
+  (function (window) {
+    var INSIGHT_CONFIG = {
+      TRANSLATION: {
+        POSTS: '文章',
+        PAGES: '頁面',
+        CATEGORIES: '分類',
+        TAGS: '標籤',
+        UNTITLED: '無標題',
+      },
+      ROOT_URL: '/',
+      CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+  })(window);
+</script>
+<script src="/js/insight.js"></script>
+
+      </div>
+    
+
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/categories/" class="menu-link">Categories</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Golang Package 初學者指南</h2>
+  <p class="post-date">2019-11-12</p>
+  <div class="arrow-down">
+    <a href="javascript:;" target="_blank" rel="noopener"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-packages" target="_blank" rel="noopener">A beginners guide to Packages in Golang</a></p>
+</blockquote>
+<p>Go 旨在鼓勵良好的軟體工程實踐。高品質軟體的指導原則之一是 DRY 原則：<strong>D</strong>on’t <strong>R</strong>epeat <strong>Y</strong>ourself，這意味著你永遠不應重複撰寫相同的程式碼。你應該重複使用並儘可能建立在現有程式碼上。</p>
+<p>允許程式碼重複使用的最基本的建構區塊是<a href="/2019/11/11/introduction-to-functions-in-golang/" title="函數">函數</a>。<strong>Package</strong> 是程式碼可重複使用性的下一步。他們可幫助你將相關的 Go 原始檔組織到同一單元中，使他們模組化、可重複使用和可維護。</p>
+<p><em>在本文中，你將學習如何將 Go 程式碼組織到可重複使用的 package 中，如何匯入 package，如何將函數、型別或變數匯出到外部 package，以及如何安裝第三方 package。</em></p>
+<a id="more"></a>
+
+<p>讓我們開始吧！</p>
+<h3 id="Go-工作區及程式碼組織"><a href="#Go-工作區及程式碼組織" class="headerlink" title="Go 工作區及程式碼組織"></a>Go 工作區及程式碼組織</h3><p>在學習 Go package 之前，了解 Go 程式碼在所謂的 Go 工作區中的組織方式非常重要。請查看以下文章，以複習有關 Go 組織程式碼的概念：</p>
+<blockquote>
+<a href="/2019/11/01/golang-installation-setup-gopath-workspace/" title="安裝、設定 Golang 的 GOPATH 和 Go 工作區">安裝、設定 Golang 的 GOPATH 和 Go 工作區</a>
+</blockquote>
+<h3 id="Go-Package"><a href="#Go-Package" class="headerlink" title="Go Package"></a>Go Package</h3><p>基本上來說，package 不過是 Go 工作區中包含一個或多個 Go 原始檔案或其他 Go package 的目錄。</p>
+<img src="/2019/11/12/a-beginners-guide-to-packages-in-golang/go-package-illustration.jpg" class="">
+
+<p>每個 Go 原始檔案都隸屬於一個 package。我們使用以下語法將原始檔案宣告為 package 的一部分：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> &lt;packagename&gt;</span><br></pre></td></tr></table></figure>
+
+<p>上面的 package 宣告必須是 Go 原始檔案中的第一行程式碼。Go 原始檔案中定義的所有函數、型別和變數都會成為所宣告 package 的一部分。</p>
+<p>你可以選擇將 package 中定義的成員匯出到外部 package，或保持其私有化在相同 package。其他 package 可以匯入並使用從 package 中匯出的函數或型別。</p>
+<p><strong>讓我們來看個範例</strong>：到目前為止，我們在本<a href="https://calvertyang.github.io/tags#Golang">系列教學</a>中幾乎會看到所有程式碼都包含以下這行：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br></pre></td></tr></table></figure>
+
+<p><code>fmt</code> 是一個核心函式庫，包含格式化和列印輸出或從各種 I/O 來源讀取輸入等相關的功能。它匯出如 <code>Println()</code>、<code>Printf()</code>、<code>Scanf()</code>等函數，以供其他 package 重複使用。</p>
+<p><strong>以這種方式封裝功能具有以下優點：</strong></p>
+<ul>
+<li><p>它減少了命名衝突。你可以在不同的 package 中使用相同的函數名稱。這讓我們的函數名稱簡短明瞭。</p>
+</li>
+<li><p>它將相關程式碼組織在一起，以便更輕鬆地找到要重複使用的程式碼。</p>
+</li>
+<li><p>它僅需要重新編譯程式實際上有更改的一小部分，進而加速了編譯過程。儘管我們使用了 <code>fmt</code> package，但我們不需要在每次修改我們的程式時重新編譯它。</p>
+</li>
+</ul>
+<h3 id="main-package-和-main-函數"><a href="#main-package-和-main-函數" class="headerlink" title="main package 和 main() 函數"></a><code>main</code> package 和 <code>main()</code> 函數</h3><p>Go 程式從 <code>main</code> package 開始執行。這是一個特殊的 package，用於想要執行的程式。</p>
+<p>按照慣例，可執行程式（有 <code>main</code> package 的程式）稱為<i>指令</i>。其他則簡稱為 <i>Package</i>。</p>
+<p><code>main()</code> 函數是一個特殊的函數，它是可執行程式的進入點。讓我們來看一個 Go 的可執行程式範例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Package declaration</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="comment">// Importing packages</span></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line">	<span class="string">"math"</span></span><br><span class="line">	<span class="string">"math/rand"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Finding the Max of two numbers</span></span><br><span class="line">	fmt.Println(math.Max(<span class="number">73.15</span>, <span class="number">92.46</span>))</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Calculate the square root of a number</span></span><br><span class="line">	fmt.Println(math.Sqrt(<span class="number">225</span>))</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Printing the value of `𝜋`</span></span><br><span class="line">	fmt.Println(math.Pi)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Epoch time in milliseconds</span></span><br><span class="line">	epoch := time.Now().Unix()</span><br><span class="line">	fmt.Println(epoch)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Generating a random integer between 0 to 100</span></span><br><span class="line">	rand.Seed(epoch)</span><br><span class="line">	fmt.Println(rand.Intn(<span class="number">100</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ go run main.go</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">92.46</span><br><span class="line">15</span><br><span class="line">3.141592653589793</span><br><span class="line">1538045386</span><br><span class="line">40</span><br></pre></td></tr></table></figure>
+
+<h3 id="匯入-Package"><a href="#匯入-Package" class="headerlink" title="匯入 Package"></a>匯入 Package</h3><p>Go 中有兩種匯入 package 的方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Multiple import statements</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"time"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"math"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"math/rand"</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Factored import statements</span></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line">	<span class="string">"math"</span></span><br><span class="line">	<span class="string">"math/rand"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>Go 的慣例是：_package 的名稱與匯入路徑的最後一個元素相同_。舉例來說，匯入為 <code>math/rand</code> 的 package 的名稱為 <code>rand</code>。它是透過 <code>math/rand</code> 路徑匯入的，因為它是 <code>math</code> package 中的巢狀子目錄。</p>
+<h3 id="匯出與未匯出的名稱"><a href="#匯出與未匯出的名稱" class="headerlink" title="匯出與未匯出的名稱"></a>匯出與未匯出的名稱</h3><blockquote>
+<p>以大寫字母開頭的所有內容（變數、型別或函數）都會被匯出，並可被外部 package 看見。</p>
+<p>任何不以大寫字母開頭的內容都不會被匯出，並且僅在同一 package 中可見。</p>
+</blockquote>
+<p>匯入 package 時，只能存取其匯出的名稱。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"math"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// MaxInt64 is an exported name</span></span><br><span class="line">	fmt.Println(<span class="string">"Max value of int64: "</span>, <span class="keyword">int64</span>(math.MaxInt64))</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Phi is an exported name</span></span><br><span class="line">	fmt.Println(<span class="string">"Value of Phi (ϕ): "</span>, math.Phi)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// pi starts with a small letter, so it is not exported</span></span><br><span class="line">	fmt.Println(<span class="string">"Value of Pi (𝜋): "</span>, math.pi)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">./exported_names.go:16:38: cannot refer to unexported name math.pi</span><br><span class="line">./exported_names.go:16:38: undefined: math.pi</span><br></pre></td></tr></table></figure>
+
+<p>要修正以上錯誤，需要將 <code>math.pi</code> 更改為 <code>math.Pi</code>。</p>
+<h3 id="建立和管理自訂-Package"><a href="#建立和管理自訂-Package" class="headerlink" title="建立和管理自訂 Package"></a>建立和管理自訂 Package</h3><p>到目前為止，我們只有在 <code>main</code> package 中撰寫程式碼，並使用從 Go 核心函式庫匯入的功能。</p>
+<p>讓我們建立一個 Go 專案範例，該專案具有多個自訂 package 以及一堆原始碼檔案，並了解相同的 package 宣告、匯入和匯出概念如何套用在自訂 package。</p>
+<p>這是我們在 Go 工作區內組織專案的方式：</p>
+<img src="/2019/11/12/a-beginners-guide-to-packages-in-golang/go-custom-package-organization.jpg" class="">
+
+<p><code>src</code> 資料夾包含我們的 Go 專案，該專案位於名為 <code>example</code> 的 git 儲存庫中。<code>bin</code> 和 <code>pkg</code> 資料夾分別包含可執行檔和 package 檔案。他們在我們安裝程式時由 <a href="/2019/11/01/golang-installation-setup-gopath-workspace/" title="Go 工具">Go 工具</a>自動產生。</p>
+<p>讓我們逐一查看程式中的每個原始檔案中的程式碼：</p>
+<h4 id="numbers-prime-go"><a href="#numbers-prime-go" class="headerlink" title="numbers/prime.go"></a>numbers/prime.go</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> numbers</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"math"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Checks if a number is prime or not</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">IsPrime</span><span class="params">(num <span class="keyword">int</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">2</span>; i &lt;= <span class="keyword">int</span>(math.Floor(math.Sqrt(<span class="keyword">float64</span>(num)))); i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> num%i == <span class="number">0</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> num &gt; <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="strings-reverse-go"><a href="#strings-reverse-go" class="headerlink" title="strings/reverse.go"></a>strings/reverse.go</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> strings</span><br><span class="line"></span><br><span class="line"><span class="comment">// Reverses a string</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	Since strings in Go are immutable, we first convert the string to a mutable array of runes ([]rune),</span></span><br><span class="line"><span class="comment">	perform the reverse operation on that, and then re-cast to a string.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Reverse</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	runes := []<span class="keyword">rune</span>(s)</span><br><span class="line">	reversedRunes := reverseRunes(runes)</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">string</span>(reversedRunes)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="strings-reverse-runes-go"><a href="#strings-reverse-runes-go" class="headerlink" title="strings/reverse_runes.go"></a>strings/reverse_runes.go</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> strings</span><br><span class="line"></span><br><span class="line"><span class="comment">// Reverses an array of runes</span></span><br><span class="line"><span class="comment">// This function is not exported (It is only visible inside the `strings` package)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverseRunes</span><span class="params">(r []<span class="keyword">rune</span>)</span> []<span class="title">rune</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i, j := <span class="number">0</span>, <span class="built_in">len</span>(r)<span class="number">-1</span>; i &lt; j; i, j = i+<span class="number">1</span>, j<span class="number">-1</span> &#123;</span><br><span class="line">		r[i], r[j] = r[j], r[i]</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> r</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="strings-greeting-texts-go-Nested-package"><a href="#strings-greeting-texts-go-Nested-package" class="headerlink" title="strings/greeting/texts.go (Nested package)"></a>strings/greeting/texts.go (Nested package)</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Nested Package</span></span><br><span class="line"><span class="keyword">package</span> greeting</span><br><span class="line"></span><br><span class="line"><span class="comment">// Exported</span></span><br><span class="line"><span class="keyword">const</span>  (</span><br><span class="line">	WelcomeText = <span class="string">"Hello, World to Golang"</span></span><br><span class="line">	MorningText = <span class="string">"Good Morning"</span></span><br><span class="line">	EveningText = <span class="string">"Good Evening"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Not exported (only visible inside the `greeting` package)</span></span><br><span class="line"><span class="keyword">var</span> loremIpsumText = <span class="string">`Lorem ipsum dolor sit amet, consectetur adipiscing elit,</span></span><br><span class="line"><span class="string">sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad</span></span><br><span class="line"><span class="string">minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea</span></span><br><span class="line"><span class="string">commodo consequat.`</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="myapp-app-go-The-main-package-entry-point-of-our-program"><a href="#myapp-app-go-The-main-package-entry-point-of-our-program" class="headerlink" title="myapp/app.go (The main package: entry point of our program)"></a>myapp/app.go (The main package: entry point of our program)</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"github.com/callicoder/example/numbers"</span></span><br><span class="line">	<span class="string">"github.com/callicoder/example/strings"</span></span><br><span class="line">	<span class="string">"github.com/callicoder/example/strings/greeting"</span> <span class="comment">// Importing a nested package</span></span><br><span class="line">	str <span class="string">"strings"</span>	<span class="comment">// Package Alias</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(numbers.IsPrime(<span class="number">19</span>))</span><br><span class="line"></span><br><span class="line">	fmt.Println(greeting.WelcomeText)</span><br><span class="line"></span><br><span class="line">	fmt.Println(strings.Reverse(<span class="string">"callicoder"</span>))</span><br><span class="line"></span><br><span class="line">	fmt.Println(str.Count(<span class="string">"Go is Awesome. I love Go"</span>, <span class="string">"Go"</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Installing the Go package</span><br><span class="line">$ go install github.com/callicoder/example/myapp</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Running the executable binary</span><br><span class="line">$ myapp</span><br><span class="line">true</span><br><span class="line">Hello, World to Golang</span><br><span class="line">redocillac</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h3><ul>
+<li><p>匯入路徑</p>
+<p>所有匯入路徑都相對於 Go 工作區的 <code>src</code> 目錄。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"github.com/callicoder/example/numbers"</span></span><br><span class="line">	<span class="string">"github.com/callicoder/example/strings"</span></span><br><span class="line">	<span class="string">"github.com/callicoder/example/strings/greeting"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Package 別名</p>
+<p>你可以使用 package 別名來解決相同名稱的不同 package 之間的衝突，或只是為匯入的 package 取一個簡短的名字。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	str <span class="string">"strings"</span>   <span class="comment">// Package Alias</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>巢狀 Package</p>
+<p>  你可以在 package 中放入另一個 package。就像建立子目錄一樣簡單：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">src</span><br><span class="line">    github.com/callicoder/example</span><br><span class="line">        strings                     # Package</span><br><span class="line">            greeting                # Nested Package</span><br><span class="line">                texts.go</span><br></pre></td></tr></table></figure>
+
+<p>可以如同根 package 一樣匯入巢狀 package。只要提供他相對於 <code>$GOPATH/src</code> 目錄的路徑：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"github.com/callicoder/example/strings/greeting"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="安裝第三方-Package"><a href="#安裝第三方-Package" class="headerlink" title="安裝第三方 Package"></a>安裝第三方 Package</h3><p>你可以使用 <code>go get</code> 指令從遠端儲存庫中取得第三方 package。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ go get -u github.com/jinzhu/gorm</span><br></pre></td></tr></table></figure>
+
+<p>上面的指令從 Github 取得 <code>gorm</code> package，並將其儲存在 Go 工作區中的 <code>src/github.com/jinzhu/gorm</code> 路徑中。</p>
+<p>你現在可以像這樣在程式中匯入並使用以上 package：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"github.com/jinzhu/gorm"</span></span><br></pre></td></tr></table></figure>
+
+<p>要注意的是，與其他語言和 package 管理工具（<code>npm</code>、<code>maven</code> 等）不同，Go 沒有集中的官方 package 儲存庫。因此，他要求你在 <code>go get</code> 指令中提供 package 的主機名稱和路徑。</p>
+<p>這裡有另一個 <code>go get</code> 指令的範例，該指令從 <code>go.uber.org</code>（Uber 的 Go package 託管網站）下載 package：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ go get -u go.uber.org/zap</span><br></pre></td></tr></table></figure>
+
+<p>上面的指令下載並儲存 <code>zap</code> package 在 <code>$GOPATH/src/go.uber.org/zap</code> 路徑中。你可以這樣匯入它：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"go.uber.org/zap"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>在本文中，你學到了如何將 Go 程式碼組織到可重複使用的 package 中、如何匯入 package、如何匯出 package 中的成員、如何建立自訂 package 以及如何安裝第三方 package。</p>
+<p>在之後的文章中，你將會學習有關 package 初始化、空白識別字元和 package 文件。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- UpdatedDate Start -->
+     
+       <p class="post-date">最後更新時間：2019-12-09</p>
+     
+   <!-- UpdatedDate END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/11/11/introduction-to-functions-in-golang/">
+        <span class="nav-arrow">&larr; </span>
+        
+          Golang 函數介紹
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/11/12/working-with-arrays-in-golang/">
+        
+          在 Golang 中使用陣列
+        
+        <span class="nav-arrow"> &rarr;</span>
+      </a>
+    
+  </div>
+
+
+    <!-- NAV END -->
+    <!-- 打賞 START -->
+    
+    <!-- 打賞 END -->
+    <!-- 二維條碼 START -->
+    
+      <div class="qrcode">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="share-qrcode"/>
+        </svg>
+        <p class="notice">掃描二維條碼，分享此文章</p>
+      </div>
+    
+    <!-- 二維條碼 END -->
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">目錄</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Go-工作區及程式碼組織"><span class="toc-nav-text">Go 工作區及程式碼組織</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Go-Package"><span class="toc-nav-text">Go Package</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#main-package-和-main-函數"><span class="toc-nav-text">main package 和 main() 函數</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#匯入-Package"><span class="toc-nav-text">匯入 Package</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#匯出與未匯出的名稱"><span class="toc-nav-text">匯出與未匯出的名稱</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#建立和管理自訂-Package"><span class="toc-nav-text">建立和管理自訂 Package</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#numbers-prime-go"><span class="toc-nav-text">numbers/prime.go</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#strings-reverse-go"><span class="toc-nav-text">strings/reverse.go</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#strings-reverse-runes-go"><span class="toc-nav-text">strings/reverse_runes.go</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#strings-greeting-texts-go-Nested-package"><span class="toc-nav-text">strings/greeting/texts.go (Nested package)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#myapp-app-go-The-main-package-entry-point-of-our-program"><span class="toc-nav-text">myapp/app.go (The main package: entry point of our program)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#注意事項"><span class="toc-nav-text">注意事項</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#安裝第三方-Package"><span class="toc-nav-text">安裝第三方 Package</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#結論"><span class="toc-nav-text">結論</span></a></li></ol>
+    
+  </div>
+</aside>
+
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://calvertyang.github.io/2019/11/12/a-beginners-guide-to-packages-in-golang/';
+    var banner = '';
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      });
+    } else {
+      $('#article-banner').geopattern(url);
+    }
+    $('.header').removeClass('fixed-header');
+
+     // error image
+    $('.markdown-content img').on('error', function() {
+      $(this).attr('src', '/css/images/error-img.png');
+      $(this).css({
+        'cursor': 'default'
+      });
+    });
+
+    // 若圖片放在連結內，則將游標改為 pointer 並將圖片靠左
+    $('.markdown-content img').each(function() {
+      if ($(this).parents().is('a')) {
+        $(this).css({
+          'cursor': 'pointer',
+          'display': 'inline-block'
+        });
+      }
+    });
+
+    // zoom image
+    $('.markdown-content img').on('click', function(e) {
+      var src = $(this).attr('src');
+      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
+        var imageW = $(this).width();
+        var imageH = $(this).height();
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        zoom = zoom < 1 ? 1 : zoom;
+        zoom = zoom > 2 ? 2 : zoom;
+        var transY = (($(window).height() - imageH) / 2).toFixed(2);
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
+        $('.image-view-wrap').addClass('wrap-active');
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        });
+        $('html').css('overflow', 'hidden');
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove();
+          $('html').attr('style', '');
+        });
+      }
+    });
+
+    // qrcode
+    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
+      text: document.location.href,
+      width: 100,
+      height: 100,
+      colorDark: '#000000',
+    	colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.L,
+      useSVG: true
+    });
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; Calvert 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+
+<script>
+  async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  $('figure').each(function(i, block) {
+    let lang = this.classList[1] || 'codeblock';
+    this.dataset.lang = lang.toUpperCase();
+  });
+</script>
+<script src="/js/script.js"></script>
+
+  </body>
+</html>

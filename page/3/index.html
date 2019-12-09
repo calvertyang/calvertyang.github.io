@@ -205,6 +205,100 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2018/01/24/electron-api-demos/">Electron API 範例</a>
+      </h2>
+      <p class="article-date">2018年1月24日</p>
+      
+        
+  <a href="/tags#Electron" >
+    <span class="tag-code">Electron</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          
+因為最近在工作時需要使用 Electron，發現官方提供的 Electron API 應用程式範例很適合讓想入門的人了解一些基本 API 的用法以及實際執行的效果。
+在 Github 上搜尋這個範例程式發現沒有正體中文版覺得有點可惜，於是就花了點時間來翻譯此範例程式。
+原始碼可從 Gith ...
+        
+      </div>
+      <a class="more" href="/2018/01/24/electron-api-demos/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/03/15/drawing-with-rvg/">使用 RVG 繪圖</a>
+      </h2>
+      <p class="article-date">2017年3月15日</p>
+      
+        
+  <a href="/tags#Ruby" >
+    <span class="tag-code">Ruby</span>
+  </a>
+
+  <a href="/tags#Rmagick" >
+    <span class="tag-code">Rmagick</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>RMagick User’s Guide and Reference</strong> — <a href="https://rmagick.github.io/rvgtut.html" target="_blank" rel="noopener">Drawing with RVG</a></p>
+</blockquote>
+<h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><p>RVG（Ruby 向量圖形）是 RMagick 的 Draw 類別的外觀，它提供了基於 W3C 推薦的可縮放向量圖形（Scalable Vector Graphics）的繪圖 API。</p>
+<p>RVG 是一個可縮放向量繪圖函式庫。可縮放意味著圖形不是固定的像素尺寸。相同的圖形可以被呈現在螢幕上或列印出來。向量圖使用了幾何物件，如直線和圓。與點陣圖不同，向量圖在放大時不會「像素化」。</p>
+<img src="/2017/03/15/drawing-with-rvg/duck.gif" class="">
+
+<p>作為 RVG 函式庫的介紹，讓我們來看看如何畫出上面這隻小鴨。以下是完整的程式。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">'rvg/rvg'</span></span><br><span class="line"><span class="keyword">include</span> Magick</span><br><span class="line"></span><br><span class="line">RVG::dpi = <span class="number">72</span></span><br><span class="line"></span><br><span class="line">rvg = RVG.new(<span class="number">2.5</span>.<span class="keyword">in</span>, <span class="number">2.5</span>.<span class="keyword">in</span>).viewbox(<span class="number">0</span>,<span class="number">0</span>,<span class="number">250</span>,<span class="number">250</span>) <span class="keyword">do</span> <span class="params">|canvas|</span></span><br><span class="line">  canvas.background_fill = <span class="string">'white'</span></span><br><span class="line"></span><br><span class="line">  canvas.g.translate(<span class="number">100</span>, <span class="number">150</span>).rotate(-<span class="number">30</span>) <span class="keyword">do</span> <span class="params">|body|</span></span><br><span class="line">    body.styles(<span class="symbol">:fill=&gt;<span class="string">'yellow'</span></span>, <span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>, <span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>)</span><br><span class="line">    body.ellipse(<span class="number">50</span>, <span class="number">30</span>)</span><br><span class="line">    body.rect(<span class="number">45</span>, <span class="number">20</span>, -<span class="number">20</span>, -<span class="number">10</span>).skewX(-<span class="number">35</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  canvas.g.translate(<span class="number">130</span>, <span class="number">83</span>) <span class="keyword">do</span> <span class="params">|head|</span></span><br><span class="line">    head.styles(<span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>, <span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>)</span><br><span class="line">    head.circle(<span class="number">30</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'yellow'</span></span>)</span><br><span class="line">    head.circle(<span class="number">5</span>, <span class="number">10</span>, -<span class="number">5</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'black'</span></span>)</span><br><span class="line">    head.polygon(<span class="number">30</span>,<span class="number">0</span>, <span class="number">70</span>,<span class="number">5</span>, <span class="number">30</span>,<span class="number">10</span>, <span class="number">62</span>,<span class="number">25</span>, <span class="number">23</span>,<span class="number">20</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'orange'</span></span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  foot = RVG::Group.new <span class="keyword">do</span> <span class="params">|_foot|</span></span><br><span class="line">    _foot.path(<span class="string">'m0,0 v30 l30,10 l5,-10, l-5,-10 l-30,10z'</span>).</span><br><span class="line">    styles(<span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>, <span class="symbol">:fill=&gt;<span class="string">'orange'</span></span>, <span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  canvas.use(foot).translate(<span class="number">75</span>, <span class="number">188</span>).rotate(<span class="number">15</span>)</span><br><span class="line">  canvas.use(foot).translate(<span class="number">100</span>, <span class="number">185</span>).rotate(-<span class="number">15</span>)</span><br><span class="line"></span><br><span class="line">  canvas.text(<span class="number">125</span>, <span class="number">30</span>) <span class="keyword">do</span> <span class="params">|title|</span></span><br><span class="line">    title.tspan(<span class="string">"duck|"</span>).styles(<span class="symbol">:text_anchor=&gt;<span class="string">'end'</span></span>, <span class="symbol">:font_size=&gt;</span><span class="number">20</span>,</span><br><span class="line">      <span class="symbol">:font_family=&gt;<span class="string">'helvetica'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'black'</span></span>)</span><br><span class="line">    title.tspan(<span class="string">"type"</span>).styles(<span class="symbol">:font_size=&gt;</span><span class="number">22</span>,</span><br><span class="line">      <span class="symbol">:font_family=&gt;<span class="string">'times'</span></span>, <span class="symbol">:font_style=&gt;<span class="string">'italic'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'red'</span></span>)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    canvas.rect(<span class="number">249</span>,<span class="number">249</span>).styles(<span class="symbol">:stroke=&gt;<span class="string">'blue'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'none'</span></span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">rvg.draw.write(<span class="string">'duck.gif'</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>所有的繪圖都遵循相同的 3 個步驟：</p>
+<ol>
+<li>建立一個 RVG 物件。指定最終圖片的寬度和高度。轉交程式碼區塊給 <code>RVG.new</code> 方法。</li>
+<li>在程式區塊內，在 RVG 物件調用方法來指定背景，加入形狀、文字或點陣圖，或加入一組形狀、文字或點陣圖。</li>
+<li>調用 <code>draw</code> 方法在背景繪出形狀、文字或點陣圖。</li>
+</ol>
+<p>我將逐行介紹範例。</p>
+        
+      </div>
+      <a class="more" href="/2017/03/15/drawing-with-rvg/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/02/06/how-to-setup-virtual-users-for-vsftpd-in-ubuntu/">如何在 Ubuntu 中為 vsftpd 設置虛擬帳號</a>
+      </h2>
+      <p class="article-date">2017年2月6日</p>
+      
+        
+  <a href="/tags#Linux" >
+    <span class="tag-code">Linux</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          以下是在 Ubunto 16.04 LTS 安裝 vsftpd 並設定虛擬帳號的步驟
+
+安裝 vsftpd
+12$ sudo apt-get update$ sudo apt-get install vsftpd
+
+編輯設定檔
+1$ sudo vim /etc/vsftpd.conf
+
+以下 ...
+        
+      </div>
+      <a class="more" href="/2017/02/06/how-to-setup-virtual-users-for-vsftpd-in-ubuntu/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2016/10/16/capistrano-with-ed25519-keys/">在 Capistrano 自動化部署時使用 Ed25519 金鑰</a>
       </h2>
       <p class="article-date">2016年10月16日</p>
@@ -468,145 +562,6 @@ GitHub Flow 是一個基於分支的輕量化工作流程，幫助團隊及專�
         
       </div>
       <a class="more" href="/2013/11/16/sql-to-aggregation-mapping-chart/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2013/11/14/sql-to-mongodb-mapping-chart/">SQL 及 MongoDB 基本指令對應表</a>
-      </h2>
-      <p class="article-date">2013年11月14日</p>
-      
-        
-  <a href="/tags#SQL" >
-    <span class="tag-code">SQL</span>
-  </a>
-
-  <a href="/tags#NoSQL" >
-    <span class="tag-code">NoSQL</span>
-  </a>
-
-  <a href="/tags#MongoDB" >
-    <span class="tag-code">MongoDB</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          <p>由於新專案採用了 <a href="http://nodejs.org/" target="_blank" rel="noopener">Node.js</a> 開發且使用 <a href="http://www.mongodb.org/" target="_blank" rel="noopener">MongoDB</a> 作為儲存媒介，所以動手翻譯了官方文件方便查閱相關指令用法。</p>
-<h3 id="術語和概念-Terminology-and-Concepts"><a href="#術語和概念-Terminology-and-Concepts" class="headerlink" title="術語和概念(Terminology and Concepts)"></a>術語和概念(Terminology and Concepts)</h3><h5 id="下表列出了各種-SQL-和相應的-MongoDB-的術語和概念。"><a href="#下表列出了各種-SQL-和相應的-MongoDB-的術語和概念。" class="headerlink" title="下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。"></a>下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。</h5><table>
-<thead>
-<tr>
-<th align="left">SQL 術語/概念</th>
-<th align="left">MongoDB 術語/概念</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">資料庫(database)</td>
-<td align="left">資料庫(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-database" target="_blank" rel="noopener">database</a>)</td>
-</tr>
-<tr>
-<td align="left">資料表(table)</td>
-<td align="left">集合(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-collection" target="_blank" rel="noopener">collection</a>)</td>
-</tr>
-<tr>
-<td align="left">資料列(row)</td>
-<td align="left">文件(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-document" target="_blank" rel="noopener">document</a>) 或 <a href="http://docs.mongodb.org/manual/reference/glossary/#term-bson" target="_blank" rel="noopener">BSON</a> 文件</td>
-</tr>
-<tr>
-<td align="left">資料行(column)</td>
-<td align="left">欄位(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-field" target="_blank" rel="noopener">field</a>)</td>
-</tr>
-<tr>
-<td align="left">索引(index)</td>
-<td align="left">索引(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-index" target="_blank" rel="noopener">index</a>)</td>
-</tr>
-<tr>
-<td align="left">資料表連結(table joins)</td>
-<td align="left">嵌入式文件及連結(embedded documents and linking)</td>
-</tr>
-<tr>
-<td align="left">主索引鍵(primary key)<br /><br />指定任意一個或多個欄位組合為主索引鍵，資料內容須唯一不可重複。</td>
-<td align="left">主索引鍵(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-primary-key" target="_blank" rel="noopener">primary key</a>)<br /><br />在 MongoDB，主索引鍵會自動設定到 <a href="http://docs.mongodb.org/manual/reference/glossary/#term-id" target="_blank" rel="noopener">_id</a> 欄位。</td>
-</tr>
-<tr>
-<td align="left">彙總(aggregation)，例如：group by</td>
-<td align="left">彙總管線(aggregation pipeline)<br /><br /><a href="http://calvert.logdown.com/posts/159915-sql-to-aggregation-mapping-chart" target="_blank" rel="noopener">參閱 SQL 至彙總(Aggregation)對應表</a>.</td>
-</tr>
-</tbody></table>
-<h3 id="可執行檔案-Executables"><a href="#可執行檔案-Executables" class="headerlink" title="可執行檔案(Executables)"></a>可執行檔案(Executables)</h3><h5 id="下表列出了-MySQL-Oracle-可執行檔案和相應的-MongoDB-的可執行檔案。"><a href="#下表列出了-MySQL-Oracle-可執行檔案和相應的-MongoDB-的可執行檔案。" class="headerlink" title="下表列出了 MySQL / Oracle 可執行檔案和相應的 MongoDB 的可執行檔案。"></a>下表列出了 MySQL / Oracle 可執行檔案和相應的 MongoDB 的可執行檔案。</h5><table>
-<thead>
-<tr>
-<th align="left"></th>
-<th align="left">MySQL / Oracle</th>
-<th align="left">MongoDB</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">資料庫伺服器(Database Server)</td>
-<td align="left">mysqld / oracle</td>
-<td align="left">mongod</td>
-</tr>
-<tr>
-<td align="left">資料庫用戶端(Database Client)</td>
-<td align="left">mysql / sqlplus</td>
-<td align="left">mongo</td>
-</tr>
-</tbody></table>
-        
-      </div>
-      <a class="more" href="/2013/11/14/sql-to-mongodb-mapping-chart/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2013/11/06/how-to-install-redis-in-centos-6/">如何在 CentOS 6 安裝 Redis</a>
-      </h2>
-      <p class="article-date">2013年11月6日</p>
-      
-        
-  <a href="/tags#Linux" >
-    <span class="tag-code">Linux</span>
-  </a>
-
-  <a href="/tags#Redis" >
-    <span class="tag-code">Redis</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          Redis 是一個開源、遵守 BSD 授權、先進的鍵值對儲存庫。它通常被稱為資料結構伺服器，因為值可以是字串(String)、雜湊(Hash)、列表(List)、集合(Set)及序列集合(Sorted Set)等類型。
-
-下載並解壓縮
-123$ wget http://download.re ...
-        
-      </div>
-      <a class="more" href="/2013/11/06/how-to-install-redis-in-centos-6/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2013/10/26/mac-os-x-ssd-performance-optimization/">Mac OS X 延長 SSD 壽命</a>
-      </h2>
-      <p class="article-date">2013年10月26日</p>
-      
-        
-  <a href="/tags#Mac" >
-    <span class="tag-code">Mac</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          由於有時候會重灌電腦，所以在這記錄一下重灌之後要延長 SSD 所做的步驟。
-關閉 Time Machine 的本機備份模式如果有開啟 Time Machine 功能，當備份磁碟無法使用時，系統還是會每小時建立快照摒除存在本機硬碟，使用以下指令可以禁止系統在本地端備份檔案
-1$ sudo tm ...
-        
-      </div>
-      <a class="more" href="/2013/10/26/mac-os-x-ssd-performance-optimization/">繼續閱讀</a>
     </article>
   
 
