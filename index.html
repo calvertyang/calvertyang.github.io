@@ -205,6 +205,35 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2020/06/04/how-laravel-generate-email-verification-url/">Laravel 如何產生 Email 驗證網址</a>
+      </h2>
+      <p class="article-date">2020年6月4日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+  <a href="/tags#Laravel" >
+    <span class="tag-code">Laravel</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <p>由於新專案決定使用 <a href="https://laravel.com/" target="_blank" rel="noopener">Laravel</a> 開發，在實作 Email 驗證時發現與 <a href="https://github.com/heartcombo/devise" target="_blank" rel="noopener">Devise</a> 不同的是，它沒有在資料表內建立 <code>confirmation_token</code> 欄位，於是便讓我想了解一下它產生驗證網址的方式。</p>
+<p>在追蹤原始碼後發現驗證網址是透過 <code>verificationUrl</code> 函數所產生的。</p>
+<figure class="highlight php"><figcaption><span>vendor/laravel/framework/src/Illuminate/Auth/Notifications/VerifyEmail.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Get the verification URL for the given notifiable.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  mixed  $notifiable</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> string</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">verificationUrl</span><span class="params">($notifiable)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> URL::temporarySignedRoute(</span><br><span class="line">        <span class="string">'verification.verify'</span>,</span><br><span class="line">        Carbon::now()-&gt;addMinutes(Config::get(<span class="string">'auth.verification.expire'</span>, <span class="number">60</span>)),</span><br><span class="line">        [</span><br><span class="line">            <span class="string">'id'</span> =&gt; $notifiable-&gt;getKey(),</span><br><span class="line">            <span class="string">'hash'</span> =&gt; sha1($notifiable-&gt;getEmailForVerification()),</span><br><span class="line">        ]</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由以上程式碼可看到它透過了 <code>UrlGenerator</code> 提供的 <code>temporarySignedRoute</code> 函數來產生暫時性的驗證網址。</p>
+        
+      </div>
+      <a class="more" href="/2020/06/04/how-laravel-generate-email-verification-url/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2019/11/19/golang-interfaces-tutorial-with-examples/">Golang 介面教學與範例</a>
       </h2>
       <p class="article-date">2019年11月19日</p>
@@ -439,37 +468,6 @@
       <a class="more" href="/2019/11/11/introduction-to-functions-in-golang/">繼續閱讀</a>
     </article>
   
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2019/11/11/golang-control-flow-statements/">Golang 流程控制陳述式：if、switch 與 for</a>
-      </h2>
-      <p class="article-date">2019年11月11日</p>
-      
-        
-  <a href="/tags#Golang" >
-    <span class="tag-code">Golang</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-control-flow" target="_blank" rel="noopener">Golang Control Flow Statements: If, Switch and For</a></p>
-</blockquote>
-<h3 id="if-陳述式"><a href="#if-陳述式" class="headerlink" title="if 陳述式"></a>if 陳述式</h3><p><code>if</code> 陳述式用於根據給定的條件，決定是否應執行程式碼區塊。</p>
-<p>以下是 Golang 中 <code>if</code> 陳述式的語法：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(condition) &#123;</span><br><span class="line">	<span class="comment">// Code to be executed if the condition is true.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>這裡有個簡單的範例：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> x = <span class="number">25</span></span><br><span class="line">	<span class="keyword">if</span> x%<span class="number">5</span> == <span class="number">0</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"%d is a multiple of 5\n"</span>, x)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">25 is a multiple of 5</span><br></pre></td></tr></table></figure>
-        
-      </div>
-      <a class="more" href="/2019/11/11/golang-control-flow-statements/">繼續閱讀</a>
-    </article>
-  
 
   
     <div class="guide-pager">
@@ -489,7 +487,7 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; Calvert 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
     Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
   </p>

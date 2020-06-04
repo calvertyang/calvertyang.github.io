@@ -205,6 +205,79 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2013/11/16/sql-to-aggregation-mapping-chart/">SQL 及 MongoDB 集合(Aggregation)指令對應表</a>
+      </h2>
+      <p class="article-date">2013年11月16日</p>
+      
+        
+  <a href="/tags#SQL" >
+    <span class="tag-code">SQL</span>
+  </a>
+
+  <a href="/tags#NoSQL" >
+    <span class="tag-code">NoSQL</span>
+  </a>
+
+  <a href="/tags#MongoDB" >
+    <span class="tag-code">MongoDB</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <p>集合管線(<a href="http://docs.mongodb.org/manual/core/aggregation/" target="_blank" rel="noopener">aggregation pipeline</a>)允許 MongoDB 提供原生集合功能，對應 SQL 中許多常見的資料集合操作。</p>
+<h5 id="下表列出了常見的-SQL-集合術語、功能及概念和相應的-MongoDB-集合運算元概觀。"><a href="#下表列出了常見的-SQL-集合術語、功能及概念和相應的-MongoDB-集合運算元概觀。" class="headerlink" title="下表列出了常見的 SQL 集合術語、功能及概念和相應的 MongoDB 集合運算元概觀。"></a>下表列出了常見的 SQL 集合術語、功能及概念和相應的 MongoDB 集合運算元概觀。</h5><table>
+<thead>
+<tr>
+<th align="left">SQL 術語、功能及概念</th>
+<th align="left">MongoDB 集合運算元</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">WHERE</td>
+<td align="left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/match/#pipe._S_match" target="_blank" rel="noopener">$match</a></td>
+</tr>
+<tr>
+<td align="left">GROUP BY</td>
+<td align="left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/group/#pipe._S_group" target="_blank" rel="noopener">$group</a></td>
+</tr>
+<tr>
+<td align="left">HAVING</td>
+<td align="left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/match/#pipe._S_match" target="_blank" rel="noopener">$match</a></td>
+</tr>
+<tr>
+<td align="left">SELECT</td>
+<td align="left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/project/#pipe._S_project" target="_blank" rel="noopener">$project</a></td>
+</tr>
+<tr>
+<td align="left">ORDER BY</td>
+<td align="left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/sort/#pipe._S_sort" target="_blank" rel="noopener">$sort</a></td>
+</tr>
+<tr>
+<td align="left">LIMIT</td>
+<td align="left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/limit/#pipe._S_limit" target="_blank" rel="noopener">$limit</a></td>
+</tr>
+<tr>
+<td align="left">SUM()</td>
+<td align="left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/sum/#grp._S_sum" target="_blank" rel="noopener">$sum</a></td>
+</tr>
+<tr>
+<td align="left">COUNT()</td>
+<td align="left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/sum/#grp._S_sum" target="_blank" rel="noopener">$sum</a></td>
+</tr>
+<tr>
+<td align="left">join</td>
+<td align="left">沒有直接對應的運算元，然而，<a href="http://docs.mongodb.org/manual/reference/operator/aggregation/unwind/#pipe._S_unwind" target="_blank" rel="noopener">$unwind</a> 運算元允許有些類似的功能，但是與嵌入的欄位在文件內。</td>
+</tr>
+</tbody></table>
+        
+      </div>
+      <a class="more" href="/2013/11/16/sql-to-aggregation-mapping-chart/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2013/11/14/sql-to-mongodb-mapping-chart/">SQL 及 MongoDB 基本指令對應表</a>
       </h2>
       <p class="article-date">2013年11月14日</p>
@@ -424,7 +497,7 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; Calvert 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
     Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
   </p>
