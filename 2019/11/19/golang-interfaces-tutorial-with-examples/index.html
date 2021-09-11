@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="Calvert&#39;s tech blog">
-  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
   
@@ -13,55 +13,70 @@
       Golang 介面教學與範例 | Calvert&#39;s murmur
     
   </title>
-  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrcode.js"></script>
+  
   
   
     <!-- MathJax support START -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
       });
     </script>
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
+        let all = MathJax.Hub.getAllJax(), i;
         for (i = 0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- MathJax support END -->
   
 
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
-  <script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-44933497-2');
-  </script>
+    </script>
 
 
-</head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
-</div>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3999187913340509" crossorigin="anonymous"></script>
+
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
   <body>
     <header class="header fixed-header">
@@ -70,7 +85,6 @@
       <div class="logo"></div>
       <span>Calvert's murmur</span>
     </a>
-
     <ul class="right-list">
       
         <li class="list-item">
@@ -81,7 +95,7 @@
       
         <li class="list-item">
           
-            <a href="/categories/" class="item-link">Categories</a>
+            <a href="/series/" class="item-link">Series</a>
           
         </li>
       
@@ -109,49 +123,15 @@
           
         </li>
       
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
     </ul>
-
-    
-      <div id="search-form-wrap">
-        <form class="search-form">
-          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
-          <button type="submit" class="search-form-submit">
-            <span class="fa fa-search"></span>
-          </button>
-        </form>
-        <div class="ins-search">
-  <div class="ins-search-mask"></div>
-  <div class="ins-search-container">
-    <div class="ins-input-wrapper">
-      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
-      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-    </div>
-    <div class="ins-section-wrapper">
-      <div class="ins-section-container"></div>
-    </div>
-  </div>
-</div>
-<script>
-  (function (window) {
-    var INSIGHT_CONFIG = {
-      TRANSLATION: {
-        POSTS: '文章',
-        PAGES: '頁面',
-        CATEGORIES: '分類',
-        TAGS: '標籤',
-        UNTITLED: '無標題',
-      },
-      ROOT_URL: '/',
-      CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-  })(window);
-</script>
-<script src="/js/insight.js"></script>
-
-      </div>
-    
-
     <div class="menu">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -168,7 +148,7 @@
         
           <li class="menu-item">
             
-              <a href="/categories/" class="menu-link">Categories</a>
+              <a href="/series/" class="menu-link">Series</a>
             
           </li>
         
@@ -198,64 +178,206 @@
         
       </ul>
     </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
   </div>
 </header>
 
     <div id="article-banner">
   <h2>Golang 介面教學與範例</h2>
   <p class="post-date">2019-11-19</p>
+
   <div class="arrow-down">
-    <a href="javascript:;" target="_blank" rel="noopener"></a>
+    <a href="javascript:;"></a>
   </div>
 </div>
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-interfaces" target="_blank" rel="noopener">Golang Interfaces Tutorial with Examples</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-interfaces">Golang Interfaces Tutorial with Examples</a></p>
 </blockquote>
 <h3 id="Go-的介面"><a href="#Go-的介面" class="headerlink" title="Go 的介面"></a>Go 的介面</h3><p>Go 中的介面是使用一組方法簽名定義的<strong>型別</strong>。介面定義了類似物件型別的行為。</p>
 <p>舉例來說，這是一個定義幾何形狀行為的介面：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Go Interface - `Shape`</span></span><br><span class="line"><span class="keyword">type</span> Shape <span class="keyword">interface</span> &#123;</span><br><span class="line">	Area() <span class="keyword">float64</span></span><br><span class="line">	Perimeter() <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Go Interface - `Shape`</span>
+<span class="token keyword">type</span> Shape <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">Area</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">float64</span>
+	<span class="token function">Perimeter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">float64</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>使用 <strong>type</strong> 關鍵字定義介面，後面接著介面名稱和關鍵字 <code>interface</code>。然後，在大括號內指定一組方法簽名。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h3 id="在-Go-中實作介面"><a href="#在-Go-中實作介面" class="headerlink" title="在 Go 中實作介面"></a>在 Go 中實作介面</h3><p>要實作介面，你只需要實作介面中宣告的所有方法。</p>
 <p><strong>Go 的介面是隱含實作的</strong></p>
 <p>與 Java 等其他語言不同，你不需要使用如 <code>implements</code> 關鍵字之類的方法來明確指定一種型別來實作介面。</p>
 <p>以下是兩種實作 <code>Shape</code> 介面的 struct 型別：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Struct type `Rectangle` - implements the `Shape` interface by implementing all its methods.</span></span><br><span class="line"><span class="keyword">type</span> Rectangle <span class="keyword">struct</span> &#123;</span><br><span class="line">	Length, Width <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r Rectangle)</span> <span class="title">Area</span><span class="params">()</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> r.Length * r.Width</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r Rectangle)</span> <span class="title">Perimeter</span><span class="params">()</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">2</span> * (r.Length + r.Width)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Struct type `Rectangle` - implements the `Shape` interface by implementing all its methods.</span>
+<span class="token keyword">type</span> Rectangle <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	Length<span class="token punctuation">,</span> Width <span class="token builtin">float64</span>
+<span class="token punctuation">&#125;</span>
 
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Struct type `Circle` - implements the `Shape` interface by implementing all its methods.</span></span><br><span class="line"><span class="keyword">type</span> Circle <span class="keyword">struct</span> &#123;</span><br><span class="line">	Radius <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c Circle)</span> <span class="title">Area</span><span class="params">()</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> math.Pi * c.Radius * c.Radius</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c Circle)</span> <span class="title">Perimeter</span><span class="params">()</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">2</span> * math.Pi * c.Radius</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c Circle)</span> <span class="title">Diameter</span><span class="params">()</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">2</span> * c.Radius</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>r Rectangle<span class="token punctuation">)</span> <span class="token function">Area</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">float64</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> r<span class="token punctuation">.</span>Length <span class="token operator">*</span> r<span class="token punctuation">.</span>Width
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>r Rectangle<span class="token punctuation">)</span> <span class="token function">Perimeter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">float64</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token number">2</span> <span class="token operator">*</span> <span class="token punctuation">(</span>r<span class="token punctuation">.</span>Length <span class="token operator">+</span> r<span class="token punctuation">.</span>Width<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Struct type `Circle` - implements the `Shape` interface by implementing all its methods.</span>
+<span class="token keyword">type</span> Circle <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	Radius <span class="token builtin">float64</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c Circle<span class="token punctuation">)</span> <span class="token function">Area</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">float64</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> math<span class="token punctuation">.</span>Pi <span class="token operator">*</span> c<span class="token punctuation">.</span>Radius <span class="token operator">*</span> c<span class="token punctuation">.</span>Radius
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c Circle<span class="token punctuation">)</span> <span class="token function">Perimeter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">float64</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token number">2</span> <span class="token operator">*</span> math<span class="token punctuation">.</span>Pi <span class="token operator">*</span> c<span class="token punctuation">.</span>Radius
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c Circle<span class="token punctuation">)</span> <span class="token function">Diameter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">float64</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token number">2</span> <span class="token operator">*</span> c<span class="token punctuation">.</span>Radius
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="使用具有明確數值的介面型別"><a href="#使用具有明確數值的介面型別" class="headerlink" title="使用具有明確數值的介面型別"></a>使用具有明確數值的介面型別</h3><p>除非我們將其與實作所有方法的具體型別一起使用，否則介面本身並不是那麼有用。</p>
 <p>讓我們來看看如何將介面與明確數值一起使用。</p>
 <ul>
 <li><p><strong>介面型別可以包含實作其所有方法的任何值</strong></p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"math"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> s Shape = Circle&#123;<span class="number">5.0</span>&#125;</span><br><span class="line">	fmt.Printf(<span class="string">"Shape Type = %T, Shape Value = %v\n"</span>, s, s)</span><br><span class="line">	fmt.Printf(<span class="string">"Area = %f, Perimeter = %f\n\n"</span>, s.Area(), s.Perimeter())</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> s1 Shape = Rectangle&#123;<span class="number">4.0</span>, <span class="number">6.0</span>&#125;</span><br><span class="line">	fmt.Printf(<span class="string">"Shape Type = %T, Shape Value = %v\n"</span>, s1, s1)</span><br><span class="line">	fmt.Printf(<span class="string">"Area = %f, Perimeter = %f\n"</span>, s1.Area(), s1.Perimeter())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Shape Type = main.Circle, Shape Value = &#123;5&#125;</span><br><span class="line">Area = 78.539816, Perimeter = 31.415927</span><br><span class="line"></span><br><span class="line">Shape Type = main.Rectangle, Shape Value = &#123;4 6&#125;</span><br><span class="line">Area = 24.000000, Perimeter = 20.000000</span><br></pre></td></tr></table></figure>
-</li>
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"math"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> s Shape <span class="token operator">=</span> Circle<span class="token punctuation">&#123;</span><span class="token number">5.0</span><span class="token punctuation">&#125;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Shape Type = %T, Shape Value = %v\n"</span><span class="token punctuation">,</span> s<span class="token punctuation">,</span> s<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Area = %f, Perimeter = %f\n\n"</span><span class="token punctuation">,</span> s<span class="token punctuation">.</span><span class="token function">Area</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> s<span class="token punctuation">.</span><span class="token function">Perimeter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+	<span class="token keyword">var</span> s1 Shape <span class="token operator">=</span> Rectangle<span class="token punctuation">&#123;</span><span class="token number">4.0</span><span class="token punctuation">,</span> <span class="token number">6.0</span><span class="token punctuation">&#125;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Shape Type = %T, Shape Value = %v\n"</span><span class="token punctuation">,</span> s1<span class="token punctuation">,</span> s1<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Area = %f, Perimeter = %f\n"</span><span class="token punctuation">,</span> s1<span class="token punctuation">.</span><span class="token function">Area</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> s1<span class="token punctuation">.</span><span class="token function">Perimeter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+Shape Type &#x3D; main.Circle, Shape Value &#x3D; &#123;5&#125;
+Area &#x3D; 78.539816, Perimeter &#x3D; 31.415927
+
+Shape Type &#x3D; main.Rectangle, Shape Value &#x3D; &#123;4 6&#125;
+Area &#x3D; 24.000000, Perimeter &#x3D; 20.000000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><p><strong>使用介面型別作為函數的參數</strong></p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Generic function to calculate the total area of multiple shapes of different types</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">CalculateTotalArea</span><span class="params">(shapes ...Shape)</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	totalArea := <span class="number">0.0</span></span><br><span class="line">	<span class="keyword">for</span> _, s := <span class="keyword">range</span> shapes &#123;</span><br><span class="line">		totalArea += s.Area()</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> totalArea</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	totalArea := CalculateTotalArea(Circle&#123;<span class="number">2</span>&#125;, Rectangle&#123;<span class="number">4</span>, <span class="number">5</span>&#125;, Circle&#123;<span class="number">10</span>&#125;)</span><br><span class="line">	fmt.Println(<span class="string">"Total area = "</span>, totalArea)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Total area =  346.7256359733385</span><br></pre></td></tr></table></figure>
-</li>
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token comment">// Generic function to calculate the total area of multiple shapes of different types</span>
+<span class="token keyword">func</span> <span class="token function">CalculateTotalArea</span><span class="token punctuation">(</span>shapes <span class="token operator">...</span>Shape<span class="token punctuation">)</span> <span class="token builtin">float64</span> <span class="token punctuation">&#123;</span>
+	totalArea <span class="token operator">:=</span> <span class="token number">0.0</span>
+	<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> s <span class="token operator">:=</span> <span class="token keyword">range</span> shapes <span class="token punctuation">&#123;</span>
+		totalArea <span class="token operator">+=</span> s<span class="token punctuation">.</span><span class="token function">Area</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> totalArea
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	totalArea <span class="token operator">:=</span> <span class="token function">CalculateTotalArea</span><span class="token punctuation">(</span>Circle<span class="token punctuation">&#123;</span><span class="token number">2</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> Rectangle<span class="token punctuation">&#123;</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> Circle<span class="token punctuation">&#123;</span><span class="token number">10</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Total area = "</span><span class="token punctuation">,</span> totalArea<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+Total area &#x3D;  346.7256359733385<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 <li><p><strong>將介面型別用於欄位</strong></p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Interface types can also be used as fields</span></span><br><span class="line"><span class="keyword">type</span> MyDrawing <span class="keyword">struct</span> &#123;</span><br><span class="line">	shapes  []Shape</span><br><span class="line">	bgColor <span class="keyword">string</span></span><br><span class="line">	fgColor <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(drawing MyDrawing)</span> <span class="title">Area</span><span class="params">()</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	totalArea := <span class="number">0.0</span></span><br><span class="line">	<span class="keyword">for</span> _, s := <span class="keyword">range</span> drawing.shapes &#123;</span><br><span class="line">		totalArea += s.Area()</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> totalArea        </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	drawing := MyDrawing&#123;</span><br><span class="line">		shapes: []Shape&#123;</span><br><span class="line">			Circle&#123;<span class="number">2</span>&#125;,</span><br><span class="line">			Rectangle&#123;<span class="number">3</span>, <span class="number">5</span>&#125;,</span><br><span class="line">			Rectangle&#123;<span class="number">4</span>, <span class="number">7</span>&#125;,</span><br><span class="line">		&#125;,</span><br><span class="line">		bgColor: <span class="string">"red"</span>,</span><br><span class="line">		fgColor: <span class="string">"white"</span>,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"Drawing"</span>, drawing)</span><br><span class="line">	fmt.Println(<span class="string">"Drawing Area = "</span>, drawing.Area())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Drawing &#123;[&#123;2&#125; &#123;3 5&#125; &#123;4 7&#125;] red white&#125;</span><br><span class="line">Drawing Area = 55.56637061435917</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
 
-</li>
+<span class="token comment">// Interface types can also be used as fields</span>
+<span class="token keyword">type</span> MyDrawing <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	shapes  <span class="token punctuation">[</span><span class="token punctuation">]</span>Shape
+	bgColor <span class="token builtin">string</span>
+	fgColor <span class="token builtin">string</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>drawing MyDrawing<span class="token punctuation">)</span> <span class="token function">Area</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">float64</span> <span class="token punctuation">&#123;</span>
+	totalArea <span class="token operator">:=</span> <span class="token number">0.0</span>
+	<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> s <span class="token operator">:=</span> <span class="token keyword">range</span> drawing<span class="token punctuation">.</span>shapes <span class="token punctuation">&#123;</span>
+		totalArea <span class="token operator">+=</span> s<span class="token punctuation">.</span><span class="token function">Area</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> totalArea        
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	drawing <span class="token operator">:=</span> MyDrawing<span class="token punctuation">&#123;</span>
+		shapes<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>Shape<span class="token punctuation">&#123;</span>
+			Circle<span class="token punctuation">&#123;</span><span class="token number">2</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+			Rectangle<span class="token punctuation">&#123;</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+			Rectangle<span class="token punctuation">&#123;</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+		bgColor<span class="token punctuation">:</span> <span class="token string">"red"</span><span class="token punctuation">,</span>
+		fgColor<span class="token punctuation">:</span> <span class="token string">"white"</span><span class="token punctuation">,</span>
+	<span class="token punctuation">&#125;</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Drawing"</span><span class="token punctuation">,</span> drawing<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Drawing Area = "</span><span class="token punctuation">,</span> drawing<span class="token punctuation">.</span><span class="token function">Area</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+Drawing &#123;[&#123;2&#125; &#123;3 5&#125; &#123;4 7&#125;] red white&#125;
+Drawing Area &#x3D; 55.56637061435917<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
 </ul>
 <h3 id="介面數值：介面型別如何與明確數值一起使用？"><a href="#介面數值：介面型別如何與明確數值一起使用？" class="headerlink" title="介面數值：介面型別如何與明確數值一起使用？"></a>介面數值：介面型別如何與明確數值一起使用？</h3><p>在底層，介面值可以認為是一個由值和具體型別組成的元組：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// interface</span></span><br><span class="line">(value, <span class="keyword">type</span>)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// interface</span>
+<span class="token punctuation">(</span>value<span class="token punctuation">,</span> <span class="token keyword">type</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>讓我們來看一個範例了解更多資訊：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> s Shape</span><br><span class="line"></span><br><span class="line">	s = Circle&#123;<span class="number">5</span>&#125;</span><br><span class="line">	fmt.Printf(<span class="string">"(%v, %T)\n"</span>, s, s)</span><br><span class="line">	fmt.Printf(<span class="string">"Shape area = %v\n"</span>, s.Area())</span><br><span class="line"></span><br><span class="line">	s = Rectangle&#123;<span class="number">4</span>, <span class="number">7</span>&#125;</span><br><span class="line">	fmt.Printf(<span class="string">"(%v, %T)\n"</span>, s, s)</span><br><span class="line">	fmt.Printf(<span class="string">"Shape area = %v\n"</span>, s.Area())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">(&#123;5&#125;, main.Circle)</span><br><span class="line">Shape area = 78.53981633974483</span><br><span class="line">(&#123;4 7&#125;, main.Rectangle)</span><br><span class="line">Shape area = 28</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> s Shape
+
+	s <span class="token operator">=</span> Circle<span class="token punctuation">&#123;</span><span class="token number">5</span><span class="token punctuation">&#125;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"(%v, %T)\n"</span><span class="token punctuation">,</span> s<span class="token punctuation">,</span> s<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Shape area = %v\n"</span><span class="token punctuation">,</span> s<span class="token punctuation">.</span><span class="token function">Area</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+	s <span class="token operator">=</span> Rectangle<span class="token punctuation">&#123;</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">&#125;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"(%v, %T)\n"</span><span class="token punctuation">,</span> s<span class="token punctuation">,</span> s<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Shape area = %v\n"</span><span class="token punctuation">,</span> s<span class="token punctuation">.</span><span class="token function">Area</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+(&#123;5&#125;, main.Circle)
+Shape area &#x3D; 78.53981633974483
+(&#123;4 7&#125;, main.Rectangle)
+Shape area &#x3D; 28<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>查看以上程式的輸出，並注意變數 <code>s</code> 如何取得有關數值以及分配給它的 <code>Shape</code> 的型別的資訊。</p>
 <p><em>當我們在介面上呼叫方法時，將執行其底層型別上同名的方法。</em></p>
@@ -274,11 +396,9 @@
       </div>
     
     <!-- Tags END -->
-    <!-- UpdatedDate Start -->
-     
-       <p class="post-date">最後更新時間：2019-11-28</p>
-     
-   <!-- UpdatedDate END -->
+    <!-- Last updated on Start -->
+    
+    <!-- Last updated on END -->
     <!-- NAV START -->
     
   <div class="nav-container">
@@ -303,19 +423,9 @@
 
 
     <!-- NAV END -->
-    <!-- 打賞 START -->
+    <!-- QR Code START -->
     
-    <!-- 打賞 END -->
-    <!-- 二維條碼 START -->
-    
-      <div class="qrcode">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g id="share-qrcode"/>
-        </svg>
-        <p class="notice">掃描二維條碼，分享此文章</p>
-      </div>
-    
-    <!-- 二維條碼 END -->
+    <!-- QR Code END -->
   </article>
   <!-- Article END -->
   <!-- Catalog START -->
@@ -324,7 +434,7 @@
   <div class="toc-main">
     <strong class="toc-title">目錄</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Go-的介面"><span class="toc-nav-text">Go 的介面</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#在-Go-中實作介面"><span class="toc-nav-text">在 Go 中實作介面</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用具有明確數值的介面型別"><span class="toc-nav-text">使用具有明確數值的介面型別</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#介面數值：介面型別如何與明確數值一起使用？"><span class="toc-nav-text">介面數值：介面型別如何與明確數值一起使用？</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Go-%E7%9A%84%E4%BB%8B%E9%9D%A2"><span class="toc-nav-text">Go 的介面</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%9C%A8-Go-%E4%B8%AD%E5%AF%A6%E4%BD%9C%E4%BB%8B%E9%9D%A2"><span class="toc-nav-text">在 Go 中實作介面</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E4%BD%BF%E7%94%A8%E5%85%B7%E6%9C%89%E6%98%8E%E7%A2%BA%E6%95%B8%E5%80%BC%E7%9A%84%E4%BB%8B%E9%9D%A2%E5%9E%8B%E5%88%A5"><span class="toc-nav-text">使用具有明確數值的介面型別</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E4%BB%8B%E9%9D%A2%E6%95%B8%E5%80%BC%EF%BC%9A%E4%BB%8B%E9%9D%A2%E5%9E%8B%E5%88%A5%E5%A6%82%E4%BD%95%E8%88%87%E6%98%8E%E7%A2%BA%E6%95%B8%E5%80%BC%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8%EF%BC%9F"><span class="toc-nav-text">介面數值：介面型別如何與明確數值一起使用？</span></a></li></ol>
     
   </div>
 </aside>
@@ -334,23 +444,23 @@
 </main>
 
 <script>
-  (function () {
-    var url = 'https://calvertyang.github.io/2019/11/19/golang-interfaces-tutorial-with-examples/';
-    var banner = '';
+  (function() {
+    const url = 'https://calvertyang.github.io/2019/11/19/golang-interfaces-tutorial-with-examples/';
+    const banner = '';
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
-        'background-image': 'url(' + banner + ')'
+        'background-image': 'url(' + banner + ')',
       });
     } else {
       $('#article-banner').geopattern(url);
     }
     $('.header').removeClass('fixed-header');
 
-     // error image
-    $('.markdown-content img').on('error', function() {
-      $(this).attr('src', '/css/images/error-img.png');
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.svg');
       $(this).css({
-        'cursor': 'default'
+        'cursor': 'default',
       });
     });
 
@@ -359,28 +469,28 @@
       if ($(this).parents().is('a')) {
         $(this).css({
           'cursor': 'pointer',
-          'display': 'inline-block'
+          'display': 'inline-block',
         });
       }
     });
 
     // zoom image
-    $('.markdown-content img').on('click', function(e) {
-      var src = $(this).attr('src');
-      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
-        var imageW = $(this).width();
-        var imageH = $(this).height();
+    $('.markdown-content img').on('click', function() {
+      const src = $(this).attr('src');
+      if (src !== '/css/images/error_icon.svg' && !$(this).parents().is('a')) {
+        const imageW = $(this).width();
+        const imageH = $(this).height();
 
-        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        let zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
         zoom = zoom < 1 ? 1 : zoom;
         zoom = zoom > 2 ? 2 : zoom;
-        var transY = (($(window).height() - imageH) / 2).toFixed(2);
+        const transY = (($(window).height() - imageH) / 2).toFixed(2);
 
         $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
         $('.image-view-wrap').addClass('wrap-active');
         $('.image-view-wrap img').css({
-          'width': `${imageW}`,
-          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+          width: imageW,
+          transform: `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`,
         });
         $('html').css('overflow', 'hidden');
 
@@ -389,35 +499,26 @@
           $('html').attr('style', '');
         });
       }
-    });
-
-    // qrcode
-    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
-      text: document.location.href,
-      width: 100,
-      height: 100,
-      colorDark: '#000000',
-    	colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.L,
-      useSVG: true
-    });
+    })
   })();
 </script>
+
+
 
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
 
 <script>
   function async(u, c) {
-    var d = document, t = 'script',
+    const d = document, t = 'script',
       o = d.createElement(t),
       s = d.getElementsByTagName(t)[0];
     o.src = u;
@@ -425,20 +526,36 @@
     s.parentNode.insertBefore(o, s);
   }
 </script>
-
 <script>
   async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
     FastClick.attach(document.body);
-  })
+  });
 </script>
 
 <script>
-  $('figure').each(function(i, block) {
-    let lang = this.classList[1] || 'codeblock';
-    this.dataset.lang = lang.toUpperCase();
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
   });
 </script>
+
+
 <script src="/js/script.js"></script>
+
 
   </body>
 </html>

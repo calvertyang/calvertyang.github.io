@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="Calvert&#39;s tech blog">
-  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
   
@@ -13,55 +13,70 @@
       在 Golang 中使用常數 | Calvert&#39;s murmur
     
   </title>
-  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrcode.js"></script>
+  
   
   
     <!-- MathJax support START -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
       });
     </script>
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
+        let all = MathJax.Hub.getAllJax(), i;
         for (i = 0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- MathJax support END -->
   
 
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
-  <script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-44933497-2');
-  </script>
+    </script>
 
 
-</head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
-</div>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3999187913340509" crossorigin="anonymous"></script>
+
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
   <body>
     <header class="header fixed-header">
@@ -70,7 +85,6 @@
       <div class="logo"></div>
       <span>Calvert's murmur</span>
     </a>
-
     <ul class="right-list">
       
         <li class="list-item">
@@ -81,7 +95,7 @@
       
         <li class="list-item">
           
-            <a href="/categories/" class="item-link">Categories</a>
+            <a href="/series/" class="item-link">Series</a>
           
         </li>
       
@@ -109,49 +123,15 @@
           
         </li>
       
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
     </ul>
-
-    
-      <div id="search-form-wrap">
-        <form class="search-form">
-          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
-          <button type="submit" class="search-form-submit">
-            <span class="fa fa-search"></span>
-          </button>
-        </form>
-        <div class="ins-search">
-  <div class="ins-search-mask"></div>
-  <div class="ins-search-container">
-    <div class="ins-input-wrapper">
-      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
-      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-    </div>
-    <div class="ins-section-wrapper">
-      <div class="ins-section-container"></div>
-    </div>
-  </div>
-</div>
-<script>
-  (function (window) {
-    var INSIGHT_CONFIG = {
-      TRANSLATION: {
-        POSTS: '文章',
-        PAGES: '頁面',
-        CATEGORIES: '分類',
-        TAGS: '標籤',
-        UNTITLED: '無標題',
-      },
-      ROOT_URL: '/',
-      CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-  })(window);
-</script>
-<script src="/js/insight.js"></script>
-
-      </div>
-    
-
     <div class="menu">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -168,7 +148,7 @@
         
           <li class="menu-item">
             
-              <a href="/categories/" class="menu-link">Categories</a>
+              <a href="/series/" class="menu-link">Series</a>
             
           </li>
         
@@ -198,21 +178,47 @@
         
       </ul>
     </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
   </div>
 </header>
 
     <div id="article-banner">
   <h2>在 Golang 中使用常數</h2>
   <p class="post-date">2019-11-06</p>
+
   <div class="arrow-down">
-    <a href="javascript:;" target="_blank" rel="noopener"></a>
+    <a href="javascript:;"></a>
   </div>
 </div>
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-typed-untyped-constants" target="_blank" rel="noopener">Working with Constants in Golang</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-typed-untyped-constants">Working with Constants in Golang</a></p>
 </blockquote>
 <h3 id="常數"><a href="#常數" class="headerlink" title="常數"></a>常數</h3><p>在 Golang 中，我們使用 <code>constant</code> 語法來表示固定（不改變）的值，如 <code>5</code>、<code>1.34</code>、<code>true</code> 和 <code>&quot;Hello&quot;</code> 等。</p>
 <h4 id="定數是常數"><a href="#定數是常數" class="headerlink" title="定數是常數"></a>定數是常數</h4><p>Golang 中的所有定數，如整數 <code>5</code>、<code>1000</code>、浮點數 <code>4.76</code>、<code>1.89</code>、布林值 <code>true</code>、<code>false</code> 或字串 <code>&quot;Hello&quot;</code>、<code>&quot;Jhon&quot;</code> 都是<strong>常數</strong>。</p>
@@ -248,69 +254,99 @@
 <td><code>&quot;Hello&quot;</code>、<code>&quot;Rajeev&quot;</code></td>
 </tr>
 </tbody></table>
-<a id="more"></a>
+<span id="more"></span>
 
 <h4 id="宣告常數"><a href="#宣告常數" class="headerlink" title="宣告常數"></a>宣告常數</h4><p>定數是沒有名稱的常數。你可以使用 <code>const</code> 關鍵字來要宣告一個常數並幫它命名：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myFavLanguage = <span class="string">"Python"</span></span><br><span class="line"><span class="keyword">const</span> sunRisesInTheEast = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">const</span> myFavLanguage <span class="token operator">=</span> <span class="token string">"Python"</span>
+<span class="token keyword">const</span> sunRisesInTheEast <span class="token operator">=</span> <span class="token boolean">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>你也可以像這樣在宣告時指定型別：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a <span class="keyword">int</span> = <span class="number">1234</span></span><br><span class="line"><span class="keyword">const</span> b <span class="keyword">string</span> = <span class="string">"Hi"</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">const</span> a <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">1234</span>
+<span class="token keyword">const</span> b <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">"Hi"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>在單一陳述式中也可以有多個宣告：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> country, code = <span class="string">"India"</span>, <span class="number">91</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	employeeId <span class="keyword">string</span>  = <span class="string">"E101"</span></span><br><span class="line">	salary     <span class="keyword">float64</span> = <span class="number">50000.0</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">const</span> country<span class="token punctuation">,</span> code <span class="token operator">=</span> <span class="token string">"India"</span><span class="token punctuation">,</span> <span class="token number">91</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">(</span>
+	employeeId <span class="token builtin">string</span>  <span class="token operator">=</span> <span class="token string">"E101"</span>
+	salary     <span class="token builtin">float64</span> <span class="token operator">=</span> <span class="token number">50000.0</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>正如你所期望的，常數無法更改。也就是說，你無法在初始化常數後重新分派給它：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">123</span></span><br><span class="line">a = <span class="number">321</span> <span class="comment">// Compiler Error (Cannot assign to constant)</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token number">123</span>
+a <span class="token operator">=</span> <span class="token number">321</span> <span class="token comment">// Compiler Error (Cannot assign to constant)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="已型別化和未型別化常數"><a href="#已型別化和未型別化常數" class="headerlink" title="已型別化和未型別化常數"></a>已型別化和未型別化常數</h3><p>Golang 中的常數很特別。它們的運作方式與其他語言的運作方式不同。要了解它們為何如此特別以及它們如何正常運作，我們需要關於 Go 型別系統的背景知識。讓我們直接進入正題吧！</p>
 <h4 id="背景知識"><a href="#背景知識" class="headerlink" title="背景知識"></a>背景知識</h4><p>Go 是一種靜態型別的程式語言。也就是說編譯器在編譯時期就知道或推斷了每個變數的型別。</p>
 <p>但是它的型別系統更進一步的不允許你執行混合數字型別的操作。舉例來說，你不能將 <code>float64</code> 變數加到 <code>int</code>，也不能將 <code>int64</code> 變數加到 <code>int</code>：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myFloat <span class="keyword">float64</span> = <span class="number">21.54</span></span><br><span class="line"><span class="keyword">var</span> myInt <span class="keyword">int</span> = <span class="number">562</span></span><br><span class="line"><span class="keyword">var</span> myInt64 <span class="keyword">int64</span> = <span class="number">120</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> res1 = myFloat + myInt <span class="comment">// Not Allowed (Compiler Error)</span></span><br><span class="line"><span class="keyword">var</span> res2 = myInt + myInt64 <span class="comment">// Not Allowed (Compiler Error)</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> myFloat <span class="token builtin">float64</span> <span class="token operator">=</span> <span class="token number">21.54</span>
+<span class="token keyword">var</span> myInt <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">562</span>
+<span class="token keyword">var</span> myInt64 <span class="token builtin">int64</span> <span class="token operator">=</span> <span class="token number">120</span>
+
+<span class="token keyword">var</span> res1 <span class="token operator">=</span> myFloat <span class="token operator">+</span> myInt <span class="token comment">// Not Allowed (Compiler Error)</span>
+<span class="token keyword">var</span> res2 <span class="token operator">=</span> myInt <span class="token operator">+</span> myInt64 <span class="token comment">// Not Allowed (Compiler Error)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>要使上述操作正常運作，你需要明確地轉換變數，讓它們都屬於相同型別：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> res1 = myFloat + <span class="keyword">float64</span>(myInt) <span class="comment">// Works</span></span><br><span class="line"><span class="keyword">var</span> res2 = myInt + <span class="keyword">int</span>(myInt64)     <span class="comment">// Works</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> res1 <span class="token operator">=</span> myFloat <span class="token operator">+</span> <span class="token function">float64</span><span class="token punctuation">(</span>myInt<span class="token punctuation">)</span> <span class="token comment">// Works</span>
+<span class="token keyword">var</span> res2 <span class="token operator">=</span> myInt <span class="token operator">+</span> <span class="token function">int</span><span class="token punctuation">(</span>myInt64<span class="token punctuation">)</span>     <span class="token comment">// Works</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>如果你使用過其他靜態型別的語言，如 C、C++ 或 Java，那麼你必須知道，只要在任何操作中將它們混合使用，它們會自動將較小的型別轉換為較大的型別。舉例來說，<code>int</code> 可以自動轉換為 <code>long</code>、<code>float</code> 或 <code>double</code>。</p>
 <p>所以顯而易見的問題是：為什麼 Go 不會做同樣的事？它為什麼不像 C、C++ 或 Java 一樣執行隱式型別轉換？</p>
-<p>以下是 Go 設計師所說的（節錄自 <a href="https://golang.org/doc/faq#conversions" target="_blank" rel="noopener">Golang 的官方文件</a>）：</p>
+<p>以下是 Go 設計師所說的（節錄自 <a target="_blank" rel="noopener" href="https://golang.org/doc/faq#conversions">Golang 的官方文件</a>）：</p>
 <blockquote>
 <p>C 語言籠罩在數字型別間便利的自動轉換所引起的混亂中。表達式什麼時候是無號數？可容納多大數值範圍？它會溢位嗎？結果是否可移植、不受執行它的機器影響？這也使得編譯器複雜化；「一般算術轉換」不容易實作且跨架構不一致。出於可移植性的原因，我們決定以程式碼中明確地型別轉換作為代價，讓事情變得清晰明瞭。</p>
 </blockquote>
 <p>好吧！因此 Go 不提供隱式型別轉換，它要求我們在混合操作多個型別的變數時，必須使用明確地型別轉換。</p>
 <p>但是 Go 的型別系統如何與常數一起使用？以下所有陳述式在 Golang 中皆有效：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myInt32 <span class="keyword">int32</span> = <span class="number">10</span>    </span><br><span class="line"><span class="keyword">var</span> myInt <span class="keyword">int</span> = <span class="number">10</span></span><br><span class="line"><span class="keyword">var</span> myFloat64 <span class="keyword">float64</span> = <span class="number">10</span></span><br><span class="line"><span class="keyword">var</span> myComplex <span class="keyword">complex64</span> = <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> myInt32 <span class="token builtin">int32</span> <span class="token operator">=</span> <span class="token number">10</span>    
+<span class="token keyword">var</span> myInt <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">10</span>
+<span class="token keyword">var</span> myFloat64 <span class="token builtin">float64</span> <span class="token operator">=</span> <span class="token number">10</span>
+<span class="token keyword">var</span> myComplex <span class="token builtin">complex64</span> <span class="token operator">=</span> <span class="token number">10</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>在以上範例中，常數值 <code>10</code> 的型別是什麼？此外，如果 Golang 中沒有隱式型別轉換，那麼我們就不需要像這樣寫上面的陳述式：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myInt32 <span class="keyword">int32</span> = <span class="keyword">int32</span>(<span class="number">10</span>)</span><br><span class="line"><span class="keyword">var</span> myFloat64 <span class="keyword">float64</span> = <span class="keyword">float64</span>(<span class="number">10</span>)</span><br><span class="line"><span class="comment">// etc..</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> myInt32 <span class="token builtin">int32</span> <span class="token operator">=</span> <span class="token function">int32</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> myFloat64 <span class="token builtin">float64</span> <span class="token operator">=</span> <span class="token function">float64</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>
+<span class="token comment">// etc..</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>好吧！所有這些問題的答案都在於 Golang 處理常數的方式。因此，讓我們找出它們的處理方式。</p>
 <h4 id="未型別化常數"><a href="#未型別化常數" class="headerlink" title="未型別化常數"></a>未型別化常數</h4><p>除非明確地給定型別，否則 Golang 中任何已命名或未命名的常數都是未型別化的。舉例來說，以下所有常數都是未型別化的：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>       <span class="comment">// untyped integer constant</span></span><br><span class="line"><span class="number">4.5</span>     <span class="comment">// untyped floating-point constant</span></span><br><span class="line"><span class="literal">true</span>    <span class="comment">// untyped boolean constant</span></span><br><span class="line"><span class="string">"Hello"</span> <span class="comment">// untyped string constant</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token number">1</span>       <span class="token comment">// untyped integer constant</span>
+<span class="token number">4.5</span>     <span class="token comment">// untyped floating-point constant</span>
+<span class="token boolean">true</span>    <span class="token comment">// untyped boolean constant</span>
+<span class="token string">"Hello"</span> <span class="token comment">// untyped string constant</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>即使你給它們名字，它們還是未型別化：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1</span></span><br><span class="line"><span class="keyword">const</span> f = <span class="number">4.5</span></span><br><span class="line"><span class="keyword">const</span> b = <span class="literal">true</span></span><br><span class="line"><span class="keyword">const</span> s = <span class="string">"Hello"</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token keyword">const</span> f <span class="token operator">=</span> <span class="token number">4.5</span>
+<span class="token keyword">const</span> b <span class="token operator">=</span> <span class="token boolean">true</span>
+<span class="token keyword">const</span> s <span class="token operator">=</span> <span class="token string">"Hello"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>現在，你可能會想說我使用的是如 <code>integer</code> 常數、<code>string</code> 常數之類的語法，而我還說它們是未型別化。</p>
 <p>是的，<code>1</code> 是整數、<code>4.5</code> 是浮點數以及 <code>&quot;Hello&quot;</code> 是字串。但它們只是數值，還沒有給它們如 <code>int32</code>、<code>float64</code> 或 <code>string</code> 的<strong>固定</strong>型別，這會迫使它們遵守 Go 的嚴格型別規則。</p>
 <p>事實上，<code>1</code> 是未型別化的，這讓我們可以將其分派給型別與整數<strong>相容</strong>的任何變數：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myInt <span class="keyword">int</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> myFloat <span class="keyword">float64</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> myComplex <span class="keyword">complex64</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> myInt <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token keyword">var</span> myFloat <span class="token builtin">float64</span> <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token keyword">var</span> myComplex <span class="token builtin">complex64</span> <span class="token operator">=</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>要注意的是，雖然 <code>1</code> 未型別化，但它是未型別化的整數。因此，它只能在允許整數的地方使用。舉例來說，你不能將它分派給 <code>string</code> 或 <code>boolean</code> 變數。</p>
 <p>同樣地，可以在任何允許使用浮點數的地方使用如 <code>4.5</code> 之類的未型別化浮點數常數：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myFloat32 <span class="keyword">float32</span> = <span class="number">4.5</span></span><br><span class="line"><span class="keyword">var</span> myComplex64 <span class="keyword">complex64</span> = <span class="number">4.5</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> myFloat32 <span class="token builtin">float32</span> <span class="token operator">=</span> <span class="token number">4.5</span>
+<span class="token keyword">var</span> myComplex64 <span class="token builtin">complex64</span> <span class="token operator">=</span> <span class="token number">4.5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p><strong>現在來看一個未型別化字串常數的範例：</strong></p>
 <p>在 Golang 中，你可以使用 <code>type</code> 關鍵字來建立型別別名：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> RichString <span class="keyword">string</span> <span class="comment">// Type alias of `string`</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> RichString <span class="token builtin">string</span> <span class="token comment">// Type alias of `string`</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>鑑於 Golang 的強型別特性，你不能將 <code>string</code> 變數分派給 <code>RichString</code> 變數：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myString <span class="keyword">string</span> = <span class="string">"Hello"</span></span><br><span class="line"><span class="keyword">var</span> myRichString RichString = myString <span class="comment">// Won't work.</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> myString <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">"Hello"</span>
+<span class="token keyword">var</span> myRichString RichString <span class="token operator">=</span> myString <span class="token comment">// Won't work.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>但是，你可以將一個未型別化的字串常數分派給 <code>RichString</code> 變數，因為它與字串相容：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myUntypedString = <span class="string">"Hello"</span></span><br><span class="line"><span class="keyword">var</span> myRichString RichString = myUntypedString <span class="comment">// Works</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">const</span> myUntypedString <span class="token operator">=</span> <span class="token string">"Hello"</span>
+<span class="token keyword">var</span> myRichString RichString <span class="token operator">=</span> myUntypedString <span class="token comment">// Works</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h4 id="常數和型別推斷：預設型別"><a href="#常數和型別推斷：預設型別" class="headerlink" title="常數和型別推斷：預設型別"></a>常數和型別推斷：預設型別</h4><p>Go 支援型別推斷。也就是說，它可以從初始化變數的值推斷出變數的型別。因此，你可以宣告一個具有初始值但沒有任何型別資訊的變數，而 Go 會自動決定型別：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">5</span> <span class="comment">// Go compiler automatically infers the type of the variable `a`</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">5</span> <span class="token comment">// Go compiler automatically infers the type of the variable `a`</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>但是它是如何運作的呢？鑑於 Golang 中的常數是未型別化的，在上面的範例中，變數 <code>a</code> 的型別是什麼？是 <code>int8</code>、<code>int16</code>、<code>int32</code>、<code>int64</code> 還是 <code>int</code>？</p>
 <p>好吧，事實證明，Golang 中每個未型別化的常數都有一個<strong>預設型別</strong>。當我們將常數分派給沒有任何明確型別的變數時，將使用預設型別。</p>
@@ -349,22 +385,26 @@
 </tbody></table>
 <p>因此，在陳述式 <code>var a = 5</code> 中，由於沒有明確地型別資訊，整數常數的預設型別將決定 <code>a</code> 的型別，即 <code>int</code>。</p>
 <h4 id="已型別化常數"><a href="#已型別化常數" class="headerlink" title="已型別化常數"></a>已型別化常數</h4><p>在 Golang 中，當你像這樣在宣告常數時<strong>明確地</strong>指定型別，常數是已型別化的：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> typedInt <span class="keyword">int</span> = <span class="number">1</span> <span class="comment">// Typed constant</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">const</span> typedInt <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">1</span> <span class="token comment">// Typed constant</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>就像變數一樣，Go 型別系統的所有規則都適用於已型別化的常數。舉例來說，你不能分派已型別化的整數常數到浮點數變數：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myFloat64 <span class="keyword">float64</span> = typedInt <span class="comment">// Compiler Error</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> myFloat64 <span class="token builtin">float64</span> <span class="token operator">=</span> typedInt <span class="token comment">// Compiler Error</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>使用已型別化常數，你將失去未型別化常數帶來的所有靈活性，例如將它們分派給相容型別的任何變數，或將它們混合在算術運算中。因此，僅在絕對必要時，才應該為常數宣告型別。否則，只宣告沒有型別的常數。</p>
 <h3 id="常數表達式"><a href="#常數表達式" class="headerlink" title="常數表達式"></a>常數表達式</h3><p>常數是未型別化的（除非明確地給定型別），這讓你可以在任何表達式中自由混合它們。</p>
 <p>因此，你可以擁有一個混合各種未型別化常數的表達式，只要這些未型別化的常數彼此相容：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">5</span> + <span class="number">7.5</span> <span class="comment">// Valid</span></span><br><span class="line"><span class="keyword">const</span> b = <span class="number">12</span> / <span class="number">5</span>  <span class="comment">// Valid</span></span><br><span class="line"><span class="keyword">const</span> c = <span class="string">'z'</span> + <span class="number">1</span> <span class="comment">// Valid</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> d = <span class="string">"Hey"</span> + <span class="literal">true</span> <span class="comment">// Invalid (untyped string constant and untyped boolean constant are not compatible with each other)</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token number">5</span> <span class="token operator">+</span> <span class="token number">7.5</span> <span class="token comment">// Valid</span>
+<span class="token keyword">const</span> b <span class="token operator">=</span> <span class="token number">12</span> <span class="token operator">/</span> <span class="token number">5</span>  <span class="token comment">// Valid</span>
+<span class="token keyword">const</span> c <span class="token operator">=</span> <span class="token string">'z'</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token comment">// Valid</span>
+
+<span class="token keyword">const</span> d <span class="token operator">=</span> <span class="token string">"Hey"</span> <span class="token operator">+</span> <span class="token boolean">true</span> <span class="token comment">// Invalid (untyped string constant and untyped boolean constant are not compatible with each other)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>對常數表達式及其結果的評估遵循某些規則。讓我們看看這些規則：</p>
 <p><strong>常數表達式的規則</strong></p>
 <ul>
 <li><p>比較兩個未型別化的常數，會輸出未型別化的布林值常數。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">7.5</span> &gt; <span class="number">5</span>       <span class="comment">// true (untyped boolean constant)</span></span><br><span class="line"><span class="keyword">const</span> b = <span class="string">"xyz"</span> &lt; <span class="string">"uvw"</span> <span class="comment">// false (untyped boolean constant)</span></span><br></pre></td></tr></table></figure>
-</li>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token number">7.5</span> <span class="token operator">></span> <span class="token number">5</span>       <span class="token comment">// true (untyped boolean constant)</span>
+<span class="token keyword">const</span> b <span class="token operator">=</span> <span class="token string">"xyz"</span> <span class="token operator">&lt;</span> <span class="token string">"uvw"</span> <span class="token comment">// false (untyped boolean constant)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 <li><p>對於其他運算（除了位移）：</p>
 <ul>
 <li><p>如果兩個運算元型別相同（例如，皆為未型別化的整數常數），則結果也是相同型別。舉例來說，表達式 <code>25 / 2</code> 的結果是 <code>12</code>，不是 <code>12.5</code>。由於兩個運算元均為未型別化整數，因此結果將被截斷為整數。</p>
@@ -372,43 +412,76 @@
 <li><p>如果兩個運算元型別不同，則結果是該運算元的型別且根據規則取較大的：<code>integer &lt; rune &lt; floating-point &lt; complex</code>。</p>
 </li>
 </ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">25</span> / <span class="number">2</span>       <span class="comment">// 12 (untyped integer constant)</span></span><br><span class="line"><span class="keyword">const</span> b = (<span class="number">6</span> + <span class="number">8i</span>) / <span class="number">2</span> <span class="comment">// (3 + 4i) (untyped complex constant)</span></span><br></pre></td></tr></table></figure>
-</li>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token number">25</span> <span class="token operator">/</span> <span class="token number">2</span>       <span class="token comment">// 12 (untyped integer constant)</span>
+<span class="token keyword">const</span> b <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">6</span> <span class="token operator">+</span> <span class="token number">8i</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span> <span class="token comment">// (3 + 4i) (untyped complex constant)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 <li><p>位移運算規則有點複雜。首先，有一些必要條件：</p>
 <ul>
-<li>位移表達式右側的運算元必須是未型別化的整數型別，或是可以表示 <code>uint</code> 型別的未型別化常數。</li>
-</ul>
-<ul>
-<li>左側的運算元必須是整數型別，或是可以表示 <code>int</code> 型別的未型別化常數。</li>
-</ul>
-<p><strong>規則</strong>：如果位移表達式左側的運算元是未型別化常數，則結果是未型別化的整數常數；否則結果與左側運算元的型別相同。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1</span> &lt;&lt; <span class="number">5</span>         <span class="comment">// 32 (untyped integer constant)</span></span><br><span class="line"><span class="keyword">const</span> b = <span class="keyword">int32</span>(<span class="number">1</span>) &lt;&lt; <span class="number">4</span>  <span class="comment">// 16 (int32)</span></span><br><span class="line"><span class="keyword">const</span> c = <span class="number">16.0</span> &gt;&gt; <span class="number">2</span>      <span class="comment">// 4 (untyped integer constant) - 16.0 can represent a value of type `int`</span></span><br><span class="line"><span class="keyword">const</span> d = <span class="number">32</span> &gt;&gt; <span class="number">3.0</span>      <span class="comment">// 4 (untyped integer constant) - 3.0 can represent a value of type `uint`</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> e = <span class="number">10.50</span> &lt;&lt; <span class="number">2</span>     <span class="comment">// ILLEGAL (10.50 can't represent a value of type `int`)</span></span><br><span class="line"><span class="keyword">const</span> f = <span class="number">64</span> &gt;&gt; <span class="number">-2</span>       <span class="comment">// ILLEGAL (The right operand must be an unsigned int or an untyped constant compatible with `uint`)</span></span><br></pre></td></tr></table></figure>
-
+<li><p>位移表達式右側的運算元必須是未型別化的整數型別，或是可以表示 <code>uint</code> 型別的未型別化常數。</p>
+</li>
+<li><p>左側的運算元必須是整數型別，或是可以表示 <code>int</code> 型別的未型別化常數。</p>
 </li>
 </ul>
-<h4 id="常數表達式範例"><a href="#常數表達式範例" class="headerlink" title="常數表達式範例"></a>常數表達式範例</h4><p>讓我們來看一些常數表達式的範例：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> result = <span class="number">25</span> / <span class="number">2</span></span><br><span class="line">	fmt.Printf(<span class="string">"result is %v which is of type %T\n"</span>, result, result)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>規則</strong>：如果位移表達式左側的運算元是未型別化常數，則結果是未型別化的整數常數；否則結果與左側運算元的型別相同。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">5</span>         <span class="token comment">// 32 (untyped integer constant)</span>
+<span class="token keyword">const</span> b <span class="token operator">=</span> <span class="token function">int32</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token number">4</span>  <span class="token comment">// 16 (int32)</span>
+<span class="token keyword">const</span> c <span class="token operator">=</span> <span class="token number">16.0</span> <span class="token operator">>></span> <span class="token number">2</span>      <span class="token comment">// 4 (untyped integer constant) - 16.0 can represent a value of type `int`</span>
+<span class="token keyword">const</span> d <span class="token operator">=</span> <span class="token number">32</span> <span class="token operator">>></span> <span class="token number">3.0</span>      <span class="token comment">// 4 (untyped integer constant) - 3.0 can represent a value of type `uint`</span>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">result is 12 which is of type int</span><br></pre></td></tr></table></figure>
+<span class="token keyword">const</span> e <span class="token operator">=</span> <span class="token number">10.50</span> <span class="token operator">&lt;&lt;</span> <span class="token number">2</span>     <span class="token comment">// ILLEGAL (10.50 can't represent a value of type `int`)</span>
+<span class="token keyword">const</span> f <span class="token operator">=</span> <span class="token number">64</span> <span class="token operator">>></span> <span class="token operator">-</span><span class="token number">2</span>       <span class="token comment">// ILLEGAL (The right operand must be an unsigned int or an untyped constant compatible with `uint`)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h4 id="常數表達式範例"><a href="#常數表達式範例" class="headerlink" title="常數表達式範例"></a>常數表達式範例</h4><p>讓我們來看一些常數表達式的範例：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> result <span class="token operator">=</span> <span class="token number">25</span> <span class="token operator">/</span> <span class="token number">2</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"result is %v which is of type %T\n"</span><span class="token punctuation">,</span> result<span class="token punctuation">,</span> result<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+result is 12 which is of type int<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>由於 <code>25</code> 和 <code>2</code> 都是未型別化的整數常數，因此結果會被截斷為未型別化的整數 <code>12</code>。</p>
 <p><em>若要得到正確的結果，你可以執行以下任一操作：</em></p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Use a float value in numerator or denominator</span></span><br><span class="line"><span class="keyword">var</span> result = <span class="number">25.0</span> / <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Use a float value in numerator or denominator</span>
+<span class="token keyword">var</span> result <span class="token operator">=</span> <span class="token number">25.0</span> <span class="token operator">/</span> <span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Explicitly cast the numerator or the denominator</span></span><br><span class="line"><span class="keyword">var</span> result = <span class="keyword">float64</span>(<span class="number">25</span>) / <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Explicitly cast the numerator or the denominator</span>
+<span class="token keyword">var</span> result <span class="token operator">=</span> <span class="token function">float64</span><span class="token punctuation">(</span><span class="token number">25</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p><strong>讓我們來看另一個範例：</strong></p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> result = <span class="number">4.5</span> + (<span class="number">10</span><span class="number">-5</span>)*(<span class="number">3</span>+<span class="number">2</span>)/<span class="number">2</span></span><br><span class="line">	fmt.Println(result)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> result <span class="token operator">=</span> <span class="token number">4.5</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">10</span><span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>以上程式會產生什麼結果？</p>
 <p>嗯，不是 <code>17</code>。以上程式的實際結果是 <code>16.5</code>。我們來看一下表達式的求值順序，以了解為什麼結果是 <code>16.5</code>。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4.5</span> + (<span class="number">10</span> - <span class="number">5</span>) * (<span class="number">3</span> + <span class="number">2</span>)/<span class="number">2</span></span><br><span class="line">          ↓</span><br><span class="line">  <span class="number">4.5</span> + (<span class="number">5</span>) * (<span class="number">3</span> + <span class="number">2</span>)/<span class="number">2</span></span><br><span class="line">          ↓</span><br><span class="line">   <span class="number">4.5</span> + (<span class="number">5</span>) * (<span class="number">5</span>)/<span class="number">2</span></span><br><span class="line">          ↓</span><br><span class="line">     <span class="number">4.5</span> + (<span class="number">25</span>)/<span class="number">2</span></span><br><span class="line">          ↓</span><br><span class="line">      <span class="number">4.5</span> + <span class="number">12</span></span><br><span class="line">          ↓</span><br><span class="line">        <span class="number">16.5</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token number">4.5</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">10</span> <span class="token operator">-</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">3</span> <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span>
+          ↓
+  <span class="token number">4.5</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">3</span> <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span>
+          ↓
+   <span class="token number">4.5</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span>
+          ↓
+     <span class="token number">4.5</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">25</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span>
+          ↓
+      <span class="token number">4.5</span> <span class="token operator">+</span> <span class="token number">12</span>
+          ↓
+        <span class="token number">16.5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>了解了嗎？結果是錯誤的，因為表達式 <code>25/2</code> 的計算結果是 <code>12</code>。</p>
 <p>要得到正確的結果，可以執行以下任一操作：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Use a float value in the numerator or denominator</span></span><br><span class="line"><span class="keyword">var</span> result = <span class="number">4.5</span> + (<span class="number">10</span><span class="number">-5</span>)*(<span class="number">3</span>+<span class="number">2</span>)/<span class="number">2.0</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Use a float value in the numerator or denominator</span>
+<span class="token keyword">var</span> result <span class="token operator">=</span> <span class="token number">4.5</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">10</span><span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2.0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Explicitly cast numerator or the denominator</span></span><br><span class="line"><span class="keyword">var</span> result = <span class="number">4.5</span> + <span class="keyword">float64</span>((<span class="number">10</span><span class="number">-5</span>)*(<span class="number">3</span>+<span class="number">2</span>))/<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Explicitly cast numerator or the denominator</span>
+<span class="token keyword">var</span> result <span class="token operator">=</span> <span class="token number">4.5</span> <span class="token operator">+</span> <span class="token function">float64</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>未型別化常數是 Go 創造者做出的驚人設計決策。儘管 Go 有強大的型別系統，但你可以使用未型別化的常數來擺脫 Go 的型別系統，並在處理任何表達式中的混合資料型別時具有更強大的靈活性。</p>
 </section>
@@ -425,11 +498,9 @@
       </div>
     
     <!-- Tags END -->
-    <!-- UpdatedDate Start -->
-     
-       <p class="post-date">最後更新時間：2019-11-15</p>
-     
-   <!-- UpdatedDate END -->
+    <!-- Last updated on Start -->
+    
+    <!-- Last updated on END -->
     <!-- NAV START -->
     
   <div class="nav-container">
@@ -454,19 +525,9 @@
 
 
     <!-- NAV END -->
-    <!-- 打賞 START -->
+    <!-- QR Code START -->
     
-    <!-- 打賞 END -->
-    <!-- 二維條碼 START -->
-    
-      <div class="qrcode">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g id="share-qrcode"/>
-        </svg>
-        <p class="notice">掃描二維條碼，分享此文章</p>
-      </div>
-    
-    <!-- 二維條碼 END -->
+    <!-- QR Code END -->
   </article>
   <!-- Article END -->
   <!-- Catalog START -->
@@ -475,7 +536,7 @@
   <div class="toc-main">
     <strong class="toc-title">目錄</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#常數"><span class="toc-nav-text">常數</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#定數是常數"><span class="toc-nav-text">定數是常數</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#宣告常數"><span class="toc-nav-text">宣告常數</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#已型別化和未型別化常數"><span class="toc-nav-text">已型別化和未型別化常數</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#背景知識"><span class="toc-nav-text">背景知識</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#未型別化常數"><span class="toc-nav-text">未型別化常數</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#常數和型別推斷：預設型別"><span class="toc-nav-text">常數和型別推斷：預設型別</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#已型別化常數"><span class="toc-nav-text">已型別化常數</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#常數表達式"><span class="toc-nav-text">常數表達式</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#常數表達式範例"><span class="toc-nav-text">常數表達式範例</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#結論"><span class="toc-nav-text">結論</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%B8%B8%E6%95%B8"><span class="toc-nav-text">常數</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%AE%9A%E6%95%B8%E6%98%AF%E5%B8%B8%E6%95%B8"><span class="toc-nav-text">定數是常數</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%AE%A3%E5%91%8A%E5%B8%B8%E6%95%B8"><span class="toc-nav-text">宣告常數</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%B7%B2%E5%9E%8B%E5%88%A5%E5%8C%96%E5%92%8C%E6%9C%AA%E5%9E%8B%E5%88%A5%E5%8C%96%E5%B8%B8%E6%95%B8"><span class="toc-nav-text">已型別化和未型別化常數</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E8%83%8C%E6%99%AF%E7%9F%A5%E8%AD%98"><span class="toc-nav-text">背景知識</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E6%9C%AA%E5%9E%8B%E5%88%A5%E5%8C%96%E5%B8%B8%E6%95%B8"><span class="toc-nav-text">未型別化常數</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%B8%B8%E6%95%B8%E5%92%8C%E5%9E%8B%E5%88%A5%E6%8E%A8%E6%96%B7%EF%BC%9A%E9%A0%90%E8%A8%AD%E5%9E%8B%E5%88%A5"><span class="toc-nav-text">常數和型別推斷：預設型別</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%B7%B2%E5%9E%8B%E5%88%A5%E5%8C%96%E5%B8%B8%E6%95%B8"><span class="toc-nav-text">已型別化常數</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%B8%B8%E6%95%B8%E8%A1%A8%E9%81%94%E5%BC%8F"><span class="toc-nav-text">常數表達式</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%B8%B8%E6%95%B8%E8%A1%A8%E9%81%94%E5%BC%8F%E7%AF%84%E4%BE%8B"><span class="toc-nav-text">常數表達式範例</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%B5%90%E8%AB%96"><span class="toc-nav-text">結論</span></a></li></ol>
     
   </div>
 </aside>
@@ -485,23 +546,23 @@
 </main>
 
 <script>
-  (function () {
-    var url = 'https://calvertyang.github.io/2019/11/06/working-with-constants-in-golang/';
-    var banner = '';
+  (function() {
+    const url = 'https://calvertyang.github.io/2019/11/06/working-with-constants-in-golang/';
+    const banner = '';
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
-        'background-image': 'url(' + banner + ')'
+        'background-image': 'url(' + banner + ')',
       });
     } else {
       $('#article-banner').geopattern(url);
     }
     $('.header').removeClass('fixed-header');
 
-     // error image
-    $('.markdown-content img').on('error', function() {
-      $(this).attr('src', '/css/images/error-img.png');
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.svg');
       $(this).css({
-        'cursor': 'default'
+        'cursor': 'default',
       });
     });
 
@@ -510,28 +571,28 @@
       if ($(this).parents().is('a')) {
         $(this).css({
           'cursor': 'pointer',
-          'display': 'inline-block'
+          'display': 'inline-block',
         });
       }
     });
 
     // zoom image
-    $('.markdown-content img').on('click', function(e) {
-      var src = $(this).attr('src');
-      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
-        var imageW = $(this).width();
-        var imageH = $(this).height();
+    $('.markdown-content img').on('click', function() {
+      const src = $(this).attr('src');
+      if (src !== '/css/images/error_icon.svg' && !$(this).parents().is('a')) {
+        const imageW = $(this).width();
+        const imageH = $(this).height();
 
-        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        let zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
         zoom = zoom < 1 ? 1 : zoom;
         zoom = zoom > 2 ? 2 : zoom;
-        var transY = (($(window).height() - imageH) / 2).toFixed(2);
+        const transY = (($(window).height() - imageH) / 2).toFixed(2);
 
         $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
         $('.image-view-wrap').addClass('wrap-active');
         $('.image-view-wrap img').css({
-          'width': `${imageW}`,
-          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+          width: imageW,
+          transform: `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`,
         });
         $('html').css('overflow', 'hidden');
 
@@ -540,35 +601,26 @@
           $('html').attr('style', '');
         });
       }
-    });
-
-    // qrcode
-    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
-      text: document.location.href,
-      width: 100,
-      height: 100,
-      colorDark: '#000000',
-    	colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.L,
-      useSVG: true
-    });
+    })
   })();
 </script>
+
+
 
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
 
 <script>
   function async(u, c) {
-    var d = document, t = 'script',
+    const d = document, t = 'script',
       o = d.createElement(t),
       s = d.getElementsByTagName(t)[0];
     o.src = u;
@@ -576,20 +628,36 @@
     s.parentNode.insertBefore(o, s);
   }
 </script>
-
 <script>
   async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
     FastClick.attach(document.body);
-  })
+  });
 </script>
 
 <script>
-  $('figure').each(function(i, block) {
-    let lang = this.classList[1] || 'codeblock';
-    this.dataset.lang = lang.toUpperCase();
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
   });
 </script>
+
+
 <script src="/js/script.js"></script>
+
 
   </body>
 </html>

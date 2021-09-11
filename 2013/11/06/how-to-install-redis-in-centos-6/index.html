@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="Calvert&#39;s tech blog">
-  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
   
@@ -13,55 +13,70 @@
       如何在 CentOS 6 安裝 Redis | Calvert&#39;s murmur
     
   </title>
-  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrcode.js"></script>
+  
   
   
     <!-- MathJax support START -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
       });
     </script>
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
+        let all = MathJax.Hub.getAllJax(), i;
         for (i = 0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- MathJax support END -->
   
 
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
-  <script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-44933497-2');
-  </script>
+    </script>
 
 
-</head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
-</div>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3999187913340509" crossorigin="anonymous"></script>
+
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
   <body>
     <header class="header fixed-header">
@@ -70,7 +85,6 @@
       <div class="logo"></div>
       <span>Calvert's murmur</span>
     </a>
-
     <ul class="right-list">
       
         <li class="list-item">
@@ -81,7 +95,7 @@
       
         <li class="list-item">
           
-            <a href="/categories/" class="item-link">Categories</a>
+            <a href="/series/" class="item-link">Series</a>
           
         </li>
       
@@ -109,49 +123,15 @@
           
         </li>
       
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
     </ul>
-
-    
-      <div id="search-form-wrap">
-        <form class="search-form">
-          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
-          <button type="submit" class="search-form-submit">
-            <span class="fa fa-search"></span>
-          </button>
-        </form>
-        <div class="ins-search">
-  <div class="ins-search-mask"></div>
-  <div class="ins-search-container">
-    <div class="ins-input-wrapper">
-      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
-      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-    </div>
-    <div class="ins-section-wrapper">
-      <div class="ins-section-container"></div>
-    </div>
-  </div>
-</div>
-<script>
-  (function (window) {
-    var INSIGHT_CONFIG = {
-      TRANSLATION: {
-        POSTS: '文章',
-        PAGES: '頁面',
-        CATEGORIES: '分類',
-        TAGS: '標籤',
-        UNTITLED: '無標題',
-      },
-      ROOT_URL: '/',
-      CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-  })(window);
-</script>
-<script src="/js/insight.js"></script>
-
-      </div>
-    
-
     <div class="menu">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -168,7 +148,7 @@
         
           <li class="menu-item">
             
-              <a href="/categories/" class="menu-link">Categories</a>
+              <a href="/series/" class="menu-link">Series</a>
             
           </li>
         
@@ -198,14 +178,40 @@
         
       </ul>
     </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
   </div>
 </header>
 
     <div id="article-banner">
   <h2>如何在 CentOS 6 安裝 Redis</h2>
   <p class="post-date">2013-11-06</p>
+
   <div class="arrow-down">
-    <a href="javascript:;" target="_blank" rel="noopener"></a>
+    <a href="javascript:;"></a>
   </div>
 </div>
 <main class="app-body flex-box">
@@ -214,17 +220,34 @@
     <section class="markdown-content"><p>Redis 是一個開源、遵守 BSD 授權、先進的鍵值對儲存庫。它通常被稱為資料結構伺服器，因為值可以是字串(String)、雜湊(Hash)、列表(List)、集合(Set)及序列集合(Sorted Set)等類型。</p>
 <ol>
 <li><p>下載並解壓縮</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ wget http://download.redis.io/redis-stable.tar.gz</span><br><span class="line">$ tar -zxvf redis-stable.tar.gz</span><br><span class="line">$ <span class="built_in">cd</span> redis-stable</span><br></pre></td></tr></table></figure>
-</li>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">wget</span> http://download.redis.io/redis-stable.tar.gz
+$ <span class="token function">tar</span> -zxvf redis-stable.tar.gz
+$ <span class="token builtin class-name">cd</span> redis-stable<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
 <li><p>編譯並測試是否可安裝</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ make</span><br><span class="line">$ make <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">make</span>
+$ <span class="token function">make</span> <span class="token builtin class-name">test</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>若出現訊息，代表系統尚未安裝 tcl</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> src &amp;&amp; make <span class="built_in">test</span></span><br><span class="line">make[1]: Entering directory `/tmp/redis-stable/src<span class="string">'</span></span><br><span class="line"><span class="string">You need tcl 8.5 or newer in order to run the Redis test</span></span><br><span class="line"><span class="string">make[1]: *** [test] Error 1</span></span><br><span class="line"><span class="string">make[1]: Leaving directory `/tmp/redis-stable/src'</span></span><br><span class="line">make: *** [<span class="built_in">test</span>] Error 2</span><br></pre></td></tr></table></figure>
-<p>tcl 安裝步驟，詳見<a href="http://www.linuxfromscratch.org/blfs/view/cvs/general/tcl.html" target="_blank" rel="noopener">官方文件</a></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> src <span class="token operator">&amp;&amp;</span> <span class="token function">make</span> <span class="token builtin class-name">test</span>
+make<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>: Entering directory <span class="token variable"><span class="token variable">`</span>/tmp/redis-stable/src'
+You need tcl <span class="token number">8.5</span> or newer <span class="token keyword">in</span> order to run the Redis <span class="token builtin class-name">test</span>
+make<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>: *** <span class="token punctuation">[</span>test<span class="token punctuation">]</span> Error <span class="token number">1</span>
+make<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>: Leaving directory <span class="token variable">`</span></span>/tmp/redis-stable/src'
+make: *** <span class="token punctuation">[</span>test<span class="token punctuation">]</span> Error <span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>tcl 安裝步驟，詳見<a target="_blank" rel="noopener" href="http://www.linuxfromscratch.org/blfs/view/cvs/general/tcl.html">官方文件</a></p>
 </li>
 <li><p>安裝 redis</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ make install</span><br><span class="line"><span class="built_in">cd</span> src &amp;&amp; make install</span><br><span class="line">make[1]: Entering directory <span class="string">'/tmp/redis-stable/src'</span></span><br><span class="line">Hint: To run <span class="string">'make test'</span> is a good idea ;)</span><br><span class="line">mkdir -p /usr/<span class="built_in">local</span>/bin</span><br><span class="line">    INSTALL install</span><br><span class="line">    INSTALL install</span><br><span class="line">    INSTALL install</span><br><span class="line">    INSTALL install</span><br><span class="line">    INSTALL install</span><br><span class="line">make[1]: Leaving directory `/tmp/redis-stable/src<span class="string">'</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">make</span> <span class="token function">install</span>
+<span class="token builtin class-name">cd</span> src <span class="token operator">&amp;&amp;</span> <span class="token function">make</span> <span class="token function">install</span>
+make<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>: Entering directory <span class="token string">'/tmp/redis-stable/src'</span>
+Hint: To run <span class="token string">'make test'</span> is a good idea <span class="token punctuation">;</span><span class="token punctuation">)</span>
+<span class="token function">mkdir</span> -p /usr/local/bin
+    INSTALL <span class="token function">install</span>
+    INSTALL <span class="token function">install</span>
+    INSTALL <span class="token function">install</span>
+    INSTALL <span class="token function">install</span>
+    INSTALL <span class="token function">install</span>
+make<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>: Leaving directory `/tmp/redis-stable/src'<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>到此，redis 便安裝完畢了，redis 包含了以下幾個部分：</p>
 <ul>
@@ -235,23 +258,32 @@
 </ul>
 </li>
 <li><p>啟動 redis<br>最簡單的啟動方式為直接執行 <code>redis-server</code> 且不含任何參數。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ redis-server</span><br><span class="line">[12182] 06 Nov 13:58:15.841 <span class="comment"># Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf</span></span><br><span class="line">[12182] 06 Nov 13:58:15.842 * Max number of open files <span class="built_in">set</span> to 10032</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">[12182] 06 Nov 13:58:15.843 <span class="comment"># Server started, Redis version 2.6.16</span></span><br><span class="line">[12182] 06 Nov 13:58:15.843 * The server is now ready to accept connections on port 6379</span><br></pre></td></tr></table></figure>
-
-<p>若要啟動 redis 並帶入設定檔，只需將設定檔的完整路徑帶入即可，如：redis-server /etc/redis.conf</p>
 </li>
-<li><p>接著加入設定將 redis 作為服務於開機時啟動<br>建立工作目錄</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mkdir /var/redis</span><br></pre></td></tr></table></figure>
+</ol>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ redis-server
+<span class="token punctuation">[</span><span class="token number">12182</span><span class="token punctuation">]</span> 06 Nov <span class="token number">13</span>:58:15.841 <span class="token comment"># Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf</span>
+<span class="token punctuation">[</span><span class="token number">12182</span><span class="token punctuation">]</span> 06 Nov <span class="token number">13</span>:58:15.842 * Max number of <span class="token function">open</span> files <span class="token builtin class-name">set</span> to <span class="token number">10032</span>
+<span class="token punctuation">..</span>.
+<span class="token punctuation">..</span>.
+<span class="token punctuation">[</span><span class="token number">12182</span><span class="token punctuation">]</span> 06 Nov <span class="token number">13</span>:58:15.843 <span class="token comment"># Server started, Redis version 2.6.16</span>
+<span class="token punctuation">[</span><span class="token number">12182</span><span class="token punctuation">]</span> 06 Nov <span class="token number">13</span>:58:15.843 * The server is now ready to accept connections on port <span class="token number">6379</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>從 utils 資料夾複製啟動腳本到 /etc/init.d/</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cp utils/redis_init_script /etc/init.d/redis</span><br></pre></td></tr></table></figure>
+<p>  若要啟動 redis 並帶入設定檔，只需將設定檔的完整路徑帶入即可，如：redis-server /etc/redis.conf</p>
+<ol start="5">
+<li>接著加入設定將 redis 作為服務於開機時啟動<br>建立工作目錄</li>
+</ol>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">mkdir</span> /var/redis<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>編輯啟動腳本，根據需求修改 REDIS_PORT</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/init.d/redis</span><br></pre></td></tr></table></figure>
+<p>  從 utils 資料夾複製啟動腳本到 /etc/init.d/</p>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">cp</span> utils/redis_init_script /etc/init.d/redis<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>複製預設設定檔</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp redis.conf /etc/redis.conf</span><br></pre></td></tr></table></figure>
+<p>  編輯啟動腳本，根據需求修改 REDIS_PORT</p>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">vi</span> /etc/init.d/redis<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>需修改以下幾個項目</p>
+<p>  複製預設設定檔</p>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">cp</span> redis.conf /etc/redis.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>  需修改以下幾個項目</p>
 <ul>
 <li>daemonize: 設定為 yes 讓 redis 可背景執行，預設為 no</li>
 <li>port: 根據需求修改連接埠，預設為 6379</li>
@@ -259,13 +291,11 @@
 <li>logfile: 設定要放置記錄檔的位置，預設為標準輸出(stdout) 不會保留記錄於檔案內</li>
 <li>dir: 將工作目錄設定為 /var/redis (<strong>此設定非常重要</strong>)</li>
 </ul>
-<p>最後，將啟動腳本加入開機執行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-rc.d redis defaults</span><br></pre></td></tr></table></figure>
+<p>  最後，將啟動腳本加入開機執行</p>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> update-rc.d redis defaults<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>現在你可以透過以下指令啟動 redis</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service redis start</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+<p>  現在你可以透過以下指令啟動 redis</p>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">service</span> redis start<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </section>
     <!-- Tags START -->
     
@@ -284,11 +314,9 @@
       </div>
     
     <!-- Tags END -->
-    <!-- UpdatedDate Start -->
-     
-       <p class="post-date">最後更新時間：2019-11-15</p>
-     
-   <!-- UpdatedDate END -->
+    <!-- Last updated on Start -->
+    
+    <!-- Last updated on END -->
     <!-- NAV START -->
     
   <div class="nav-container">
@@ -313,19 +341,9 @@
 
 
     <!-- NAV END -->
-    <!-- 打賞 START -->
+    <!-- QR Code START -->
     
-    <!-- 打賞 END -->
-    <!-- 二維條碼 START -->
-    
-      <div class="qrcode">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g id="share-qrcode"/>
-        </svg>
-        <p class="notice">掃描二維條碼，分享此文章</p>
-      </div>
-    
-    <!-- 二維條碼 END -->
+    <!-- QR Code END -->
   </article>
   <!-- Article END -->
   <!-- Catalog START -->
@@ -344,23 +362,23 @@
 </main>
 
 <script>
-  (function () {
-    var url = 'https://calvertyang.github.io/2013/11/06/how-to-install-redis-in-centos-6/';
-    var banner = '';
+  (function() {
+    const url = 'https://calvertyang.github.io/2013/11/06/how-to-install-redis-in-centos-6/';
+    const banner = '';
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
-        'background-image': 'url(' + banner + ')'
+        'background-image': 'url(' + banner + ')',
       });
     } else {
       $('#article-banner').geopattern(url);
     }
     $('.header').removeClass('fixed-header');
 
-     // error image
-    $('.markdown-content img').on('error', function() {
-      $(this).attr('src', '/css/images/error-img.png');
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.svg');
       $(this).css({
-        'cursor': 'default'
+        'cursor': 'default',
       });
     });
 
@@ -369,28 +387,28 @@
       if ($(this).parents().is('a')) {
         $(this).css({
           'cursor': 'pointer',
-          'display': 'inline-block'
+          'display': 'inline-block',
         });
       }
     });
 
     // zoom image
-    $('.markdown-content img').on('click', function(e) {
-      var src = $(this).attr('src');
-      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
-        var imageW = $(this).width();
-        var imageH = $(this).height();
+    $('.markdown-content img').on('click', function() {
+      const src = $(this).attr('src');
+      if (src !== '/css/images/error_icon.svg' && !$(this).parents().is('a')) {
+        const imageW = $(this).width();
+        const imageH = $(this).height();
 
-        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        let zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
         zoom = zoom < 1 ? 1 : zoom;
         zoom = zoom > 2 ? 2 : zoom;
-        var transY = (($(window).height() - imageH) / 2).toFixed(2);
+        const transY = (($(window).height() - imageH) / 2).toFixed(2);
 
         $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
         $('.image-view-wrap').addClass('wrap-active');
         $('.image-view-wrap img').css({
-          'width': `${imageW}`,
-          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+          width: imageW,
+          transform: `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`,
         });
         $('html').css('overflow', 'hidden');
 
@@ -399,35 +417,26 @@
           $('html').attr('style', '');
         });
       }
-    });
-
-    // qrcode
-    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
-      text: document.location.href,
-      width: 100,
-      height: 100,
-      colorDark: '#000000',
-    	colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.L,
-      useSVG: true
-    });
+    })
   })();
 </script>
+
+
 
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
 
 <script>
   function async(u, c) {
-    var d = document, t = 'script',
+    const d = document, t = 'script',
       o = d.createElement(t),
       s = d.getElementsByTagName(t)[0];
     o.src = u;
@@ -435,20 +444,36 @@
     s.parentNode.insertBefore(o, s);
   }
 </script>
-
 <script>
   async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
     FastClick.attach(document.body);
-  })
+  });
 </script>
 
 <script>
-  $('figure').each(function(i, block) {
-    let lang = this.classList[1] || 'codeblock';
-    this.dataset.lang = lang.toUpperCase();
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
   });
 </script>
+
+
 <script src="/js/script.js"></script>
+
 
   </body>
 </html>

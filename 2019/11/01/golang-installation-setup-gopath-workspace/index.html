@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="Calvert&#39;s tech blog">
-  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
   
@@ -13,55 +13,70 @@
       安裝、設定 Golang 的 GOPATH 和 Go 工作區 | Calvert&#39;s murmur
     
   </title>
-  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrcode.js"></script>
+  
   
   
     <!-- MathJax support START -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
       });
     </script>
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
+        let all = MathJax.Hub.getAllJax(), i;
         for (i = 0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- MathJax support END -->
   
 
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
-  <script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-44933497-2');
-  </script>
+    </script>
 
 
-</head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
-</div>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3999187913340509" crossorigin="anonymous"></script>
+
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
   <body>
     <header class="header fixed-header">
@@ -70,7 +85,6 @@
       <div class="logo"></div>
       <span>Calvert's murmur</span>
     </a>
-
     <ul class="right-list">
       
         <li class="list-item">
@@ -81,7 +95,7 @@
       
         <li class="list-item">
           
-            <a href="/categories/" class="item-link">Categories</a>
+            <a href="/series/" class="item-link">Series</a>
           
         </li>
       
@@ -109,49 +123,15 @@
           
         </li>
       
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
     </ul>
-
-    
-      <div id="search-form-wrap">
-        <form class="search-form">
-          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
-          <button type="submit" class="search-form-submit">
-            <span class="fa fa-search"></span>
-          </button>
-        </form>
-        <div class="ins-search">
-  <div class="ins-search-mask"></div>
-  <div class="ins-search-container">
-    <div class="ins-input-wrapper">
-      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
-      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-    </div>
-    <div class="ins-section-wrapper">
-      <div class="ins-section-container"></div>
-    </div>
-  </div>
-</div>
-<script>
-  (function (window) {
-    var INSIGHT_CONFIG = {
-      TRANSLATION: {
-        POSTS: '文章',
-        PAGES: '頁面',
-        CATEGORIES: '分類',
-        TAGS: '標籤',
-        UNTITLED: '無標題',
-      },
-      ROOT_URL: '/',
-      CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-  })(window);
-</script>
-<script src="/js/insight.js"></script>
-
-      </div>
-    
-
     <div class="menu">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -168,7 +148,7 @@
         
           <li class="menu-item">
             
-              <a href="/categories/" class="menu-link">Categories</a>
+              <a href="/series/" class="menu-link">Series</a>
             
           </li>
         
@@ -198,25 +178,51 @@
         
       </ul>
     </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
   </div>
 </header>
 
     <div id="article-banner">
   <h2>安裝、設定 Golang 的 GOPATH 和 Go 工作區</h2>
   <p class="post-date">2019-11-01</p>
+
   <div class="arrow-down">
-    <a href="javascript:;" target="_blank" rel="noopener"></a>
+    <a href="javascript:;"></a>
   </div>
 </div>
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-installation-setup-gopath-workspace" target="_blank" rel="noopener">Golang Installation, Setup, GOPATH, and Go Workspace</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-installation-setup-gopath-workspace">Golang Installation, Setup, GOPATH, and Go Workspace</a></p>
 </blockquote>
 <p>Go 是 Google 建立的開源、靜態型別的編譯語言。</p>
 <p>它結合了靜態型別和動態型別語言的優點，並為你提供了有效率和輕鬆撰寫程式的完美組合。它主要適合用於快速建立、高效能和可靠的伺服器端應用程式。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <p>以下是 Go 最著名的功能：</p>
 <ul>
@@ -233,22 +239,62 @@
 </ul>
 <p>這是我們 Go <a href="https://calvertyang.github.io/tags#Golang">教學系列</a>的第一部份。在本文中，你將學到如何在系統中安裝 Go，以及如何為 Go 專案設定開發環境。</p>
 <h3 id="安裝-Go"><a href="#安裝-Go" class="headerlink" title="安裝 Go"></a>安裝 Go</h3><p>Go 二進位發行版適用於所有主要作業系統，如 Linux、Windows 和 macOS。從二進位發行版安裝 Go 非常簡單。</p>
-<p>如果沒有適用於你的作業系統的二進位發行版，可以嘗試<a href="https://golang.org/doc/install/source" target="_blank" rel="noopener">從原始碼安裝 Go</a>。</p>
-<h4 id="Mac-OS-X"><a href="#Mac-OS-X" class="headerlink" title="Mac OS X"></a>Mac OS X</h4><h5 id="使用-Homebrew"><a href="#使用-Homebrew" class="headerlink" title="使用 Homebrew"></a>使用 Homebrew</h5><p>在 macOS 中安裝 Go 最簡單的方法是使用 <a href="https://brew.sh" target="_blank" rel="noopener">Homebrew</a>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install go</span><br></pre></td></tr></table></figure>
+<p>如果沒有適用於你的作業系統的二進位發行版，可以嘗試<a target="_blank" rel="noopener" href="https://golang.org/doc/install/source">從原始碼安裝 Go</a>。</p>
+<h4 id="Mac-OS-X"><a href="#Mac-OS-X" class="headerlink" title="Mac OS X"></a>Mac OS X</h4><h5 id="使用-Homebrew"><a href="#使用-Homebrew" class="headerlink" title="使用 Homebrew"></a>使用 Homebrew</h5><p>在 macOS 中安裝 Go 最簡單的方法是使用 <a target="_blank" rel="noopener" href="https://brew.sh/">Homebrew</a>：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">brew <span class="token function">install</span> go<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h5 id="使用-macOS-package-安裝程式"><a href="#使用-macOS-package-安裝程式" class="headerlink" title="使用 macOS package 安裝程式"></a>使用 macOS package 安裝程式</h5><p>從 <a href="https://golang.org/dl" target="_blank" rel="noopener">Go 的官方下載頁面</a>下載最新的 Go 安裝程式（<code>.pkg</code>）。開啟安裝程式並按照畫面上的說明安裝 Go。預設情況下，Go 會安裝在 <code>/usr/local/go</code> 中。</p>
-<h4 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h4><p>從 <a href="https://golang.org/dl" target="_blank" rel="noopener">Go 的官方下載頁面</a>下載 Linux 發行版，並解壓縮到 <code>/usr/local</code> 目錄中。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -C /usr/<span class="built_in">local</span> -xzf go<span class="variable">$VERSION</span>.<span class="variable">$OS</span>-<span class="variable">$ARCH</span>.tar.gz</span><br></pre></td></tr></table></figure>
+<h5 id="使用-macOS-package-安裝程式"><a href="#使用-macOS-package-安裝程式" class="headerlink" title="使用 macOS package 安裝程式"></a>使用 macOS package 安裝程式</h5><p>從 <a target="_blank" rel="noopener" href="https://golang.org/dl">Go 的官方下載頁面</a>下載最新的 Go 安裝程式（<code>.pkg</code>）。開啟安裝程式並按照畫面上的說明安裝 Go。預設情況下，Go 會安裝在 <code>/usr/local/go</code> 中。</p>
+<h4 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h4><p>從 <a target="_blank" rel="noopener" href="https://golang.org/dl">Go 的官方下載頁面</a>下載 Linux 發行版，並解壓縮到 <code>/usr/local</code> 目錄中。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">tar</span> -C /usr/local -xzf go<span class="token variable">$VERSION</span><span class="token builtin class-name">.</span><span class="token variable">$OS</span>-<span class="token variable">$ARCH</span>.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>接下來，將 <code>/usr/local/go/bin</code> 目錄加到 PATH 環境變數中。你可以透過將下面這行加到 <code>~/.bash_profile</code> 檔案中來完成此操作：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/go/bin</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span>:/usr/local/go/bin<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>你也可以使用 <code>/opt/go</code> 之類的任何其他目錄代替 <code>/usr/local</code> 來安裝 Go。</p>
-<h4 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h4><p>從 <a href="https://golang.org/dl" target="_blank" rel="noopener">Go 的官方下載頁面</a>下載 Windows MSI 安裝程式。開啟安裝程式並按照畫面上的說明安裝 Go。預設情況下，Go 會安裝在 <code>C:\Go</code> 中。</p>
-<h3 id="Go-工具"><a href="#Go-工具" class="headerlink" title="Go 工具"></a>Go 工具</h3><p>Go 發行版包含了 <a href="https://golang.org/cmd/go" target="_blank" rel="noopener">Go 工具</a>。它是一個命令列工具，可讓你自動執行常見任務，如下載和安裝相依套件，建置和測試程式碼等。</p>
+<h4 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h4><p>從 <a target="_blank" rel="noopener" href="https://golang.org/dl">Go 的官方下載頁面</a>下載 Windows MSI 安裝程式。開啟安裝程式並按照畫面上的說明安裝 Go。預設情況下，Go 會安裝在 <code>C:\Go</code> 中。</p>
+<h3 id="Go-工具"><a href="#Go-工具" class="headerlink" title="Go 工具"></a>Go 工具</h3><p>Go 發行版包含了 <a target="_blank" rel="noopener" href="https://golang.org/cmd/go">Go 工具</a>。它是一個命令列工具，可讓你自動執行常見任務，如下載和安裝相依套件，建置和測試程式碼等。</p>
 <p>按照上一節中的說明安裝 <code>Go</code> 之後，你應該可以透過在命令列中輸入 <code>go</code> 來執行 <em>Go 工具</em> ：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">$ go</span><br><span class="line">Go is a tool <span class="keyword">for</span> managing Go <span class="built_in">source</span> code.</span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line"></span><br><span class="line">    go <span class="built_in">command</span> [arguments]</span><br><span class="line"></span><br><span class="line">The commands are:</span><br><span class="line"></span><br><span class="line">    build       compile packages and dependencies</span><br><span class="line">    clean       remove object files</span><br><span class="line">    doc         show documentation <span class="keyword">for</span> package or symbol</span><br><span class="line">    env         <span class="built_in">print</span> Go environment information</span><br><span class="line">    bug         start a bug report</span><br><span class="line">    fix         run go tool fix on packages</span><br><span class="line">    fmt         run gofmt on package sources</span><br><span class="line">    generate    generate Go files by processing <span class="built_in">source</span></span><br><span class="line">    get         download and install packages and dependencies</span><br><span class="line">    install     compile and install packages and dependencies</span><br><span class="line">    list        list packages</span><br><span class="line">    run         compile and run Go program</span><br><span class="line">    <span class="built_in">test</span>        <span class="built_in">test</span> packages</span><br><span class="line">    tool        run specified go tool</span><br><span class="line">    version     <span class="built_in">print</span> Go version</span><br><span class="line">    vet         run go tool vet on packages</span><br><span class="line"></span><br><span class="line">Use <span class="string">"go help [command]"</span> <span class="keyword">for</span> more information about a <span class="built_in">command</span>.</span><br><span class="line"></span><br><span class="line">Additional <span class="built_in">help</span> topics:</span><br><span class="line"></span><br><span class="line">    c           calling between Go and C</span><br><span class="line">    buildmode   description of build modes</span><br><span class="line">    filetype    file types</span><br><span class="line">    gopath      GOPATH environment variable</span><br><span class="line">    environment environment variables</span><br><span class="line">    importpath  import path syntax</span><br><span class="line">    packages    description of package lists</span><br><span class="line">    testflag    description of testing flags</span><br><span class="line">    testfunc    description of testing <span class="built_in">functions</span></span><br><span class="line"></span><br><span class="line">Use <span class="string">"go help [topic]"</span> <span class="keyword">for</span> more information about that topic.</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ go
+Go is a tool <span class="token keyword">for</span> managing Go <span class="token builtin class-name">source</span> code.
+
+Usage:
+
+    go <span class="token builtin class-name">command</span> <span class="token punctuation">[</span>arguments<span class="token punctuation">]</span>
+
+The commands are:
+
+    build       compile packages and dependencies
+    clean       remove object files
+    doc         show documentation <span class="token keyword">for</span> package or symbol
+    <span class="token function">env</span>         print Go environment information
+    bug         start a bug report
+    fix         run go tool fix on packages
+    <span class="token function">fmt</span>         run gofmt on package sources
+    generate    generate Go files by processing <span class="token builtin class-name">source</span>
+    get         download and <span class="token function">install</span> packages and dependencies
+    <span class="token function">install</span>     compile and <span class="token function">install</span> packages and dependencies
+    list        list packages
+    run         compile and run Go program
+    <span class="token builtin class-name">test</span>        <span class="token builtin class-name">test</span> packages
+    tool        run specified go tool
+    version     print Go version
+    vet         run go tool vet on packages
+
+Use <span class="token string">"go help [command]"</span> <span class="token keyword">for</span> <span class="token function">more</span> information about a command.
+
+Additional <span class="token builtin class-name">help</span> topics:
+
+    c           calling between Go and C
+    buildmode   description of build modes
+    filetype    <span class="token function">file</span> types
+    gopath      GOPATH environment variable
+    environment environment variables
+    importpath  <span class="token function">import</span> path syntax
+    packages    description of package lists
+    testflag    description of testing flags
+    testfunc    description of testing functions
+
+Use <span class="token string">"go help [topic]"</span> <span class="token keyword">for</span> <span class="token function">more</span> information about that topic.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="GOPATH、Go-工作區及程式碼組織"><a href="#GOPATH、Go-工作區及程式碼組織" class="headerlink" title="GOPATH、Go 工作區及程式碼組織"></a>GOPATH、Go 工作區及程式碼組織</h3><p>Go 要求你以特定方式組織程式碼：</p>
 <blockquote>
@@ -266,12 +312,42 @@
 <p>所有不可執行的 package（共享函式庫）都儲存在此目錄中。你不能直接執行這些 package，因為他們不是可執行檔。他們通常是在其他可執行 package 中匯入和使用。</p>
 </li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># A typical Go workspace</span></span><br><span class="line">bin/</span><br><span class="line">    myapp                           <span class="comment"># Executable binary</span></span><br><span class="line">    hello                           <span class="comment"># Executable binary</span></span><br><span class="line">pkg/</span><br><span class="line">   github.com/callicoder/example/</span><br><span class="line">       numbers.a                    <span class="comment"># Package archive</span></span><br><span class="line">       strings.a                    <span class="comment"># Package archive</span></span><br><span class="line">   github.com/gorilla/</span><br><span class="line">       mux.a                        <span class="comment"># Package archive</span></span><br><span class="line">   go.uber.org/</span><br><span class="line">       zap.a                        <span class="comment"># Package archive</span></span><br><span class="line">src/</span><br><span class="line">    github.com/callicoder/example/  <span class="comment"># Project repository</span></span><br><span class="line">       .git/</span><br><span class="line">       myapp/</span><br><span class="line">          app.go                    <span class="comment"># Executable program containing main package and function</span></span><br><span class="line">       numbers/                     <span class="comment"># Go Package (contains utility functions for working with numbers)</span></span><br><span class="line">          prime.go</span><br><span class="line">          prime_test.go</span><br><span class="line">       strings/                     <span class="comment"># Go Package (contains utility functions for working with strings)</span></span><br><span class="line">          reverse.go</span><br><span class="line">          trim.go</span><br><span class="line">    github.com/gorilla/mux/         <span class="comment"># 3rd Party package</span></span><br><span class="line">       <span class="comment">#... package contents</span></span><br><span class="line">    go.uber.org/zap/                <span class="comment"># 3rd Party package</span></span><br><span class="line">       <span class="comment">#... package contents</span></span><br><span class="line">    hello/                          <span class="comment"># Local package (not published anywhere)</span></span><br><span class="line">       hello.go  </span><br><span class="line"></span><br><span class="line">    <span class="comment"># ... (more repositories and packages omitted) ...</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># A typical Go workspace</span>
+bin/
+    myapp                           <span class="token comment"># Executable binary</span>
+    hello                           <span class="token comment"># Executable binary</span>
+pkg/
+   github.com/callicoder/example/
+       numbers.a                    <span class="token comment"># Package archive</span>
+       strings.a                    <span class="token comment"># Package archive</span>
+   github.com/gorilla/
+       mux.a                        <span class="token comment"># Package archive</span>
+   go.uber.org/
+       zap.a                        <span class="token comment"># Package archive</span>
+src/
+    github.com/callicoder/example/  <span class="token comment"># Project repository</span>
+       .git/
+       myapp/
+          app.go                    <span class="token comment"># Executable program containing main package and function</span>
+       numbers/                     <span class="token comment"># Go Package (contains utility functions for working with numbers)</span>
+          prime.go
+          prime_test.go
+       strings/                     <span class="token comment"># Go Package (contains utility functions for working with strings)</span>
+          reverse.go
+          trim.go
+    github.com/gorilla/mux/         <span class="token comment"># 3rd Party package</span>
+       <span class="token comment">#... package contents</span>
+    go.uber.org/zap/                <span class="token comment"># 3rd Party package</span>
+       <span class="token comment">#... package contents</span>
+    hello/                          <span class="token comment"># Local package (not published anywhere)</span>
+       hello.go  
+
+    <span class="token comment"># ... (more repositories and packages omitted) ...</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="設定-GOPATH"><a href="#設定-GOPATH" class="headerlink" title="設定 GOPATH"></a>設定 GOPATH</h4><p>GOPATH 環境變數指定了工作區的位置。預設情況下，在 Unix 系統上 <code>GOPATH</code> 被假定為 <code>$HOME/go</code>，在 Windows 上被假定為 <code>%USERPROFILE%\go</code>。如果你滿意這個路徑，則無需執行任何操作。你可以在家目錄中建立名為 <code>go</code> 的工作區目錄，然後開始撰寫 Go 程式碼。</p>
 <p>如果想要使用自訂位置作為工作區，你可以按照以下說明設定 <code>GOPATH</code> 環境變數：</p>
 <h5 id="Unix-系統（Linux-和-macOS）"><a href="#Unix-系統（Linux-和-macOS）" class="headerlink" title="Unix 系統（Linux 和 macOS）"></a>Unix 系統（Linux 和 macOS）</h5><p>在 Bash shell 中設定 <code>GOPATH</code>，將下面一行加到 <code>~/.bash_profile</code> 檔案中：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GOPATH=<span class="variable">$HOME</span>/go</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">GOPATH</span><span class="token operator">=</span><span class="token environment constant">$HOME</span>/go<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>如果你使用 <strong>Zsh</strong> shell，那麼你需要將上面一行加到 <code>~/.zshrc</code> 檔案中。</p>
 <h5 id="Windows-系統"><a href="#Windows-系統" class="headerlink" title="Windows 系統"></a>Windows 系統</h5><p>假設你要將工作區目錄放置在 <code>C:\go-workspace</code>。以下是設定 <code>GOPATH</code> 環境變數以使用此工作區位置的方法：</p>
@@ -295,23 +371,41 @@
 </ul>
 <p>注意，<code>GOPATH</code> 必須與 Go 安裝路徑不同。</p>
 <h3 id="使用-Hello-World-程式測試-Go-是否正確安裝"><a href="#使用-Hello-World-程式測試-Go-是否正確安裝" class="headerlink" title="使用 Hello World 程式測試 Go 是否正確安裝"></a>使用 <code>Hello World</code> 程式測試 Go 是否正確安裝</h3><p>首先，確定已經在 <code>$HOME/go</code> 建立了 Go 工作區目錄。接下來，在工作區中建立一個新目錄 <code>src/hello</code>。最後，使用以下程式碼建立一個名為 <code>hello.go</code> 的檔案：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">"Hello, World\n"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd $HOME/go/src/hello</span><br><span class="line">$ ls</span><br><span class="line">hello.go</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Hello, World\n"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">$ cd $HOME&#x2F;go&#x2F;src&#x2F;hello
+$ ls
+hello.go<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>執行以上程式最簡單的方法是使用 <code>go run</code> 指令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ go run hello.go</span><br><span class="line">Hello, World</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">$ go run hello.go
+Hello, World<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h4 id="使用-go-build-建置執行檔"><a href="#使用-go-build-建置執行檔" class="headerlink" title="使用 go build 建置執行檔"></a>使用 <code>go build</code> 建置執行檔</h4><p><code>go run</code> 指令會編譯和執行程式一次。但是，如果你想從 Go 原始碼產生一個執行檔，可以在不使用 Go 工具的情況下將其作為獨立的可執行檔來執行，則可以使用 <code>go build</code> 指令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cd $HOME/go/src/hello</span><br><span class="line">$ go build</span><br><span class="line">$ ls</span><br><span class="line">hello hello.go</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">$ cd $HOME&#x2F;go&#x2F;src&#x2F;hello
+$ go build
+$ ls
+hello hello.go<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><code>go build</code> 指令會建立一個名稱與 package（<code>hello</code>）相同的可執行檔。你可以像這樣執行它：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ./hello</span><br><span class="line">Hello, World</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">$ .&#x2F;hello
+Hello, World<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h4 id="使用-go-install-安裝-package-到-bin-目錄中"><a href="#使用-go-install-安裝-package-到-bin-目錄中" class="headerlink" title="使用 go install 安裝 package 到 bin 目錄中"></a>使用 <code>go install</code> 安裝 package 到 <code>bin</code> 目錄中</h4><p>你可以使用 <code>go install</code> 指令來建置並安裝執行檔到工作區的 <code>bin</code> 目錄：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd $HOME/go/src/hello</span><br><span class="line">$ go install</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">$ cd $HOME&#x2F;go&#x2F;src&#x2F;hello
+$ go install<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cd $HOME/go/bin</span><br><span class="line">$ ls</span><br><span class="line">hello</span><br><span class="line">$ ./hello</span><br><span class="line">Hello, World</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">$ cd $HOME&#x2F;go&#x2F;bin
+$ ls
+hello
+$ .&#x2F;hello
+Hello, World<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>你也可以將 <code>$HOME/go/bin</code> 目錄加到 <code>PATH</code> 變數，以便從任何位置執行 go 可執行檔。</p>
 <p><strong>別忘了查看：<code>go help run</code>、<code>go help build</code> 和 <code>go help install</code>。</strong></p>
@@ -330,11 +424,9 @@
       </div>
     
     <!-- Tags END -->
-    <!-- UpdatedDate Start -->
-     
-       <p class="post-date">最後更新時間：2019-11-28</p>
-     
-   <!-- UpdatedDate END -->
+    <!-- Last updated on Start -->
+    
+    <!-- Last updated on END -->
     <!-- NAV START -->
     
   <div class="nav-container">
@@ -359,19 +451,9 @@
 
 
     <!-- NAV END -->
-    <!-- 打賞 START -->
+    <!-- QR Code START -->
     
-    <!-- 打賞 END -->
-    <!-- 二維條碼 START -->
-    
-      <div class="qrcode">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g id="share-qrcode"/>
-        </svg>
-        <p class="notice">掃描二維條碼，分享此文章</p>
-      </div>
-    
-    <!-- 二維條碼 END -->
+    <!-- QR Code END -->
   </article>
   <!-- Article END -->
   <!-- Catalog START -->
@@ -380,7 +462,7 @@
   <div class="toc-main">
     <strong class="toc-title">目錄</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#安裝-Go"><span class="toc-nav-text">安裝 Go</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Mac-OS-X"><span class="toc-nav-text">Mac OS X</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#使用-Homebrew"><span class="toc-nav-text">使用 Homebrew</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#使用-macOS-package-安裝程式"><span class="toc-nav-text">使用 macOS package 安裝程式</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Linux"><span class="toc-nav-text">Linux</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Windows"><span class="toc-nav-text">Windows</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Go-工具"><span class="toc-nav-text">Go 工具</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#GOPATH、Go-工作區及程式碼組織"><span class="toc-nav-text">GOPATH、Go 工作區及程式碼組織</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#設定-GOPATH"><span class="toc-nav-text">設定 GOPATH</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Unix-系統（Linux-和-macOS）"><span class="toc-nav-text">Unix 系統（Linux 和 macOS）</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Windows-系統"><span class="toc-nav-text">Windows 系統</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用-Hello-World-程式測試-Go-是否正確安裝"><span class="toc-nav-text">使用 Hello World 程式測試 Go 是否正確安裝</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#使用-go-build-建置執行檔"><span class="toc-nav-text">使用 go build 建置執行檔</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#使用-go-install-安裝-package-到-bin-目錄中"><span class="toc-nav-text">使用 go install 安裝 package 到 bin 目錄中</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#結論"><span class="toc-nav-text">結論</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%AE%89%E8%A3%9D-Go"><span class="toc-nav-text">安裝 Go</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Mac-OS-X"><span class="toc-nav-text">Mac OS X</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#%E4%BD%BF%E7%94%A8-Homebrew"><span class="toc-nav-text">使用 Homebrew</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#%E4%BD%BF%E7%94%A8-macOS-package-%E5%AE%89%E8%A3%9D%E7%A8%8B%E5%BC%8F"><span class="toc-nav-text">使用 macOS package 安裝程式</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Linux"><span class="toc-nav-text">Linux</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Windows"><span class="toc-nav-text">Windows</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Go-%E5%B7%A5%E5%85%B7"><span class="toc-nav-text">Go 工具</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#GOPATH%E3%80%81Go-%E5%B7%A5%E4%BD%9C%E5%8D%80%E5%8F%8A%E7%A8%8B%E5%BC%8F%E7%A2%BC%E7%B5%84%E7%B9%94"><span class="toc-nav-text">GOPATH、Go 工作區及程式碼組織</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E8%A8%AD%E5%AE%9A-GOPATH"><span class="toc-nav-text">設定 GOPATH</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Unix-%E7%B3%BB%E7%B5%B1%EF%BC%88Linux-%E5%92%8C-macOS%EF%BC%89"><span class="toc-nav-text">Unix 系統（Linux 和 macOS）</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Windows-%E7%B3%BB%E7%B5%B1"><span class="toc-nav-text">Windows 系統</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E4%BD%BF%E7%94%A8-Hello-World-%E7%A8%8B%E5%BC%8F%E6%B8%AC%E8%A9%A6-Go-%E6%98%AF%E5%90%A6%E6%AD%A3%E7%A2%BA%E5%AE%89%E8%A3%9D"><span class="toc-nav-text">使用 Hello World 程式測試 Go 是否正確安裝</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E4%BD%BF%E7%94%A8-go-build-%E5%BB%BA%E7%BD%AE%E5%9F%B7%E8%A1%8C%E6%AA%94"><span class="toc-nav-text">使用 go build 建置執行檔</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E4%BD%BF%E7%94%A8-go-install-%E5%AE%89%E8%A3%9D-package-%E5%88%B0-bin-%E7%9B%AE%E9%8C%84%E4%B8%AD"><span class="toc-nav-text">使用 go install 安裝 package 到 bin 目錄中</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%B5%90%E8%AB%96"><span class="toc-nav-text">結論</span></a></li></ol>
     
   </div>
 </aside>
@@ -390,23 +472,23 @@
 </main>
 
 <script>
-  (function () {
-    var url = 'https://calvertyang.github.io/2019/11/01/golang-installation-setup-gopath-workspace/';
-    var banner = '';
+  (function() {
+    const url = 'https://calvertyang.github.io/2019/11/01/golang-installation-setup-gopath-workspace/';
+    const banner = '';
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
-        'background-image': 'url(' + banner + ')'
+        'background-image': 'url(' + banner + ')',
       });
     } else {
       $('#article-banner').geopattern(url);
     }
     $('.header').removeClass('fixed-header');
 
-     // error image
-    $('.markdown-content img').on('error', function() {
-      $(this).attr('src', '/css/images/error-img.png');
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.svg');
       $(this).css({
-        'cursor': 'default'
+        'cursor': 'default',
       });
     });
 
@@ -415,28 +497,28 @@
       if ($(this).parents().is('a')) {
         $(this).css({
           'cursor': 'pointer',
-          'display': 'inline-block'
+          'display': 'inline-block',
         });
       }
     });
 
     // zoom image
-    $('.markdown-content img').on('click', function(e) {
-      var src = $(this).attr('src');
-      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
-        var imageW = $(this).width();
-        var imageH = $(this).height();
+    $('.markdown-content img').on('click', function() {
+      const src = $(this).attr('src');
+      if (src !== '/css/images/error_icon.svg' && !$(this).parents().is('a')) {
+        const imageW = $(this).width();
+        const imageH = $(this).height();
 
-        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        let zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
         zoom = zoom < 1 ? 1 : zoom;
         zoom = zoom > 2 ? 2 : zoom;
-        var transY = (($(window).height() - imageH) / 2).toFixed(2);
+        const transY = (($(window).height() - imageH) / 2).toFixed(2);
 
         $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
         $('.image-view-wrap').addClass('wrap-active');
         $('.image-view-wrap img').css({
-          'width': `${imageW}`,
-          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+          width: imageW,
+          transform: `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`,
         });
         $('html').css('overflow', 'hidden');
 
@@ -445,35 +527,26 @@
           $('html').attr('style', '');
         });
       }
-    });
-
-    // qrcode
-    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
-      text: document.location.href,
-      width: 100,
-      height: 100,
-      colorDark: '#000000',
-    	colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.L,
-      useSVG: true
-    });
+    })
   })();
 </script>
+
+
 
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
 
 <script>
   function async(u, c) {
-    var d = document, t = 'script',
+    const d = document, t = 'script',
       o = d.createElement(t),
       s = d.getElementsByTagName(t)[0];
     o.src = u;
@@ -481,20 +554,36 @@
     s.parentNode.insertBefore(o, s);
   }
 </script>
-
 <script>
   async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
     FastClick.attach(document.body);
-  })
+  });
 </script>
 
 <script>
-  $('figure').each(function(i, block) {
-    let lang = this.classList[1] || 'codeblock';
-    this.dataset.lang = lang.toUpperCase();
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
   });
 </script>
+
+
 <script src="/js/script.js"></script>
+
 
   </body>
 </html>

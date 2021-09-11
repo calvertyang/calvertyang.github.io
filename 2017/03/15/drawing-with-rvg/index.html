@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="Calvert&#39;s tech blog">
-  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
   
@@ -13,55 +13,70 @@
       使用 RVG 繪圖 | Calvert&#39;s murmur
     
   </title>
-  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrcode.js"></script>
+  
   
   
     <!-- MathJax support START -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
       });
     </script>
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
+        let all = MathJax.Hub.getAllJax(), i;
         for (i = 0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- MathJax support END -->
   
 
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
-  <script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-44933497-2');
-  </script>
+    </script>
 
 
-</head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
-</div>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3999187913340509" crossorigin="anonymous"></script>
+
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
   <body>
     <header class="header fixed-header">
@@ -70,7 +85,6 @@
       <div class="logo"></div>
       <span>Calvert's murmur</span>
     </a>
-
     <ul class="right-list">
       
         <li class="list-item">
@@ -81,7 +95,7 @@
       
         <li class="list-item">
           
-            <a href="/categories/" class="item-link">Categories</a>
+            <a href="/series/" class="item-link">Series</a>
           
         </li>
       
@@ -109,49 +123,15 @@
           
         </li>
       
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
     </ul>
-
-    
-      <div id="search-form-wrap">
-        <form class="search-form">
-          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
-          <button type="submit" class="search-form-submit">
-            <span class="fa fa-search"></span>
-          </button>
-        </form>
-        <div class="ins-search">
-  <div class="ins-search-mask"></div>
-  <div class="ins-search-container">
-    <div class="ins-input-wrapper">
-      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
-      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-    </div>
-    <div class="ins-section-wrapper">
-      <div class="ins-section-container"></div>
-    </div>
-  </div>
-</div>
-<script>
-  (function (window) {
-    var INSIGHT_CONFIG = {
-      TRANSLATION: {
-        POSTS: '文章',
-        PAGES: '頁面',
-        CATEGORIES: '分類',
-        TAGS: '標籤',
-        UNTITLED: '無標題',
-      },
-      ROOT_URL: '/',
-      CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-  })(window);
-</script>
-<script src="/js/insight.js"></script>
-
-      </div>
-    
-
     <div class="menu">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -168,7 +148,7 @@
         
           <li class="menu-item">
             
-              <a href="/categories/" class="menu-link">Categories</a>
+              <a href="/series/" class="menu-link">Series</a>
             
           </li>
         
@@ -198,28 +178,91 @@
         
       </ul>
     </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
   </div>
 </header>
 
     <div id="article-banner">
   <h2>使用 RVG 繪圖</h2>
   <p class="post-date">2017-03-15</p>
+
   <div class="arrow-down">
-    <a href="javascript:;" target="_blank" rel="noopener"></a>
+    <a href="javascript:;"></a>
   </div>
 </div>
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><blockquote>
-<p>原文：<strong>RMagick User’s Guide and Reference</strong> — <a href="https://rmagick.github.io/rvgtut.html" target="_blank" rel="noopener">Drawing with RVG</a></p>
+<p>原文：<strong>RMagick User’s Guide and Reference</strong> — <a target="_blank" rel="noopener" href="https://rmagick.github.io/rvgtut.html">Drawing with RVG</a></p>
 </blockquote>
 <h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><p>RVG（Ruby 向量圖形）是 RMagick 的 Draw 類別的外觀，它提供了基於 W3C 推薦的可縮放向量圖形（Scalable Vector Graphics）的繪圖 API。</p>
 <p>RVG 是一個可縮放向量繪圖函式庫。可縮放意味著圖形不是固定的像素尺寸。相同的圖形可以被呈現在螢幕上或列印出來。向量圖使用了幾何物件，如直線和圓。與點陣圖不同，向量圖在放大時不會「像素化」。</p>
 <img src="/2017/03/15/drawing-with-rvg/duck.gif" class="">
 
 <p>作為 RVG 函式庫的介紹，讓我們來看看如何畫出上面這隻小鴨。以下是完整的程式。</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">'rvg/rvg'</span></span><br><span class="line"><span class="keyword">include</span> Magick</span><br><span class="line"></span><br><span class="line">RVG::dpi = <span class="number">72</span></span><br><span class="line"></span><br><span class="line">rvg = RVG.new(<span class="number">2.5</span>.<span class="keyword">in</span>, <span class="number">2.5</span>.<span class="keyword">in</span>).viewbox(<span class="number">0</span>,<span class="number">0</span>,<span class="number">250</span>,<span class="number">250</span>) <span class="keyword">do</span> <span class="params">|canvas|</span></span><br><span class="line">  canvas.background_fill = <span class="string">'white'</span></span><br><span class="line"></span><br><span class="line">  canvas.g.translate(<span class="number">100</span>, <span class="number">150</span>).rotate(-<span class="number">30</span>) <span class="keyword">do</span> <span class="params">|body|</span></span><br><span class="line">    body.styles(<span class="symbol">:fill=&gt;<span class="string">'yellow'</span></span>, <span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>, <span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>)</span><br><span class="line">    body.ellipse(<span class="number">50</span>, <span class="number">30</span>)</span><br><span class="line">    body.rect(<span class="number">45</span>, <span class="number">20</span>, -<span class="number">20</span>, -<span class="number">10</span>).skewX(-<span class="number">35</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  canvas.g.translate(<span class="number">130</span>, <span class="number">83</span>) <span class="keyword">do</span> <span class="params">|head|</span></span><br><span class="line">    head.styles(<span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>, <span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>)</span><br><span class="line">    head.circle(<span class="number">30</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'yellow'</span></span>)</span><br><span class="line">    head.circle(<span class="number">5</span>, <span class="number">10</span>, -<span class="number">5</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'black'</span></span>)</span><br><span class="line">    head.polygon(<span class="number">30</span>,<span class="number">0</span>, <span class="number">70</span>,<span class="number">5</span>, <span class="number">30</span>,<span class="number">10</span>, <span class="number">62</span>,<span class="number">25</span>, <span class="number">23</span>,<span class="number">20</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'orange'</span></span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  foot = RVG::Group.new <span class="keyword">do</span> <span class="params">|_foot|</span></span><br><span class="line">    _foot.path(<span class="string">'m0,0 v30 l30,10 l5,-10, l-5,-10 l-30,10z'</span>).</span><br><span class="line">    styles(<span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>, <span class="symbol">:fill=&gt;<span class="string">'orange'</span></span>, <span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  canvas.use(foot).translate(<span class="number">75</span>, <span class="number">188</span>).rotate(<span class="number">15</span>)</span><br><span class="line">  canvas.use(foot).translate(<span class="number">100</span>, <span class="number">185</span>).rotate(-<span class="number">15</span>)</span><br><span class="line"></span><br><span class="line">  canvas.text(<span class="number">125</span>, <span class="number">30</span>) <span class="keyword">do</span> <span class="params">|title|</span></span><br><span class="line">    title.tspan(<span class="string">"duck|"</span>).styles(<span class="symbol">:text_anchor=&gt;<span class="string">'end'</span></span>, <span class="symbol">:font_size=&gt;</span><span class="number">20</span>,</span><br><span class="line">      <span class="symbol">:font_family=&gt;<span class="string">'helvetica'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'black'</span></span>)</span><br><span class="line">    title.tspan(<span class="string">"type"</span>).styles(<span class="symbol">:font_size=&gt;</span><span class="number">22</span>,</span><br><span class="line">      <span class="symbol">:font_family=&gt;<span class="string">'times'</span></span>, <span class="symbol">:font_style=&gt;<span class="string">'italic'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'red'</span></span>)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    canvas.rect(<span class="number">249</span>,<span class="number">249</span>).styles(<span class="symbol">:stroke=&gt;<span class="string">'blue'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'none'</span></span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">rvg.draw.write(<span class="string">'duck.gif'</span>)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token keyword">require</span> <span class="token string">'rvg/rvg'</span>
+<span class="token keyword">include</span> <span class="token constant">Magick</span>
+
+<span class="token constant">RVG</span><span class="token punctuation">:</span><span class="token punctuation">:</span>dpi <span class="token operator">=</span> <span class="token number">72</span>
+
+rvg <span class="token operator">=</span> <span class="token constant">RVG</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span><span class="token number">2.5</span><span class="token punctuation">.</span><span class="token keyword">in</span><span class="token punctuation">,</span> <span class="token number">2.5</span><span class="token punctuation">.</span><span class="token keyword">in</span><span class="token punctuation">)</span><span class="token punctuation">.</span>viewbox<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">250</span><span class="token punctuation">,</span><span class="token number">250</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>canvas<span class="token operator">|</span>
+  canvas<span class="token punctuation">.</span>background_fill <span class="token operator">=</span> <span class="token string">'white'</span>
+
+  canvas<span class="token punctuation">.</span>g<span class="token punctuation">.</span>translate<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">150</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rotate<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">30</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>body<span class="token operator">|</span>
+    body<span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'yellow'</span><span class="token punctuation">,</span> <span class="token symbol">:stroke</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'black'</span><span class="token punctuation">,</span> <span class="token symbol">:stroke_width</span><span class="token operator">=</span><span class="token operator">></span><span class="token number">2</span><span class="token punctuation">)</span>
+    body<span class="token punctuation">.</span>ellipse<span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span>
+    body<span class="token punctuation">.</span>rect<span class="token punctuation">(</span><span class="token number">45</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">20</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span>skewX<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">35</span><span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+
+  canvas<span class="token punctuation">.</span>g<span class="token punctuation">.</span>translate<span class="token punctuation">(</span><span class="token number">130</span><span class="token punctuation">,</span> <span class="token number">83</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>head<span class="token operator">|</span>
+    head<span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:stroke</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'black'</span><span class="token punctuation">,</span> <span class="token symbol">:stroke_width</span><span class="token operator">=</span><span class="token operator">></span><span class="token number">2</span><span class="token punctuation">)</span>
+    head<span class="token punctuation">.</span>circle<span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'yellow'</span><span class="token punctuation">)</span>
+    head<span class="token punctuation">.</span>circle<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'black'</span><span class="token punctuation">)</span>
+    head<span class="token punctuation">.</span>polygon<span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">70</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">62</span><span class="token punctuation">,</span><span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">23</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'orange'</span><span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+
+  foot <span class="token operator">=</span> <span class="token constant">RVG</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">Group</span><span class="token punctuation">.</span><span class="token keyword">new</span> <span class="token keyword">do</span> <span class="token operator">|</span>_foot<span class="token operator">|</span>
+    _foot<span class="token punctuation">.</span>path<span class="token punctuation">(</span><span class="token string">'m0,0 v30 l30,10 l5,-10, l-5,-10 l-30,10z'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
+    styles<span class="token punctuation">(</span><span class="token symbol">:stroke_width</span><span class="token operator">=</span><span class="token operator">></span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'orange'</span><span class="token punctuation">,</span> <span class="token symbol">:stroke</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'black'</span><span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+  canvas<span class="token punctuation">.</span>use<span class="token punctuation">(</span>foot<span class="token punctuation">)</span><span class="token punctuation">.</span>translate<span class="token punctuation">(</span><span class="token number">75</span><span class="token punctuation">,</span> <span class="token number">188</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rotate<span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span>
+  canvas<span class="token punctuation">.</span>use<span class="token punctuation">(</span>foot<span class="token punctuation">)</span><span class="token punctuation">.</span>translate<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">185</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rotate<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">15</span><span class="token punctuation">)</span>
+
+  canvas<span class="token punctuation">.</span>text<span class="token punctuation">(</span><span class="token number">125</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>title<span class="token operator">|</span>
+    title<span class="token punctuation">.</span>tspan<span class="token punctuation">(</span><span class="token string">"duck|"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:text_anchor</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'end'</span><span class="token punctuation">,</span> <span class="token symbol">:font_size</span><span class="token operator">=</span><span class="token operator">></span><span class="token number">20</span><span class="token punctuation">,</span>
+      <span class="token symbol">:font_family</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'helvetica'</span><span class="token punctuation">,</span> <span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'black'</span><span class="token punctuation">)</span>
+    title<span class="token punctuation">.</span>tspan<span class="token punctuation">(</span><span class="token string">"type"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:font_size</span><span class="token operator">=</span><span class="token operator">></span><span class="token number">22</span><span class="token punctuation">,</span>
+      <span class="token symbol">:font_family</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'times'</span><span class="token punctuation">,</span> <span class="token symbol">:font_style</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'italic'</span><span class="token punctuation">,</span> <span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'red'</span><span class="token punctuation">)</span>
+    <span class="token keyword">end</span>
+    canvas<span class="token punctuation">.</span>rect<span class="token punctuation">(</span><span class="token number">249</span><span class="token punctuation">,</span><span class="token number">249</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:stroke</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'blue'</span><span class="token punctuation">,</span> <span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'none'</span><span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+
+rvg<span class="token punctuation">.</span>draw<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string">'duck.gif'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>所有的繪圖都遵循相同的 3 個步驟：</p>
 <ol>
@@ -228,12 +271,15 @@
 <li>調用 <code>draw</code> 方法在背景繪出形狀、文字或點陣圖。</li>
 </ol>
 <p>我將逐行介紹範例。</p>
-<a id="more"></a>
+<span id="more"></span>
 
-<h2 id="第-1-3-行"><a href="#第-1-3-行" class="headerlink" title="第 1 ~ 3 行"></a>第 1 ~ 3 行</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">'rvg/rvg'</span></span><br><span class="line"><span class="keyword">include</span> Magick</span><br></pre></td></tr></table></figure>
+<h2 id="第-1-3-行"><a href="#第-1-3-行" class="headerlink" title="第 1 ~ 3 行"></a>第 1 ~ 3 行</h2><pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token keyword">require</span> <span class="token string">'rvg/rvg'</span>
+<span class="token keyword">include</span> <span class="token constant">Magick</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>這只是平常用來載入 RVG 擴展的 Ruby 程式碼。為了少打一些字，我引入了 Magick 模組到物件的命名空間。</p>
-<h2 id="第-4-6-行"><a href="#第-4-6-行" class="headerlink" title="第 4 ~ 6 行"></a>第 4 ~ 6 行</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RVG::dpi = <span class="number">72</span></span><br><span class="line"></span><br><span class="line">rvg = RVG.new(<span class="number">2.5</span>.<span class="keyword">in</span>, <span class="number">2.5</span>.<span class="keyword">in</span>).viewbox(<span class="number">0</span>,<span class="number">0</span>,<span class="number">250</span>,<span class="number">250</span>) <span class="keyword">do</span> <span class="params">|canvas|</span></span><br></pre></td></tr></table></figure>
+<h2 id="第-4-6-行"><a href="#第-4-6-行" class="headerlink" title="第 4 ~ 6 行"></a>第 4 ~ 6 行</h2><pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token constant">RVG</span><span class="token punctuation">:</span><span class="token punctuation">:</span>dpi <span class="token operator">=</span> <span class="token number">72</span>
+
+rvg <span class="token operator">=</span> <span class="token constant">RVG</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span><span class="token number">2.5</span><span class="token punctuation">.</span><span class="token keyword">in</span><span class="token punctuation">,</span> <span class="token number">2.5</span><span class="token punctuation">.</span><span class="token keyword">in</span><span class="token punctuation">)</span><span class="token punctuation">.</span>viewbox<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">250</span><span class="token punctuation">,</span><span class="token number">250</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>canvas<span class="token operator">|</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p><code>RVG::dpi</code> 啟用了在 RVG 使用單位方法。當你將 <code>RVG::dpi</code> 設定為非 nil 值時，RVG 向整數和浮點數類別加入了許多轉換方法。這些方法允許你使用如英吋、毫米和厘米來指定測量單位。DPI 代表「每英吋點數」圖片解析度。這裡我設定 <code>RVG::dpi</code> 為 72，一個螢幕常用的數值。</p>
 <p><code>RVG.new</code> 需要 2 個參數。這些參數以像素指定最終圖片的寬度和高度。由於我定義了 <code>RVG::dpi</code>，我可以透過 <code>in</code> 轉換方法使用英吋指定這些數值。在 72dpi，最終圖片的邊長將會是 2.5 * 72 = 180 像素。</p>
@@ -243,10 +289,14 @@
 <p>預設情況下，RVG 座標系的原點在左上角。X 軸向右為正值，Y 軸向下為正值。上面的圖片顯示了該座標系的座標軸。我為範例圖片加上了淺藍色方格紙背景，以協助將坐標參數與圖片中的實際位置相關聯。只要記住，座標軸和方格紙背景實際上不是我產生的圖片的一部分。</p>
 <p>RVG 類別是 RVG 定義的容器類別之一。容器物件可以包含圖形物件，如圓和線、文字、點陣圖及其他容器物件。最外面的容器永遠是 RVG 物件。我將加入所有組成鴨子的圖形物件到此容器。</p>
 <p>我們通常會轉交一個程式區塊給容器建構方法。但是，在這裡我連接了 <code>viewbox</code> 到 <code>new</code>，所以 <code>viewbox</code> 負責產生並傳遞新的 RVG 實例到 <code>canvas</code> 參數。</p>
-<h2 id="第-7-行"><a href="#第-7-行" class="headerlink" title="第 7 行"></a>第 7 行</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">canvas.background_fill = <span class="string">'white'</span></span><br></pre></td></tr></table></figure>
+<h2 id="第-7-行"><a href="#第-7-行" class="headerlink" title="第 7 行"></a>第 7 行</h2><pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby">canvas<span class="token punctuation">.</span>background_fill <span class="token operator">=</span> <span class="token string">'white'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>預設情況下，RVG 圖形是繪製在透明背景上。當你想要顯示你的圖片在另一個圖片上時，這是很方便的。你可以透過為 <code>background_fill=</code> 屬性指定顏色來覆蓋預設背景顏色。這裡我設定背景顏色為「白色」。</p>
-<h2 id="第-9-13-行"><a href="#第-9-13-行" class="headerlink" title="第 9 ~ 13 行"></a>第 9 ~ 13 行</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">canvas.g.translate(<span class="number">100</span>, <span class="number">150</span>).rotate(-<span class="number">30</span>) <span class="keyword">do</span> <span class="params">|body|</span></span><br><span class="line">  body.styles(<span class="symbol">:fill=&gt;<span class="string">'yellow'</span></span>, <span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>, <span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>)</span><br><span class="line">  body.ellipse(<span class="number">50</span>, <span class="number">30</span>)</span><br><span class="line">  body.rect(<span class="number">45</span>, <span class="number">20</span>, -<span class="number">20</span>, -<span class="number">10</span>).skewX(-<span class="number">35</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="第-9-13-行"><a href="#第-9-13-行" class="headerlink" title="第 9 ~ 13 行"></a>第 9 ~ 13 行</h2><pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby">canvas<span class="token punctuation">.</span>g<span class="token punctuation">.</span>translate<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">150</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rotate<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">30</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>body<span class="token operator">|</span>
+  body<span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'yellow'</span><span class="token punctuation">,</span> <span class="token symbol">:stroke</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'black'</span><span class="token punctuation">,</span> <span class="token symbol">:stroke_width</span><span class="token operator">=</span><span class="token operator">></span><span class="token number">2</span><span class="token punctuation">)</span>
+  body<span class="token punctuation">.</span>ellipse<span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span>
+  body<span class="token punctuation">.</span>rect<span class="token punctuation">(</span><span class="token number">45</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">20</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span>skewX<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">35</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>這幾行做了很多事情，調用 7 個方法，所以讓我們一次介紹一個方法。</p>
 <h3 id="Groups（群組）"><a href="#Groups（群組）" class="headerlink" title="Groups（群組）"></a>Groups（群組）</h3><p><code>Group</code> 是 RVG 中的第二個容器類別。群組的目的是將一組座標系變形和一組樣式與群組中的圖形物件相關聯。要在另一個容器中建立群組物件，可調用容器上的 <code>g</code> 方法。如果程式區塊存在的話，<code>g</code> 方法會轉交給程式區塊。在這個範例中，沒有與 <code>g</code> 關聯的程式區塊，所以 <code>g</code> 返回了新群組。<code>g</code> 方法加入群組到其容器的內容。在這個範例中，群組的容器是在第 6 行建立的 canvas 物件。群組中的圖形物件會作為繪製容器的一部分被繪製。連接到 <code>g</code> 的 <code>translate</code> 和 <code>rotate</code>，透過_新增坐標系變形_來修改群組。</p>
@@ -271,7 +321,12 @@
 
 <p>身體就是這樣。在繼續之前讓我們來完成其他瑣事。我之前說過容器建構式（如 <code>g</code>）會轉交給程式區塊如果存在的話。在這個範例，<code>translate</code> 和 <code>rotate</code> 方法介於 <code>g</code> 和程式區塊間。如果有相關聯的程式區塊，所有變形方法都會轉交過去，所以我可以很容易地將他們連接到容器建構式，並仍然使用程式區塊參數來定義群組內的圖形物件。方法連結是 RVG 常見的慣用方法，你會在範例中看到很多。</p>
 <p>下一個群組繪製頭部。</p>
-<h2 id="第-15-20-行"><a href="#第-15-20-行" class="headerlink" title="第 15 ~ 20 行"></a>第 15 ~ 20 行</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">canvas.g.translate(<span class="number">130</span>, <span class="number">83</span>) <span class="keyword">do</span> <span class="params">|head|</span></span><br><span class="line">  head.styles(<span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>, <span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>)</span><br><span class="line">  head.circle(<span class="number">30</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'yellow'</span></span>)</span><br><span class="line">  head.circle(<span class="number">5</span>, <span class="number">10</span>, -<span class="number">5</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'black'</span></span>)</span><br><span class="line">  head.polygon(<span class="number">30</span>,<span class="number">0</span>, <span class="number">70</span>,<span class="number">5</span>, <span class="number">30</span>,<span class="number">10</span>, <span class="number">62</span>,<span class="number">25</span>, <span class="number">23</span>,<span class="number">20</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'orange'</span></span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="第-15-20-行"><a href="#第-15-20-行" class="headerlink" title="第 15 ~ 20 行"></a>第 15 ~ 20 行</h2><pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby">canvas<span class="token punctuation">.</span>g<span class="token punctuation">.</span>translate<span class="token punctuation">(</span><span class="token number">130</span><span class="token punctuation">,</span> <span class="token number">83</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>head<span class="token operator">|</span>
+  head<span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:stroke</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'black'</span><span class="token punctuation">,</span> <span class="token symbol">:stroke_width</span><span class="token operator">=</span><span class="token operator">></span><span class="token number">2</span><span class="token punctuation">)</span>
+  head<span class="token punctuation">.</span>circle<span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'yellow'</span><span class="token punctuation">)</span>
+  head<span class="token punctuation">.</span>circle<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'black'</span><span class="token punctuation">)</span>
+  head<span class="token punctuation">.</span>polygon<span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">70</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">62</span><span class="token punctuation">,</span><span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">23</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'orange'</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>這個部分與前一部分非常相似。我要定義一個群組來包含繪製鴨子頭部、眼睛和喙的圖形物件。首先，我使用平移方法來將原點移動到 (130,83)：</p>
 <img src="/2017/03/15/drawing-with-rvg/duck6.gif" class="">
@@ -280,12 +335,16 @@
 <p>最後，我使用 <code>polygon</code> 方法來繪製鳥喙。此方法使用一系列的 (x,y) 座標繪製多邊形。如果最後一個座標不等於第一個，<code>polygon</code> 會暗中的加上它以關閉多邊形。同樣地，我使用 <code>styles</code> 將填充顏色設定為「橘色」。</p>
 <img src="/2017/03/15/drawing-with-rvg/duck8.gif" class="">
 
-<h2 id="第-22-25-行"><a href="#第-22-25-行" class="headerlink" title="第 22 ~ 25 行"></a>第 22 ~ 25 行</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">foot = RVG::Group.new <span class="keyword">do</span> <span class="params">|_foot|</span></span><br><span class="line">  _foot.path(<span class="string">'m0,0 v30 l30,10 l5,-10, l-5,-10 l-30,10z'</span>).</span><br><span class="line">    styles(<span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>, <span class="symbol">:fill=&gt;<span class="string">'orange'</span></span>, <span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="第-22-25-行"><a href="#第-22-25-行" class="headerlink" title="第 22 ~ 25 行"></a>第 22 ~ 25 行</h2><pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby">foot <span class="token operator">=</span> <span class="token constant">RVG</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">Group</span><span class="token punctuation">.</span><span class="token keyword">new</span> <span class="token keyword">do</span> <span class="token operator">|</span>_foot<span class="token operator">|</span>
+  _foot<span class="token punctuation">.</span>path<span class="token punctuation">(</span><span class="token string">'m0,0 v30 l30,10 l5,-10, l-5,-10 l-30,10z'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
+    styles<span class="token punctuation">(</span><span class="token symbol">:stroke_width</span><span class="token operator">=</span><span class="token operator">></span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'orange'</span><span class="token punctuation">,</span> <span class="token symbol">:stroke</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'black'</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>這裡我透過直接調用 <code>new</code> 來建立一個群組，而不是在容器上調用 <code>g</code> 方法。這將建立一個不包含在畫布中的群組物件。你可以想像腳沒有附加到任何東西，像這樣：</p>
 <img src="/2017/03/15/drawing-with-rvg/duck9.gif" class="">
 
-<h2 id="第-26-27-行"><a href="#第-26-27-行" class="headerlink" title="第 26 ~ 27 行"></a>第 26 ~ 27 行</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">canvas.use(foot).translate(<span class="number">75</span>, <span class="number">188</span>).rotate(<span class="number">15</span>)</span><br><span class="line">canvas.use(foot).translate(<span class="number">100</span>, <span class="number">185</span>).rotate(-<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="第-26-27-行"><a href="#第-26-27-行" class="headerlink" title="第 26 ~ 27 行"></a>第 26 ~ 27 行</h2><pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby">canvas<span class="token punctuation">.</span>use<span class="token punctuation">(</span>foot<span class="token punctuation">)</span><span class="token punctuation">.</span>translate<span class="token punctuation">(</span><span class="token number">75</span><span class="token punctuation">,</span> <span class="token number">188</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rotate<span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span>
+canvas<span class="token punctuation">.</span>use<span class="token punctuation">(</span>foot<span class="token punctuation">)</span><span class="token punctuation">.</span>translate<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">185</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rotate<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">15</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>要將群組加入到畫布，我使用 <code>use</code> 方法。use 方法可以接受任何容器或圖形物件作為參數。你還可以指定一個 (x,y) 座標來放置物件。然而，在這個範例中，我讓那些參數預設為 (0,0)，並使用 <code>translate</code> 來決定腳的位置。以下展示了左腳如何附加到鴨子上：</p>
 <img src="/2017/03/15/drawing-with-rvg/duck10.gif" class="">
@@ -296,23 +355,28 @@
 <p>附加右腳很簡單，再次調用 <code>use</code> 但使用不同的參數來 <code>translate</code> 和 <code>rotate</code>：</p>
 <img src="/2017/03/15/drawing-with-rvg/duck12.gif" class="">
 
-<h2 id="第-29-34-行"><a href="#第-29-34-行" class="headerlink" title="第 29 ~ 34 行"></a>第 29 ~ 34 行</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">canvas.text(<span class="number">125</span>, <span class="number">30</span>) <span class="keyword">do</span> <span class="params">|title|</span></span><br><span class="line">  title.tspan(<span class="string">"duck|"</span>).styles(<span class="symbol">:text_anchor=&gt;<span class="string">'end'</span></span>, <span class="symbol">:font_size=&gt;</span><span class="number">20</span>,</span><br><span class="line">    <span class="symbol">:font_family=&gt;<span class="string">'helvetica'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'black'</span></span>)</span><br><span class="line">  title.tspan(<span class="string">"type"</span>).styles(<span class="symbol">:font_size=&gt;</span><span class="number">22</span>,</span><br><span class="line">    <span class="symbol">:font_family=&gt;<span class="string">'times'</span></span>, <span class="symbol">:font_style=&gt;<span class="string">'italic'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'red'</span></span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="第-29-34-行"><a href="#第-29-34-行" class="headerlink" title="第 29 ~ 34 行"></a>第 29 ~ 34 行</h2><pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby">canvas<span class="token punctuation">.</span>text<span class="token punctuation">(</span><span class="token number">125</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>title<span class="token operator">|</span>
+  title<span class="token punctuation">.</span>tspan<span class="token punctuation">(</span><span class="token string">"duck|"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:text_anchor</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'end'</span><span class="token punctuation">,</span> <span class="token symbol">:font_size</span><span class="token operator">=</span><span class="token operator">></span><span class="token number">20</span><span class="token punctuation">,</span>
+    <span class="token symbol">:font_family</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'helvetica'</span><span class="token punctuation">,</span> <span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'black'</span><span class="token punctuation">)</span>
+  title<span class="token punctuation">.</span>tspan<span class="token punctuation">(</span><span class="token string">"type"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:font_size</span><span class="token operator">=</span><span class="token operator">></span><span class="token number">22</span><span class="token punctuation">,</span>
+    <span class="token symbol">:font_family</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'times'</span><span class="token punctuation">,</span> <span class="token symbol">:font_style</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'italic'</span><span class="token punctuation">,</span> <span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'red'</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>我現在需要的是一個圖片標題。文字在 RVG 是 <code>text</code> 方法的工作。和形狀方法相同，<code>text</code> 可以與任何容器物件一起使用。<code>text</code> 本身是一個容器，除了它只能包含文字相關的物件。<code>text</code> 方法接受 2 或 3 個參數，一個 (x,y) 座標對和一個可選的字串。(x,y) 座標對定義目前文字開始呈現的位置，如果有一個字串參數，它將從目前文字位置開始被呈現。呈現文字會改變目前文字位置到文字的結尾。</p>
 <p>在這個範例中，文字被作為一個容器，文字物件可以包含 <code>tspan</code> 物件。每個 <code>tspan</code> 可以指定它自己的樣式。預設情況下，每個 <code>tspan</code> 會從目前文字位置開始呈現。</p>
 <p>同樣地，我可以使用 <code>styles</code> 改變文字外觀。我在這裡選擇字體、字體樣式（預設是「normal」）、以點計算的大小和顏色。</p>
 <img src="/2017/03/15/drawing-with-rvg/duck14.gif" class="">
 
-<h2 id="第-35-行"><a href="#第-35-行" class="headerlink" title="第 35 行"></a>第 35 行</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">canvas.rect(<span class="number">249</span>,<span class="number">249</span>).styles(<span class="symbol">:stroke=&gt;<span class="string">'blue'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'none'</span></span>)</span><br></pre></td></tr></table></figure>
+<h2 id="第-35-行"><a href="#第-35-行" class="headerlink" title="第 35 行"></a>第 35 行</h2><pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby">canvas<span class="token punctuation">.</span>rect<span class="token punctuation">(</span><span class="token number">249</span><span class="token punctuation">,</span><span class="token number">249</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:stroke</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'blue'</span><span class="token punctuation">,</span> <span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'none'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>就快完成了，我現在需要的是加上一個藍色邊框。（我現在要刪除方格紙背景，因為我們不再需要它。）</p>
 <img src="/2017/03/15/drawing-with-rvg/duck15.gif" class="">
 
-<h2 id="第-38-行"><a href="#第-38-行" class="headerlink" title="第 38 行"></a>第 38 行</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvg.draw.write(<span class="string">'duck.gif'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="第-38-行"><a href="#第-38-行" class="headerlink" title="第 38 行"></a>第 38 行</h2><pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby">rvg<span class="token punctuation">.</span>draw<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string">'duck.gif'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>調用 <code>draw</code> 方法沒有佔用大量空間，只有 4 個字母，但是做了很多工作。<code>draw</code> 方法會遍歷我加到最外層 RVG 容器的所有圖形物件，並在背景繪製他們。繪製完成後，<code>draw</code> 將以 RMagick Image 物件的形式回傳圖像。你可以在圖像上使用任何 Image 類別方法，這裡我簡單地將圖像輸出為 GIF 檔案。</p>
 <h2 id="縮放圖片"><a href="#縮放圖片" class="headerlink" title="縮放圖片"></a>縮放圖片</h2><p>RVG 圖片真的可以縮放嗎？讓我們試試看。更改 RVG.new 調用讓圖片變成 4 倍大。邊長是 5 英吋：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvg = RVG.new(<span class="number">5</span>.<span class="keyword">in</span>, <span class="number">5</span>.<span class="keyword">in</span>).viewbox(<span class="number">0</span>,<span class="number">0</span>,<span class="number">250</span>,<span class="number">250</span>) <span class="keyword">do</span> <span class="params">|canvas|</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby">rvg <span class="token operator">=</span> <span class="token constant">RVG</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span><span class="token number">5.</span><span class="token keyword">in</span><span class="token punctuation">,</span> <span class="token number">5.</span><span class="token keyword">in</span><span class="token punctuation">)</span><span class="token punctuation">.</span>viewbox<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">250</span><span class="token punctuation">,</span><span class="token number">250</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>canvas<span class="token operator">|</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>不改變其他東西。再次執行程式，看看你得到什麼。</p>
 <img src="/2017/03/15/drawing-with-rvg/big-duck.gif" class="">
@@ -334,11 +398,9 @@
       </div>
     
     <!-- Tags END -->
-    <!-- UpdatedDate Start -->
-     
-       <p class="post-date">最後更新時間：2019-11-15</p>
-     
-   <!-- UpdatedDate END -->
+    <!-- Last updated on Start -->
+    
+    <!-- Last updated on END -->
     <!-- NAV START -->
     
   <div class="nav-container">
@@ -363,19 +425,9 @@
 
 
     <!-- NAV END -->
-    <!-- 打賞 START -->
+    <!-- QR Code START -->
     
-    <!-- 打賞 END -->
-    <!-- 二維條碼 START -->
-    
-      <div class="qrcode">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g id="share-qrcode"/>
-        </svg>
-        <p class="notice">掃描二維條碼，分享此文章</p>
-      </div>
-    
-    <!-- 二維條碼 END -->
+    <!-- QR Code END -->
   </article>
   <!-- Article END -->
   <!-- Catalog START -->
@@ -384,7 +436,7 @@
   <div class="toc-main">
     <strong class="toc-title">目錄</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#介紹"><span class="toc-nav-text">介紹</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#摘要"><span class="toc-nav-text">摘要</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#第-1-3-行"><span class="toc-nav-text">第 1 ~ 3 行</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#第-4-6-行"><span class="toc-nav-text">第 4 ~ 6 行</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#預設座標系"><span class="toc-nav-text">預設座標系</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#第-7-行"><span class="toc-nav-text">第 7 行</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#第-9-13-行"><span class="toc-nav-text">第 9 ~ 13 行</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Groups（群組）"><span class="toc-nav-text">Groups（群組）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Transforms（變形）"><span class="toc-nav-text">Transforms（變形）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Styles（樣式）"><span class="toc-nav-text">Styles（樣式）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Basic-shapes（基本形狀）"><span class="toc-nav-text">Basic shapes（基本形狀）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#SkewX（X-方向傾斜）"><span class="toc-nav-text">SkewX（X 方向傾斜）</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#第-15-20-行"><span class="toc-nav-text">第 15 ~ 20 行</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#第-22-25-行"><span class="toc-nav-text">第 22 ~ 25 行</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#第-26-27-行"><span class="toc-nav-text">第 26 ~ 27 行</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#第-29-34-行"><span class="toc-nav-text">第 29 ~ 34 行</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#第-35-行"><span class="toc-nav-text">第 35 行</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#第-38-行"><span class="toc-nav-text">第 38 行</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#縮放圖片"><span class="toc-nav-text">縮放圖片</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%BB%8B%E7%B4%B9"><span class="toc-nav-text">介紹</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E6%91%98%E8%A6%81"><span class="toc-nav-text">摘要</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%AC%AC-1-3-%E8%A1%8C"><span class="toc-nav-text">第 1 ~ 3 行</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%AC%AC-4-6-%E8%A1%8C"><span class="toc-nav-text">第 4 ~ 6 行</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E9%A0%90%E8%A8%AD%E5%BA%A7%E6%A8%99%E7%B3%BB"><span class="toc-nav-text">預設座標系</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%AC%AC-7-%E8%A1%8C"><span class="toc-nav-text">第 7 行</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%AC%AC-9-13-%E8%A1%8C"><span class="toc-nav-text">第 9 ~ 13 行</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Groups%EF%BC%88%E7%BE%A4%E7%B5%84%EF%BC%89"><span class="toc-nav-text">Groups（群組）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Transforms%EF%BC%88%E8%AE%8A%E5%BD%A2%EF%BC%89"><span class="toc-nav-text">Transforms（變形）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Styles%EF%BC%88%E6%A8%A3%E5%BC%8F%EF%BC%89"><span class="toc-nav-text">Styles（樣式）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Basic-shapes%EF%BC%88%E5%9F%BA%E6%9C%AC%E5%BD%A2%E7%8B%80%EF%BC%89"><span class="toc-nav-text">Basic shapes（基本形狀）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#SkewX%EF%BC%88X-%E6%96%B9%E5%90%91%E5%82%BE%E6%96%9C%EF%BC%89"><span class="toc-nav-text">SkewX（X 方向傾斜）</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%AC%AC-15-20-%E8%A1%8C"><span class="toc-nav-text">第 15 ~ 20 行</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%AC%AC-22-25-%E8%A1%8C"><span class="toc-nav-text">第 22 ~ 25 行</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%AC%AC-26-27-%E8%A1%8C"><span class="toc-nav-text">第 26 ~ 27 行</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%AC%AC-29-34-%E8%A1%8C"><span class="toc-nav-text">第 29 ~ 34 行</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%AC%AC-35-%E8%A1%8C"><span class="toc-nav-text">第 35 行</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%AC%AC-38-%E8%A1%8C"><span class="toc-nav-text">第 38 行</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%B8%AE%E6%94%BE%E5%9C%96%E7%89%87"><span class="toc-nav-text">縮放圖片</span></a></li></ol>
     
   </div>
 </aside>
@@ -394,23 +446,23 @@
 </main>
 
 <script>
-  (function () {
-    var url = 'https://calvertyang.github.io/2017/03/15/drawing-with-rvg/';
-    var banner = '';
+  (function() {
+    const url = 'https://calvertyang.github.io/2017/03/15/drawing-with-rvg/';
+    const banner = '';
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
-        'background-image': 'url(' + banner + ')'
+        'background-image': 'url(' + banner + ')',
       });
     } else {
       $('#article-banner').geopattern(url);
     }
     $('.header').removeClass('fixed-header');
 
-     // error image
-    $('.markdown-content img').on('error', function() {
-      $(this).attr('src', '/css/images/error-img.png');
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.svg');
       $(this).css({
-        'cursor': 'default'
+        'cursor': 'default',
       });
     });
 
@@ -419,28 +471,28 @@
       if ($(this).parents().is('a')) {
         $(this).css({
           'cursor': 'pointer',
-          'display': 'inline-block'
+          'display': 'inline-block',
         });
       }
     });
 
     // zoom image
-    $('.markdown-content img').on('click', function(e) {
-      var src = $(this).attr('src');
-      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
-        var imageW = $(this).width();
-        var imageH = $(this).height();
+    $('.markdown-content img').on('click', function() {
+      const src = $(this).attr('src');
+      if (src !== '/css/images/error_icon.svg' && !$(this).parents().is('a')) {
+        const imageW = $(this).width();
+        const imageH = $(this).height();
 
-        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        let zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
         zoom = zoom < 1 ? 1 : zoom;
         zoom = zoom > 2 ? 2 : zoom;
-        var transY = (($(window).height() - imageH) / 2).toFixed(2);
+        const transY = (($(window).height() - imageH) / 2).toFixed(2);
 
         $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
         $('.image-view-wrap').addClass('wrap-active');
         $('.image-view-wrap img').css({
-          'width': `${imageW}`,
-          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+          width: imageW,
+          transform: `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`,
         });
         $('html').css('overflow', 'hidden');
 
@@ -449,35 +501,26 @@
           $('html').attr('style', '');
         });
       }
-    });
-
-    // qrcode
-    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
-      text: document.location.href,
-      width: 100,
-      height: 100,
-      colorDark: '#000000',
-    	colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.L,
-      useSVG: true
-    });
+    })
   })();
 </script>
+
+
 
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
 
 <script>
   function async(u, c) {
-    var d = document, t = 'script',
+    const d = document, t = 'script',
       o = d.createElement(t),
       s = d.getElementsByTagName(t)[0];
     o.src = u;
@@ -485,20 +528,36 @@
     s.parentNode.insertBefore(o, s);
   }
 </script>
-
 <script>
   async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
     FastClick.attach(document.body);
-  })
+  });
 </script>
 
 <script>
-  $('figure').each(function(i, block) {
-    let lang = this.classList[1] || 'codeblock';
-    this.dataset.lang = lang.toUpperCase();
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
   });
 </script>
+
+
 <script src="/js/script.js"></script>
+
 
   </body>
 </html>

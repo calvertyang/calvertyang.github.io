@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="Calvert&#39;s tech blog">
-  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
   
@@ -13,55 +13,70 @@
       Golang 變數、零值和型別推斷 | Calvert&#39;s murmur
     
   </title>
-  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrcode.js"></script>
+  
   
   
     <!-- MathJax support START -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
       });
     </script>
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
+        let all = MathJax.Hub.getAllJax(), i;
         for (i = 0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- MathJax support END -->
   
 
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
-  <script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-44933497-2');
-  </script>
+    </script>
 
 
-</head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
-</div>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3999187913340509" crossorigin="anonymous"></script>
+
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
   <body>
     <header class="header fixed-header">
@@ -70,7 +85,6 @@
       <div class="logo"></div>
       <span>Calvert's murmur</span>
     </a>
-
     <ul class="right-list">
       
         <li class="list-item">
@@ -81,7 +95,7 @@
       
         <li class="list-item">
           
-            <a href="/categories/" class="item-link">Categories</a>
+            <a href="/series/" class="item-link">Series</a>
           
         </li>
       
@@ -109,49 +123,15 @@
           
         </li>
       
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
     </ul>
-
-    
-      <div id="search-form-wrap">
-        <form class="search-form">
-          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
-          <button type="submit" class="search-form-submit">
-            <span class="fa fa-search"></span>
-          </button>
-        </form>
-        <div class="ins-search">
-  <div class="ins-search-mask"></div>
-  <div class="ins-search-container">
-    <div class="ins-input-wrapper">
-      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
-      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-    </div>
-    <div class="ins-section-wrapper">
-      <div class="ins-section-container"></div>
-    </div>
-  </div>
-</div>
-<script>
-  (function (window) {
-    var INSIGHT_CONFIG = {
-      TRANSLATION: {
-        POSTS: '文章',
-        PAGES: '頁面',
-        CATEGORIES: '分類',
-        TAGS: '標籤',
-        UNTITLED: '無標題',
-      },
-      ROOT_URL: '/',
-      CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-  })(window);
-</script>
-<script src="/js/insight.js"></script>
-
-      </div>
-    
-
     <div class="menu">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -168,7 +148,7 @@
         
           <li class="menu-item">
             
-              <a href="/categories/" class="menu-link">Categories</a>
+              <a href="/series/" class="menu-link">Series</a>
             
           </li>
         
@@ -198,25 +178,51 @@
         
       </ul>
     </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
   </div>
 </header>
 
     <div id="article-banner">
   <h2>Golang 變數、零值和型別推斷</h2>
   <p class="post-date">2019-11-05</p>
+
   <div class="arrow-down">
-    <a href="javascript:;" target="_blank" rel="noopener"></a>
+    <a href="javascript:;"></a>
   </div>
 </div>
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-variables-zero-values-type-inference" target="_blank" rel="noopener">Golang Variables, Zero Values, and Type inference</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-variables-zero-values-type-inference">Golang Variables, Zero Values, and Type inference</a></p>
 </blockquote>
 <h3 id="變數和資料型別入門"><a href="#變數和資料型別入門" class="headerlink" title="變數和資料型別入門"></a>變數和資料型別入門</h3><p>每個程式都需要在記憶體中儲存一些資料。資料被儲存在特定的記憶體位置。</p>
 <p>變數只是為儲存資料的記憶體位置所取的一個方便的名稱。除了名稱外，每個變數還有關聯的型別。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <img src="/2019/11/05/golang-variables-zero-values-type-inference/golang-variables-data-types-illustration.jpg" class="">
 
@@ -225,13 +231,22 @@
 <p>我們在 Golang 中也有一個 <code>int</code> 資料型別，其大小取決於平台。在 32 位元系統上，它的大小為 32 位元，在 64 位元系統上，它的大小為 64 位元。</p>
 <p>Golang 中的其他資料型別範例有 <code>bool</code>、<code>string</code>、<code>float32</code>、<code>float64</code>等。在<a href="/2019/11/05/golang-basic-types-operators-type-conversion/" title="下一個教學">下一個教學</a>中，你將了解關於這些資料型別的更多資訊。我在這簡要介紹了資料型別，因為在深入研究 Golang 變數之前有必要了解它們。</p>
 <h3 id="深入-Golang-變數"><a href="#深入-Golang-變數" class="headerlink" title="深入 Golang 變數"></a>深入 Golang 變數</h3><h4 id="宣告變數"><a href="#宣告變數" class="headerlink" title="宣告變數"></a>宣告變數</h4><p>在 Golang 中，我們使用 <code>var</code> 關鍵字來宣告變數：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> firstName <span class="keyword">string</span></span><br><span class="line"><span class="keyword">var</span> lastName <span class="keyword">string</span>  </span><br><span class="line"><span class="keyword">var</span> age <span class="keyword">int</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> firstName <span class="token builtin">string</span>
+<span class="token keyword">var</span> lastName <span class="token builtin">string</span>  
+<span class="token keyword">var</span> age <span class="token builtin">int</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>如下所示，你也可以一次宣告多個變數：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	firstName <span class="keyword">string</span></span><br><span class="line">	lastName  <span class="keyword">string</span></span><br><span class="line">	age       <span class="keyword">int</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> <span class="token punctuation">(</span>
+	firstName <span class="token builtin">string</span>
+	lastName  <span class="token builtin">string</span>
+	age       <span class="token builtin">int</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>你甚至可以使用逗號組合多個相同型別的變數宣告：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	firstName, lastName <span class="keyword">string</span></span><br><span class="line">	age                 <span class="keyword">int</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> <span class="token punctuation">(</span>
+	firstName<span class="token punctuation">,</span> lastName <span class="token builtin">string</span>
+	age                 <span class="token builtin">int</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="零值"><a href="#零值" class="headerlink" title="零值"></a>零值</h4><p>任何沒有初始值的變數宣告都會有<strong>零值</strong>，具體取決於變數的型別：</p>
 <table>
@@ -259,38 +274,93 @@
 </tr>
 </tbody></table>
 <p>下面的範例展示了零值的概念：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> (</span><br><span class="line">		firstName, lastName <span class="keyword">string</span></span><br><span class="line">		age                 <span class="keyword">int</span></span><br><span class="line">		salary              <span class="keyword">float64</span></span><br><span class="line">		isConfirmed         <span class="keyword">bool</span></span><br><span class="line">	)</span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"firstName: %s, lastName: %s, age: %d, salary: %f, isConfirmed: %t\n"</span>,</span><br><span class="line">		firstName, lastName, age, salary, isConfirmed)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">firstName: , lastName: , age: 0, salary: 0.000000, isConfirmed: false</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> <span class="token punctuation">(</span>
+		firstName<span class="token punctuation">,</span> lastName <span class="token builtin">string</span>
+		age                 <span class="token builtin">int</span>
+		salary              <span class="token builtin">float64</span>
+		isConfirmed         <span class="token builtin">bool</span>
+	<span class="token punctuation">)</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"firstName: %s, lastName: %s, age: %d, salary: %f, isConfirmed: %t\n"</span><span class="token punctuation">,</span>
+		firstName<span class="token punctuation">,</span> lastName<span class="token punctuation">,</span> age<span class="token punctuation">,</span> salary<span class="token punctuation">,</span> isConfirmed<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+firstName: , lastName: , age: 0, salary: 0.000000, isConfirmed: false<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h4 id="用初始值宣告變數"><a href="#用初始值宣告變數" class="headerlink" title="用初始值宣告變數"></a>用初始值宣告變數</h4><p>以下是如何在宣告時初始化變數的方法：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> firstName <span class="keyword">string</span> = <span class="string">"Satoshi"</span></span><br><span class="line"><span class="keyword">var</span> lastName <span class="keyword">string</span> = <span class="string">"Nakamoto"</span></span><br><span class="line"><span class="keyword">var</span> age <span class="keyword">int</span> = <span class="number">35</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> firstName <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">"Satoshi"</span>
+<span class="token keyword">var</span> lastName <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">"Nakamoto"</span>
+<span class="token keyword">var</span> age <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">35</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>你也可以像這樣使用多個宣告：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	firstName <span class="keyword">string</span> = <span class="string">"Satoshi"</span></span><br><span class="line">	lastName  <span class="keyword">string</span> = <span class="string">"Nakamoto"</span></span><br><span class="line">	age       <span class="keyword">int</span>    = <span class="number">35</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> <span class="token punctuation">(</span>
+	firstName <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">"Satoshi"</span>
+	lastName  <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">"Nakamoto"</span>
+	age       <span class="token builtin">int</span>    <span class="token operator">=</span> <span class="token number">35</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>甚至使用逗號組合多個相同型別的變數宣告，並像這樣初始化它們：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	firstName, lastName <span class="keyword">string</span> = <span class="string">"Satoshi"</span>, <span class="string">"Nakamoto"</span></span><br><span class="line">	age <span class="keyword">int</span> = <span class="number">35</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> <span class="token punctuation">(</span>
+	firstName<span class="token punctuation">,</span> lastName <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">"Satoshi"</span><span class="token punctuation">,</span> <span class="token string">"Nakamoto"</span>
+	age <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">35</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="型別推斷"><a href="#型別推斷" class="headerlink" title="型別推斷"></a>型別推斷</h4><p>儘管 Go 是一種靜態型別的程式語言，但它不需要你明確指定宣告的每個變數的型別。</p>
 <p>當你宣告具有初始值的變數時，Golang 會自動從右側的值推斷出變數的型別。因此，在宣告時初始化變數不需要指定型別：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> name = <span class="string">"Rajeev Singh"</span> <span class="comment">// Type declaration is optional here.</span></span><br><span class="line">	fmt.Printf(<span class="string">"Variable 'name' is of type %T\n"</span>, name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Variable &apos;name&apos; is of type string</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> name <span class="token operator">=</span> <span class="token string">"Rajeev Singh"</span> <span class="token comment">// Type declaration is optional here.</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Variable 'name' is of type %T\n"</span><span class="token punctuation">,</span> name<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+Variable &#39;name&#39; is of type string<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>在上面的範例中，Golang 自動從右側的值推斷出變數的型別為 <code>string</code>。如果你嘗試重新分派其他型別的值給變數，則編譯器將拋出錯誤：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"Rajeev Singh"</span> <span class="comment">// Type inferred as `string`</span></span><br><span class="line">name = <span class="number">1234</span> <span class="comment">// Compiler Error</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> name <span class="token operator">=</span> <span class="token string">"Rajeev Singh"</span> <span class="token comment">// Type inferred as `string`</span>
+name <span class="token operator">=</span> <span class="token number">1234</span> <span class="token comment">// Compiler Error</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>如下所示，型別推斷讓我們可以在同一行中宣告和初始化不同資料型別的多個變數：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Multiple variable declarations with inferred types</span></span><br><span class="line">	<span class="keyword">var</span> firstName, lastName, age, salary = <span class="string">"John"</span>, <span class="string">"Maxwell"</span>, <span class="number">28</span>, <span class="number">50000.0</span></span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"firstName: %T, lastName: %T, age: %T, salary: %T\n"</span>,</span><br><span class="line">		firstName, lastName, age, salary)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">firstName: string, lastName: string, age: int, salary: float64</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// Multiple variable declarations with inferred types</span>
+	<span class="token keyword">var</span> firstName<span class="token punctuation">,</span> lastName<span class="token punctuation">,</span> age<span class="token punctuation">,</span> salary <span class="token operator">=</span> <span class="token string">"John"</span><span class="token punctuation">,</span> <span class="token string">"Maxwell"</span><span class="token punctuation">,</span> <span class="token number">28</span><span class="token punctuation">,</span> <span class="token number">50000.0</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"firstName: %T, lastName: %T, age: %T, salary: %T\n"</span><span class="token punctuation">,</span>
+		firstName<span class="token punctuation">,</span> lastName<span class="token punctuation">,</span> age<span class="token punctuation">,</span> salary<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+firstName: string, lastName: string, age: int, salary: float64<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h4 id="簡短宣告"><a href="#簡短宣告" class="headerlink" title="簡短宣告"></a>簡短宣告</h4><p>Go 使用 <code>:=</code> 運算子提供了簡短的變數宣告語法。這是宣告和初始化變數的簡寫（包含型別推斷）。</p>
 <p>舉例來說，<code>var name = &quot;Rajeev&quot;</code> 的簡寫是 <code>name := &quot;Rajeev&quot;</code>。以下是完整範例：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Short variable declaration syntax</span></span><br><span class="line">	name := <span class="string">"Rajeev Singh"</span></span><br><span class="line">	age, salary, isProgrammer := <span class="number">35</span>, <span class="number">50000.0</span>, <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(name, age, salary, isProgrammer)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Rajeev Singh 35 50000 true</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// Short variable declaration syntax</span>
+	name <span class="token operator">:=</span> <span class="token string">"Rajeev Singh"</span>
+	age<span class="token punctuation">,</span> salary<span class="token punctuation">,</span> isProgrammer <span class="token operator">:=</span> <span class="token number">35</span><span class="token punctuation">,</span> <span class="token number">50000.0</span><span class="token punctuation">,</span> <span class="token boolean">true</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> age<span class="token punctuation">,</span> salary<span class="token punctuation">,</span> isProgrammer<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+Rajeev Singh 35 50000 true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>要注意的是，簡短的變數宣告只能在函數內使用。在函數外，每個陳述式都需要以 <code>var</code>、<code>func</code> 等關鍵字開頭，因此，不可使用 <code>:=</code> 運算子。</p>
 <h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>變數是任何程式語言中的基本概念之一。在本文中，你學到了如何在 Golang 宣告變數、型別推斷如何運作，以及如何使用複合式宣告和簡短宣告。</p>
@@ -308,11 +378,9 @@
       </div>
     
     <!-- Tags END -->
-    <!-- UpdatedDate Start -->
-     
-       <p class="post-date">最後更新時間：2019-11-27</p>
-     
-   <!-- UpdatedDate END -->
+    <!-- Last updated on Start -->
+    
+    <!-- Last updated on END -->
     <!-- NAV START -->
     
   <div class="nav-container">
@@ -337,19 +405,9 @@
 
 
     <!-- NAV END -->
-    <!-- 打賞 START -->
+    <!-- QR Code START -->
     
-    <!-- 打賞 END -->
-    <!-- 二維條碼 START -->
-    
-      <div class="qrcode">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g id="share-qrcode"/>
-        </svg>
-        <p class="notice">掃描二維條碼，分享此文章</p>
-      </div>
-    
-    <!-- 二維條碼 END -->
+    <!-- QR Code END -->
   </article>
   <!-- Article END -->
   <!-- Catalog START -->
@@ -358,7 +416,7 @@
   <div class="toc-main">
     <strong class="toc-title">目錄</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#變數和資料型別入門"><span class="toc-nav-text">變數和資料型別入門</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#深入-Golang-變數"><span class="toc-nav-text">深入 Golang 變數</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#宣告變數"><span class="toc-nav-text">宣告變數</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#零值"><span class="toc-nav-text">零值</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#用初始值宣告變數"><span class="toc-nav-text">用初始值宣告變數</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#型別推斷"><span class="toc-nav-text">型別推斷</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#簡短宣告"><span class="toc-nav-text">簡短宣告</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#結論"><span class="toc-nav-text">結論</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%AE%8A%E6%95%B8%E5%92%8C%E8%B3%87%E6%96%99%E5%9E%8B%E5%88%A5%E5%85%A5%E9%96%80"><span class="toc-nav-text">變數和資料型別入門</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%B7%B1%E5%85%A5-Golang-%E8%AE%8A%E6%95%B8"><span class="toc-nav-text">深入 Golang 變數</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%AE%A3%E5%91%8A%E8%AE%8A%E6%95%B8"><span class="toc-nav-text">宣告變數</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E9%9B%B6%E5%80%BC"><span class="toc-nav-text">零值</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E7%94%A8%E5%88%9D%E5%A7%8B%E5%80%BC%E5%AE%A3%E5%91%8A%E8%AE%8A%E6%95%B8"><span class="toc-nav-text">用初始值宣告變數</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%9E%8B%E5%88%A5%E6%8E%A8%E6%96%B7"><span class="toc-nav-text">型別推斷</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E7%B0%A1%E7%9F%AD%E5%AE%A3%E5%91%8A"><span class="toc-nav-text">簡短宣告</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%B5%90%E8%AB%96"><span class="toc-nav-text">結論</span></a></li></ol>
     
   </div>
 </aside>
@@ -368,23 +426,23 @@
 </main>
 
 <script>
-  (function () {
-    var url = 'https://calvertyang.github.io/2019/11/05/golang-variables-zero-values-type-inference/';
-    var banner = '';
+  (function() {
+    const url = 'https://calvertyang.github.io/2019/11/05/golang-variables-zero-values-type-inference/';
+    const banner = '';
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
-        'background-image': 'url(' + banner + ')'
+        'background-image': 'url(' + banner + ')',
       });
     } else {
       $('#article-banner').geopattern(url);
     }
     $('.header').removeClass('fixed-header');
 
-     // error image
-    $('.markdown-content img').on('error', function() {
-      $(this).attr('src', '/css/images/error-img.png');
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.svg');
       $(this).css({
-        'cursor': 'default'
+        'cursor': 'default',
       });
     });
 
@@ -393,28 +451,28 @@
       if ($(this).parents().is('a')) {
         $(this).css({
           'cursor': 'pointer',
-          'display': 'inline-block'
+          'display': 'inline-block',
         });
       }
     });
 
     // zoom image
-    $('.markdown-content img').on('click', function(e) {
-      var src = $(this).attr('src');
-      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
-        var imageW = $(this).width();
-        var imageH = $(this).height();
+    $('.markdown-content img').on('click', function() {
+      const src = $(this).attr('src');
+      if (src !== '/css/images/error_icon.svg' && !$(this).parents().is('a')) {
+        const imageW = $(this).width();
+        const imageH = $(this).height();
 
-        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        let zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
         zoom = zoom < 1 ? 1 : zoom;
         zoom = zoom > 2 ? 2 : zoom;
-        var transY = (($(window).height() - imageH) / 2).toFixed(2);
+        const transY = (($(window).height() - imageH) / 2).toFixed(2);
 
         $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
         $('.image-view-wrap').addClass('wrap-active');
         $('.image-view-wrap img').css({
-          'width': `${imageW}`,
-          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+          width: imageW,
+          transform: `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`,
         });
         $('html').css('overflow', 'hidden');
 
@@ -423,35 +481,26 @@
           $('html').attr('style', '');
         });
       }
-    });
-
-    // qrcode
-    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
-      text: document.location.href,
-      width: 100,
-      height: 100,
-      colorDark: '#000000',
-    	colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.L,
-      useSVG: true
-    });
+    })
   })();
 </script>
+
+
 
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
 
 <script>
   function async(u, c) {
-    var d = document, t = 'script',
+    const d = document, t = 'script',
       o = d.createElement(t),
       s = d.getElementsByTagName(t)[0];
     o.src = u;
@@ -459,20 +508,36 @@
     s.parentNode.insertBefore(o, s);
   }
 </script>
-
 <script>
   async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
     FastClick.attach(document.body);
-  })
+  });
 </script>
 
 <script>
-  $('figure').each(function(i, block) {
-    let lang = this.classList[1] || 'codeblock';
-    this.dataset.lang = lang.toUpperCase();
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
   });
 </script>
+
+
 <script src="/js/script.js"></script>
+
 
   </body>
 </html>

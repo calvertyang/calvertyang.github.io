@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="Calvert&#39;s tech blog">
-  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
   
@@ -13,55 +13,70 @@
       Active Storage 概要 | Calvert&#39;s murmur
     
   </title>
-  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrcode.js"></script>
+  
   
   
     <!-- MathJax support START -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
       });
     </script>
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
+        let all = MathJax.Hub.getAllJax(), i;
         for (i = 0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- MathJax support END -->
   
 
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
-  <script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-44933497-2');
-  </script>
+    </script>
 
 
-</head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
-</div>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3999187913340509" crossorigin="anonymous"></script>
+
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
   <body>
     <header class="header fixed-header">
@@ -70,7 +85,6 @@
       <div class="logo"></div>
       <span>Calvert's murmur</span>
     </a>
-
     <ul class="right-list">
       
         <li class="list-item">
@@ -81,7 +95,7 @@
       
         <li class="list-item">
           
-            <a href="/categories/" class="item-link">Categories</a>
+            <a href="/series/" class="item-link">Series</a>
           
         </li>
       
@@ -109,49 +123,15 @@
           
         </li>
       
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
     </ul>
-
-    
-      <div id="search-form-wrap">
-        <form class="search-form">
-          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
-          <button type="submit" class="search-form-submit">
-            <span class="fa fa-search"></span>
-          </button>
-        </form>
-        <div class="ins-search">
-  <div class="ins-search-mask"></div>
-  <div class="ins-search-container">
-    <div class="ins-input-wrapper">
-      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
-      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-    </div>
-    <div class="ins-section-wrapper">
-      <div class="ins-section-container"></div>
-    </div>
-  </div>
-</div>
-<script>
-  (function (window) {
-    var INSIGHT_CONFIG = {
-      TRANSLATION: {
-        POSTS: '文章',
-        PAGES: '頁面',
-        CATEGORIES: '分類',
-        TAGS: '標籤',
-        UNTITLED: '無標題',
-      },
-      ROOT_URL: '/',
-      CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-  })(window);
-</script>
-<script src="/js/insight.js"></script>
-
-      </div>
-    
-
     <div class="menu">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -168,7 +148,7 @@
         
           <li class="menu-item">
             
-              <a href="/categories/" class="menu-link">Categories</a>
+              <a href="/series/" class="menu-link">Series</a>
             
           </li>
         
@@ -198,26 +178,52 @@
         
       </ul>
     </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
   </div>
 </header>
 
     <div id="article-banner">
   <h2>Active Storage 概要</h2>
   <p class="post-date">2018-05-18</p>
+
   <div class="arrow-down">
-    <a href="javascript:;" target="_blank" rel="noopener"></a>
+    <a href="javascript:;"></a>
   </div>
 </div>
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><blockquote>
-<p>原文：<strong>Ruby on Rails Guides</strong> — <a href="http://guides.rubyonrails.org/active_storage_overview.html" target="_blank" rel="noopener">Active Storage Overview</a></p>
+<p>原文：<strong>Ruby on Rails Guides</strong> — <a target="_blank" rel="noopener" href="http://guides.rubyonrails.org/active_storage_overview.html">Active Storage Overview</a></p>
 </blockquote>
-<p>Active Storage 是 Rails 5.2 所新增的功能，它可以讓你輕鬆的將檔案傳送到 <a href="https://aws.amazon.com/s3/" target="_blank" rel="noopener">Amazon S3</a>、<a href="https://cloud.google.com/storage/docs/" target="_blank" rel="noopener">Google Cloud Storage</a> 或 <a href="https://azure.microsoft.com/en-us/services/storage/" target="_blank" rel="noopener">Microsoft Azure Storage</a> 等雲端儲存服務，並將這些檔案附加到 Active Record。</p>
+<p>Active Storage 是 Rails 5.2 所新增的功能，它可以讓你輕鬆的將檔案傳送到 <a target="_blank" rel="noopener" href="https://aws.amazon.com/s3/">Amazon S3</a>、<a target="_blank" rel="noopener" href="https://cloud.google.com/storage/docs/">Google Cloud Storage</a> 或 <a target="_blank" rel="noopener" href="https://azure.microsoft.com/en-us/services/storage/">Microsoft Azure Storage</a> 等雲端儲存服務，並將這些檔案附加到 Active Record。</p>
 <p>支援一個主要雲端儲存服務，並在其它服務中建立鏡像以實現備援機制，它也提供了用於測試或本地部署的磁碟服務，但重點還是放在雲端儲存。</p>
 <p>檔案可以從伺服器上傳到雲端或直接從客戶端上傳到雲端。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <p>閱讀本指南後，你將知道：</p>
 <ul>
@@ -231,142 +237,278 @@
 <li>如何實作對其它雲端儲存服務的支援。</li>
 </ul>
 <h3 id="1-什麼是-Active-Storage"><a href="#1-什麼是-Active-Storage" class="headerlink" title="1. 什麼是 Active Storage?"></a>1. 什麼是 Active Storage?</h3><p>Active Storage 方便將檔案上傳到 Amazon S3、Google Cloud Storage 或 Microsoft Azure Storage 等雲端儲存服務，並將這些檔案附加到 Active Record 物件。它配備了本地磁碟服務以進行開發和測試，並支援將檔案鏡像到次要服務以進行備份和遷移。</p>
-<p>使用 Active Storage，應用程式可以透過 <a href="https://www.imagemagick.org/" target="_blank" rel="noopener">ImageMagick</a> 轉換上傳圖片，產生非圖片檔案（如 PDF 或影片）的預覽圖，並從任意檔案中提取中繼資料。</p>
+<p>使用 Active Storage，應用程式可以透過 <a target="_blank" rel="noopener" href="https://www.imagemagick.org/">ImageMagick</a> 轉換上傳圖片，產生非圖片檔案（如 PDF 或影片）的預覽圖，並從任意檔案中提取中繼資料。</p>
 <h3 id="2-安裝"><a href="#2-安裝" class="headerlink" title="2. 安裝"></a>2. 安裝</h3><p>Active Storage 在應用程式資料庫中使用兩個名為 <code>active_storage_blobs</code> 和 <code>active_storage_attachments</code> 的資料表。建立新的應用程式（或將應用程式升級到 Rails 5.2），執行 <code>rails active_storage:install</code> 來產生用來建立這些資料表的遷移。使用 <code>rails db:migrate</code> 來執行遷移。</p>
 <p>在 <code>config/storage.yml</code> 定義 Active Storage 服務。對應用程式使用的每個服務，提供一個名稱和必要的設定。下面的範例定義了三個名為 <code>local</code>、<code>test</code> 和 <code>amazon</code> 的服務：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">local:</span></span><br><span class="line">  <span class="attr">service:</span> <span class="string">Disk</span></span><br><span class="line">  <span class="attr">root:</span> &lt;%=<span class="ruby"> Rails.root.join(<span class="string">"storage"</span>) </span>%&gt;</span><br><span class="line"></span><br><span class="line"><span class="attr">test:</span></span><br><span class="line">  <span class="attr">service:</span> <span class="string">Disk</span></span><br><span class="line">  <span class="attr">root:</span> &lt;%=<span class="ruby"> Rails.root.join(<span class="string">"tmp/storage"</span>) </span>%&gt;</span><br><span class="line"></span><br><span class="line"><span class="attr">amazon:</span></span><br><span class="line">  <span class="attr">service:</span> <span class="string">S3</span></span><br><span class="line">  <span class="attr">access_key_id:</span> <span class="string">""</span></span><br><span class="line">  <span class="attr">secret_access_key:</span> <span class="string">""</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">local:
+  service: Disk
+  root: &lt;%&#x3D; Rails.root.join(&quot;storage&quot;) %&gt;
+
+test:
+  service: Disk
+  root: &lt;%&#x3D; Rails.root.join(&quot;tmp&#x2F;storage&quot;) %&gt;
+
+amazon:
+  service: S3
+  access_key_id: &quot;&quot;
+  secret_access_key: &quot;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>透過設定 <code>Rails.application.config.active_storage.service</code> 告訴 Active Storage 要使用哪個服務。由於每個環境都可能使用不同的服務，因此建議在每個環境的基礎設定上進行。要在開發環境中使用先前範例中的磁碟服務，你可以將以下內容加到 <code>config/environments/development.rb</code>：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在本地儲存檔案。</span></span><br><span class="line">config.active_storage.service = <span class="symbol">:local</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token comment"># 在本地儲存檔案。</span>
+config<span class="token punctuation">.</span>active_storage<span class="token punctuation">.</span>service <span class="token operator">=</span> <span class="token symbol">:local</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>要在生產環境使用 Amazon S3，你可以將以下內容加到 <code>config/environments/production.rb</code>：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在 Amazon S3 儲存檔案。</span></span><br><span class="line">config.active_storage.service = <span class="symbol">:amazon</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token comment"># 在 Amazon S3 儲存檔案。</span>
+config<span class="token punctuation">.</span>active_storage<span class="token punctuation">.</span>service <span class="token operator">=</span> <span class="token symbol">:amazon</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>繼續閱讀來取得關於內建服務轉接器（如 <code>Disk</code> 和 <code>S3</code>）及其所需設定的更多資訊。</p>
 <h4 id="2-1-磁碟服務"><a href="#2-1-磁碟服務" class="headerlink" title="2.1. 磁碟服務"></a>2.1. 磁碟服務</h4><p>在 <code>config/storage.yml</code> 定義磁碟服務：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">local:</span></span><br><span class="line">  <span class="attr">service:</span> <span class="string">Disk</span></span><br><span class="line">  <span class="attr">root:</span> &lt;%=<span class="ruby"> Rails.root.join(<span class="string">"storage"</span>) </span>%&gt;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">local:
+  service: Disk
+  root: &lt;%&#x3D; Rails.root.join(&quot;storage&quot;) %&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="2-2-Amazon-S3-服務"><a href="#2-2-Amazon-S3-服務" class="headerlink" title="2.2. Amazon S3 服務"></a>2.2. Amazon S3 服務</h4><p>在 <code>config/storage.yml</code> 定義 S3 服務：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">amazon:</span></span><br><span class="line">  <span class="attr">service:</span> <span class="string">S3</span></span><br><span class="line">  <span class="attr">access_key_id:</span> <span class="string">""</span></span><br><span class="line">  <span class="attr">secret_access_key:</span> <span class="string">""</span></span><br><span class="line">  <span class="attr">region:</span> <span class="string">""</span></span><br><span class="line">  <span class="attr">bucket:</span> <span class="string">""</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">amazon:
+  service: S3
+  access_key_id: &quot;&quot;
+  secret_access_key: &quot;&quot;
+  region: &quot;&quot;
+  bucket: &quot;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>將 <a href="https://github.com/aws/aws-sdk-ruby" target="_blank" rel="noopener">aws-sdk-s3</a> gem 加到 <code>Gemfile</code>：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem <span class="string">"aws-sdk-s3"</span>, <span class="symbol">require:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>將 <a target="_blank" rel="noopener" href="https://github.com/aws/aws-sdk-ruby">aws-sdk-s3</a> gem 加到 <code>Gemfile</code>：</p>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb">gem <span class="token string">"aws-sdk-s3"</span><span class="token punctuation">,</span> <span class="token keyword">require</span><span class="token punctuation">:</span> <span class="token boolean">false</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <blockquote>
 <p>Active Storage 的核心功能需要以下權限：<code>s3:ListBucket</code>、<code>s3:PutObject</code>、<code>s3:GetObject</code> 和 <code>s3:DeleteObject</code>。如果你設定了其它上傳選項，如 ACL 設定，則可能需要額外的權限。</p>
 </blockquote>
 <blockquote>
-<p>如果你想使用環境變數、標準 SDK 設定檔、設定檔、IAM 實例設定檔或工作角色，則可以省略上面範例中的 <code>access_key_id</code>、<code>secret_access_key</code> 和 <code>region</code> 值。Amazon S3 服務支援 <a href="https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html" target="_blank" rel="noopener">AWS SDK 文件</a>中描述的所有認證選項。</p>
+<p>如果你想使用環境變數、標準 SDK 設定檔、設定檔、IAM 實例設定檔或工作角色，則可以省略上面範例中的 <code>access_key_id</code>、<code>secret_access_key</code> 和 <code>region</code> 值。Amazon S3 服務支援 <a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html">AWS SDK 文件</a>中描述的所有認證選項。</p>
 </blockquote>
 <h4 id="2-3-Microsoft-Azure-Storage-服務"><a href="#2-3-Microsoft-Azure-Storage-服務" class="headerlink" title="2.3. Microsoft Azure Storage 服務"></a>2.3. Microsoft Azure Storage 服務</h4><p>在 <code>config/storage.yml</code> 定義 Azure Storage 服務：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">azure:</span></span><br><span class="line">  <span class="attr">service:</span> <span class="string">AzureStorage</span></span><br><span class="line">  <span class="attr">storage_account_name:</span> <span class="string">""</span></span><br><span class="line">  <span class="attr">storage_access_key:</span> <span class="string">""</span></span><br><span class="line">  <span class="attr">container:</span> <span class="string">""</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">azure:
+  service: AzureStorage
+  storage_account_name: &quot;&quot;
+  storage_access_key: &quot;&quot;
+  container: &quot;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>將 <a href="https://github.com/Azure/azure-storage-ruby" target="_blank" rel="noopener">azure-storage</a> gem 加到 <code>Gemfile</code>：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem <span class="string">"azure-storage"</span>, <span class="symbol">require:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>將 <a target="_blank" rel="noopener" href="https://github.com/Azure/azure-storage-ruby">azure-storage</a> gem 加到 <code>Gemfile</code>：</p>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb">gem <span class="token string">"azure-storage"</span><span class="token punctuation">,</span> <span class="token keyword">require</span><span class="token punctuation">:</span> <span class="token boolean">false</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="2-4-Google-Cloud-Storage-服務"><a href="#2-4-Google-Cloud-Storage-服務" class="headerlink" title="2.4. Google Cloud Storage 服務"></a>2.4. Google Cloud Storage 服務</h4><p>在 <code>config/storage.yml</code> 定義 Google Cloud Storage 服務：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">google:</span></span><br><span class="line">  <span class="attr">service:</span> <span class="string">GCS</span></span><br><span class="line">  <span class="attr">credentials:</span> &lt;%=<span class="ruby"> Rails.root.join(<span class="string">"path/to/keyfile.json"</span>) </span>%&gt;</span><br><span class="line">  <span class="attr">project:</span> <span class="string">""</span></span><br><span class="line">  <span class="attr">bucket:</span> <span class="string">""</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">google:
+  service: GCS
+  credentials: &lt;%&#x3D; Rails.root.join(&quot;path&#x2F;to&#x2F;keyfile.json&quot;) %&gt;
+  project: &quot;&quot;
+  bucket: &quot;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>可以選擇提供一個 Hash 憑證來取代密鑰路徑：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">google:</span></span><br><span class="line">  <span class="attr">service:</span> <span class="string">GCS</span></span><br><span class="line">  <span class="attr">credentials:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">"service_account"</span></span><br><span class="line">    <span class="attr">project_id:</span> <span class="string">""</span></span><br><span class="line">    <span class="attr">private_key_id:</span> &lt;%=<span class="ruby"> Rails.application.credentials.dig(<span class="symbol">:gcs</span>, <span class="symbol">:private_key_id</span>) </span>%&gt;</span><br><span class="line">    <span class="attr">private_key:</span> &lt;%=<span class="ruby"> Rails.application.credentials.dig(<span class="symbol">:gcs</span>, <span class="symbol">:private_key</span>) </span>%&gt;</span><br><span class="line">    <span class="attr">client_email:</span> <span class="string">""</span></span><br><span class="line">    <span class="attr">client_id:</span> <span class="string">""</span></span><br><span class="line">    <span class="attr">auth_uri:</span> <span class="string">"https://accounts.google.com/o/oauth2/auth"</span></span><br><span class="line">    <span class="attr">token_uri:</span> <span class="string">"https://accounts.google.com/o/oauth2/token"</span></span><br><span class="line">    <span class="attr">auth_provider_x509_cert_url:</span> <span class="string">"https://www.googleapis.com/oauth2/v1/certs"</span></span><br><span class="line">    <span class="attr">client_x509_cert_url:</span> <span class="string">""</span></span><br><span class="line">  <span class="attr">project:</span> <span class="string">""</span></span><br><span class="line">  <span class="attr">bucket:</span> <span class="string">""</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">google:
+  service: GCS
+  credentials:
+    type: &quot;service_account&quot;
+    project_id: &quot;&quot;
+    private_key_id: &lt;%&#x3D; Rails.application.credentials.dig(:gcs, :private_key_id) %&gt;
+    private_key: &lt;%&#x3D; Rails.application.credentials.dig(:gcs, :private_key) %&gt;
+    client_email: &quot;&quot;
+    client_id: &quot;&quot;
+    auth_uri: &quot;https:&#x2F;&#x2F;accounts.google.com&#x2F;o&#x2F;oauth2&#x2F;auth&quot;
+    token_uri: &quot;https:&#x2F;&#x2F;accounts.google.com&#x2F;o&#x2F;oauth2&#x2F;token&quot;
+    auth_provider_x509_cert_url: &quot;https:&#x2F;&#x2F;www.googleapis.com&#x2F;oauth2&#x2F;v1&#x2F;certs&quot;
+    client_x509_cert_url: &quot;&quot;
+  project: &quot;&quot;
+  bucket: &quot;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>將 <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/tree/master/google-cloud-storage" target="_blank" rel="noopener">google-cloud-storage</a> gem 加到 <code>Gemfile</code>：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem <span class="string">"google-cloud-storage"</span>, <span class="string">"~&gt; 1.8"</span>, <span class="symbol">require:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>將 <a target="_blank" rel="noopener" href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/tree/master/google-cloud-storage">google-cloud-storage</a> gem 加到 <code>Gemfile</code>：</p>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb">gem <span class="token string">"google-cloud-storage"</span><span class="token punctuation">,</span> <span class="token string">"~> 1.8"</span><span class="token punctuation">,</span> <span class="token keyword">require</span><span class="token punctuation">:</span> <span class="token boolean">false</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="2-5-鏡像服務"><a href="#2-5-鏡像服務" class="headerlink" title="2.5. 鏡像服務"></a>2.5. 鏡像服務</h4><p>你可以透過定義鏡像服務來讓多個服務保持同步。當檔案被上傳或刪除時，它會在所有鏡像服務中完成。鏡像服務可用來幫助生產環境中服務之間的遷移。你可以開始鏡像到新服務，將現有檔案從舊服務複製到新服務，然後全力投入新服務。根據上述定義你想要使用的每項服務，從鏡像服務中引用它們。</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">s3_west_coast:</span></span><br><span class="line">  <span class="attr">service:</span> <span class="string">S3</span></span><br><span class="line">  <span class="attr">access_key_id:</span> <span class="string">""</span></span><br><span class="line">  <span class="attr">secret_access_key:</span> <span class="string">""</span></span><br><span class="line">  <span class="attr">region:</span> <span class="string">""</span></span><br><span class="line">  <span class="attr">bucket:</span> <span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="attr">s3_east_coast:</span></span><br><span class="line">  <span class="attr">service:</span> <span class="string">S3</span></span><br><span class="line">  <span class="attr">access_key_id:</span> <span class="string">""</span></span><br><span class="line">  <span class="attr">secret_access_key:</span> <span class="string">""</span></span><br><span class="line">  <span class="attr">region:</span> <span class="string">""</span></span><br><span class="line">  <span class="attr">bucket:</span> <span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="attr">production:</span></span><br><span class="line">  <span class="attr">service:</span> <span class="string">Mirror</span></span><br><span class="line">  <span class="attr">primary:</span> <span class="string">s3_east_coast</span></span><br><span class="line">  <span class="attr">mirrors:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">s3_west_coast</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">s3_west_coast:
+  service: S3
+  access_key_id: &quot;&quot;
+  secret_access_key: &quot;&quot;
+  region: &quot;&quot;
+  bucket: &quot;&quot;
+
+s3_east_coast:
+  service: S3
+  access_key_id: &quot;&quot;
+  secret_access_key: &quot;&quot;
+  region: &quot;&quot;
+  bucket: &quot;&quot;
+
+production:
+  service: Mirror
+  primary: s3_east_coast
+  mirrors:
+    - s3_west_coast<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <blockquote>
 <p>檔案由主服務提供。</p>
 </blockquote>
 <blockquote>
-<p>與<a href="#8-直接上傳">直接上傳</a>功能不相容。</p>
+<p>與<a href="#8-%E7%9B%B4%E6%8E%A5%E4%B8%8A%E5%82%B3">直接上傳</a>功能不相容。</p>
 </blockquote>
 <h3 id="3-將檔案附加到記錄"><a href="#3-將檔案附加到記錄" class="headerlink" title="3. 將檔案附加到記錄"></a>3. 將檔案附加到記錄</h3><h4 id="3-1-has-one-attached"><a href="#3-1-has-one-attached" class="headerlink" title="3.1. has_one_attached"></a>3.1. has_one_attached</h4><p><code>has_one_attached</code> 指令設定了記錄和檔案間的一對一關係。每個記錄可以附加一個檔案。</p>
 <p>例如，假設你的應用程式有一個 <code>User</code> 模型。如果想讓每個使用者都有一個頭像，請這樣定義 <code>User</code> 模型：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> &lt; ApplicationRecord</span></span><br><span class="line">  has_one_attached <span class="symbol">:avatar</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token keyword">class</span> <span class="token class-name">User</span> <span class="token operator">&lt;</span> <span class="token constant">ApplicationRecord</span>
+  has_one_attached <span class="token symbol">:avatar</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>你可以建立一個帶有頭像的使用者：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SignupController</span> &lt; ApplicationController</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">create</span></span></span><br><span class="line">    user = User.create!(user_params)</span><br><span class="line">    session[<span class="symbol">:user_id</span>] = user.id</span><br><span class="line">    redirect_to root_path</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  private</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">user_params</span></span></span><br><span class="line">      params.<span class="keyword">require</span>(<span class="symbol">:user</span>).permit(<span class="symbol">:email_address</span>, <span class="symbol">:password</span>, <span class="symbol">:avatar</span>)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token keyword">class</span> <span class="token class-name">SignupController</span> <span class="token operator">&lt;</span> <span class="token constant">ApplicationController</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">create</span></span>
+    user <span class="token operator">=</span> <span class="token constant">User</span><span class="token punctuation">.</span>create<span class="token operator">!</span><span class="token punctuation">(</span>user_params<span class="token punctuation">)</span>
+    session<span class="token punctuation">[</span><span class="token symbol">:user_id</span><span class="token punctuation">]</span> <span class="token operator">=</span> user<span class="token punctuation">.</span>id
+    redirect_to root_path
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">private</span>
+    <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">user_params</span></span>
+      params<span class="token punctuation">.</span><span class="token keyword">require</span><span class="token punctuation">(</span><span class="token symbol">:user</span><span class="token punctuation">)</span><span class="token punctuation">.</span>permit<span class="token punctuation">(</span><span class="token symbol">:email_address</span><span class="token punctuation">,</span> <span class="token symbol">:password</span><span class="token punctuation">,</span> <span class="token symbol">:avatar</span><span class="token punctuation">)</span>
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>呼叫 <code>avatar.attach</code> 將頭像附加到現有使用者：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Current.user.avatar.attach(params[<span class="symbol">:avatar</span>])</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token constant">Current</span><span class="token punctuation">.</span>user<span class="token punctuation">.</span>avatar<span class="token punctuation">.</span>attach<span class="token punctuation">(</span>params<span class="token punctuation">[</span><span class="token symbol">:avatar</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>呼叫 <code>avatar.attached?</code> 來確定特定使用者是否有頭像：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Current.user.avatar.attached?</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token constant">Current</span><span class="token punctuation">.</span>user<span class="token punctuation">.</span>avatar<span class="token punctuation">.</span>attached<span class="token operator">?</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="3-2-has-many-attached"><a href="#3-2-has-many-attached" class="headerlink" title="3.2. has_many_attached"></a>3.2. has_many_attached</h4><p><code>has_many_attached</code> 指令設定了記錄和檔案間的一對多關係。每個記錄可以附加多個檔案。</p>
 <p>例如，假設你的應用程式有一個 <code>Message</code> 模型。如果想讓每個訊息都有多張圖片，請這樣定義 <code>Message</code> 模型：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Message</span> &lt; ApplicationRecord</span></span><br><span class="line">  has_many_attached <span class="symbol">:images</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token keyword">class</span> <span class="token class-name">Message</span> <span class="token operator">&lt;</span> <span class="token constant">ApplicationRecord</span>
+  has_many_attached <span class="token symbol">:images</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>你可以建立一則帶有多張圖片的訊息：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MessagesController</span> &lt; ApplicationController</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">create</span></span></span><br><span class="line">    message = Message.create!(message_params)</span><br><span class="line">    redirect_to message</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  private</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">message_params</span></span></span><br><span class="line">      params.<span class="keyword">require</span>(<span class="symbol">:message</span>).permit(<span class="symbol">:title</span>, <span class="symbol">:content</span>, <span class="symbol">images:</span> [])</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token keyword">class</span> <span class="token class-name">MessagesController</span> <span class="token operator">&lt;</span> <span class="token constant">ApplicationController</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">create</span></span>
+    message <span class="token operator">=</span> <span class="token constant">Message</span><span class="token punctuation">.</span>create<span class="token operator">!</span><span class="token punctuation">(</span>message_params<span class="token punctuation">)</span>
+    redirect_to message
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">private</span>
+    <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">message_params</span></span>
+      params<span class="token punctuation">.</span><span class="token keyword">require</span><span class="token punctuation">(</span><span class="token symbol">:message</span><span class="token punctuation">)</span><span class="token punctuation">.</span>permit<span class="token punctuation">(</span><span class="token symbol">:title</span><span class="token punctuation">,</span> <span class="token symbol">:content</span><span class="token punctuation">,</span> images<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>呼叫 <code>images.attach</code> 將圖片附加到現有訊息：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@message.images.attach(params[<span class="symbol">:images</span>])</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token variable">@message</span><span class="token punctuation">.</span>images<span class="token punctuation">.</span>attach<span class="token punctuation">(</span>params<span class="token punctuation">[</span><span class="token symbol">:images</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>呼叫 <code>images.attached?</code> 來確定特定訊息是否有圖片：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@message.images.attached?</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token variable">@message</span><span class="token punctuation">.</span>images<span class="token punctuation">.</span>attached<span class="token operator">?</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="3-3-附加-File-IO-物件"><a href="#3-3-附加-File-IO-物件" class="headerlink" title="3.3 附加 File/IO 物件"></a>3.3 附加 File/IO 物件</h4><p>有時候你需要附加一個不是透過 HTTP 請求傳送的檔案。例如，你可能需要附加從磁碟上產生的檔案，或從使用者提交的網址下載的檔案。你可能也想在模型測試中附加檔案。要做到這一點，至少提供包含一個開啟 IO 物件和檔案名稱的 Hash：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@message.image.attach(<span class="symbol">io:</span> File.open(<span class="string">'/path/to/file'</span>), <span class="symbol">filename:</span> <span class="string">'file.pdf'</span>)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token variable">@message</span><span class="token punctuation">.</span>image<span class="token punctuation">.</span>attach<span class="token punctuation">(</span>io<span class="token punctuation">:</span> <span class="token builtin">File</span><span class="token punctuation">.</span>open<span class="token punctuation">(</span><span class="token string">'/path/to/file'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> filename<span class="token punctuation">:</span> <span class="token string">'file.pdf'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>如果可能，最好提供內容類型。Active Storage 會嘗試從資料來確定檔案的內容類型。若辦不到，它將採用你提供的內容類型。</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@message.image.attach(<span class="symbol">io:</span> File.open(<span class="string">'/path/to/file'</span>), <span class="symbol">filename:</span> <span class="string">'file.pdf'</span>, <span class="symbol">content_type:</span> <span class="string">'application/pdf'</span>)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token variable">@message</span><span class="token punctuation">.</span>image<span class="token punctuation">.</span>attach<span class="token punctuation">(</span>io<span class="token punctuation">:</span> <span class="token builtin">File</span><span class="token punctuation">.</span>open<span class="token punctuation">(</span><span class="token string">'/path/to/file'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> filename<span class="token punctuation">:</span> <span class="token string">'file.pdf'</span><span class="token punctuation">,</span> content_type<span class="token punctuation">:</span> <span class="token string">'application/pdf'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>如果你未提供內容類型，且 Active Storage 無法自動確定檔案的內容類型，則預設為 application/octet-stream。</p>
 <blockquote>
 <p>譯者註：若使用 AJAX 來送出表單，可能會出現 <code>No &#39;Access-Control-Allow-Origin&#39; header is present on the requested resource.</code> 的錯誤訊息，以 Amazon S3 為例，需要登入 AWS 後台修改 CORS 設定，設定範例如下：</p>
 </blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">CORSConfiguration</span> <span class="attr">xmlns</span>=<span class="string">"http://s3.amazonaws.com/doc/2006-03-01/"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">CORSRule</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AllowedOrigin</span>&gt;</span>*<span class="tag">&lt;/<span class="name">AllowedOrigin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AllowedMethod</span>&gt;</span>GET<span class="tag">&lt;/<span class="name">AllowedMethod</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">MaxAgeSeconds</span>&gt;</span>3000<span class="tag">&lt;/<span class="name">MaxAgeSeconds</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AllowedHeader</span>&gt;</span>Authorization<span class="tag">&lt;/<span class="name">AllowedHeader</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">CORSRule</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">CORSRule</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AllowedOrigin</span>&gt;</span>*<span class="tag">&lt;/<span class="name">AllowedOrigin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AllowedMethod</span>&gt;</span>PUT<span class="tag">&lt;/<span class="name">AllowedMethod</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AllowedMethod</span>&gt;</span>POST<span class="tag">&lt;/<span class="name">AllowedMethod</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">MaxAgeSeconds</span>&gt;</span>3000<span class="tag">&lt;/<span class="name">MaxAgeSeconds</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AllowedHeader</span>&gt;</span>*<span class="tag">&lt;/<span class="name">AllowedHeader</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">CORSRule</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">CORSConfiguration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>CORSConfiguration</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://s3.amazonaws.com/doc/2006-03-01/<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>CORSRule</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>AllowedOrigin</span><span class="token punctuation">></span></span>*<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>AllowedOrigin</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>AllowedMethod</span><span class="token punctuation">></span></span>GET<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>AllowedMethod</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>MaxAgeSeconds</span><span class="token punctuation">></span></span>3000<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>MaxAgeSeconds</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>AllowedHeader</span><span class="token punctuation">></span></span>Authorization<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>AllowedHeader</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>CORSRule</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>CORSRule</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>AllowedOrigin</span><span class="token punctuation">></span></span>*<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>AllowedOrigin</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>AllowedMethod</span><span class="token punctuation">></span></span>PUT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>AllowedMethod</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>AllowedMethod</span><span class="token punctuation">></span></span>POST<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>AllowedMethod</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>MaxAgeSeconds</span><span class="token punctuation">></span></span>3000<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>MaxAgeSeconds</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>AllowedHeader</span><span class="token punctuation">></span></span>*<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>AllowedHeader</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>CORSRule</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>CORSConfiguration</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="4-刪除檔案"><a href="#4-刪除檔案" class="headerlink" title="4. 刪除檔案"></a>4. 刪除檔案</h3><p>要從模型中刪除附件，請在附件上呼叫 <code>purge</code>。如果你的應用程式有設定使用 Active Job，刪除作業可以在背景完成。刪除作業會從儲存服務中刪除 blob 和檔案。</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 同步刪除頭像和實際資源檔案。</span></span><br><span class="line">user.avatar.purge</span><br><span class="line"></span><br><span class="line"><span class="comment"># 透過 Active Job 非同步刪除相關模型和實際資源檔案。</span></span><br><span class="line">user.avatar.purge_later</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token comment"># 同步刪除頭像和實際資源檔案。</span>
+user<span class="token punctuation">.</span>avatar<span class="token punctuation">.</span>purge
+
+<span class="token comment"># 透過 Active Job 非同步刪除相關模型和實際資源檔案。</span>
+user<span class="token punctuation">.</span>avatar<span class="token punctuation">.</span>purge_later<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="5-檔案連結"><a href="#5-檔案連結" class="headerlink" title="5. 檔案連結"></a>5. 檔案連結</h3><p>為 blob 產生一個指向應用程式的永久連結。存取時，會返回一個重新導向到實際服務端點的連結。這種間接的方式將公開網址從實際網址分離開來，並允許例如鏡像不同服務中的附件以實現高可用性。重新導向連結的 HTTP 過期時間為 5 分鐘。</p>
-<figure class="highlight erb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">url_for(user.avatar)</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-erb" data-language="erb"><code class="language-erb">url_for(user.avatar)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>要建立下載連結，請使用 <code>rails_blob_{path|url}</code> 輔助方法。使用這個輔助方法可以讓你設定 disposition。</p>
-<figure class="highlight erb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">rails_blob_path(user.avatar, disposition: "attachment")</span></span><br></pre></td></tr></table></figure>
+<p>要建立下載連結，請使用 <code>rails_blob_&#123;path|url&#125;</code> 輔助方法。使用這個輔助方法可以讓你設定 disposition。</p>
+<pre class="line-numbers language-erb" data-language="erb"><code class="language-erb">rails_blob_path(user.avatar, disposition: "attachment")<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>如果你需要從控制器或視圖之外建立連結（背景作業、定時作業、等⋯），可以像這樣存取 rails_blob_path：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Rails.application.routes.url_helpers.rails_blob_path(user.avatar, <span class="symbol">only_path:</span> <span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token constant">Rails</span><span class="token punctuation">.</span>application<span class="token punctuation">.</span>routes<span class="token punctuation">.</span>url_helpers<span class="token punctuation">.</span>rails_blob_path<span class="token punctuation">(</span>user<span class="token punctuation">.</span>avatar<span class="token punctuation">,</span> only_path<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="6-下載檔案"><a href="#6-下載檔案" class="headerlink" title="6. 下載檔案"></a>6. 下載檔案</h3><p>如果需要在伺服器端處理 blob，例如，執行分析或進一步轉換時，可以用以下方式下載 blob 並取得二進位物件：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">binary = user.avatar.download</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb">binary <span class="token operator">=</span> user<span class="token punctuation">.</span>avatar<span class="token punctuation">.</span>download<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>某些時候，您可能希望將其轉換為磁碟上的實體檔案，以便將檔案路徑傳遞給外部程式（如掃毒軟體、轉換程式、優化程式、壓縮程式等⋯）。在這種情況下，你可以在類別中引用 <code>ActiveStorage::Downloading</code> 模組，該模組提供了輔助方法直接下載檔案，避免將檔案儲存到記憶體中。<code>ActiveStorage::Downloading</code> 需要定義一個 <code>blob</code> 方法。</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VirusScanner</span></span></span><br><span class="line">  <span class="keyword">include</span> ActiveStorage::Downloading</span><br><span class="line"></span><br><span class="line">  <span class="keyword">attr_reader</span> <span class="symbol">:blob</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">initialize</span><span class="params">(blob)</span></span></span><br><span class="line">    @blob = blob</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">scan</span></span></span><br><span class="line">    download_blob_to_tempfile <span class="keyword">do</span> <span class="params">|file|</span></span><br><span class="line">      system <span class="string">'scan_virus'</span>, file.path</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token keyword">class</span> <span class="token class-name">VirusScanner</span>
+  <span class="token keyword">include</span> <span class="token constant">ActiveStorage</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">Downloading</span>
+
+  attr_reader <span class="token symbol">:blob</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">initialize</span></span><span class="token punctuation">(</span>blob<span class="token punctuation">)</span>
+    <span class="token variable">@blob</span> <span class="token operator">=</span> blob
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">scan</span></span>
+    download_blob_to_tempfile <span class="token keyword">do</span> <span class="token operator">|</span>file<span class="token operator">|</span>
+      system <span class="token string">'scan_virus'</span><span class="token punctuation">,</span> file<span class="token punctuation">.</span>path
+    <span class="token keyword">end</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>預設情況下，<code>download_blob_to_tempfile</code> 會在 <code>Dir.tmpdir</code> 中建立檔案。如果需要使用其它目錄，請在類別中覆寫 ActiveStorage::Downloading#tempdir：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VirusScanner</span></span></span><br><span class="line">  <span class="keyword">include</span> ActiveStorage::Downloading</span><br><span class="line">  <span class="comment"># ...</span></span><br><span class="line"></span><br><span class="line">  private</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tempdir</span></span></span><br><span class="line">      <span class="string">'/path/to/tmp'</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token keyword">class</span> <span class="token class-name">VirusScanner</span>
+  <span class="token keyword">include</span> <span class="token constant">ActiveStorage</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">Downloading</span>
+  <span class="token comment"># ...</span>
+
+  <span class="token keyword">private</span>
+    <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">tempdir</span></span>
+      <span class="token string">'/path/to/tmp'</span>
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>如果外部程式是獨立執行的程式，你可能也需要 <code>chmod</code> 該檔案及其目錄，因為 <code>Tempfile</code> 會將權限設定為 <code>0600</code>，其它用戶無法存取該檔案。</p>
-<h3 id="7-轉換圖片"><a href="#7-轉換圖片" class="headerlink" title="7. 轉換圖片"></a>7. 轉換圖片</h3><p>要建立不同尺寸的圖片，請在 Blob 上呼叫 <code>variant</code>。你可以傳送任何 <a href="https://github.com/minimagick/minimagick" target="_blank" rel="noopener">MiniMagick</a> 所支援的轉換方式到此方法。</p>
+<h3 id="7-轉換圖片"><a href="#7-轉換圖片" class="headerlink" title="7. 轉換圖片"></a>7. 轉換圖片</h3><p>要建立不同尺寸的圖片，請在 Blob 上呼叫 <code>variant</code>。你可以傳送任何 <a target="_blank" rel="noopener" href="https://github.com/minimagick/minimagick">MiniMagick</a> 所支援的轉換方式到此方法。</p>
 <p>要啟用轉換功能，請將 <code>mini_magick</code> gem 加到 <code>Gemfile</code>：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem <span class="string">'mini_magick'</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb">gem <span class="token string">'mini_magick'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>當瀏覽器存取不同尺寸的圖片網址時，Active Storage 會將原始的 blob 延遲轉換為指定的格式，並導向到它新的服務位置。</p>
-<figure class="highlight erb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">%=</span></span></span><span class="ruby"> image_tag user.avatar.variant(<span class="symbol">resize:</span> <span class="string">"100x100"</span>) </span><span class="xml"><span class="tag">%&gt;</span></span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-erb" data-language="erb"><code class="language-erb"><span class="token erb language-erb"><span class="token delimiter punctuation">&lt;%=</span> image_tag user<span class="token punctuation">.</span>avatar<span class="token punctuation">.</span>variant<span class="token punctuation">(</span>resize<span class="token punctuation">:</span> <span class="token string">"100x100"</span><span class="token punctuation">)</span> <span class="token delimiter punctuation">%></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="8-預覽檔案"><a href="#8-預覽檔案" class="headerlink" title="8. 預覽檔案"></a>8. 預覽檔案</h3><p>一些非圖片檔案可以被預覽：也就是說，他們可以用圖片來呈現。例如，可以透過擷取第一個影格來預覽影片檔。Active Storage 內建支援預覽影片和 PDF 文件。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> @<span class="attr">message.files.each</span> <span class="attr">do</span> |<span class="attr">file</span>| %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">%=</span> <span class="attr">image_tag</span> <span class="attr">file.preview</span>(<span class="attr">resize:</span> "<span class="attr">100x100</span>&gt;</span>") %&gt;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> <span class="attr">end</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+  &lt;% @message.files.each do |file| %>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>
+      &lt;%= image_tag file.preview(resize: "100x100>") %>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+  &lt;% end %>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <blockquote>
 <p>擷取預覽圖片需要第三方應用程式，用於影片的 <code>ffmpeg</code> 和用於 PDF 的 <code>mutool</code>。這些函式庫不是由 Rails 提供的。你必須自行安裝他們才能使用內建的預覽器。在安裝和使用第三方軟體前，請確定你了解這樣做所牽涉的許可。</p>
 </blockquote>
 <h3 id="9-直接上傳"><a href="#9-直接上傳" class="headerlink" title="9. 直接上傳"></a>9. 直接上傳</h3><p>Active Storage 及其包含的 JavaScript 函式庫支援從客戶端直接上傳到雲端。</p>
 <h4 id="9-1-安裝直接上傳功能"><a href="#9-1-安裝直接上傳功能" class="headerlink" title="9.1. 安裝直接上傳功能"></a>9.1. 安裝直接上傳功能</h4><ol>
-<li><p>在應用程式的 JavaScript 封裝載入 <code>activestorage.js</code>。<br>使用 Asset Pipeline：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//= require activestorage</span></span><br></pre></td></tr></table></figure>
+<li>在應用程式的 JavaScript 封裝載入 <code>activestorage.js</code>。<br>使用 Asset Pipeline：</li>
+</ol>
+  <pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">//= require activestorage</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>使用 npm 套件：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> ActiveStorage <span class="keyword">from</span> <span class="string">"activestorage"</span></span><br><span class="line">ActiveStorage.start()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在檔案輸入欄位中註記直接上傳。</p>
-<figure class="highlight erb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">%=</span></span></span><span class="ruby"> form.file_field <span class="symbol">:attachments</span>, <span class="symbol">multiple:</span> <span class="literal">true</span>, <span class="symbol">direct_upload:</span> <span class="literal">true</span> </span><span class="xml"><span class="tag">%&gt;</span></span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>就是這樣！在表單提交後會開始上傳檔案。</p>
-</li>
+<p>  使用 npm 套件：</p>
+  <pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> ActiveStorage <span class="token keyword">from</span> <span class="token string">"activestorage"</span>
+ActiveStorage<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>在檔案輸入欄位中註記直接上傳。</li>
+</ol>
+  <pre class="line-numbers language-erb" data-language="erb"><code class="language-erb"><span class="token erb language-erb"><span class="token delimiter punctuation">&lt;%=</span> form<span class="token punctuation">.</span>file_field <span class="token symbol">:attachments</span><span class="token punctuation">,</span> multiple<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> direct_upload<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token delimiter punctuation">%></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="3">
+<li>就是這樣！在表單提交後會開始上傳檔案。</li>
 </ol>
 <h4 id="9-2-直接上傳功能的-JavaScript-事件"><a href="#9-2-直接上傳功能的-JavaScript-事件" class="headerlink" title="9.2. 直接上傳功能的 JavaScript 事件"></a>9.2. 直接上傳功能的 JavaScript 事件</h4><table>
 <thead>
@@ -386,43 +528,43 @@
 <tr>
 <td><code>direct-upload:initialize</code></td>
 <td><code>&lt;input&gt;</code></td>
-<td><code>{id, file}</code></td>
+<td><code>&#123;id, file&#125;</code></td>
 <td>表單提交後，處理每個檔案。</td>
 </tr>
 <tr>
 <td><code>direct-upload:start</code></td>
 <td><code>&lt;input&gt;</code></td>
-<td><code>{id, file}</code></td>
+<td><code>&#123;id, file&#125;</code></td>
 <td>開始直接上傳。</td>
 </tr>
 <tr>
 <td><code>direct-upload:before-blob-request</code></td>
 <td><code>&lt;input&gt;</code></td>
-<td><code>{id, file, xhr}</code></td>
+<td><code>&#123;id, file, xhr&#125;</code></td>
 <td>向你的應用程式請求直接上傳中繼資料之前。</td>
 </tr>
 <tr>
 <td><code>direct-upload:before-storage-request</code></td>
 <td><code>&lt;input&gt;</code></td>
-<td><code>{id, file, xhr}</code></td>
+<td><code>&#123;id, file, xhr&#125;</code></td>
 <td>請求儲存檔案之前。</td>
 </tr>
 <tr>
 <td><code>direct-upload:progress</code></td>
 <td><code>&lt;input&gt;</code></td>
-<td><code>{id, file, progress}</code></td>
+<td><code>&#123;id, file, progress&#125;</code></td>
 <td>請求儲存檔案的進度。</td>
 </tr>
 <tr>
 <td><code>direct-upload:error</code></td>
 <td><code>&lt;input&gt;</code></td>
-<td><code>{id, file, error}</code></td>
+<td><code>&#123;id, file, error&#125;</code></td>
 <td>發生錯誤。除非此事件被取消，否則將顯示<code>提醒</code>。</td>
 </tr>
 <tr>
 <td><code>direct-upload:end</code></td>
 <td><code>&lt;input&gt;</code></td>
-<td><code>{id, file}</code></td>
+<td><code>&#123;id, file&#125;</code></td>
 <td>直接上傳已結束。</td>
 </tr>
 <tr>
@@ -436,25 +578,177 @@
 <img src="/2018/05/18/active-storage-overview/direct-uploads.gif" class="" title="直接上傳">
 
 <p>在表單內顯示上傳的檔案：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// direct_uploads.js</span></span><br><span class="line"></span><br><span class="line">addEventListener(<span class="string">"direct-upload:initialize"</span>, event =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; target, detail &#125; = event</span><br><span class="line">  <span class="keyword">const</span> &#123; id, file &#125; = detail</span><br><span class="line">  target.insertAdjacentHTML(<span class="string">"beforebegin"</span>, <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div id="direct-upload-<span class="subst">$&#123;id&#125;</span>" class="direct-upload direct-upload--pending"&gt;</span></span><br><span class="line"><span class="string">      &lt;div id="direct-upload-progress-<span class="subst">$&#123;id&#125;</span>" class="direct-upload__progress" style="width: 0%"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;span class="direct-upload__filename"&gt;<span class="subst">$&#123;file.name&#125;</span>&lt;/span&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">  `</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">addEventListener(<span class="string">"direct-upload:start"</span>, event =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; id &#125; = event.detail</span><br><span class="line">  <span class="keyword">const</span> element = <span class="built_in">document</span>.getElementById(<span class="string">`direct-upload-<span class="subst">$&#123;id&#125;</span>`</span>)</span><br><span class="line">  element.classList.remove(<span class="string">"direct-upload--pending"</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">addEventListener(<span class="string">"direct-upload:progress"</span>, event =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; id, progress &#125; = event.detail</span><br><span class="line">  <span class="keyword">const</span> progressElement = <span class="built_in">document</span>.getElementById(<span class="string">`direct-upload-progress-<span class="subst">$&#123;id&#125;</span>`</span>)</span><br><span class="line">  progressElement.style.width = <span class="string">`<span class="subst">$&#123;progress&#125;</span>%`</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">addEventListener(<span class="string">"direct-upload:error"</span>, event =&gt; &#123;</span><br><span class="line">  event.preventDefault()</span><br><span class="line">  <span class="keyword">const</span> &#123; id, error &#125; = event.detail</span><br><span class="line">  <span class="keyword">const</span> element = <span class="built_in">document</span>.getElementById(<span class="string">`direct-upload-<span class="subst">$&#123;id&#125;</span>`</span>)</span><br><span class="line">  element.classList.add(<span class="string">"direct-upload--error"</span>)</span><br><span class="line">  element.setAttribute(<span class="string">"title"</span>, error)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">addEventListener(<span class="string">"direct-upload:end"</span>, event =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; id &#125; = event.detail</span><br><span class="line">  <span class="keyword">const</span> element = <span class="built_in">document</span>.getElementById(<span class="string">`direct-upload-<span class="subst">$&#123;id&#125;</span>`</span>)</span><br><span class="line">  element.classList.add(<span class="string">"direct-upload--complete"</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// direct_uploads.js</span>
+
+<span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"direct-upload:initialize"</span><span class="token punctuation">,</span> <span class="token parameter">event</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> target<span class="token punctuation">,</span> detail <span class="token punctuation">&#125;</span> <span class="token operator">=</span> event
+  <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> id<span class="token punctuation">,</span> file <span class="token punctuation">&#125;</span> <span class="token operator">=</span> detail
+  target<span class="token punctuation">.</span><span class="token function">insertAdjacentHTML</span><span class="token punctuation">(</span><span class="token string">"beforebegin"</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+    &lt;div id="direct-upload-</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>id<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">" class="direct-upload direct-upload--pending">
+      &lt;div id="direct-upload-progress-</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>id<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">" class="direct-upload__progress" style="width: 0%">&lt;/div>
+      &lt;span class="direct-upload__filename"></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>file<span class="token punctuation">.</span>name<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">&lt;/span>
+    &lt;/div>
+  </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"direct-upload:start"</span><span class="token punctuation">,</span> <span class="token parameter">event</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> id <span class="token punctuation">&#125;</span> <span class="token operator">=</span> event<span class="token punctuation">.</span>detail
+  <span class="token keyword">const</span> element <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">direct-upload-</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>id<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+  element<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">"direct-upload--pending"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"direct-upload:progress"</span><span class="token punctuation">,</span> <span class="token parameter">event</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> id<span class="token punctuation">,</span> progress <span class="token punctuation">&#125;</span> <span class="token operator">=</span> event<span class="token punctuation">.</span>detail
+  <span class="token keyword">const</span> progressElement <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">direct-upload-progress-</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>id<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+  progressElement<span class="token punctuation">.</span>style<span class="token punctuation">.</span>width <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>progress<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">%</span><span class="token template-punctuation string">`</span></span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"direct-upload:error"</span><span class="token punctuation">,</span> <span class="token parameter">event</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> id<span class="token punctuation">,</span> error <span class="token punctuation">&#125;</span> <span class="token operator">=</span> event<span class="token punctuation">.</span>detail
+  <span class="token keyword">const</span> element <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">direct-upload-</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>id<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+  element<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"direct-upload--error"</span><span class="token punctuation">)</span>
+  element<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">"title"</span><span class="token punctuation">,</span> error<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"direct-upload:end"</span><span class="token punctuation">,</span> <span class="token parameter">event</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> id <span class="token punctuation">&#125;</span> <span class="token operator">=</span> event<span class="token punctuation">.</span>detail
+  <span class="token keyword">const</span> element <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">direct-upload-</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>id<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+  element<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"direct-upload--complete"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>加上樣式：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* direct_uploads.css */</span></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.direct-upload</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">2px</span> <span class="number">4px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">3px</span> <span class="number">3px</span> <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="built_in">rgba</span>(0, 0, 0, 0.3);</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">3px</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">11px</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">13px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.direct-upload--pending</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0.6</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.direct-upload__progress</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0.2</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#0076ff</span>;</span><br><span class="line">  <span class="attribute">transition</span>: width <span class="number">120ms</span> ease-out, opacity <span class="number">60ms</span> <span class="number">60ms</span> ease-in;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate3d</span>(0, 0, 0);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.direct-upload--complete</span> <span class="selector-class">.direct-upload__progress</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0.4</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.direct-upload--error</span> &#123;</span><br><span class="line">  <span class="attribute">border-color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[type=file]</span><span class="selector-attr">[data-direct-upload-url]</span><span class="selector-attr">[disabled]</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token comment">/* direct_uploads.css */</span>
+
+<span class="token selector">.direct-upload</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> inline-block<span class="token punctuation">;</span>
+  <span class="token property">position</span><span class="token punctuation">:</span> relative<span class="token punctuation">;</span>
+  <span class="token property">padding</span><span class="token punctuation">:</span> 2px 4px<span class="token punctuation">;</span>
+  <span class="token property">margin</span><span class="token punctuation">:</span> 0 3px 3px 0<span class="token punctuation">;</span>
+  <span class="token property">border</span><span class="token punctuation">:</span> 1px solid <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0.3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">border-radius</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 11px<span class="token punctuation">;</span>
+  <span class="token property">line-height</span><span class="token punctuation">:</span> 13px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.direct-upload--pending</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">opacity</span><span class="token punctuation">:</span> 0.6<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.direct-upload__progress</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
+  <span class="token property">top</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">left</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">bottom</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">opacity</span><span class="token punctuation">:</span> 0.2<span class="token punctuation">;</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> #0076ff<span class="token punctuation">;</span>
+  <span class="token property">transition</span><span class="token punctuation">:</span> width 120ms ease-out<span class="token punctuation">,</span> opacity 60ms 60ms ease-in<span class="token punctuation">;</span>
+  <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">translate3d</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.direct-upload--complete .direct-upload__progress</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">opacity</span><span class="token punctuation">:</span> 0.4<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.direct-upload--error</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">border-color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">input[type=file][data-direct-upload-url][disabled]</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="9-4-與函式庫或框架整合"><a href="#9-4-與函式庫或框架整合" class="headerlink" title="9.4. 與函式庫或框架整合"></a>9.4. 與函式庫或框架整合</h4><p>如果你想從 JavaScript 框架中使用直接上傳功能，或者想要整合自訂的拖放解決方案，可以使用 <code>DirectUpload</code> 類別來達成此目的。當從你的函式庫收到選擇的檔案後，實例化一個 DirectUpload 並呼叫它的 create 方法。當上傳完成時，create 會調用 callback。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; DirectUpload &#125; <span class="keyword">from</span> <span class="string">"activestorage"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> input = <span class="built_in">document</span>.querySelector(<span class="string">'input[type=file]'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 綁定到檔案放置 - 在父元素上使用 ondrop 或使用 Dropzone 之類的函式庫</span></span><br><span class="line"><span class="keyword">const</span> onDrop = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">  event.preventDefault()</span><br><span class="line">  <span class="keyword">const</span> files = event.dataTransfer.files;</span><br><span class="line">  <span class="built_in">Array</span>.from(files).forEach(<span class="function"><span class="params">file</span> =&gt;</span> uploadFile(file))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 綁定到正常的檔案選取</span></span><br><span class="line">input.addEventListener(<span class="string">'change'</span>, (event) =&gt; &#123;</span><br><span class="line">  <span class="built_in">Array</span>.from(input.files).forEach(<span class="function"><span class="params">file</span> =&gt;</span> uploadFile(file))</span><br><span class="line">  <span class="comment">// 你可以從輸入欄位清除選定的檔案</span></span><br><span class="line">  input.value = <span class="literal">null</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> uploadFile = (file) &#123;</span><br><span class="line">  <span class="comment">// 表單的檔案輸入欄位需要 direct_upload: true，它提供了 data-direct-upload-url</span></span><br><span class="line">  <span class="keyword">const</span> url = input.dataset.directUploadUrl</span><br><span class="line">  <span class="keyword">const</span> upload = <span class="keyword">new</span> DirectUpload(file, url)</span><br><span class="line"></span><br><span class="line">  upload.create(<span class="function">(<span class="params">error, blob</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (error) &#123;</span><br><span class="line">      <span class="comment">// 錯誤處理</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 將適當名稱且值為 blob.signed_id 的隱藏輸入欄位加到表單中，以便 blob id 可以在</span></span><br><span class="line">      <span class="comment">// 正常上傳流程中被傳送</span></span><br><span class="line">      <span class="keyword">const</span> hiddenField = <span class="built_in">document</span>.createElement(<span class="string">'input'</span>)</span><br><span class="line">      hiddenField.setAttribute(<span class="string">"type"</span>, <span class="string">"hidden"</span>);</span><br><span class="line">      hiddenField.setAttribute(<span class="string">"value"</span>, blob.signed_id);</span><br><span class="line">      hiddenField.name = input.name</span><br><span class="line">      <span class="built_in">document</span>.querySelector(<span class="string">'form'</span>).appendChild(hiddenField)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> DirectUpload <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"activestorage"</span>
+
+<span class="token keyword">const</span> input <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'input[type=file]'</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 綁定到檔案放置 - 在父元素上使用 ondrop 或使用 Dropzone 之類的函式庫</span>
+<span class="token keyword">const</span> <span class="token function-variable function">onDrop</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> files <span class="token operator">=</span> event<span class="token punctuation">.</span>dataTransfer<span class="token punctuation">.</span>files<span class="token punctuation">;</span>
+  Array<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span>files<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">file</span> <span class="token operator">=></span> <span class="token function">uploadFile</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 綁定到正常的檔案選取</span>
+input<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'change'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  Array<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span>input<span class="token punctuation">.</span>files<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">file</span> <span class="token operator">=></span> <span class="token function">uploadFile</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token comment">// 你可以從輸入欄位清除選定的檔案</span>
+  input<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token keyword">null</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> uploadFile <span class="token operator">=</span> <span class="token punctuation">(</span>file<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// 表單的檔案輸入欄位需要 direct_upload: true，它提供了 data-direct-upload-url</span>
+  <span class="token keyword">const</span> url <span class="token operator">=</span> input<span class="token punctuation">.</span>dataset<span class="token punctuation">.</span>directUploadUrl
+  <span class="token keyword">const</span> upload <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DirectUpload</span><span class="token punctuation">(</span>file<span class="token punctuation">,</span> url<span class="token punctuation">)</span>
+
+  upload<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">error<span class="token punctuation">,</span> blob</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 錯誤處理</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 將適當名稱且值為 blob.signed_id 的隱藏輸入欄位加到表單中，以便 blob id 可以在</span>
+      <span class="token comment">// 正常上傳流程中被傳送</span>
+      <span class="token keyword">const</span> hiddenField <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'input'</span><span class="token punctuation">)</span>
+      hiddenField<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">"type"</span><span class="token punctuation">,</span> <span class="token string">"hidden"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      hiddenField<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">"value"</span><span class="token punctuation">,</span> blob<span class="token punctuation">.</span>signed_id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      hiddenField<span class="token punctuation">.</span>name <span class="token operator">=</span> input<span class="token punctuation">.</span>name
+      document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'form'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>hiddenField<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>如果你需要追蹤檔案上傳進度，可以傳送第三個參數給 <code>DirectUpload</code> 建構函數。在上傳過程中，DirectUpload 會呼叫物件的 <code>directUploadWillStoreFileWithXHR</code> 方法。然後，你可以在 XHR 上綁定自己的進度處理程式。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; DirectUpload &#125; <span class="keyword">from</span> <span class="string">"activestorage"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Uploader</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(file, url) &#123;</span><br><span class="line">    <span class="keyword">this</span>.upload = <span class="keyword">new</span> DirectUpload(<span class="keyword">this</span>.file, <span class="keyword">this</span>.url, <span class="keyword">this</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  upload(file) &#123;</span><br><span class="line">    <span class="keyword">this</span>.upload.create(<span class="function">(<span class="params">error, blob</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (error) &#123;</span><br><span class="line">        <span class="comment">// 錯誤處理</span></span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 將適當名稱且值為 blob.signed_id 的隱藏輸入欄位加到表單中，以便 blob id 可以在</span></span><br><span class="line">        <span class="comment">// 正常上傳流程中被傳送</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  directUploadWillStoreFileWithXHR(request) &#123;</span><br><span class="line">    request.upload.addEventListener(<span class="string">"progress"</span>,</span><br><span class="line">      event =&gt; <span class="keyword">this</span>.directUploadDidProgress(event))</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  directUploadDidProgress(event) &#123;</span><br><span class="line">    <span class="comment">// 使用 event.loaded 和 event.total 來更新進度列</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> DirectUpload <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"activestorage"</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Uploader</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">file<span class="token punctuation">,</span> url</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>upload <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DirectUpload</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>file<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>url<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token function">upload</span><span class="token punctuation">(</span><span class="token parameter">file</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>upload<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">error<span class="token punctuation">,</span> blob</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 錯誤處理</span>
+      <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 將適當名稱且值為 blob.signed_id 的隱藏輸入欄位加到表單中，以便 blob id 可以在</span>
+        <span class="token comment">// 正常上傳流程中被傳送</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token function">directUploadWillStoreFileWithXHR</span><span class="token punctuation">(</span><span class="token parameter">request</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    request<span class="token punctuation">.</span>upload<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"progress"</span><span class="token punctuation">,</span>
+      <span class="token parameter">event</span> <span class="token operator">=></span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">directUploadDidProgress</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token function">directUploadDidProgress</span><span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 使用 event.loaded 和 event.total 來更新進度列</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="10-移除系統測試過程中儲存的檔案"><a href="#10-移除系統測試過程中儲存的檔案" class="headerlink" title="10. 移除系統測試過程中儲存的檔案"></a>10. 移除系統測試過程中儲存的檔案</h3><p>系統測試透過復原（Rollback）交易來清理測試資料。因為 destroy 永遠不會在對像上呼叫，所以附加的檔案永遠不會被清理。如果你想清除檔案，可以在 <code>after_teardown</code> callback 中完成。在此處操作可以確保測試過程中建立的連線都已完成，並且不會從 Active Storage 收到錯誤，表示無法找到檔案。</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ApplicationSystemTestCase</span> &lt; ActionDispatch::SystemTestCase</span></span><br><span class="line">  driven_by <span class="symbol">:selenium</span>, <span class="symbol">using:</span> <span class="symbol">:chrome</span>, <span class="symbol">screen_size:</span> [<span class="number">1400</span>, <span class="number">1400</span>]</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">remove_uploaded_files</span></span></span><br><span class="line">    FileUtils.rm_rf(<span class="string">"<span class="subst">#&#123;Rails.root&#125;</span>/storage_test"</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">after_teardown</span></span></span><br><span class="line">    <span class="keyword">super</span></span><br><span class="line">    remove_uploaded_files</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token keyword">class</span> <span class="token class-name">ApplicationSystemTestCase</span> <span class="token operator">&lt;</span> <span class="token constant">ActionDispatch</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">SystemTestCase</span>
+  driven_by <span class="token symbol">:selenium</span><span class="token punctuation">,</span> using<span class="token punctuation">:</span> <span class="token symbol">:chrome</span><span class="token punctuation">,</span> screen_size<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">1400</span><span class="token punctuation">,</span> <span class="token number">1400</span><span class="token punctuation">]</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">remove_uploaded_files</span></span>
+    <span class="token constant">FileUtils</span><span class="token punctuation">.</span>rm_rf<span class="token punctuation">(</span><span class="token string">"<span class="token interpolation"><span class="token delimiter tag">#&#123;</span><span class="token constant">Rails</span><span class="token punctuation">.</span>root<span class="token delimiter tag">&#125;</span></span>/storage_test"</span><span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">after_teardown</span></span>
+    <span class="token keyword">super</span>
+    remove_uploaded_files
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>如果你的系統測試驗證是否刪除帶有附件的模型，並且使用 Active Job，請將測試環境設定為使用行內佇列轉接器，以便立即執行清除工作，而不是在未來的某個時間執行。</p>
 <p>你可能也想為測試環境使用單獨的服務定義，以便你的測試不會刪除在開發過程中建立的檔案。</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用行內作業處理，以便立即執行</span></span><br><span class="line">config.active_job.queue_adapter = <span class="symbol">:inline</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在測試環境中分開儲存檔案</span></span><br><span class="line">config.active_storage.service = <span class="symbol">:local_test</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token comment"># 使用行內作業處理，以便立即執行</span>
+config<span class="token punctuation">.</span>active_job<span class="token punctuation">.</span>queue_adapter <span class="token operator">=</span> <span class="token symbol">:inline</span>
 
-<h3 id="11-實作支援其它雲端儲存服務"><a href="#11-實作支援其它雲端儲存服務" class="headerlink" title="11. 實作支援其它雲端儲存服務"></a>11. 實作支援其它雲端儲存服務</h3><p>如果你需要支援除了這些以外的雲端服務，則需要實作 Service。每個服務都透過實作上傳和下載檔案到雲端所需的方法，來擴充 <a href="https://github.com/rails/rails/blob/master/activestorage/lib/active_storage/service.rb" target="_blank" rel="noopener">ActiveStorage::Service</a>。</p>
+<span class="token comment"># 在測試環境中分開儲存檔案</span>
+config<span class="token punctuation">.</span>active_storage<span class="token punctuation">.</span>service <span class="token operator">=</span> <span class="token symbol">:local_test</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="11-實作支援其它雲端儲存服務"><a href="#11-實作支援其它雲端儲存服務" class="headerlink" title="11. 實作支援其它雲端儲存服務"></a>11. 實作支援其它雲端儲存服務</h3><p>如果你需要支援除了這些以外的雲端服務，則需要實作 Service。每個服務都透過實作上傳和下載檔案到雲端所需的方法，來擴充 <a target="_blank" rel="noopener" href="https://github.com/rails/rails/blob/master/activestorage/lib/active_storage/service.rb">ActiveStorage::Service</a>。</p>
 </section>
     <!-- Tags START -->
     
@@ -473,11 +767,11 @@
       </div>
     
     <!-- Tags END -->
-    <!-- UpdatedDate Start -->
-     
-       <p class="post-date">最後更新時間：2018-08-15</p>
-     
-   <!-- UpdatedDate END -->
+    <!-- Last updated on Start -->
+    
+      <p class="post-date">最後更新時間：2018-08-15</p>
+    
+    <!-- Last updated on END -->
     <!-- NAV START -->
     
   <div class="nav-container">
@@ -502,19 +796,9 @@
 
 
     <!-- NAV END -->
-    <!-- 打賞 START -->
+    <!-- QR Code START -->
     
-    <!-- 打賞 END -->
-    <!-- 二維條碼 START -->
-    
-      <div class="qrcode">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g id="share-qrcode"/>
-        </svg>
-        <p class="notice">掃描二維條碼，分享此文章</p>
-      </div>
-    
-    <!-- 二維條碼 END -->
+    <!-- QR Code END -->
   </article>
   <!-- Article END -->
   <!-- Catalog START -->
@@ -523,7 +807,7 @@
   <div class="toc-main">
     <strong class="toc-title">目錄</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-什麼是-Active-Storage"><span class="toc-nav-text">1. 什麼是 Active Storage?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-安裝"><span class="toc-nav-text">2. 安裝</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-1-磁碟服務"><span class="toc-nav-text">2.1. 磁碟服務</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-2-Amazon-S3-服務"><span class="toc-nav-text">2.2. Amazon S3 服務</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-3-Microsoft-Azure-Storage-服務"><span class="toc-nav-text">2.3. Microsoft Azure Storage 服務</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-4-Google-Cloud-Storage-服務"><span class="toc-nav-text">2.4. Google Cloud Storage 服務</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-5-鏡像服務"><span class="toc-nav-text">2.5. 鏡像服務</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-將檔案附加到記錄"><span class="toc-nav-text">3. 將檔案附加到記錄</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-1-has-one-attached"><span class="toc-nav-text">3.1. has_one_attached</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-2-has-many-attached"><span class="toc-nav-text">3.2. has_many_attached</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-3-附加-File-IO-物件"><span class="toc-nav-text">3.3 附加 File/IO 物件</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-刪除檔案"><span class="toc-nav-text">4. 刪除檔案</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#5-檔案連結"><span class="toc-nav-text">5. 檔案連結</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#6-下載檔案"><span class="toc-nav-text">6. 下載檔案</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#7-轉換圖片"><span class="toc-nav-text">7. 轉換圖片</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#8-預覽檔案"><span class="toc-nav-text">8. 預覽檔案</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#9-直接上傳"><span class="toc-nav-text">9. 直接上傳</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#9-1-安裝直接上傳功能"><span class="toc-nav-text">9.1. 安裝直接上傳功能</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#9-2-直接上傳功能的-JavaScript-事件"><span class="toc-nav-text">9.2. 直接上傳功能的 JavaScript 事件</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#9-3-範例"><span class="toc-nav-text">9.3. 範例</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#9-4-與函式庫或框架整合"><span class="toc-nav-text">9.4. 與函式庫或框架整合</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#10-移除系統測試過程中儲存的檔案"><span class="toc-nav-text">10. 移除系統測試過程中儲存的檔案</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#11-實作支援其它雲端儲存服務"><span class="toc-nav-text">11. 實作支援其它雲端儲存服務</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E4%BB%80%E9%BA%BC%E6%98%AF-Active-Storage"><span class="toc-nav-text">1. 什麼是 Active Storage?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-%E5%AE%89%E8%A3%9D"><span class="toc-nav-text">2. 安裝</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-1-%E7%A3%81%E7%A2%9F%E6%9C%8D%E5%8B%99"><span class="toc-nav-text">2.1. 磁碟服務</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-2-Amazon-S3-%E6%9C%8D%E5%8B%99"><span class="toc-nav-text">2.2. Amazon S3 服務</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-3-Microsoft-Azure-Storage-%E6%9C%8D%E5%8B%99"><span class="toc-nav-text">2.3. Microsoft Azure Storage 服務</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-4-Google-Cloud-Storage-%E6%9C%8D%E5%8B%99"><span class="toc-nav-text">2.4. Google Cloud Storage 服務</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-5-%E9%8F%A1%E5%83%8F%E6%9C%8D%E5%8B%99"><span class="toc-nav-text">2.5. 鏡像服務</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-%E5%B0%87%E6%AA%94%E6%A1%88%E9%99%84%E5%8A%A0%E5%88%B0%E8%A8%98%E9%8C%84"><span class="toc-nav-text">3. 將檔案附加到記錄</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-1-has-one-attached"><span class="toc-nav-text">3.1. has_one_attached</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-2-has-many-attached"><span class="toc-nav-text">3.2. has_many_attached</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-3-%E9%99%84%E5%8A%A0-File-IO-%E7%89%A9%E4%BB%B6"><span class="toc-nav-text">3.3 附加 File&#x2F;IO 物件</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-%E5%88%AA%E9%99%A4%E6%AA%94%E6%A1%88"><span class="toc-nav-text">4. 刪除檔案</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#5-%E6%AA%94%E6%A1%88%E9%80%A3%E7%B5%90"><span class="toc-nav-text">5. 檔案連結</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#6-%E4%B8%8B%E8%BC%89%E6%AA%94%E6%A1%88"><span class="toc-nav-text">6. 下載檔案</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#7-%E8%BD%89%E6%8F%9B%E5%9C%96%E7%89%87"><span class="toc-nav-text">7. 轉換圖片</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#8-%E9%A0%90%E8%A6%BD%E6%AA%94%E6%A1%88"><span class="toc-nav-text">8. 預覽檔案</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#9-%E7%9B%B4%E6%8E%A5%E4%B8%8A%E5%82%B3"><span class="toc-nav-text">9. 直接上傳</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#9-1-%E5%AE%89%E8%A3%9D%E7%9B%B4%E6%8E%A5%E4%B8%8A%E5%82%B3%E5%8A%9F%E8%83%BD"><span class="toc-nav-text">9.1. 安裝直接上傳功能</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#9-2-%E7%9B%B4%E6%8E%A5%E4%B8%8A%E5%82%B3%E5%8A%9F%E8%83%BD%E7%9A%84-JavaScript-%E4%BA%8B%E4%BB%B6"><span class="toc-nav-text">9.2. 直接上傳功能的 JavaScript 事件</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#9-3-%E7%AF%84%E4%BE%8B"><span class="toc-nav-text">9.3. 範例</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#9-4-%E8%88%87%E5%87%BD%E5%BC%8F%E5%BA%AB%E6%88%96%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88"><span class="toc-nav-text">9.4. 與函式庫或框架整合</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#10-%E7%A7%BB%E9%99%A4%E7%B3%BB%E7%B5%B1%E6%B8%AC%E8%A9%A6%E9%81%8E%E7%A8%8B%E4%B8%AD%E5%84%B2%E5%AD%98%E7%9A%84%E6%AA%94%E6%A1%88"><span class="toc-nav-text">10. 移除系統測試過程中儲存的檔案</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#11-%E5%AF%A6%E4%BD%9C%E6%94%AF%E6%8F%B4%E5%85%B6%E5%AE%83%E9%9B%B2%E7%AB%AF%E5%84%B2%E5%AD%98%E6%9C%8D%E5%8B%99"><span class="toc-nav-text">11. 實作支援其它雲端儲存服務</span></a></li></ol>
     
   </div>
 </aside>
@@ -533,23 +817,23 @@
 </main>
 
 <script>
-  (function () {
-    var url = 'https://calvertyang.github.io/2018/05/18/active-storage-overview/';
-    var banner = '';
+  (function() {
+    const url = 'https://calvertyang.github.io/2018/05/18/active-storage-overview/';
+    const banner = '';
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
-        'background-image': 'url(' + banner + ')'
+        'background-image': 'url(' + banner + ')',
       });
     } else {
       $('#article-banner').geopattern(url);
     }
     $('.header').removeClass('fixed-header');
 
-     // error image
-    $('.markdown-content img').on('error', function() {
-      $(this).attr('src', '/css/images/error-img.png');
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.svg');
       $(this).css({
-        'cursor': 'default'
+        'cursor': 'default',
       });
     });
 
@@ -558,28 +842,28 @@
       if ($(this).parents().is('a')) {
         $(this).css({
           'cursor': 'pointer',
-          'display': 'inline-block'
+          'display': 'inline-block',
         });
       }
     });
 
     // zoom image
-    $('.markdown-content img').on('click', function(e) {
-      var src = $(this).attr('src');
-      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
-        var imageW = $(this).width();
-        var imageH = $(this).height();
+    $('.markdown-content img').on('click', function() {
+      const src = $(this).attr('src');
+      if (src !== '/css/images/error_icon.svg' && !$(this).parents().is('a')) {
+        const imageW = $(this).width();
+        const imageH = $(this).height();
 
-        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        let zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
         zoom = zoom < 1 ? 1 : zoom;
         zoom = zoom > 2 ? 2 : zoom;
-        var transY = (($(window).height() - imageH) / 2).toFixed(2);
+        const transY = (($(window).height() - imageH) / 2).toFixed(2);
 
         $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
         $('.image-view-wrap').addClass('wrap-active');
         $('.image-view-wrap img').css({
-          'width': `${imageW}`,
-          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+          width: imageW,
+          transform: `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`,
         });
         $('html').css('overflow', 'hidden');
 
@@ -588,35 +872,26 @@
           $('html').attr('style', '');
         });
       }
-    });
-
-    // qrcode
-    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
-      text: document.location.href,
-      width: 100,
-      height: 100,
-      colorDark: '#000000',
-    	colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.L,
-      useSVG: true
-    });
+    })
   })();
 </script>
+
+
 
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
 
 <script>
   function async(u, c) {
-    var d = document, t = 'script',
+    const d = document, t = 'script',
       o = d.createElement(t),
       s = d.getElementsByTagName(t)[0];
     o.src = u;
@@ -624,20 +899,36 @@
     s.parentNode.insertBefore(o, s);
   }
 </script>
-
 <script>
   async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
     FastClick.attach(document.body);
-  })
+  });
 </script>
 
 <script>
-  $('figure').each(function(i, block) {
-    let lang = this.classList[1] || 'codeblock';
-    this.dataset.lang = lang.toUpperCase();
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
   });
 </script>
+
+
 <script src="/js/script.js"></script>
+
 
   </body>
 </html>

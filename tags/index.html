@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="Calvert&#39;s tech blog">
-  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
   
@@ -13,55 +13,70 @@
       Tags | Calvert&#39;s murmur
     
   </title>
-  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrcode.js"></script>
+  
   
   
     <!-- MathJax support START -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
       });
     </script>
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
+        let all = MathJax.Hub.getAllJax(), i;
         for (i = 0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- MathJax support END -->
   
 
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
-  <script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-44933497-2');
-  </script>
+    </script>
 
 
-</head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
-</div>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3999187913340509" crossorigin="anonymous"></script>
+
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
   <body>
     <header class="header fixed-header">
@@ -70,7 +85,6 @@
       <div class="logo"></div>
       <span>Calvert's murmur</span>
     </a>
-
     <ul class="right-list">
       
         <li class="list-item">
@@ -81,7 +95,7 @@
       
         <li class="list-item">
           
-            <a href="/categories/" class="item-link">Categories</a>
+            <a href="/series/" class="item-link">Series</a>
           
         </li>
       
@@ -109,49 +123,15 @@
           
         </li>
       
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
     </ul>
-
-    
-      <div id="search-form-wrap">
-        <form class="search-form">
-          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
-          <button type="submit" class="search-form-submit">
-            <span class="fa fa-search"></span>
-          </button>
-        </form>
-        <div class="ins-search">
-  <div class="ins-search-mask"></div>
-  <div class="ins-search-container">
-    <div class="ins-input-wrapper">
-      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
-      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-    </div>
-    <div class="ins-section-wrapper">
-      <div class="ins-section-container"></div>
-    </div>
-  </div>
-</div>
-<script>
-  (function (window) {
-    var INSIGHT_CONFIG = {
-      TRANSLATION: {
-        POSTS: '文章',
-        PAGES: '頁面',
-        CATEGORIES: '分類',
-        TAGS: '標籤',
-        UNTITLED: '無標題',
-      },
-      ROOT_URL: '/',
-      CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-  })(window);
-</script>
-<script src="/js/insight.js"></script>
-
-      </div>
-    
-
     <div class="menu">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -168,7 +148,7 @@
         
           <li class="menu-item">
             
-              <a href="/categories/" class="menu-link">Categories</a>
+              <a href="/series/" class="menu-link">Series</a>
             
           </li>
         
@@ -198,71 +178,96 @@
         
       </ul>
     </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
   </div>
 </header>
 
     <div id="article-banner">
   <h2>Tags</h2>
-  <p class="post-date">標籤檢索</p>
+  <p class="post-date">標籤彙整</p>
 </div>
 <main class="app-body">
   <div id="tag-cloud">
     
       <a class="tag2" data-name="tag-Linux">Linux</a>
     
-      <a class="tag0" data-name="tag-SSL">SSL</a>
+      <a class="tag1" data-name="tag-SSL">SSL</a>
     
       <a class="tag2" data-name="tag-Nginx">Nginx</a>
     
       <a class="tag2" data-name="tag-JavaScript">JavaScript</a>
     
-      <a class="tag2" data-name="tag-Mac">Mac</a>
+      <a class="tag0" data-name="tag-Mac">Mac</a>
     
       <a class="tag1" data-name="tag-Redis">Redis</a>
     
-      <a class="tag0" data-name="tag-Node.js">Node.js</a>
-    
-      <a class="tag1" data-name="tag-npm">npm</a>
-    
-      <a class="tag1" data-name="tag-SemVer">SemVer</a>
-    
-      <a class="tag1" data-name="tag-iOS">iOS</a>
-    
-      <a class="tag3" data-name="tag-SQL">SQL</a>
+      <a class="tag2" data-name="tag-SQL">SQL</a>
     
       <a class="tag2" data-name="tag-NoSQL">NoSQL</a>
     
-      <a class="tag0" data-name="tag-MongoDB">MongoDB</a>
+      <a class="tag3" data-name="tag-MongoDB">MongoDB</a>
     
-      <a class="tag1" data-name="tag-GitHub">GitHub</a>
+      <a class="tag2" data-name="tag-Node.js">Node.js</a>
     
-      <a class="tag1" data-name="tag-GitHub-Flow">GitHub Flow</a>
+      <a class="tag2" data-name="tag-npm">npm</a>
+    
+      <a class="tag2" data-name="tag-SemVer">SemVer</a>
+    
+      <a class="tag0" data-name="tag-iOS">iOS</a>
+    
+      <a class="tag2" data-name="tag-GitHub">GitHub</a>
+    
+      <a class="tag2" data-name="tag-GitHub-Flow">GitHub Flow</a>
     
       <a class="tag2" data-name="tag-Workflow">Workflow</a>
     
-      <a class="tag3" data-name="tag-Ruby-on-Rails">Ruby on Rails</a>
+      <a class="tag3" data-name="tag-SSH">SSH</a>
     
       <a class="tag1" data-name="tag-Ed25519">Ed25519</a>
     
-      <a class="tag0" data-name="tag-Electron">Electron</a>
+      <a class="tag1" data-name="tag-Ruby-on-Rails">Ruby on Rails</a>
     
-      <a class="tag1" data-name="tag-Ruby">Ruby</a>
+      <a class="tag0" data-name="tag-Ruby">Ruby</a>
     
-      <a class="tag1" data-name="tag-Golang">Golang</a>
+      <a class="tag2" data-name="tag-Rmagick">Rmagick</a>
     
-      <a class="tag2" data-name="tag-PHP">PHP</a>
-    
-      <a class="tag1" data-name="tag-Laravel">Laravel</a>
-    
-      <a class="tag2" data-name="tag-SSH">SSH</a>
-    
-      <a class="tag3" data-name="tag-Rmagick">Rmagick</a>
+      <a class="tag1" data-name="tag-Electron">Electron</a>
     
       <a class="tag1" data-name="tag-Active-Storage">Active Storage</a>
     
-      <a class="tag2" data-name="tag-Heroku">Heroku</a>
+      <a class="tag1" data-name="tag-Heroku">Heroku</a>
     
-      <a class="tag0" data-name="tag-Rails-Engine">Rails Engine</a>
+      <a class="tag3" data-name="tag-Golang">Golang</a>
+    
+      <a class="tag2" data-name="tag-PHP">PHP</a>
+    
+      <a class="tag2" data-name="tag-Laravel">Laravel</a>
+    
+      <a class="tag1" data-name="tag-Rails-Engine">Rails Engine</a>
     
   </div>
   
@@ -345,50 +350,6 @@
     </div>
   
     <div class="tag-list">
-      <h3 class="tag-name" id="tag-Node.js">Node.js</h3>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2014/08/20/npm-semantic-versioner/">看懂 npm 語意化版本</a>
-          </li>
-        </ul>
-      
-    </div>
-  
-    <div class="tag-list">
-      <h3 class="tag-name" id="tag-npm">npm</h3>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2014/08/20/npm-semantic-versioner/">看懂 npm 語意化版本</a>
-          </li>
-        </ul>
-      
-    </div>
-  
-    <div class="tag-list">
-      <h3 class="tag-name" id="tag-SemVer">SemVer</h3>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2014/08/20/npm-semantic-versioner/">看懂 npm 語意化版本</a>
-          </li>
-        </ul>
-      
-    </div>
-  
-    <div class="tag-list">
-      <h3 class="tag-name" id="tag-iOS">iOS</h3>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審</a>
-          </li>
-        </ul>
-      
-    </div>
-  
-    <div class="tag-list">
       <h3 class="tag-name" id="tag-SQL">SQL</h3>
       
         <ul class="tag-preview">
@@ -440,6 +401,50 @@
     </div>
   
     <div class="tag-list">
+      <h3 class="tag-name" id="tag-Node.js">Node.js</h3>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2014/08/20/npm-semantic-versioner/">看懂 npm 語意化版本</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="tag-list">
+      <h3 class="tag-name" id="tag-npm">npm</h3>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2014/08/20/npm-semantic-versioner/">看懂 npm 語意化版本</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="tag-list">
+      <h3 class="tag-name" id="tag-SemVer">SemVer</h3>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2014/08/20/npm-semantic-versioner/">看懂 npm 語意化版本</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="tag-list">
+      <h3 class="tag-name" id="tag-iOS">iOS</h3>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="tag-list">
       <h3 class="tag-name" id="tag-GitHub">GitHub</h3>
       
         <ul class="tag-preview">
@@ -473,7 +478,24 @@
     </div>
   
     <div class="tag-list">
-      <h3 class="tag-name" id="tag-Ruby-on-Rails">Ruby on Rails</h3>
+      <h3 class="tag-name" id="tag-SSH">SSH</h3>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2016/10/05/upgrade_your_ssh_keys/">升級你的 SSH 金鑰！</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="tag-list">
+      <h3 class="tag-name" id="tag-Ed25519">Ed25519</h3>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2016/10/05/upgrade_your_ssh_keys/">升級你的 SSH 金鑰！</a>
+          </li>
+        </ul>
       
         <ul class="tag-preview">
           <li>
@@ -481,9 +503,14 @@
           </li>
         </ul>
       
+    </div>
+  
+    <div class="tag-list">
+      <h3 class="tag-name" id="tag-Ruby-on-Rails">Ruby on Rails</h3>
+      
         <ul class="tag-preview">
           <li>
-            <a href="/2018/09/18/working-with-time-zones-in-ruby-on-rails/">在 Ruby on Rails 使用時區</a>
+            <a href="/2016/10/16/capistrano-with-ed25519-keys/">在 Capistrano 自動化部署時使用 Ed25519 金鑰</a>
           </li>
         </ul>
       
@@ -495,13 +522,19 @@
       
         <ul class="tag-preview">
           <li>
-            <a href="/2018/05/18/active-storage-overview/">Active Storage 概要</a>
+            <a href="/2018/09/18/working-with-time-zones-in-ruby-on-rails/">在 Ruby on Rails 使用時區</a>
           </li>
         </ul>
       
         <ul class="tag-preview">
           <li>
             <a href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">使用 Mailboxer 實作站內信系統</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2018/05/18/active-storage-overview/">Active Storage 概要</a>
           </li>
         </ul>
       
@@ -514,41 +547,7 @@
     </div>
   
     <div class="tag-list">
-      <h3 class="tag-name" id="tag-Ed25519">Ed25519</h3>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2016/10/16/capistrano-with-ed25519-keys/">在 Capistrano 自動化部署時使用 Ed25519 金鑰</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2016/10/05/upgrade_your_ssh_keys/">升級你的 SSH 金鑰！</a>
-          </li>
-        </ul>
-      
-    </div>
-  
-    <div class="tag-list">
-      <h3 class="tag-name" id="tag-Electron">Electron</h3>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2018/01/24/electron-api-demos/">Electron API 範例</a>
-          </li>
-        </ul>
-      
-    </div>
-  
-    <div class="tag-list">
       <h3 class="tag-name" id="tag-Ruby">Ruby</h3>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2018/07/31/when-should-you-use-self-in-your-classes/">什麼時候應該在類別內使用 self</a>
-          </li>
-        </ul>
       
         <ul class="tag-preview">
           <li>
@@ -556,143 +555,9 @@
           </li>
         </ul>
       
-    </div>
-  
-    <div class="tag-list">
-      <h3 class="tag-name" id="tag-Golang">Golang</h3>
-      
         <ul class="tag-preview">
           <li>
-            <a href="/2019/11/04/writing-your-first-golang-program/">哈囉 Golang：撰寫你的第一個 Golang 程式</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2019/11/05/golang-variables-zero-values-type-inference/">Golang 變數、零值和型別推斷</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2019/11/15/playing-with-pointers-in-golang/">在 Golang 與指標共舞</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2019/11/19/golang-interfaces-tutorial-with-examples/">Golang 介面教學與範例</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2019/11/01/golang-installation-setup-gopath-workspace/">安裝、設定 Golang 的 GOPATH 和 Go 工作區</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2019/11/05/golang-basic-types-operators-type-conversion/">Golang 基本型別、運算子和型別轉換</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2019/11/11/introduction-to-functions-in-golang/">Golang 函數介紹</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2019/11/11/golang-control-flow-statements/">Golang 流程控制陳述式：if、switch 與 for</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2019/11/12/a-beginners-guide-to-packages-in-golang/">Golang Package 初學者指南</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2019/11/06/working-with-constants-in-golang/">在 Golang 中使用常數</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2019/11/12/working-with-arrays-in-golang/">在 Golang 中使用陣列</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2019/11/14/golang-maps-by-example/">Golang map 介紹</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2019/11/15/golang-structs-tutorial-with-examples/">Golang struct 教學與範例</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2019/11/13/introduction-to-slices-in-golang/">Golang Slice 介紹</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2019/11/19/golang-methods-tutorial-with-examples/">Golang 方法教學與範例</a>
-          </li>
-        </ul>
-      
-    </div>
-  
-    <div class="tag-list">
-      <h3 class="tag-name" id="tag-PHP">PHP</h3>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2020/06/16/implement-laravel-rest-api-using-jwt-authentication/">使用 JWT 身份驗證實作 Laravel REST API</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2020/06/04/how-laravel-generate-email-verification-url/">Laravel 如何產生 Email 驗證網址</a>
-          </li>
-        </ul>
-      
-    </div>
-  
-    <div class="tag-list">
-      <h3 class="tag-name" id="tag-Laravel">Laravel</h3>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2020/06/16/implement-laravel-rest-api-using-jwt-authentication/">使用 JWT 身份驗證實作 Laravel REST API</a>
-          </li>
-        </ul>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2020/06/04/how-laravel-generate-email-verification-url/">Laravel 如何產生 Email 驗證網址</a>
-          </li>
-        </ul>
-      
-    </div>
-  
-    <div class="tag-list">
-      <h3 class="tag-name" id="tag-SSH">SSH</h3>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2016/10/05/upgrade_your_ssh_keys/">升級你的 SSH 金鑰！</a>
+            <a href="/2018/07/31/when-should-you-use-self-in-your-classes/">什麼時候應該在類別內使用 self</a>
           </li>
         </ul>
       
@@ -704,6 +569,17 @@
         <ul class="tag-preview">
           <li>
             <a href="/2017/03/15/drawing-with-rvg/">使用 RVG 繪圖</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="tag-list">
+      <h3 class="tag-name" id="tag-Electron">Electron</h3>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2018/01/24/electron-api-demos/">Electron API 範例</a>
           </li>
         </ul>
       
@@ -738,6 +614,135 @@
     </div>
   
     <div class="tag-list">
+      <h3 class="tag-name" id="tag-Golang">Golang</h3>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/11/01/golang-installation-setup-gopath-workspace/">安裝、設定 Golang 的 GOPATH 和 Go 工作區</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/11/04/writing-your-first-golang-program/">哈囉 Golang：撰寫你的第一個 Golang 程式</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/11/05/golang-basic-types-operators-type-conversion/">Golang 基本型別、運算子和型別轉換</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/11/05/golang-variables-zero-values-type-inference/">Golang 變數、零值和型別推斷</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/11/06/working-with-constants-in-golang/">在 Golang 中使用常數</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/11/11/golang-control-flow-statements/">Golang 流程控制陳述式：if、switch 與 for</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/11/11/introduction-to-functions-in-golang/">Golang 函數介紹</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/11/12/a-beginners-guide-to-packages-in-golang/">Golang Package 初學者指南</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/11/12/working-with-arrays-in-golang/">在 Golang 中使用陣列</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/11/13/introduction-to-slices-in-golang/">Golang Slice 介紹</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/11/14/golang-maps-by-example/">Golang map 介紹</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/11/15/golang-structs-tutorial-with-examples/">Golang struct 教學與範例</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/11/15/playing-with-pointers-in-golang/">在 Golang 與指標共舞</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/11/19/golang-interfaces-tutorial-with-examples/">Golang 介面教學與範例</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/11/19/golang-methods-tutorial-with-examples/">Golang 方法教學與範例</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="tag-list">
+      <h3 class="tag-name" id="tag-PHP">PHP</h3>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2020/06/04/how-laravel-generate-email-verification-url/">Laravel 如何產生 Email 驗證網址</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2020/06/16/implement-laravel-rest-api-using-jwt-authentication/">使用 JWT 身份驗證實作 Laravel REST API</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="tag-list">
+      <h3 class="tag-name" id="tag-Laravel">Laravel</h3>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2020/06/04/how-laravel-generate-email-verification-url/">Laravel 如何產生 Email 驗證網址</a>
+          </li>
+        </ul>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2020/06/16/implement-laravel-rest-api-using-jwt-authentication/">使用 JWT 身份驗證實作 Laravel REST API</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="tag-list">
       <h3 class="tag-name" id="tag-Rails-Engine">Rails Engine</h3>
       
         <ul class="tag-preview">
@@ -751,16 +756,16 @@
 </main>
 
 <script>
-  (function () {
-    var url = 'https://calvertyang.github.io/tags/index.html';
+  (function() {
+    const url = 'https://calvertyang.github.io/tags/index.html';
     $('#article-banner').geopattern(url);
     $('.header').removeClass('fixed-header');
 
-    var tag = location.hash.replace('#', '');
+    const tag = location.hash.replace('#', '');
     if (tag) {
-      var tagId = '#tag-' + tag;
+      const tagId = '#tag-' + tag;
       $('html, body').animate({
-        scrollTop: $(tagId).offset().top
+        scrollTop: $(tagId).offset().top,
       }, 400);
     }
   })();
@@ -771,15 +776,15 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
 
 <script>
   function async(u, c) {
-    var d = document, t = 'script',
+    const d = document, t = 'script',
       o = d.createElement(t),
       s = d.getElementsByTagName(t)[0];
     o.src = u;
@@ -787,20 +792,36 @@
     s.parentNode.insertBefore(o, s);
   }
 </script>
-
 <script>
   async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
     FastClick.attach(document.body);
-  })
+  });
 </script>
 
 <script>
-  $('figure').each(function(i, block) {
-    let lang = this.classList[1] || 'codeblock';
-    this.dataset.lang = lang.toUpperCase();
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
   });
 </script>
+
+
 <script src="/js/script.js"></script>
+
 
   </body>
 </html>

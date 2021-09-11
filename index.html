@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="Calvert&#39;s tech blog">
-  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
   
@@ -13,55 +13,70 @@
       Calvert&#39;s murmur
     
   </title>
-  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrcode.js"></script>
+  
   
   
     <!-- MathJax support START -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
       });
     </script>
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
+        let all = MathJax.Hub.getAllJax(), i;
         for (i = 0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- MathJax support END -->
   
 
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
-  <script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-44933497-2');
-  </script>
+    </script>
 
 
-</head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
-</div>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3999187913340509" crossorigin="anonymous"></script>
+
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
   <body>
     <header class="header fixed-header">
@@ -70,7 +85,6 @@
       <div class="logo"></div>
       <span>Calvert's murmur</span>
     </a>
-
     <ul class="right-list">
       
         <li class="list-item">
@@ -81,7 +95,7 @@
       
         <li class="list-item">
           
-            <a href="/categories/" class="item-link">Categories</a>
+            <a href="/series/" class="item-link">Series</a>
           
         </li>
       
@@ -109,49 +123,15 @@
           
         </li>
       
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
     </ul>
-
-    
-      <div id="search-form-wrap">
-        <form class="search-form">
-          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
-          <button type="submit" class="search-form-submit">
-            <span class="fa fa-search"></span>
-          </button>
-        </form>
-        <div class="ins-search">
-  <div class="ins-search-mask"></div>
-  <div class="ins-search-container">
-    <div class="ins-input-wrapper">
-      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
-      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-    </div>
-    <div class="ins-section-wrapper">
-      <div class="ins-section-container"></div>
-    </div>
-  </div>
-</div>
-<script>
-  (function (window) {
-    var INSIGHT_CONFIG = {
-      TRANSLATION: {
-        POSTS: '文章',
-        PAGES: '頁面',
-        CATEGORIES: '分類',
-        TAGS: '標籤',
-        UNTITLED: '無標題',
-      },
-      ROOT_URL: '/',
-      CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-  })(window);
-</script>
-<script src="/js/insight.js"></script>
-
-      </div>
-    
-
     <div class="menu">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -168,7 +148,7 @@
         
           <li class="menu-item">
             
-              <a href="/categories/" class="menu-link">Categories</a>
+              <a href="/series/" class="menu-link">Series</a>
             
           </li>
         
@@ -198,6 +178,31 @@
         
       </ul>
     </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
   </div>
 </header>
 
@@ -249,9 +254,25 @@
       
       <div class="article-summary">
         
-          <p>由於新專案決定使用 <a href="https://laravel.com/" target="_blank" rel="noopener">Laravel</a> 開發，在實作 Email 驗證時發現與 <a href="https://github.com/heartcombo/devise" target="_blank" rel="noopener">Devise</a> 不同的是，它沒有在資料表內建立 <code>confirmation_token</code> 欄位，於是便讓我想了解一下它產生驗證網址的方式。</p>
+          <p>由於新專案決定使用 <a target="_blank" rel="noopener" href="https://laravel.com/">Laravel</a> 開發，在實作 Email 驗證時發現與 <a target="_blank" rel="noopener" href="https://github.com/heartcombo/devise">Devise</a> 不同的是，它沒有在資料表內建立 <code>confirmation_token</code> 欄位，於是便讓我想了解一下它產生驗證網址的方式。</p>
 <p>在追蹤原始碼後發現驗證網址是透過 <code>verificationUrl</code> 函數所產生的。</p>
-<figure class="highlight php"><figcaption><span>vendor/laravel/framework/src/Illuminate/Auth/Notifications/VerifyEmail.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Get the verification URL for the given notifiable.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  mixed  $notifiable</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> string</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">verificationUrl</span><span class="params">($notifiable)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> URL::temporarySignedRoute(</span><br><span class="line">        <span class="string">'verification.verify'</span>,</span><br><span class="line">        Carbon::now()-&gt;addMinutes(Config::get(<span class="string">'auth.verification.expire'</span>, <span class="number">60</span>)),</span><br><span class="line">        [</span><br><span class="line">            <span class="string">'id'</span> =&gt; $notifiable-&gt;getKey(),</span><br><span class="line">            <span class="string">'hash'</span> =&gt; sha1($notifiable-&gt;getEmailForVerification()),</span><br><span class="line">        ]</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-php" data-language="php"><div class="caption"><span>vendor/laravel/framework/src/Illuminate/Auth/Notifications/VerifyEmail.php</span></div><code class="language-php"><span class="token comment">/**
+ * Get the verification URL for the given notifiable.
+ *
+ * @param  mixed  $notifiable
+ * @return string
+ */</span>
+<span class="token keyword">protected</span> <span class="token keyword">function</span> <span class="token function-definition function">verificationUrl</span><span class="token punctuation">(</span><span class="token variable">$notifiable</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token class-name static-context">URL</span><span class="token operator">::</span><span class="token function">temporarySignedRoute</span><span class="token punctuation">(</span>
+        <span class="token string single-quoted-string">'verification.verify'</span><span class="token punctuation">,</span>
+        <span class="token class-name static-context">Carbon</span><span class="token operator">::</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-></span><span class="token function">addMinutes</span><span class="token punctuation">(</span><span class="token class-name static-context">Config</span><span class="token operator">::</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'auth.verification.expire'</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span>
+            <span class="token string single-quoted-string">'id'</span> <span class="token operator">=></span> <span class="token variable">$notifiable</span><span class="token operator">-></span><span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token string single-quoted-string">'hash'</span> <span class="token operator">=></span> <span class="token function">sha1</span><span class="token punctuation">(</span><span class="token variable">$notifiable</span><span class="token operator">-></span><span class="token function">getEmailForVerification</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>由以上程式碼可看到它透過了 <code>UrlGenerator</code> 提供的 <code>temporarySignedRoute</code> 函數來產生暫時性的驗證網址。</p>
         
@@ -275,11 +296,15 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-interfaces" target="_blank" rel="noopener">Golang Interfaces Tutorial with Examples</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-interfaces">Golang Interfaces Tutorial with Examples</a></p>
 </blockquote>
 <h3 id="Go-的介面"><a href="#Go-的介面" class="headerlink" title="Go 的介面"></a>Go 的介面</h3><p>Go 中的介面是使用一組方法簽名定義的<strong>型別</strong>。介面定義了類似物件型別的行為。</p>
 <p>舉例來說，這是一個定義幾何形狀行為的介面：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Go Interface - `Shape`</span></span><br><span class="line"><span class="keyword">type</span> Shape <span class="keyword">interface</span> &#123;</span><br><span class="line">	Area() <span class="keyword">float64</span></span><br><span class="line">	Perimeter() <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Go Interface - `Shape`</span>
+<span class="token keyword">type</span> Shape <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">Area</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">float64</span>
+	<span class="token function">Perimeter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">float64</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>使用 <strong>type</strong> 關鍵字定義介面，後面接著介面名稱和關鍵字 <code>interface</code>。然後，在大括號內指定一組方法簽名。</p>
         
@@ -303,7 +328,7 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-methods-tutorial" target="_blank" rel="noopener">Golang Methods Tutorial with Examples</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-methods-tutorial">Golang Methods Tutorial with Examples</a></p>
 </blockquote>
 <p>技術上來說，Go 不是物件導向程式語言。它沒有類別、物件和繼承。</p>
 <p>但是，Go 有型別。並且，你可以在型別上定義<strong>方法</strong>。這讓 Go 有物件導向程式的風格。</p>
@@ -329,12 +354,16 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-structs" target="_blank" rel="noopener">Golang Structs Tutorial with Examples</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-structs">Golang Structs Tutorial with Examples</a></p>
 </blockquote>
 <p><code>struct</code> 是使用者定義的型別，包含已命名欄位/屬性的集合。它用於將相關資料分組在一起形成一個單位。任何具有一組屬性的現實世界實體都可以使用結構表示。</p>
 <p>如果你有物件導向的背景知識，你可以將 <code>struct</code> 視為支援複合但不支援繼承的輕量級類別。</p>
 <h3 id="定義-struct-型別"><a href="#定義-struct-型別" class="headerlink" title="定義 struct 型別"></a>定義 struct 型別</h3><p>你可以像這樣定義新的 <code>struct</code> 型別：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;</span><br><span class="line">	FirstName <span class="keyword">string</span></span><br><span class="line">	LastName  <span class="keyword">string</span></span><br><span class="line">	Age       <span class="keyword">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> Person <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	FirstName <span class="token builtin">string</span>
+	LastName  <span class="token builtin">string</span>
+	Age       <span class="token builtin">int</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
         
       </div>
       <a class="more" href="/2019/11/15/golang-structs-tutorial-with-examples/">繼續閱讀</a>
@@ -356,7 +385,7 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-pointers" target="_blank" rel="noopener">Playing with Pointers in Golang</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-pointers">Playing with Pointers in Golang</a></p>
 </blockquote>
 <p>指標是一個變數，用來儲存另一個變數的記憶體位址。疑惑嗎？讓我來解釋一下。</p>
 <p>首先讓我們來了解什麼是變數。當我們在撰寫任何程式時，我們需要在記憶體中儲存一些資料。資料儲存在記憶體中的特定位址。記憶體位址看起來會像 <code>0xAFFFF</code>（這是以十六進制來表示記憶體位址）。</p>
@@ -381,7 +410,7 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-maps" target="_blank" rel="noopener">Golang Maps by Example</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-maps">Golang Maps by Example</a></p>
 </blockquote>
 <p>map 是沒有順序的鍵-值對集合。它將鍵對應到值。鍵在 map 是唯一的，而值可能不是。</p>
 <p>map 資料結構用於基於鍵的快速尋找、取得和刪除資料。它是電腦科學中最常用的資料結構之一。</p>
@@ -407,7 +436,7 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-slices" target="_blank" rel="noopener">Introduction to Slices in Golang</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-slices">Introduction to Slices in Golang</a></p>
 </blockquote>
 <p>Slice 是陣列的一部分。Slice 建構在陣列之上，與陣列相比提供了更多功能、靈活性和便利性。</p>
 <p>如同陣列一樣，Slice 是可索引的且具有長度。但與陣列不同的是，它們可以調整長度。</p>
@@ -433,7 +462,7 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-arrays" target="_blank" rel="noopener">Working with Arrays in Golang</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-arrays">Working with Arrays in Golang</a></p>
 </blockquote>
 <p>陣列是固定長度的相同型別元素的集合。陣列的元素按順序儲存，並且可以使用它們的 <code>index</code> 來存取。</p>
 <img src="/2019/11/12/working-with-arrays-in-golang/golang-array.jpg" class="">
@@ -458,7 +487,7 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-packages" target="_blank" rel="noopener">A beginners guide to Packages in Golang</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-packages">A beginners guide to Packages in Golang</a></p>
 </blockquote>
 <p>Go 旨在鼓勵良好的軟體工程實踐。高品質軟體的指導原則之一是 DRY 原則：<strong>D</strong>on’t <strong>R</strong>epeat <strong>Y</strong>ourself，這意味著你永遠不應重複撰寫相同的程式碼。你應該重複使用並儘可能建立在現有程式碼上。</p>
 <p>允許程式碼重複使用的最基本的建構區塊是<a href="/2019/11/11/introduction-to-functions-in-golang/" title="函數">函數</a>。<strong>Package</strong> 是程式碼可重複使用性的下一步。他們可幫助你將相關的 Go 原始檔組織到同一單元中，使他們模組化、可重複使用和可維護。</p>
@@ -482,20 +511,21 @@
   
 </main>
 
+
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
 
 <script>
   function async(u, c) {
-    var d = document, t = 'script',
+    const d = document, t = 'script',
       o = d.createElement(t),
       s = d.getElementsByTagName(t)[0];
     o.src = u;
@@ -503,20 +533,36 @@
     s.parentNode.insertBefore(o, s);
   }
 </script>
-
 <script>
   async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
     FastClick.attach(document.body);
-  })
+  });
 </script>
 
 <script>
-  $('figure').each(function(i, block) {
-    let lang = this.classList[1] || 'codeblock';
-    this.dataset.lang = lang.toUpperCase();
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
   });
 </script>
+
+
 <script src="/js/script.js"></script>
+
 
   </body>
 </html>

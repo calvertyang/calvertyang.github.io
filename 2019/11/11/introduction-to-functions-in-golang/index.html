@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="Calvert&#39;s tech blog">
-  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
   
@@ -13,55 +13,70 @@
       Golang 函數介紹 | Calvert&#39;s murmur
     
   </title>
-  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrcode.js"></script>
+  
   
   
     <!-- MathJax support START -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
       });
     </script>
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
+        let all = MathJax.Hub.getAllJax(), i;
         for (i = 0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- MathJax support END -->
   
 
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
-  <script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-44933497-2');
-  </script>
+    </script>
 
 
-</head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
-</div>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3999187913340509" crossorigin="anonymous"></script>
+
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
   <body>
     <header class="header fixed-header">
@@ -70,7 +85,6 @@
       <div class="logo"></div>
       <span>Calvert's murmur</span>
     </a>
-
     <ul class="right-list">
       
         <li class="list-item">
@@ -81,7 +95,7 @@
       
         <li class="list-item">
           
-            <a href="/categories/" class="item-link">Categories</a>
+            <a href="/series/" class="item-link">Series</a>
           
         </li>
       
@@ -109,49 +123,15 @@
           
         </li>
       
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
     </ul>
-
-    
-      <div id="search-form-wrap">
-        <form class="search-form">
-          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
-          <button type="submit" class="search-form-submit">
-            <span class="fa fa-search"></span>
-          </button>
-        </form>
-        <div class="ins-search">
-  <div class="ins-search-mask"></div>
-  <div class="ins-search-container">
-    <div class="ins-input-wrapper">
-      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
-      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-    </div>
-    <div class="ins-section-wrapper">
-      <div class="ins-section-container"></div>
-    </div>
-  </div>
-</div>
-<script>
-  (function (window) {
-    var INSIGHT_CONFIG = {
-      TRANSLATION: {
-        POSTS: '文章',
-        PAGES: '頁面',
-        CATEGORIES: '分類',
-        TAGS: '標籤',
-        UNTITLED: '無標題',
-      },
-      ROOT_URL: '/',
-      CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-  })(window);
-</script>
-<script src="/js/insight.js"></script>
-
-      </div>
-    
-
     <div class="menu">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -168,7 +148,7 @@
         
           <li class="menu-item">
             
-              <a href="/categories/" class="menu-link">Categories</a>
+              <a href="/series/" class="menu-link">Series</a>
             
           </li>
         
@@ -198,104 +178,284 @@
         
       </ul>
     </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
   </div>
 </header>
 
     <div id="article-banner">
   <h2>Golang 函數介紹</h2>
   <p class="post-date">2019-11-11</p>
+
   <div class="arrow-down">
-    <a href="javascript:;" target="_blank" rel="noopener"></a>
+    <a href="javascript:;"></a>
   </div>
 </div>
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-functions" target="_blank" rel="noopener">Introduction to Functions in Golang</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-functions">Introduction to Functions in Golang</a></p>
 </blockquote>
 <p>函數是一個程式碼區塊，它接受一些輸入，對該輸入進行一些處理，並產生一些輸出。</p>
 <img src="/2019/11/11/introduction-to-functions-in-golang/golang-functions-illustration.jpg" class="">
 
 <p>函數可以協助你將程式劃分為可重複使用的小段程式碼。它們提高了程式的可讀性、可維護性和可測試性。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h3 id="在-Golang-宣告和呼叫函數"><a href="#在-Golang-宣告和呼叫函數" class="headerlink" title="在 Golang 宣告和呼叫函數"></a>在 Golang 宣告和呼叫函數</h3><p>在 Golang 中，我們使用 <code>func</code> 關鍵字宣告函數。函數具有一個<strong>名稱</strong>、以逗號分隔的<strong>輸入參數</strong>及其型別的列表、<strong>結果型別</strong>和<strong>主體</strong>。</p>
 <p>以下是一個簡單函數 <code>avg</code> 的範例，該函數接受兩個型別為 <code>float64</code> 的輸入參數，並返回輸入的平均值。結果也是 <code>float64</code> 型別：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">avg</span><span class="params">(x <span class="keyword">float64</span>, y <span class="keyword">float64</span>)</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> (x + y) / <span class="number">2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">avg</span><span class="token punctuation">(</span>x <span class="token builtin">float64</span><span class="token punctuation">,</span> y <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token builtin">float64</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token punctuation">(</span>x <span class="token operator">+</span> y<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>現在，呼叫函數非常簡單。你只需要像這樣將所需數量的參數傳遞給函數：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">avg(<span class="number">6.56</span>, <span class="number">13.44</span>)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token function">avg</span><span class="token punctuation">(</span><span class="token number">6.56</span><span class="token punctuation">,</span> <span class="token number">13.44</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>這是一個完整範例：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">avg</span><span class="params">(x <span class="keyword">float64</span>, y <span class="keyword">float64</span>)</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> (x + y) / <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	x := <span class="number">5.75</span></span><br><span class="line">	y := <span class="number">6.25</span></span><br><span class="line"></span><br><span class="line">	result := avg(x, y)</span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"Average of %.2f and %.2f = %.2f\n"</span>, x, y, result)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Average of 5.75 and 6.25 = 6.00</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">avg</span><span class="token punctuation">(</span>x <span class="token builtin">float64</span><span class="token punctuation">,</span> y <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token builtin">float64</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token punctuation">(</span>x <span class="token operator">+</span> y<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	x <span class="token operator">:=</span> <span class="token number">5.75</span>
+	y <span class="token operator">:=</span> <span class="token number">6.25</span>
+
+	result <span class="token operator">:=</span> <span class="token function">avg</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Average of %.2f and %.2f = %.2f\n"</span><span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> result<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+Average of 5.75 and 6.25 &#x3D; 6.00<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h4 id="函數參數和返回型別是非必要的"><a href="#函數參數和返回型別是非必要的" class="headerlink" title="函數參數和返回型別是非必要的"></a>函數參數和返回型別是非必要的</h4><p>輸入參數和返回型別對於函數是非必要的。可以宣告一個沒有任何輸入和輸出的函數。</p>
 <p><code>main()</code> 函數是此類函數的範例：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>這是另一個範例：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sayHello</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"Hello, World"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">sayHello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Hello, World"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>你只需要為同一型別的多個連續參數指定一次型別</strong></p>
 <p>如果一個函數具有兩個或更多個相同型別的連續參數，那麼只需為該型別的最後一個參數指定一次即可。</p>
 <p>舉例來說，我們也可以像這樣宣告我們在上一節中看到的 <code>avg</code> 函數：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">avg</span><span class="params">(x, y <span class="keyword">float64</span>)</span> <span class="title">float64</span></span> &#123; &#125;</span><br><span class="line"><span class="comment">// Same as - func avg(x float64, y float64) float64 &#123; &#125;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">avg</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token builtin">float64</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">&#125;</span>
+<span class="token comment">// Same as - func avg(x float64, y float64) float64 &#123; &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>這是另一個範例：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printPersonDetails</span><span class="params">(firstName, lastName <span class="keyword">string</span>, age <span class="keyword">int</span>)</span></span> &#123; &#125;</span><br><span class="line"><span class="comment">// Same as - func printPersonDetails(firstName string, lastName string, age int) &#123; &#125;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">printPersonDetails</span><span class="token punctuation">(</span>firstName<span class="token punctuation">,</span> lastName <span class="token builtin">string</span><span class="token punctuation">,</span> age <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">&#125;</span>
+<span class="token comment">// Same as - func printPersonDetails(firstName string, lastName string, age int) &#123; &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="具有多個返回值的函數"><a href="#具有多個返回值的函數" class="headerlink" title="具有多個返回值的函數"></a>具有多個返回值的函數</h3><p>Go 函數能夠返回多個值。沒錯！大多數程式語言都不支援此功能。但 Go 是不同的。</p>
-<p>假設你要建立一個函數，該函數接受股票的_先前價格<em>和</em>目前價格_，並返回價格變動的金額和百分比。</p>
+<p>假設你要建立一個函數，該函數接受股票的_先前價格_和_目前價格_，並返回價格變動的金額和百分比。</p>
 <p>以下是你如何在 Go 實作這種函數的方法：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getStockPriceChange</span><span class="params">(prevPrice, currentPrice <span class="keyword">float64</span>)</span> <span class="params">(<span class="keyword">float64</span>, <span class="keyword">float64</span>)</span></span> &#123;</span><br><span class="line">	change := currentPrice - prevPrice</span><br><span class="line">	percentChange := (change / prevPrice) * <span class="number">100</span></span><br><span class="line">	<span class="keyword">return</span> change, percentChange</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">getStockPriceChange</span><span class="token punctuation">(</span>prevPrice<span class="token punctuation">,</span> currentPrice <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token builtin">float64</span><span class="token punctuation">,</span> <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	change <span class="token operator">:=</span> currentPrice <span class="token operator">-</span> prevPrice
+	percentChange <span class="token operator">:=</span> <span class="token punctuation">(</span>change <span class="token operator">/</span> prevPrice<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">100</span>
+	<span class="token keyword">return</span> change<span class="token punctuation">,</span> percentChange
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>很間單，對吧？你只需要在括號內用逗號分隔指定的返回型別，然後從函數中返回多個逗號分隔的值即可。</p>
 <p>讓我們來看一個具有 <code>main()</code> 函數的完整範例：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"math"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getStockPriceChange</span><span class="params">(prevPrice, currentPrice <span class="keyword">float64</span>)</span> <span class="params">(<span class="keyword">float64</span>, <span class="keyword">float64</span>)</span></span> &#123;</span><br><span class="line">	change := currentPrice - prevPrice</span><br><span class="line">	percentChange := (change / prevPrice) * <span class="number">100</span></span><br><span class="line">	<span class="keyword">return</span> change, percentChange</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	prevStockPrice := <span class="number">75000.0</span></span><br><span class="line">	currentStockPrice := <span class="number">100000.0</span></span><br><span class="line"></span><br><span class="line">	change, percentChange := getStockPriceChange(prevStockPrice, currentStockPrice)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> change &lt; <span class="number">0</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"The Stock Price decreased by $%.2f which is %.2f%% of the prev price\n"</span>, math.Abs(change), math.Abs(percentChange))</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"The Stock Price increased by $%.2f which is %.2f%% of the prev price\n"</span>, change, percentChange)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">The Stock Price increased by $25000.00 which is 33.33% of the prev price</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"math"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">getStockPriceChange</span><span class="token punctuation">(</span>prevPrice<span class="token punctuation">,</span> currentPrice <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token builtin">float64</span><span class="token punctuation">,</span> <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	change <span class="token operator">:=</span> currentPrice <span class="token operator">-</span> prevPrice
+	percentChange <span class="token operator">:=</span> <span class="token punctuation">(</span>change <span class="token operator">/</span> prevPrice<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">100</span>
+	<span class="token keyword">return</span> change<span class="token punctuation">,</span> percentChange
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	prevStockPrice <span class="token operator">:=</span> <span class="token number">75000.0</span>
+	currentStockPrice <span class="token operator">:=</span> <span class="token number">100000.0</span>
+
+	change<span class="token punctuation">,</span> percentChange <span class="token operator">:=</span> <span class="token function">getStockPriceChange</span><span class="token punctuation">(</span>prevStockPrice<span class="token punctuation">,</span> currentStockPrice<span class="token punctuation">)</span>
+
+	<span class="token keyword">if</span> change <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"The Stock Price decreased by $%.2f which is %.2f%% of the prev price\n"</span><span class="token punctuation">,</span> math<span class="token punctuation">.</span><span class="token function">Abs</span><span class="token punctuation">(</span>change<span class="token punctuation">)</span><span class="token punctuation">,</span> math<span class="token punctuation">.</span><span class="token function">Abs</span><span class="token punctuation">(</span>percentChange<span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"The Stock Price increased by $%.2f which is %.2f%% of the prev price\n"</span><span class="token punctuation">,</span> change<span class="token punctuation">,</span> percentChange<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+The Stock Price increased by $25000.00 which is 33.33% of the prev price<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h4 id="從函數返回錯誤值"><a href="#從函數返回錯誤值" class="headerlink" title="從函數返回錯誤值"></a>從函數返回錯誤值</h4><p>Golang 中經常使用多個返回值來從函數返回錯誤與結果。</p>
 <p>我們來看一個範例：如果 <code>prevPrice</code> 是 <code>0</code>，則在上一節看到的 <code>getStockPriceChange</code> 函數將返回 <code>±Inf</code>（無限大）。如果你想返回錯誤，則可以透過增加一個型別為 <code>error</code> 的返回值，並像這樣返回錯誤值：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getStockPriceChangeWithError</span><span class="params">(prevPrice, currentPrice <span class="keyword">float64</span>)</span> <span class="params">(<span class="keyword">float64</span>, <span class="keyword">float64</span>, error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> prevPrice == <span class="number">0</span> &#123;</span><br><span class="line">		err := errors.New(<span class="string">"Previous price cannot be zero"</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>, <span class="number">0</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	change := currentPrice - prevPrice</span><br><span class="line">	percentChange := (change / prevPrice) * <span class="number">100</span></span><br><span class="line">	<span class="keyword">return</span> change, percentChange, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">getStockPriceChangeWithError</span><span class="token punctuation">(</span>prevPrice<span class="token punctuation">,</span> currentPrice <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token builtin">float64</span><span class="token punctuation">,</span> <span class="token builtin">float64</span><span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> prevPrice <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		err <span class="token operator">:=</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">"Previous price cannot be zero"</span><span class="token punctuation">)</span>
+		<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> err
+	<span class="token punctuation">&#125;</span>
+	change <span class="token operator">:=</span> currentPrice <span class="token operator">-</span> prevPrice
+	percentChange <span class="token operator">:=</span> <span class="token punctuation">(</span>change <span class="token operator">/</span> prevPrice<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">100</span>
+	<span class="token keyword">return</span> change<span class="token punctuation">,</span> percentChange<span class="token punctuation">,</span> <span class="token boolean">nil</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><code>error</code> 型別是 Golang 中內建的型別。Go 程式使用 <code>error</code> 值來顯示異常情況。如果你現在不了解 <code>error</code> 請別擔心。你將在以後的文章中了解更多有關錯誤處理的資訊。</p>
 <p>以下是使用 <code>main()</code> 函數示範上述觀念的完整範例：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"errors"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"math"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getStockPriceChangeWithError</span><span class="params">(prevPrice, currentPrice <span class="keyword">float64</span>)</span> <span class="params">(<span class="keyword">float64</span>, <span class="keyword">float64</span>, error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> prevPrice == <span class="number">0</span> &#123;</span><br><span class="line">		err := errors.New(<span class="string">"Previous price cannot be zero"</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>, <span class="number">0</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	change := currentPrice - prevPrice</span><br><span class="line">	percentChange := (change / prevPrice) * <span class="number">100</span></span><br><span class="line">	<span class="keyword">return</span> change, percentChange, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	prevStockPrice := <span class="number">0.0</span></span><br><span class="line">	currentStockPrice := <span class="number">100000.0</span></span><br><span class="line"></span><br><span class="line">	change, percentChange, err := getStockPriceChangeWithError(prevStockPrice, currentStockPrice)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Sorry! There was an error: "</span>, err)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> change &lt; <span class="number">0</span> &#123;</span><br><span class="line">			fmt.Printf(<span class="string">"The Stock Price decreased by $%.2f which is %.2f%% of the prev price\n"</span>, math.Abs(change), math.Abs(percentChange))</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			fmt.Printf(<span class="string">"The Stock Price increased by $%.2f which is %.2f%% of the prev price\n"</span>, change, percentChange)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Sorry! There was an error:  Previous price cannot be zero</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"errors"</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"math"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">getStockPriceChangeWithError</span><span class="token punctuation">(</span>prevPrice<span class="token punctuation">,</span> currentPrice <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token builtin">float64</span><span class="token punctuation">,</span> <span class="token builtin">float64</span><span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> prevPrice <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		err <span class="token operator">:=</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">"Previous price cannot be zero"</span><span class="token punctuation">)</span>
+		<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> err
+	<span class="token punctuation">&#125;</span>
+	change <span class="token operator">:=</span> currentPrice <span class="token operator">-</span> prevPrice
+	percentChange <span class="token operator">:=</span> <span class="token punctuation">(</span>change <span class="token operator">/</span> prevPrice<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">100</span>
+	<span class="token keyword">return</span> change<span class="token punctuation">,</span> percentChange<span class="token punctuation">,</span> <span class="token boolean">nil</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	prevStockPrice <span class="token operator">:=</span> <span class="token number">0.0</span>
+	currentStockPrice <span class="token operator">:=</span> <span class="token number">100000.0</span>
+
+	change<span class="token punctuation">,</span> percentChange<span class="token punctuation">,</span> err <span class="token operator">:=</span> <span class="token function">getStockPriceChangeWithError</span><span class="token punctuation">(</span>prevStockPrice<span class="token punctuation">,</span> currentStockPrice<span class="token punctuation">)</span>
+
+	<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Sorry! There was an error: "</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> change <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+			fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"The Stock Price decreased by $%.2f which is %.2f%% of the prev price\n"</span><span class="token punctuation">,</span> math<span class="token punctuation">.</span><span class="token function">Abs</span><span class="token punctuation">(</span>change<span class="token punctuation">)</span><span class="token punctuation">,</span> math<span class="token punctuation">.</span><span class="token function">Abs</span><span class="token punctuation">(</span>percentChange<span class="token punctuation">)</span><span class="token punctuation">)</span>
+		<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+			fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"The Stock Price increased by $%.2f which is %.2f%% of the prev price\n"</span><span class="token punctuation">,</span> change<span class="token punctuation">,</span> percentChange<span class="token punctuation">)</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+Sorry! There was an error:  Previous price cannot be zero<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="具有命名返回值的函數"><a href="#具有命名返回值的函數" class="headerlink" title="具有命名返回值的函數"></a>具有命名返回值的函數</h3><p>在 Golang 中，函數的返回值可以被命名。命名返回值的行為就像你在函數頂部定義它們一樣。</p>
 <p>讓我們用命名的返回值重寫在上一節看到的 <code>getStockPriceChange</code> 函數：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Function with named return values</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getNamedStockPriceChange</span><span class="params">(prevPrice, currentPrice <span class="keyword">float64</span>)</span> <span class="params">(change, percentChange <span class="keyword">float64</span>)</span></span> &#123;</span><br><span class="line">	change = currentPrice - prevPrice</span><br><span class="line">	percentChange = (change / prevPrice) * <span class="number">100</span></span><br><span class="line">	<span class="keyword">return</span> change, percentChange</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Function with named return values</span>
+<span class="token keyword">func</span> <span class="token function">getNamedStockPriceChange</span><span class="token punctuation">(</span>prevPrice<span class="token punctuation">,</span> currentPrice <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>change<span class="token punctuation">,</span> percentChange <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	change <span class="token operator">=</span> currentPrice <span class="token operator">-</span> prevPrice
+	percentChange <span class="token operator">=</span> <span class="token punctuation">(</span>change <span class="token operator">/</span> prevPrice<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">100</span>
+	<span class="token keyword">return</span> change<span class="token punctuation">,</span> percentChange
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>注意我們如何在函數主體中將 <code>:=</code>（簡短宣告）更改為 <code>=</code>（賦值）。這是因為 Go 本身定義了所有命名的返回值，並讓它們可以在函數中使用。由於它們已經定義，因此你無法使用簡短宣告再次定義它們。</p>
 <p>命名返回值允許你使用所謂的<strong>裸返回</strong>（不帶任何參數的 <code>return</code> 陳述式）。當你指定一個不帶任何參數的 <code>return</code> 陳述式時，預設情況下它會返回命名的返回值。因此，你也可以像這樣撰寫以上功能：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Function with named return values and naked return</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getNamedStockPriceChange</span><span class="params">(prevPrice, currentPrice <span class="keyword">float64</span>)</span> <span class="params">(change, percentChange <span class="keyword">float64</span>)</span></span> &#123;</span><br><span class="line">	change = currentPrice - prevPrice</span><br><span class="line">	percentChange = (change / prevPrice) * <span class="number">100</span></span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Function with named return values and naked return</span>
+<span class="token keyword">func</span> <span class="token function">getNamedStockPriceChange</span><span class="token punctuation">(</span>prevPrice<span class="token punctuation">,</span> currentPrice <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>change<span class="token punctuation">,</span> percentChange <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	change <span class="token operator">=</span> currentPrice <span class="token operator">-</span> prevPrice
+	percentChange <span class="token operator">=</span> <span class="token punctuation">(</span>change <span class="token operator">/</span> prevPrice<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">100</span>
+	<span class="token keyword">return</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>讓我們在帶有 <code>main()</code> 函數的完整範例中使用上述函數，並驗證輸出：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"math"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getNamedStockPriceChange</span><span class="params">(prevPrice, currentPrice <span class="keyword">float64</span>)</span> <span class="params">(change, percentChange <span class="keyword">float64</span>)</span></span> &#123;</span><br><span class="line">	change = currentPrice - prevPrice</span><br><span class="line">	percentChange = (change / prevPrice) * <span class="number">100</span></span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	prevStockPrice := <span class="number">100000.0</span></span><br><span class="line">	currentStockPrice := <span class="number">90000.0</span></span><br><span class="line"></span><br><span class="line">	change, percentChange := getNamedStockPriceChange(prevStockPrice, currentStockPrice)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> change &lt; <span class="number">0</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"The Stock Price decreased by $%.2f which is %.2f%% of the prev price\n"</span>, math.Abs(change), math.Abs(percentChange))</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"The Stock Price increased by $%.2f which is %.2f%% of the prev price\n"</span>, change, percentChange)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">The Stock Price decreased by $10000.00 which is 10.00% of the prev price</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"math"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">getNamedStockPriceChange</span><span class="token punctuation">(</span>prevPrice<span class="token punctuation">,</span> currentPrice <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>change<span class="token punctuation">,</span> percentChange <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	change <span class="token operator">=</span> currentPrice <span class="token operator">-</span> prevPrice
+	percentChange <span class="token operator">=</span> <span class="token punctuation">(</span>change <span class="token operator">/</span> prevPrice<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">100</span>
+	<span class="token keyword">return</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	prevStockPrice <span class="token operator">:=</span> <span class="token number">100000.0</span>
+	currentStockPrice <span class="token operator">:=</span> <span class="token number">90000.0</span>
+
+	change<span class="token punctuation">,</span> percentChange <span class="token operator">:=</span> <span class="token function">getNamedStockPriceChange</span><span class="token punctuation">(</span>prevStockPrice<span class="token punctuation">,</span> currentStockPrice<span class="token punctuation">)</span>
+
+	<span class="token keyword">if</span> change <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"The Stock Price decreased by $%.2f which is %.2f%% of the prev price\n"</span><span class="token punctuation">,</span> math<span class="token punctuation">.</span><span class="token function">Abs</span><span class="token punctuation">(</span>change<span class="token punctuation">)</span><span class="token punctuation">,</span> math<span class="token punctuation">.</span><span class="token function">Abs</span><span class="token punctuation">(</span>percentChange<span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"The Stock Price increased by $%.2f which is %.2f%% of the prev price\n"</span><span class="token punctuation">,</span> change<span class="token punctuation">,</span> percentChange<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+The Stock Price decreased by $10000.00 which is 10.00% of the prev price<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>命名返回值提高了函數的可讀性。使用有意義的名稱可讓函數的使用者僅透過查看其簽名即可知道函數將返回什麼。</p>
 <p>裸返回陳述式適合較短的函數。但如果你的函數比較長，請不要使用它們。它們可能會損害可讀性。你應該在更長的函數中明確地指定返回值。</p>
 <h3 id="空白識別符號"><a href="#空白識別符號" class="headerlink" title="空白識別符號"></a>空白識別符號</h3><p>有時候你可能想忽略返回多個值的函數的某些結果。</p>
 <p>舉例來說，假設你在使用我們上一節定義的 <code>getStockPriceChange</code> 函數，但你只對價格變動感興趣，而不是變動百分比。</p>
 <p>現在，你可以像這樣宣告區域變數並儲存從函數返回的所有值：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">change, percentChange := getStockPriceChange(prevStockPrice, currentStockPrice)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">change<span class="token punctuation">,</span> percentChange <span class="token operator">:=</span> <span class="token function">getStockPriceChange</span><span class="token punctuation">(</span>prevStockPrice<span class="token punctuation">,</span> currentStockPrice<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>但是在那種情況下，你將被迫使用 <code>percentChange</code> 變數，因為 Go 不允許建立你從未使用過的變數。</p>
 <p>那有什麼解決方案？嗯，你可以改用_空白識別符號_：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">change, _ := getStockPriceChange(prevStockPrice, currentStockPrice)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">change<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> <span class="token function">getStockPriceChange</span><span class="token punctuation">(</span>prevStockPrice<span class="token punctuation">,</span> currentStockPrice<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>空白識別符號用來告訴 Go 你不需要這個值。以下範例示範了此觀念：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"math"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getStockPriceChange</span><span class="params">(prevPrice, currentPrice <span class="keyword">float64</span>)</span> <span class="params">(<span class="keyword">float64</span>, <span class="keyword">float64</span>)</span></span> &#123;</span><br><span class="line">	change := currentPrice - prevPrice</span><br><span class="line">	percentChange := (change / prevPrice) * <span class="number">100</span></span><br><span class="line">	<span class="keyword">return</span> change, percentChange</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	prevStockPrice := <span class="number">80000.0</span></span><br><span class="line">	currentStockPrice := <span class="number">120000.0</span></span><br><span class="line"></span><br><span class="line">	change, _ := getStockPriceChange(prevStockPrice, currentStockPrice)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> change &lt; <span class="number">0</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"The Stock Price decreased by $%.2f\n"</span>, math.Abs(change))</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"The Stock Price increased by $%.2f\n"</span>, change)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">The Stock Price increased by $40000.00</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"math"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">getStockPriceChange</span><span class="token punctuation">(</span>prevPrice<span class="token punctuation">,</span> currentPrice <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token builtin">float64</span><span class="token punctuation">,</span> <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	change <span class="token operator">:=</span> currentPrice <span class="token operator">-</span> prevPrice
+	percentChange <span class="token operator">:=</span> <span class="token punctuation">(</span>change <span class="token operator">/</span> prevPrice<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">100</span>
+	<span class="token keyword">return</span> change<span class="token punctuation">,</span> percentChange
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	prevStockPrice <span class="token operator">:=</span> <span class="token number">80000.0</span>
+	currentStockPrice <span class="token operator">:=</span> <span class="token number">120000.0</span>
+
+	change<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> <span class="token function">getStockPriceChange</span><span class="token punctuation">(</span>prevStockPrice<span class="token punctuation">,</span> currentStockPrice<span class="token punctuation">)</span>
+
+	<span class="token keyword">if</span> change <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"The Stock Price decreased by $%.2f\n"</span><span class="token punctuation">,</span> math<span class="token punctuation">.</span><span class="token function">Abs</span><span class="token punctuation">(</span>change<span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"The Stock Price increased by $%.2f\n"</span><span class="token punctuation">,</span> change<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+The Stock Price increased by $40000.00<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>在本文中，你學到了如何在 Golang 中定義和呼叫函數、如何定義具有多個返回值和命名返回值的函數、如何從函數返回錯誤，以及如何使用空白識別符號。</p>
 </section>
@@ -312,11 +472,9 @@
       </div>
     
     <!-- Tags END -->
-    <!-- UpdatedDate Start -->
-     
-       <p class="post-date">最後更新時間：2019-11-27</p>
-     
-   <!-- UpdatedDate END -->
+    <!-- Last updated on Start -->
+    
+    <!-- Last updated on END -->
     <!-- NAV START -->
     
   <div class="nav-container">
@@ -341,19 +499,9 @@
 
 
     <!-- NAV END -->
-    <!-- 打賞 START -->
+    <!-- QR Code START -->
     
-    <!-- 打賞 END -->
-    <!-- 二維條碼 START -->
-    
-      <div class="qrcode">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g id="share-qrcode"/>
-        </svg>
-        <p class="notice">掃描二維條碼，分享此文章</p>
-      </div>
-    
-    <!-- 二維條碼 END -->
+    <!-- QR Code END -->
   </article>
   <!-- Article END -->
   <!-- Catalog START -->
@@ -362,7 +510,7 @@
   <div class="toc-main">
     <strong class="toc-title">目錄</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#在-Golang-宣告和呼叫函數"><span class="toc-nav-text">在 Golang 宣告和呼叫函數</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#函數參數和返回型別是非必要的"><span class="toc-nav-text">函數參數和返回型別是非必要的</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#具有多個返回值的函數"><span class="toc-nav-text">具有多個返回值的函數</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#從函數返回錯誤值"><span class="toc-nav-text">從函數返回錯誤值</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#具有命名返回值的函數"><span class="toc-nav-text">具有命名返回值的函數</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#空白識別符號"><span class="toc-nav-text">空白識別符號</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#結論"><span class="toc-nav-text">結論</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%9C%A8-Golang-%E5%AE%A3%E5%91%8A%E5%92%8C%E5%91%BC%E5%8F%AB%E5%87%BD%E6%95%B8"><span class="toc-nav-text">在 Golang 宣告和呼叫函數</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%87%BD%E6%95%B8%E5%8F%83%E6%95%B8%E5%92%8C%E8%BF%94%E5%9B%9E%E5%9E%8B%E5%88%A5%E6%98%AF%E9%9D%9E%E5%BF%85%E8%A6%81%E7%9A%84"><span class="toc-nav-text">函數參數和返回型別是非必要的</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%85%B7%E6%9C%89%E5%A4%9A%E5%80%8B%E8%BF%94%E5%9B%9E%E5%80%BC%E7%9A%84%E5%87%BD%E6%95%B8"><span class="toc-nav-text">具有多個返回值的函數</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%BE%9E%E5%87%BD%E6%95%B8%E8%BF%94%E5%9B%9E%E9%8C%AF%E8%AA%A4%E5%80%BC"><span class="toc-nav-text">從函數返回錯誤值</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%85%B7%E6%9C%89%E5%91%BD%E5%90%8D%E8%BF%94%E5%9B%9E%E5%80%BC%E7%9A%84%E5%87%BD%E6%95%B8"><span class="toc-nav-text">具有命名返回值的函數</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%A9%BA%E7%99%BD%E8%AD%98%E5%88%A5%E7%AC%A6%E8%99%9F"><span class="toc-nav-text">空白識別符號</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%B5%90%E8%AB%96"><span class="toc-nav-text">結論</span></a></li></ol>
     
   </div>
 </aside>
@@ -372,23 +520,23 @@
 </main>
 
 <script>
-  (function () {
-    var url = 'https://calvertyang.github.io/2019/11/11/introduction-to-functions-in-golang/';
-    var banner = '';
+  (function() {
+    const url = 'https://calvertyang.github.io/2019/11/11/introduction-to-functions-in-golang/';
+    const banner = '';
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
-        'background-image': 'url(' + banner + ')'
+        'background-image': 'url(' + banner + ')',
       });
     } else {
       $('#article-banner').geopattern(url);
     }
     $('.header').removeClass('fixed-header');
 
-     // error image
-    $('.markdown-content img').on('error', function() {
-      $(this).attr('src', '/css/images/error-img.png');
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.svg');
       $(this).css({
-        'cursor': 'default'
+        'cursor': 'default',
       });
     });
 
@@ -397,28 +545,28 @@
       if ($(this).parents().is('a')) {
         $(this).css({
           'cursor': 'pointer',
-          'display': 'inline-block'
+          'display': 'inline-block',
         });
       }
     });
 
     // zoom image
-    $('.markdown-content img').on('click', function(e) {
-      var src = $(this).attr('src');
-      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
-        var imageW = $(this).width();
-        var imageH = $(this).height();
+    $('.markdown-content img').on('click', function() {
+      const src = $(this).attr('src');
+      if (src !== '/css/images/error_icon.svg' && !$(this).parents().is('a')) {
+        const imageW = $(this).width();
+        const imageH = $(this).height();
 
-        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        let zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
         zoom = zoom < 1 ? 1 : zoom;
         zoom = zoom > 2 ? 2 : zoom;
-        var transY = (($(window).height() - imageH) / 2).toFixed(2);
+        const transY = (($(window).height() - imageH) / 2).toFixed(2);
 
         $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
         $('.image-view-wrap').addClass('wrap-active');
         $('.image-view-wrap img').css({
-          'width': `${imageW}`,
-          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+          width: imageW,
+          transform: `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`,
         });
         $('html').css('overflow', 'hidden');
 
@@ -427,35 +575,26 @@
           $('html').attr('style', '');
         });
       }
-    });
-
-    // qrcode
-    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
-      text: document.location.href,
-      width: 100,
-      height: 100,
-      colorDark: '#000000',
-    	colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.L,
-      useSVG: true
-    });
+    })
   })();
 </script>
+
+
 
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
 
 <script>
   function async(u, c) {
-    var d = document, t = 'script',
+    const d = document, t = 'script',
       o = d.createElement(t),
       s = d.getElementsByTagName(t)[0];
     o.src = u;
@@ -463,20 +602,36 @@
     s.parentNode.insertBefore(o, s);
   }
 </script>
-
 <script>
   async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
     FastClick.attach(document.body);
-  })
+  });
 </script>
 
 <script>
-  $('figure').each(function(i, block) {
-    let lang = this.classList[1] || 'codeblock';
-    this.dataset.lang = lang.toUpperCase();
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
   });
 </script>
+
+
 <script src="/js/script.js"></script>
+
 
   </body>
 </html>

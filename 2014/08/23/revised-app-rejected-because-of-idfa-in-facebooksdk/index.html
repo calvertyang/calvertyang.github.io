@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="Calvert&#39;s tech blog">
-  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
   
@@ -13,55 +13,70 @@
       修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審 | Calvert&#39;s murmur
     
   </title>
-  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrcode.js"></script>
+  
   
   
     <!-- MathJax support START -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
       });
     </script>
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
+        let all = MathJax.Hub.getAllJax(), i;
         for (i = 0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- MathJax support END -->
   
 
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
-  <script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-44933497-2');
-  </script>
+    </script>
 
 
-</head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
-</div>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3999187913340509" crossorigin="anonymous"></script>
+
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
   <body>
     <header class="header fixed-header">
@@ -70,7 +85,6 @@
       <div class="logo"></div>
       <span>Calvert's murmur</span>
     </a>
-
     <ul class="right-list">
       
         <li class="list-item">
@@ -81,7 +95,7 @@
       
         <li class="list-item">
           
-            <a href="/categories/" class="item-link">Categories</a>
+            <a href="/series/" class="item-link">Series</a>
           
         </li>
       
@@ -109,49 +123,15 @@
           
         </li>
       
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
     </ul>
-
-    
-      <div id="search-form-wrap">
-        <form class="search-form">
-          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
-          <button type="submit" class="search-form-submit">
-            <span class="fa fa-search"></span>
-          </button>
-        </form>
-        <div class="ins-search">
-  <div class="ins-search-mask"></div>
-  <div class="ins-search-container">
-    <div class="ins-input-wrapper">
-      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
-      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-    </div>
-    <div class="ins-section-wrapper">
-      <div class="ins-section-container"></div>
-    </div>
-  </div>
-</div>
-<script>
-  (function (window) {
-    var INSIGHT_CONFIG = {
-      TRANSLATION: {
-        POSTS: '文章',
-        PAGES: '頁面',
-        CATEGORIES: '分類',
-        TAGS: '標籤',
-        UNTITLED: '無標題',
-      },
-      ROOT_URL: '/',
-      CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-  })(window);
-</script>
-<script src="/js/insight.js"></script>
-
-      </div>
-    
-
     <div class="menu">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -168,7 +148,7 @@
         
           <li class="menu-item">
             
-              <a href="/categories/" class="menu-link">Categories</a>
+              <a href="/series/" class="menu-link">Series</a>
             
           </li>
         
@@ -198,14 +178,40 @@
         
       </ul>
     </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
   </div>
 </header>
 
     <div id="article-banner">
   <h2>修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審</h2>
   <p class="post-date">2014-08-23</p>
+
   <div class="arrow-down">
-    <a href="javascript:;" target="_blank" rel="noopener"></a>
+    <a href="javascript:;"></a>
   </div>
 </div>
 <main class="app-body flex-box">
@@ -213,24 +219,46 @@
   <article class="post-article">
     <section class="markdown-content"><p>這次 App 送審被 Apple 以違反 PLA 3.3.12 而退審，內容大致上是說 Advertising Identifier(IDFA) 僅可基於廣告目的使用於應用程式內，但審核團隊沒發現需用 IDFA 來呈現廣告的地方。</p>
 <p>因送審的 App 內僅使用 iAd，而 iAd 是不需 AdSupport framework、ASIdentifierManager 或 Advertising Identifier 的，所以唯一的可能性就是第三方 Framework 使用了 IDFA。</p>
-<p>Apple 在退審原因內提示可透過 <strong>strings</strong> 或 <strong>otool</strong> 指令來幫忙找出問題點，最終揪出兇手就是 FacebookSDK，在 <a href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m" target="_blank" rel="noopener"><code>FBUtility.m</code></a> 引入了 <a href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m#L28" target="_blank" rel="noopener"><code>AdSupport</code></a> 並使用 <a href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m#L287" target="_blank" rel="noopener"><code>advertisingIdentifier</code></a>。</p>
+<p>Apple 在退審原因內提示可透過 <strong>strings</strong> 或 <strong>otool</strong> 指令來幫忙找出問題點，最終揪出兇手就是 FacebookSDK，在 <a target="_blank" rel="noopener" href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m"><code>FBUtility.m</code></a> 引入了 <a target="_blank" rel="noopener" href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m#L28"><code>AdSupport</code></a> 並使用 <a target="_blank" rel="noopener" href="https://github.com/facebook/facebook-ios-sdk/blob/343e2499965d69ff4c4c2950628a3867b1b1d075/src/Core/FBUtility.m#L287"><code>advertisingIdentifier</code></a>。</p>
 <p>暫時的解決方法如下：</p>
 <ol>
-<li><p>git clone <a href="https://github.com/facebook/facebook-ios-sdk" target="_blank" rel="noopener">FacebookSDK</a> 到本機</p>
+<li><p>git clone <a target="_blank" rel="noopener" href="https://github.com/facebook/facebook-ios-sdk">FacebookSDK</a> 到本機</p>
 </li>
 <li><p>開啟 <code>src/Core/FBUtility.m</code>，將此行註解</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//#import &lt;AdSupport/AdSupport.h&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
+<pre class="line-numbers language-objc" data-language="objc"><code class="language-objc">&#x2F;&#x2F;#import &lt;AdSupport&#x2F;AdSupport.h&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 <li><p>將</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">NSString</span> *)advertiserID &#123;</span><br><span class="line">    <span class="built_in">NSString</span> *advertiserID = <span class="literal">nil</span>;</span><br><span class="line">    Class ASIdentifierManagerClass = [FBDynamicFrameworkLoader loadClass:<span class="string">@"ASIdentifierManager"</span>     withFramework:<span class="string">@"AdSupport"</span>];</span><br><span class="line">    <span class="keyword">if</span> ([ASIdentifierManagerClass <span class="keyword">class</span>]) &#123;</span><br><span class="line">        ASIdentifierManager *manager = [ASIdentifierManagerClass sharedManager];</span><br><span class="line">        advertiserID = [[manager advertisingIdentifier] UUIDString];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> advertiserID;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-objc" data-language="objc"><code class="language-objc">+ (NSString *)advertiserID &#123;
+    NSString *advertiserID &#x3D; nil;
+    Class ASIdentifierManagerClass &#x3D; [FBDynamicFrameworkLoader loadClass:@&quot;ASIdentifierManager&quot;     withFramework:@&quot;AdSupport&quot;];
+    if ([ASIdentifierManagerClass class]) &#123;
+        ASIdentifierManager *manager &#x3D; [ASIdentifierManagerClass sharedManager];
+        advertiserID &#x3D; [[manager advertisingIdentifier] UUIDString];
+    &#125;
+    return advertiserID;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>改為</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">NSString</span> *)advertiserID &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">@""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<pre class="line-numbers language-objc" data-language="objc"><code class="language-objc">+ (NSString *)advertiserID &#123;
+    return @&quot;&quot;;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
 <li><p>將</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">+ (FBAdvertisingTrackingStatus)advertisingTrackingStatus &#123;</span><br><span class="line">    <span class="keyword">if</span> ([FBSettings restrictedTreatment] == FBRestrictedTreatmentYES) &#123;</span><br><span class="line">        <span class="keyword">return</span> AdvertisingTrackingDisallowed;</span><br><span class="line">    &#125;</span><br><span class="line">    FBAdvertisingTrackingStatus status = AdvertisingTrackingUnspecified;</span><br><span class="line">    Class ASIdentifierManagerClass = [FBDynamicFrameworkLoader loadClass:<span class="string">@"ASIdentifierManager"</span> withFramework:<span class="string">@"AdSupport"</span>];</span><br><span class="line">    <span class="keyword">if</span> ([ASIdentifierManagerClass <span class="keyword">class</span>]) &#123;</span><br><span class="line">        ASIdentifierManager *manager = [ASIdentifierManagerClass sharedManager];</span><br><span class="line">        <span class="keyword">if</span> (manager) &#123;</span><br><span class="line">            status = [manager isAdvertisingTrackingEnabled] ? AdvertisingTrackingAllowed : AdvertisingTrackingDisallowed;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> status;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-objc" data-language="objc"><code class="language-objc">+ (FBAdvertisingTrackingStatus)advertisingTrackingStatus &#123;
+    if ([FBSettings restrictedTreatment] &#x3D;&#x3D; FBRestrictedTreatmentYES) &#123;
+        return AdvertisingTrackingDisallowed;
+    &#125;
+    FBAdvertisingTrackingStatus status &#x3D; AdvertisingTrackingUnspecified;
+    Class ASIdentifierManagerClass &#x3D; [FBDynamicFrameworkLoader loadClass:@&quot;ASIdentifierManager&quot; withFramework:@&quot;AdSupport&quot;];
+    if ([ASIdentifierManagerClass class]) &#123;
+        ASIdentifierManager *manager &#x3D; [ASIdentifierManagerClass sharedManager];
+        if (manager) &#123;
+            status &#x3D; [manager isAdvertisingTrackingEnabled] ? AdvertisingTrackingAllowed : AdvertisingTrackingDisallowed;
+        &#125;
+    &#125;
+    return status;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>改為</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ (FBAdvertisingTrackingStatus)advertisingTrackingStatus &#123;</span><br><span class="line">    <span class="keyword">return</span> AdvertisingTrackingDisallowed;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<pre class="line-numbers language-objc" data-language="objc"><code class="language-objc">+ (FBAdvertisingTrackingStatus)advertisingTrackingStatus &#123;
+    return AdvertisingTrackingDisallowed;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
 <li><p>使用 <code>scripts/build_framework.sh</code> 重新打包 FacebookSDK。</p>
 </li>
 <li><p>返回原專案引用新打包的 FacebookSDK 重建 App 並送審。</p>
@@ -239,8 +267,8 @@
 <p><strong>註：若 App 內使用了 iAd 以外的廣告服務且廣告有正常顯示，應該不會因違反 PLA 3.3.12 而退審。</strong></p>
 <p>參考資料：</p>
 <ul>
-<li>Stack Overflow：<a href="http://stackoverflow.com/questions/21574680/app-rejected-because-of-advertisingidentifier-in-facebook-sdk-and-flurry-sdk" target="_blank" rel="noopener">app rejected because of advertisingIdentifier in Facebook SDK and Flurry SDK</a></li>
-<li>Github：<a href="https://github.com/facebook/facebook-ios-sdk/issues/583" target="_blank" rel="noopener">Rejection for ASIdentifierManager</a></li>
+<li>Stack Overflow：<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/21574680/app-rejected-because-of-advertisingidentifier-in-facebook-sdk-and-flurry-sdk">app rejected because of advertisingIdentifier in Facebook SDK and Flurry SDK</a></li>
+<li>Github：<a target="_blank" rel="noopener" href="https://github.com/facebook/facebook-ios-sdk/issues/583">Rejection for ASIdentifierManager</a></li>
 </ul>
 </section>
     <!-- Tags START -->
@@ -256,11 +284,9 @@
       </div>
     
     <!-- Tags END -->
-    <!-- UpdatedDate Start -->
-     
-       <p class="post-date">最後更新時間：2019-11-15</p>
-     
-   <!-- UpdatedDate END -->
+    <!-- Last updated on Start -->
+    
+    <!-- Last updated on END -->
     <!-- NAV START -->
     
   <div class="nav-container">
@@ -285,19 +311,9 @@
 
 
     <!-- NAV END -->
-    <!-- 打賞 START -->
+    <!-- QR Code START -->
     
-    <!-- 打賞 END -->
-    <!-- 二維條碼 START -->
-    
-      <div class="qrcode">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g id="share-qrcode"/>
-        </svg>
-        <p class="notice">掃描二維條碼，分享此文章</p>
-      </div>
-    
-    <!-- 二維條碼 END -->
+    <!-- QR Code END -->
   </article>
   <!-- Article END -->
   <!-- Catalog START -->
@@ -316,23 +332,23 @@
 </main>
 
 <script>
-  (function () {
-    var url = 'https://calvertyang.github.io/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/';
-    var banner = '';
+  (function() {
+    const url = 'https://calvertyang.github.io/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/';
+    const banner = '';
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
-        'background-image': 'url(' + banner + ')'
+        'background-image': 'url(' + banner + ')',
       });
     } else {
       $('#article-banner').geopattern(url);
     }
     $('.header').removeClass('fixed-header');
 
-     // error image
-    $('.markdown-content img').on('error', function() {
-      $(this).attr('src', '/css/images/error-img.png');
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.svg');
       $(this).css({
-        'cursor': 'default'
+        'cursor': 'default',
       });
     });
 
@@ -341,28 +357,28 @@
       if ($(this).parents().is('a')) {
         $(this).css({
           'cursor': 'pointer',
-          'display': 'inline-block'
+          'display': 'inline-block',
         });
       }
     });
 
     // zoom image
-    $('.markdown-content img').on('click', function(e) {
-      var src = $(this).attr('src');
-      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
-        var imageW = $(this).width();
-        var imageH = $(this).height();
+    $('.markdown-content img').on('click', function() {
+      const src = $(this).attr('src');
+      if (src !== '/css/images/error_icon.svg' && !$(this).parents().is('a')) {
+        const imageW = $(this).width();
+        const imageH = $(this).height();
 
-        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        let zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
         zoom = zoom < 1 ? 1 : zoom;
         zoom = zoom > 2 ? 2 : zoom;
-        var transY = (($(window).height() - imageH) / 2).toFixed(2);
+        const transY = (($(window).height() - imageH) / 2).toFixed(2);
 
         $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
         $('.image-view-wrap').addClass('wrap-active');
         $('.image-view-wrap img').css({
-          'width': `${imageW}`,
-          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+          width: imageW,
+          transform: `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`,
         });
         $('html').css('overflow', 'hidden');
 
@@ -371,35 +387,26 @@
           $('html').attr('style', '');
         });
       }
-    });
-
-    // qrcode
-    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
-      text: document.location.href,
-      width: 100,
-      height: 100,
-      colorDark: '#000000',
-    	colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.L,
-      useSVG: true
-    });
+    })
   })();
 </script>
+
+
 
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
 
 <script>
   function async(u, c) {
-    var d = document, t = 'script',
+    const d = document, t = 'script',
       o = d.createElement(t),
       s = d.getElementsByTagName(t)[0];
     o.src = u;
@@ -407,20 +414,36 @@
     s.parentNode.insertBefore(o, s);
   }
 </script>
-
 <script>
   async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
     FastClick.attach(document.body);
-  })
+  });
 </script>
 
 <script>
-  $('figure').each(function(i, block) {
-    let lang = this.classList[1] || 'codeblock';
-    this.dataset.lang = lang.toUpperCase();
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
   });
 </script>
+
+
 <script src="/js/script.js"></script>
+
 
   </body>
 </html>

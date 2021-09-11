@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="Calvert&#39;s tech blog">
-  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
   
@@ -13,55 +13,70 @@
       Golang 方法教學與範例 | Calvert&#39;s murmur
     
   </title>
-  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrcode.js"></script>
+  
   
   
     <!-- MathJax support START -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
       });
     </script>
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
+        let all = MathJax.Hub.getAllJax(), i;
         for (i = 0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- MathJax support END -->
   
 
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
-  <script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-44933497-2');
-  </script>
+    </script>
 
 
-</head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
-</div>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3999187913340509" crossorigin="anonymous"></script>
+
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
   <body>
     <header class="header fixed-header">
@@ -70,7 +85,6 @@
       <div class="logo"></div>
       <span>Calvert's murmur</span>
     </a>
-
     <ul class="right-list">
       
         <li class="list-item">
@@ -81,7 +95,7 @@
       
         <li class="list-item">
           
-            <a href="/categories/" class="item-link">Categories</a>
+            <a href="/series/" class="item-link">Series</a>
           
         </li>
       
@@ -109,49 +123,15 @@
           
         </li>
       
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
     </ul>
-
-    
-      <div id="search-form-wrap">
-        <form class="search-form">
-          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
-          <button type="submit" class="search-form-submit">
-            <span class="fa fa-search"></span>
-          </button>
-        </form>
-        <div class="ins-search">
-  <div class="ins-search-mask"></div>
-  <div class="ins-search-container">
-    <div class="ins-input-wrapper">
-      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
-      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-    </div>
-    <div class="ins-section-wrapper">
-      <div class="ins-section-container"></div>
-    </div>
-  </div>
-</div>
-<script>
-  (function (window) {
-    var INSIGHT_CONFIG = {
-      TRANSLATION: {
-        POSTS: '文章',
-        PAGES: '頁面',
-        CATEGORIES: '分類',
-        TAGS: '標籤',
-        UNTITLED: '無標題',
-      },
-      ROOT_URL: '/',
-      CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-  })(window);
-</script>
-<script src="/js/insight.js"></script>
-
-      </div>
-    
-
     <div class="menu">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -168,7 +148,7 @@
         
           <li class="menu-item">
             
-              <a href="/categories/" class="menu-link">Categories</a>
+              <a href="/series/" class="menu-link">Series</a>
             
           </li>
         
@@ -198,69 +178,286 @@
         
       </ul>
     </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
   </div>
 </header>
 
     <div id="article-banner">
   <h2>Golang 方法教學與範例</h2>
   <p class="post-date">2019-11-19</p>
+
   <div class="arrow-down">
-    <a href="javascript:;" target="_blank" rel="noopener"></a>
+    <a href="javascript:;"></a>
   </div>
 </div>
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-methods-tutorial" target="_blank" rel="noopener">Golang Methods Tutorial with Examples</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-methods-tutorial">Golang Methods Tutorial with Examples</a></p>
 </blockquote>
 <p>技術上來說，Go 不是物件導向程式語言。它沒有類別、物件和繼承。</p>
 <p>但是，Go 有型別。並且，你可以在型別上定義<strong>方法</strong>。這讓 Go 有物件導向程式的風格。</p>
 <p>讓我們深入了解，看看如何辦到？</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h3 id="Go-方法"><a href="#Go-方法" class="headerlink" title="Go 方法"></a>Go 方法</h3><p>方法不過是一種帶有特殊 <em>接收器</em> 參數的函數。</p>
 <p><em>接收器</em> 參數有名稱和型別。它出現在 <code>func</code> 關鍵字和方法名稱之間：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(receiver Type)</span> <span class="title">MethodName</span><span class="params">(parameterList)</span> <span class="params">(returnTypes)</span></span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token punctuation">(</span>receiver Type<span class="token punctuation">)</span> <span class="token function">MethodName</span><span class="token punctuation">(</span>parameterList<span class="token punctuation">)</span> <span class="token punctuation">(</span>returnTypes<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>接收器可以是 struct 型別，也可以是非 struct 型別。</p>
 <p>我們來看一個範例，來了解如何在 <code>type</code> 上定義方法及如何執行這種方法：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Struct type - `Point`</span></span><br><span class="line"><span class="keyword">type</span> Point <span class="keyword">struct</span> &#123;</span><br><span class="line">	X, Y <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Method with receiver `Point`</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Point)</span> <span class="title">IsAbove</span><span class="params">(y <span class="keyword">float64</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> p.Y &gt; y</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	p := Point&#123;<span class="number">2.0</span>, <span class="number">4.0</span>&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"Point : "</span>, p)</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"Is Point p located above the line y = 1.0 ? : "</span>, p.IsAbove(<span class="number">1</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Point :  &#123;2 4&#125;</span><br><span class="line">Is Point p located above the line y = 1.0 ? :  true</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token comment">// Struct type - `Point`</span>
+<span class="token keyword">type</span> Point <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	X<span class="token punctuation">,</span> Y <span class="token builtin">float64</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Method with receiver `Point`</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>p Point<span class="token punctuation">)</span> <span class="token function">IsAbove</span><span class="token punctuation">(</span>y <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> p<span class="token punctuation">.</span>Y <span class="token operator">></span> y
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	p <span class="token operator">:=</span> Point<span class="token punctuation">&#123;</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token number">4.0</span><span class="token punctuation">&#125;</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Point : "</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Is Point p located above the line y = 1.0 ? : "</span><span class="token punctuation">,</span> p<span class="token punctuation">.</span><span class="token function">IsAbove</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">Point :  &#123;2 4&#125;
+Is Point p located above the line y &#x3D; 1.0 ? :  true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>注意我們在 <code>Point</code> 實體 <code>p</code> 呼叫方法 <code>IsAbove()</code> 的方式。就和你使用物件導向程式語言時呼叫方法的方式一樣。</p>
 <h3 id="方法就是函數"><a href="#方法就是函數" class="headerlink" title="方法就是函數"></a>方法就是函數</h3><p>因為方法只是帶有接收器參數的函數。我們也可以使用正常的函數來撰寫上述範例：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Struct type - `Point`</span></span><br><span class="line"><span class="keyword">type</span> Point <span class="keyword">struct</span> &#123;</span><br><span class="line">	X, Y <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">IsAboveFunc</span><span class="params">(p Point, y <span class="keyword">float64</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> p.Y &gt; y</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Compare the above function with the corresponding method -</span></span><br><span class="line"><span class="comment">func (p Point) IsAbove(y float64) bool &#123;</span></span><br><span class="line"><span class="comment">	return p.Y &gt; y</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	p := Point&#123;<span class="number">2.5</span>, <span class="number">-3.0</span>&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"Point : "</span>, p)</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"Is Point p located above the line y = 1.0 ? : "</span>, IsAboveFunc(p, <span class="number">1</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token comment">// Struct type - `Point`</span>
+<span class="token keyword">type</span> Point <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	X<span class="token punctuation">,</span> Y <span class="token builtin">float64</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">IsAboveFunc</span><span class="token punctuation">(</span>p Point<span class="token punctuation">,</span> y <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> p<span class="token punctuation">.</span>Y <span class="token operator">></span> y
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">/*
+Compare the above function with the corresponding method -
+func (p Point) IsAbove(y float64) bool &#123;
+	return p.Y > y
+&#125;
+*/</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	p <span class="token operator">:=</span> Point<span class="token punctuation">&#123;</span><span class="token number">2.5</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">3.0</span><span class="token punctuation">&#125;</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Point : "</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Is Point p located above the line y = 1.0 ? : "</span><span class="token punctuation">,</span> <span class="token function">IsAboveFunc</span><span class="token punctuation">(</span>p<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="為什麼用方法代替函數？"><a href="#為什麼用方法代替函數？" class="headerlink" title="為什麼用方法代替函數？"></a>為什麼用方法代替函數？</h3><p>方法可協助你在 Go 中撰寫物件導向風格的程式碼。方法呼叫比函數呼叫更容易閱讀和理解。</p>
 <p>此外，方法可幫助你避免命名衝突。由於方法與特定的接收器綁定，因此你可以在不同接收器型別上使用相同的方法名稱。</p>
 <p>我們來看一個範例：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"math"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> ArithmeticProgression <span class="keyword">struct</span> &#123;</span><br><span class="line">	A, D <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Method with receiver `ArithmeticProgression`</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(ap ArithmeticProgression)</span> <span class="title">NthTerm</span><span class="params">(n <span class="keyword">int</span>)</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> ap.A + <span class="keyword">float64</span>(n<span class="number">-1</span>)*ap.D</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> GeometricProgression <span class="keyword">struct</span> &#123;</span><br><span class="line">	A, R <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Method with receiver `GeometricProgression`</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(gp GeometricProgression)</span> <span class="title">NthTerm</span><span class="params">(n <span class="keyword">int</span>)</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> gp.A * math.Pow(gp.R, <span class="keyword">float64</span>(n<span class="number">-1</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	ap := ArithmeticProgression&#123;<span class="number">1</span>, <span class="number">2</span>&#125; <span class="comment">// AP: 1 3 5 7 9 ...</span></span><br><span class="line">	gp := GeometricProgression&#123;<span class="number">1</span>, <span class="number">2</span>&#125;  <span class="comment">// GP: 1 2 4 8 16 ...</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"5th Term of the Arithmetic series = "</span>, ap.NthTerm(<span class="number">5</span>))</span><br><span class="line">	fmt.Println(<span class="string">"5th Term of the Geometric series = "</span>, gp.NthTerm(<span class="number">5</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5th Term of the Arithmetic series =  9</span><br><span class="line">5th Term of the Geometric series =  16</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"math"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">type</span> ArithmeticProgression <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	A<span class="token punctuation">,</span> D <span class="token builtin">float64</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Method with receiver `ArithmeticProgression`</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>ap ArithmeticProgression<span class="token punctuation">)</span> <span class="token function">NthTerm</span><span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">float64</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> ap<span class="token punctuation">.</span>A <span class="token operator">+</span> <span class="token function">float64</span><span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span>ap<span class="token punctuation">.</span>D
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">type</span> GeometricProgression <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	A<span class="token punctuation">,</span> R <span class="token builtin">float64</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Method with receiver `GeometricProgression`</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>gp GeometricProgression<span class="token punctuation">)</span> <span class="token function">NthTerm</span><span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">float64</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> gp<span class="token punctuation">.</span>A <span class="token operator">*</span> math<span class="token punctuation">.</span><span class="token function">Pow</span><span class="token punctuation">(</span>gp<span class="token punctuation">.</span>R<span class="token punctuation">,</span> <span class="token function">float64</span><span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	ap <span class="token operator">:=</span> ArithmeticProgression<span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">&#125;</span> <span class="token comment">// AP: 1 3 5 7 9 ...</span>
+	gp <span class="token operator">:=</span> GeometricProgression<span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">&#125;</span>  <span class="token comment">// GP: 1 2 4 8 16 ...</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"5th Term of the Arithmetic series = "</span><span class="token punctuation">,</span> ap<span class="token punctuation">.</span><span class="token function">NthTerm</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"5th Term of the Geometric series = "</span><span class="token punctuation">,</span> gp<span class="token punctuation">.</span><span class="token function">NthTerm</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">5th Term of the Arithmetic series &#x3D;  9
+5th Term of the Geometric series &#x3D;  16<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="具有指標接收器的方法"><a href="#具有指標接收器的方法" class="headerlink" title="具有指標接收器的方法"></a>具有指標接收器的方法</h3><p>我們在上一節中看到的所有範例都有一個值接收器。</p>
 <p>對於值接收器，該方法對傳遞給它的值的副本進行操作。因此，呼叫者看不到方法內部對接收器所做的任何修改。</p>
 <p><strong>Go 允許你使用指標接收器定義方法</strong></p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Method with pointer receiver</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(receiver *Type)</span> <span class="title">MethodName</span><span class="params">(parameterList)</span> <span class="params">(returnTypes)</span></span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Method with pointer receiver</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>receiver <span class="token operator">*</span>Type<span class="token punctuation">)</span> <span class="token function">MethodName</span><span class="token punctuation">(</span>parameterList<span class="token punctuation">)</span> <span class="token punctuation">(</span>returnTypes<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>帶有指標接收器的方法可以修改接收器指向的值。這種修改對方法的呼叫者也是可見的：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Point <span class="keyword">struct</span> &#123;</span><br><span class="line">	X, Y <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  Translates the current Point, at location (X,Y), by dx along the x axis and dy along the y axis</span></span><br><span class="line"><span class="comment">  so that it now represents the point (X+dx,Y+dy).</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p *Point)</span> <span class="title">Translate</span><span class="params">(dx, dy <span class="keyword">float64</span>)</span></span> &#123;</span><br><span class="line">	p.X = p.X + dx</span><br><span class="line">	p.Y = p.Y + dy</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	p := Point&#123;<span class="number">3</span>, <span class="number">4</span>&#125;</span><br><span class="line">	fmt.Println(<span class="string">"Point p = "</span>, p)</span><br><span class="line"></span><br><span class="line">	p.Translate(<span class="number">7</span>, <span class="number">9</span>)</span><br><span class="line">	fmt.Println(<span class="string">"After Translate, p = "</span>, p)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Point p =  &#123;3 4&#125;</span><br><span class="line">After Translate, p =  &#123;10 13&#125;</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">type</span> Point <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	X<span class="token punctuation">,</span> Y <span class="token builtin">float64</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">/*
+  Translates the current Point, at location (X,Y), by dx along the x axis and dy along the y axis
+  so that it now represents the point (X+dx,Y+dy).
+*/</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>p <span class="token operator">*</span>Point<span class="token punctuation">)</span> <span class="token function">Translate</span><span class="token punctuation">(</span>dx<span class="token punctuation">,</span> dy <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	p<span class="token punctuation">.</span>X <span class="token operator">=</span> p<span class="token punctuation">.</span>X <span class="token operator">+</span> dx
+	p<span class="token punctuation">.</span>Y <span class="token operator">=</span> p<span class="token punctuation">.</span>Y <span class="token operator">+</span> dy
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	p <span class="token operator">:=</span> Point<span class="token punctuation">&#123;</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">&#125;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Point p = "</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span>
+
+	p<span class="token punctuation">.</span><span class="token function">Translate</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"After Translate, p = "</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">Point p &#x3D;  &#123;3 4&#125;
+After Translate, p &#x3D;  &#123;10 13&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h4 id="將具有指標接收器的方法當作函數"><a href="#將具有指標接收器的方法當作函數" class="headerlink" title="將具有指標接收器的方法當作函數"></a>將具有指標接收器的方法當作函數</h4><p>如同具有值接收器的方法，我們也可以將具有指標接收器的方法撰寫為函數。以下範例展示如何使用函數重寫前面的範例：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Point <span class="keyword">struct</span> &#123;</span><br><span class="line">	X, Y <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  Translates the current Point, at location (X,Y), by dx along the x axis and dy along the y axis</span></span><br><span class="line"><span class="comment">  so that it now represents the point (X+dx,Y+dy).</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TranslateFunc</span><span class="params">(p *Point, dx, dy <span class="keyword">float64</span>)</span></span> &#123;</span><br><span class="line">	p.X = p.X + dx</span><br><span class="line">	p.Y = p.Y + dy</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	p := Point&#123;<span class="number">3</span>, <span class="number">4</span>&#125;</span><br><span class="line">	fmt.Println(<span class="string">"Point p = "</span>, p)</span><br><span class="line"></span><br><span class="line">	TranslateFunc(&amp;p, <span class="number">7</span>, <span class="number">9</span>)</span><br><span class="line">	fmt.Println(<span class="string">"After Translate, p = "</span>, p)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">type</span> Point <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	X<span class="token punctuation">,</span> Y <span class="token builtin">float64</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">/*
+  Translates the current Point, at location (X,Y), by dx along the x axis and dy along the y axis
+  so that it now represents the point (X+dx,Y+dy).
+*/</span>
+<span class="token keyword">func</span> <span class="token function">TranslateFunc</span><span class="token punctuation">(</span>p <span class="token operator">*</span>Point<span class="token punctuation">,</span> dx<span class="token punctuation">,</span> dy <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	p<span class="token punctuation">.</span>X <span class="token operator">=</span> p<span class="token punctuation">.</span>X <span class="token operator">+</span> dx
+	p<span class="token punctuation">.</span>Y <span class="token operator">=</span> p<span class="token punctuation">.</span>Y <span class="token operator">+</span> dy
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	p <span class="token operator">:=</span> Point<span class="token punctuation">&#123;</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">&#125;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Point p = "</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span>
+
+	<span class="token function">TranslateFunc</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"After Translate, p = "</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="方法和指標間接取值"><a href="#方法和指標間接取值" class="headerlink" title="方法和指標間接取值"></a>方法和指標間接取值</h3><h4 id="1-具有指標接收器的方法與具有指標參數的函數"><a href="#1-具有指標接收器的方法與具有指標參數的函數" class="headerlink" title="1. 具有指標接收器的方法與具有指標參數的函數"></a>1. 具有指標接收器的方法與具有指標參數的函數</h4><p>具有指標接收器的方法可以接受指標和值作為接收器參數。但是，具有指標參數的函數只能接受指標：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Point <span class="keyword">struct</span> &#123;</span><br><span class="line">	X, Y <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Method with Pointer receiver</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p *Point)</span> <span class="title">Translate</span><span class="params">(dx, dy <span class="keyword">float64</span>)</span></span> &#123;</span><br><span class="line">	p.X = p.X + dx</span><br><span class="line">	p.Y = p.Y + dy</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Function with Pointer argument</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TranslateFunc</span><span class="params">(p *Point, dx, dy <span class="keyword">float64</span>)</span></span> &#123;</span><br><span class="line">	p.X = p.X + dx</span><br><span class="line">	p.Y = p.Y + dy</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	p := Point&#123;<span class="number">3</span>, <span class="number">4</span>&#125;</span><br><span class="line">	ptr := &amp;p</span><br><span class="line">	fmt.Println(<span class="string">"Point p = "</span>, p)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Calling a Method with Pointer receiver</span></span><br><span class="line">	p.Translate(<span class="number">2</span>, <span class="number">6</span>)		<span class="comment">// Valid</span></span><br><span class="line">	ptr.Translate(<span class="number">5</span>, <span class="number">10</span>)	<span class="comment">// Valid</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Calling a Function with a Pointer argument</span></span><br><span class="line">	TranslateFunc(ptr, <span class="number">20</span>, <span class="number">30</span>)  <span class="comment">// Valid</span></span><br><span class="line">	TranslateFunc(p, <span class="number">20</span>, <span class="number">30</span>)   <span class="comment">// Not Valid</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">type</span> Point <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	X<span class="token punctuation">,</span> Y <span class="token builtin">float64</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Method with Pointer receiver</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>p <span class="token operator">*</span>Point<span class="token punctuation">)</span> <span class="token function">Translate</span><span class="token punctuation">(</span>dx<span class="token punctuation">,</span> dy <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	p<span class="token punctuation">.</span>X <span class="token operator">=</span> p<span class="token punctuation">.</span>X <span class="token operator">+</span> dx
+	p<span class="token punctuation">.</span>Y <span class="token operator">=</span> p<span class="token punctuation">.</span>Y <span class="token operator">+</span> dy
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Function with Pointer argument</span>
+<span class="token keyword">func</span> <span class="token function">TranslateFunc</span><span class="token punctuation">(</span>p <span class="token operator">*</span>Point<span class="token punctuation">,</span> dx<span class="token punctuation">,</span> dy <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	p<span class="token punctuation">.</span>X <span class="token operator">=</span> p<span class="token punctuation">.</span>X <span class="token operator">+</span> dx
+	p<span class="token punctuation">.</span>Y <span class="token operator">=</span> p<span class="token punctuation">.</span>Y <span class="token operator">+</span> dy
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	p <span class="token operator">:=</span> Point<span class="token punctuation">&#123;</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">&#125;</span>
+	ptr <span class="token operator">:=</span> <span class="token operator">&amp;</span>p
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Point p = "</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span>
+
+	<span class="token comment">// Calling a Method with Pointer receiver</span>
+	p<span class="token punctuation">.</span><span class="token function">Translate</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span>		<span class="token comment">// Valid</span>
+	ptr<span class="token punctuation">.</span><span class="token function">Translate</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>	<span class="token comment">// Valid</span>
+
+	<span class="token comment">// Calling a Function with a Pointer argument</span>
+	<span class="token function">TranslateFunc</span><span class="token punctuation">(</span>ptr<span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span>  <span class="token comment">// Valid</span>
+	<span class="token function">TranslateFunc</span><span class="token punctuation">(</span>p<span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span>   <span class="token comment">// Not Valid</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <blockquote>
 <p>注意，<code>p.Translate()</code> 和 <code>ptr.Translate()</code> 呼叫都是有效的。由於 Go 知道 <code>Translate()</code> 方法具有指標接收器，因此它將陳述式 <code>p.Translate()</code>翻譯為 <code>(&amp;p).Translate()</code>。它是 Go 為了方便所提供的語法糖。</p>
 </blockquote>
 <h4 id="2-具有值接收器的方法與具有值參數的函數"><a href="#2-具有值接收器的方法與具有值參數的函數" class="headerlink" title="2. 具有值接收器的方法與具有值參數的函數"></a>2. 具有值接收器的方法與具有值參數的函數</h4><p>具有值接收器的方法可以接受值和指標作為接收器參數。但是，具有值參數的函數只能接受值：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Struct type - `Point`</span></span><br><span class="line"><span class="keyword">type</span> Point <span class="keyword">struct</span> &#123;</span><br><span class="line">	X, Y <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Point)</span> <span class="title">IsAbove</span><span class="params">(y <span class="keyword">float64</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> p.Y &gt; y</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">IsAboveFunc</span><span class="params">(p Point, y <span class="keyword">float64</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> p.Y &gt; y</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	p := Point&#123;<span class="number">0</span>, <span class="number">4</span>&#125;</span><br><span class="line">	ptr := &amp;p</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"Point p = "</span>, p)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Calling a Method with Value receiver</span></span><br><span class="line">	p.IsAbove(<span class="number">1</span>)   <span class="comment">// Valid</span></span><br><span class="line">	ptr.IsAbove(<span class="number">1</span>) <span class="comment">// Valid</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Calling a Function with a Value argument</span></span><br><span class="line">	IsAboveFunc(p, <span class="number">1</span>)   <span class="comment">// Valid</span></span><br><span class="line">	IsAboveFunc(ptr, <span class="number">1</span>) <span class="comment">// Not Valid</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token comment">// Struct type - `Point`</span>
+<span class="token keyword">type</span> Point <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	X<span class="token punctuation">,</span> Y <span class="token builtin">float64</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>p Point<span class="token punctuation">)</span> <span class="token function">IsAbove</span><span class="token punctuation">(</span>y <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> p<span class="token punctuation">.</span>Y <span class="token operator">></span> y
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">IsAboveFunc</span><span class="token punctuation">(</span>p Point<span class="token punctuation">,</span> y <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> p<span class="token punctuation">.</span>Y <span class="token operator">></span> y
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	p <span class="token operator">:=</span> Point<span class="token punctuation">&#123;</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">&#125;</span>
+	ptr <span class="token operator">:=</span> <span class="token operator">&amp;</span>p
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Point p = "</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span>
+
+	<span class="token comment">// Calling a Method with Value receiver</span>
+	p<span class="token punctuation">.</span><span class="token function">IsAbove</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>   <span class="token comment">// Valid</span>
+	ptr<span class="token punctuation">.</span><span class="token function">IsAbove</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment">// Valid</span>
+
+	<span class="token comment">// Calling a Function with a Value argument</span>
+	<span class="token function">IsAboveFunc</span><span class="token punctuation">(</span>p<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>   <span class="token comment">// Valid</span>
+	<span class="token function">IsAboveFunc</span><span class="token punctuation">(</span>ptr<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment">// Not Valid</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <blockquote>
 <p>在上面的範例中，<code>p.IsAbove()</code> 和 <code>ptr.IsAbove()</code> 陳述式都是有效的。Go 知道 <code>IsAbove()</code> 方法有值接收器。因此，為了方便起見，它將陳述式 <code>ptr.IsAbove()</code> 翻譯為 <code>(*ptr).IsAbove()</code>。</p>
@@ -269,18 +466,58 @@
 <p>Go 不允許你定義的方法的接收器型別是定義在其他 package 中（這也包括諸如 <code>int</code> 之類的內建型別）。</p>
 <p>在前面的所有範例中，struct 和方法都在相同 package <code>main</code> 中定義，因此他們運作良好。但是，如果你嘗試在型別上定義方法，但該型別是在其他 package 中定義的，則會編譯失敗。</p>
 <p>我們來看一個範例。細想以下 package 階層：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">src/example</span><br><span class="line">	main</span><br><span class="line">		main.go</span><br><span class="line">    model</span><br><span class="line">        person.go</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">src&#x2F;example
+	main
+		main.go
+    model
+        person.go<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>以下是 <code>person.go</code> 的內容：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> model</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;</span><br><span class="line">	FirstName <span class="keyword">string</span></span><br><span class="line">	LastName <span class="keyword">string</span></span><br><span class="line">	Age <span class="keyword">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> model
+
+<span class="token keyword">type</span> Person <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	FirstName <span class="token builtin">string</span>
+	LastName <span class="token builtin">string</span>
+	Age <span class="token builtin">int</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>我們來嘗試在 struct <code>Person</code> 上定義一個方法：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"example/model"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ERROR: cannot define new methods on non-local types model.Person</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p model.Person)</span> <span class="title">getFullName</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> p.FirstName + <span class="string">" "</span> + p.LastName</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"example/model"</span>
+
+<span class="token comment">// ERROR: cannot define new methods on non-local types model.Person</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>p model<span class="token punctuation">.</span>Person<span class="token punctuation">)</span> <span class="token function">getFullName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> p<span class="token punctuation">.</span>FirstName <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> p<span class="token punctuation">.</span>LastName
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="在非-struct-型別上定義方法"><a href="#在非-struct-型別上定義方法" class="headerlink" title="在非 struct 型別上定義方法"></a>在非 struct 型別上定義方法</h3><p>Go 也允許你在非 struct 型別上定義方法。在以下範例中，我已經在 <code>MyString</code> 型別上定義了一個名為 <code>reverse()</code> 的方法。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> MyString <span class="keyword">string</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(myStr MyString)</span> <span class="title">reverse</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	s := <span class="keyword">string</span>(myStr)</span><br><span class="line">	runes := []<span class="keyword">rune</span>(s)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> i, j := <span class="number">0</span>, <span class="built_in">len</span>(runes)<span class="number">-1</span>; i &lt; j; i, j = i+<span class="number">1</span>, j<span class="number">-1</span> &#123;</span><br><span class="line">		runes[i], runes[j] = runes[j], runes[i]</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">string</span>(runes)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	myStr := MyString(<span class="string">"OLLEH"</span>)</span><br><span class="line">	fmt.Println(myStr.reverse())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">HELLO</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">type</span> MyString <span class="token builtin">string</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>myStr MyString<span class="token punctuation">)</span> <span class="token function">reverse</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+	s <span class="token operator">:=</span> <span class="token function">string</span><span class="token punctuation">(</span>myStr<span class="token punctuation">)</span>
+	runes <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">rune</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+
+	<span class="token keyword">for</span> i<span class="token punctuation">,</span> j <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>runes<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> j<span class="token punctuation">;</span> i<span class="token punctuation">,</span> j <span class="token operator">=</span> i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> j<span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">&#123;</span>
+		runes<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> runes<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> runes<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> runes<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> <span class="token function">string</span><span class="token punctuation">(</span>runes<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	myStr <span class="token operator">:=</span> <span class="token function">MyString</span><span class="token punctuation">(</span><span class="token string">"OLLEH"</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>myStr<span class="token punctuation">.</span><span class="token function">reverse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+HELLO<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>希望你喜歡這篇文章。感謝你的閱讀，下篇再見。</p>
 </section>
@@ -297,11 +534,9 @@
       </div>
     
     <!-- Tags END -->
-    <!-- UpdatedDate Start -->
-     
-       <p class="post-date">最後更新時間：2019-11-19</p>
-     
-   <!-- UpdatedDate END -->
+    <!-- Last updated on Start -->
+    
+    <!-- Last updated on END -->
     <!-- NAV START -->
     
   <div class="nav-container">
@@ -326,19 +561,9 @@
 
 
     <!-- NAV END -->
-    <!-- 打賞 START -->
+    <!-- QR Code START -->
     
-    <!-- 打賞 END -->
-    <!-- 二維條碼 START -->
-    
-      <div class="qrcode">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g id="share-qrcode"/>
-        </svg>
-        <p class="notice">掃描二維條碼，分享此文章</p>
-      </div>
-    
-    <!-- 二維條碼 END -->
+    <!-- QR Code END -->
   </article>
   <!-- Article END -->
   <!-- Catalog START -->
@@ -347,7 +572,7 @@
   <div class="toc-main">
     <strong class="toc-title">目錄</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Go-方法"><span class="toc-nav-text">Go 方法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#方法就是函數"><span class="toc-nav-text">方法就是函數</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#為什麼用方法代替函數？"><span class="toc-nav-text">為什麼用方法代替函數？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#具有指標接收器的方法"><span class="toc-nav-text">具有指標接收器的方法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#將具有指標接收器的方法當作函數"><span class="toc-nav-text">將具有指標接收器的方法當作函數</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#方法和指標間接取值"><span class="toc-nav-text">方法和指標間接取值</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-具有指標接收器的方法與具有指標參數的函數"><span class="toc-nav-text">1. 具有指標接收器的方法與具有指標參數的函數</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-具有值接收器的方法與具有值參數的函數"><span class="toc-nav-text">2. 具有值接收器的方法與具有值參數的函數</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#方法定義限制"><span class="toc-nav-text">方法定義限制</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#在非-struct-型別上定義方法"><span class="toc-nav-text">在非 struct 型別上定義方法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#結論"><span class="toc-nav-text">結論</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Go-%E6%96%B9%E6%B3%95"><span class="toc-nav-text">Go 方法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%96%B9%E6%B3%95%E5%B0%B1%E6%98%AF%E5%87%BD%E6%95%B8"><span class="toc-nav-text">方法就是函數</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E7%94%A8%E6%96%B9%E6%B3%95%E4%BB%A3%E6%9B%BF%E5%87%BD%E6%95%B8%EF%BC%9F"><span class="toc-nav-text">為什麼用方法代替函數？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%85%B7%E6%9C%89%E6%8C%87%E6%A8%99%E6%8E%A5%E6%94%B6%E5%99%A8%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-nav-text">具有指標接收器的方法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%B0%87%E5%85%B7%E6%9C%89%E6%8C%87%E6%A8%99%E6%8E%A5%E6%94%B6%E5%99%A8%E7%9A%84%E6%96%B9%E6%B3%95%E7%95%B6%E4%BD%9C%E5%87%BD%E6%95%B8"><span class="toc-nav-text">將具有指標接收器的方法當作函數</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%96%B9%E6%B3%95%E5%92%8C%E6%8C%87%E6%A8%99%E9%96%93%E6%8E%A5%E5%8F%96%E5%80%BC"><span class="toc-nav-text">方法和指標間接取值</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-%E5%85%B7%E6%9C%89%E6%8C%87%E6%A8%99%E6%8E%A5%E6%94%B6%E5%99%A8%E7%9A%84%E6%96%B9%E6%B3%95%E8%88%87%E5%85%B7%E6%9C%89%E6%8C%87%E6%A8%99%E5%8F%83%E6%95%B8%E7%9A%84%E5%87%BD%E6%95%B8"><span class="toc-nav-text">1. 具有指標接收器的方法與具有指標參數的函數</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-%E5%85%B7%E6%9C%89%E5%80%BC%E6%8E%A5%E6%94%B6%E5%99%A8%E7%9A%84%E6%96%B9%E6%B3%95%E8%88%87%E5%85%B7%E6%9C%89%E5%80%BC%E5%8F%83%E6%95%B8%E7%9A%84%E5%87%BD%E6%95%B8"><span class="toc-nav-text">2. 具有值接收器的方法與具有值參數的函數</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%96%B9%E6%B3%95%E5%AE%9A%E7%BE%A9%E9%99%90%E5%88%B6"><span class="toc-nav-text">方法定義限制</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%9C%A8%E9%9D%9E-struct-%E5%9E%8B%E5%88%A5%E4%B8%8A%E5%AE%9A%E7%BE%A9%E6%96%B9%E6%B3%95"><span class="toc-nav-text">在非 struct 型別上定義方法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%B5%90%E8%AB%96"><span class="toc-nav-text">結論</span></a></li></ol>
     
   </div>
 </aside>
@@ -357,23 +582,23 @@
 </main>
 
 <script>
-  (function () {
-    var url = 'https://calvertyang.github.io/2019/11/19/golang-methods-tutorial-with-examples/';
-    var banner = '';
+  (function() {
+    const url = 'https://calvertyang.github.io/2019/11/19/golang-methods-tutorial-with-examples/';
+    const banner = '';
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
-        'background-image': 'url(' + banner + ')'
+        'background-image': 'url(' + banner + ')',
       });
     } else {
       $('#article-banner').geopattern(url);
     }
     $('.header').removeClass('fixed-header');
 
-     // error image
-    $('.markdown-content img').on('error', function() {
-      $(this).attr('src', '/css/images/error-img.png');
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.svg');
       $(this).css({
-        'cursor': 'default'
+        'cursor': 'default',
       });
     });
 
@@ -382,28 +607,28 @@
       if ($(this).parents().is('a')) {
         $(this).css({
           'cursor': 'pointer',
-          'display': 'inline-block'
+          'display': 'inline-block',
         });
       }
     });
 
     // zoom image
-    $('.markdown-content img').on('click', function(e) {
-      var src = $(this).attr('src');
-      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
-        var imageW = $(this).width();
-        var imageH = $(this).height();
+    $('.markdown-content img').on('click', function() {
+      const src = $(this).attr('src');
+      if (src !== '/css/images/error_icon.svg' && !$(this).parents().is('a')) {
+        const imageW = $(this).width();
+        const imageH = $(this).height();
 
-        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        let zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
         zoom = zoom < 1 ? 1 : zoom;
         zoom = zoom > 2 ? 2 : zoom;
-        var transY = (($(window).height() - imageH) / 2).toFixed(2);
+        const transY = (($(window).height() - imageH) / 2).toFixed(2);
 
         $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
         $('.image-view-wrap').addClass('wrap-active');
         $('.image-view-wrap img').css({
-          'width': `${imageW}`,
-          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+          width: imageW,
+          transform: `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`,
         });
         $('html').css('overflow', 'hidden');
 
@@ -412,35 +637,26 @@
           $('html').attr('style', '');
         });
       }
-    });
-
-    // qrcode
-    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
-      text: document.location.href,
-      width: 100,
-      height: 100,
-      colorDark: '#000000',
-    	colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.L,
-      useSVG: true
-    });
+    })
   })();
 </script>
+
+
 
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
 
 <script>
   function async(u, c) {
-    var d = document, t = 'script',
+    const d = document, t = 'script',
       o = d.createElement(t),
       s = d.getElementsByTagName(t)[0];
     o.src = u;
@@ -448,20 +664,36 @@
     s.parentNode.insertBefore(o, s);
   }
 </script>
-
 <script>
   async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
     FastClick.attach(document.body);
-  })
+  });
 </script>
 
 <script>
-  $('figure').each(function(i, block) {
-    let lang = this.classList[1] || 'codeblock';
-    this.dataset.lang = lang.toUpperCase();
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
   });
 </script>
+
+
 <script src="/js/script.js"></script>
+
 
   </body>
 </html>

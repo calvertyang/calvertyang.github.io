@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="Calvert&#39;s tech blog">
-  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
   
@@ -13,55 +13,70 @@
       Calvert&#39;s murmur
     
   </title>
-  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrcode.js"></script>
+  
   
   
     <!-- MathJax support START -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
       });
     </script>
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
+        let all = MathJax.Hub.getAllJax(), i;
         for (i = 0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- MathJax support END -->
   
 
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
-  <script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-44933497-2');
-  </script>
+    </script>
 
 
-</head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
-</div>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3999187913340509" crossorigin="anonymous"></script>
+
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
   <body>
     <header class="header fixed-header">
@@ -70,7 +85,6 @@
       <div class="logo"></div>
       <span>Calvert's murmur</span>
     </a>
-
     <ul class="right-list">
       
         <li class="list-item">
@@ -81,7 +95,7 @@
       
         <li class="list-item">
           
-            <a href="/categories/" class="item-link">Categories</a>
+            <a href="/series/" class="item-link">Series</a>
           
         </li>
       
@@ -109,49 +123,15 @@
           
         </li>
       
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
     </ul>
-
-    
-      <div id="search-form-wrap">
-        <form class="search-form">
-          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
-          <button type="submit" class="search-form-submit">
-            <span class="fa fa-search"></span>
-          </button>
-        </form>
-        <div class="ins-search">
-  <div class="ins-search-mask"></div>
-  <div class="ins-search-container">
-    <div class="ins-input-wrapper">
-      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
-      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-    </div>
-    <div class="ins-section-wrapper">
-      <div class="ins-section-container"></div>
-    </div>
-  </div>
-</div>
-<script>
-  (function (window) {
-    var INSIGHT_CONFIG = {
-      TRANSLATION: {
-        POSTS: '文章',
-        PAGES: '頁面',
-        CATEGORIES: '分類',
-        TAGS: '標籤',
-        UNTITLED: '無標題',
-      },
-      ROOT_URL: '/',
-      CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-  })(window);
-</script>
-<script src="/js/insight.js"></script>
-
-      </div>
-    
-
     <div class="menu">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -168,7 +148,7 @@
         
           <li class="menu-item">
             
-              <a href="/categories/" class="menu-link">Categories</a>
+              <a href="/series/" class="menu-link">Series</a>
             
           </li>
         
@@ -198,6 +178,31 @@
         
       </ul>
     </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
   </div>
 </header>
 
@@ -264,7 +269,7 @@
       
       <div class="article-summary">
         
-          <p>集合管線(<a href="http://docs.mongodb.org/manual/core/aggregation/" target="_blank" rel="noopener">aggregation pipeline</a>)允許 MongoDB 提供原生集合功能，對應 SQL 中許多常見的資料集合操作。</p>
+          <p>集合管線(<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/core/aggregation/">aggregation pipeline</a>)允許 MongoDB 提供原生集合功能，對應 SQL 中許多常見的資料集合操作。</p>
 <h5 id="下表列出了常見的-SQL-集合術語、功能及概念和相應的-MongoDB-集合運算元概觀。"><a href="#下表列出了常見的-SQL-集合術語、功能及概念和相應的-MongoDB-集合運算元概觀。" class="headerlink" title="下表列出了常見的 SQL 集合術語、功能及概念和相應的 MongoDB 集合運算元概觀。"></a>下表列出了常見的 SQL 集合術語、功能及概念和相應的 MongoDB 集合運算元概觀。</h5><table>
 <thead>
 <tr>
@@ -274,39 +279,39 @@
 </thead>
 <tbody><tr>
 <td align="left">WHERE</td>
-<td align="left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/match/#pipe._S_match" target="_blank" rel="noopener">$match</a></td>
+<td align="left"><a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/aggregation/match/#pipe._S_match">$match</a></td>
 </tr>
 <tr>
 <td align="left">GROUP BY</td>
-<td align="left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/group/#pipe._S_group" target="_blank" rel="noopener">$group</a></td>
+<td align="left"><a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/aggregation/group/#pipe._S_group">$group</a></td>
 </tr>
 <tr>
 <td align="left">HAVING</td>
-<td align="left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/match/#pipe._S_match" target="_blank" rel="noopener">$match</a></td>
+<td align="left"><a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/aggregation/match/#pipe._S_match">$match</a></td>
 </tr>
 <tr>
 <td align="left">SELECT</td>
-<td align="left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/project/#pipe._S_project" target="_blank" rel="noopener">$project</a></td>
+<td align="left"><a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/aggregation/project/#pipe._S_project">$project</a></td>
 </tr>
 <tr>
 <td align="left">ORDER BY</td>
-<td align="left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/sort/#pipe._S_sort" target="_blank" rel="noopener">$sort</a></td>
+<td align="left"><a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/aggregation/sort/#pipe._S_sort">$sort</a></td>
 </tr>
 <tr>
 <td align="left">LIMIT</td>
-<td align="left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/limit/#pipe._S_limit" target="_blank" rel="noopener">$limit</a></td>
+<td align="left"><a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/aggregation/limit/#pipe._S_limit">$limit</a></td>
 </tr>
 <tr>
 <td align="left">SUM()</td>
-<td align="left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/sum/#grp._S_sum" target="_blank" rel="noopener">$sum</a></td>
+<td align="left"><a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/aggregation/sum/#grp._S_sum">$sum</a></td>
 </tr>
 <tr>
 <td align="left">COUNT()</td>
-<td align="left"><a href="http://docs.mongodb.org/manual/reference/operator/aggregation/sum/#grp._S_sum" target="_blank" rel="noopener">$sum</a></td>
+<td align="left"><a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/aggregation/sum/#grp._S_sum">$sum</a></td>
 </tr>
 <tr>
 <td align="left">join</td>
-<td align="left">沒有直接對應的運算元，然而，<a href="http://docs.mongodb.org/manual/reference/operator/aggregation/unwind/#pipe._S_unwind" target="_blank" rel="noopener">$unwind</a> 運算元允許有些類似的功能，但是與嵌入的欄位在文件內。</td>
+<td align="left">沒有直接對應的運算元，然而，<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/aggregation/unwind/#pipe._S_unwind">$unwind</a> 運算元允許有些類似的功能，但是與嵌入的欄位在文件內。</td>
 </tr>
 </tbody></table>
         
@@ -337,7 +342,7 @@
       
       <div class="article-summary">
         
-          <p>由於新專案採用了 <a href="http://nodejs.org/" target="_blank" rel="noopener">Node.js</a> 開發且使用 <a href="http://www.mongodb.org/" target="_blank" rel="noopener">MongoDB</a> 作為儲存媒介，所以動手翻譯了官方文件方便查閱相關指令用法。</p>
+          <p>由於新專案採用了 <a target="_blank" rel="noopener" href="http://nodejs.org/">Node.js</a> 開發且使用 <a target="_blank" rel="noopener" href="http://www.mongodb.org/">MongoDB</a> 作為儲存媒介，所以動手翻譯了官方文件方便查閱相關指令用法。</p>
 <h3 id="術語和概念-Terminology-and-Concepts"><a href="#術語和概念-Terminology-and-Concepts" class="headerlink" title="術語和概念(Terminology and Concepts)"></a>術語和概念(Terminology and Concepts)</h3><h5 id="下表列出了各種-SQL-和相應的-MongoDB-的術語和概念。"><a href="#下表列出了各種-SQL-和相應的-MongoDB-的術語和概念。" class="headerlink" title="下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。"></a>下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。</h5><table>
 <thead>
 <tr>
@@ -347,23 +352,23 @@
 </thead>
 <tbody><tr>
 <td align="left">資料庫(database)</td>
-<td align="left">資料庫(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-database" target="_blank" rel="noopener">database</a>)</td>
+<td align="left">資料庫(<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-database">database</a>)</td>
 </tr>
 <tr>
 <td align="left">資料表(table)</td>
-<td align="left">集合(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-collection" target="_blank" rel="noopener">collection</a>)</td>
+<td align="left">集合(<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-collection">collection</a>)</td>
 </tr>
 <tr>
 <td align="left">資料列(row)</td>
-<td align="left">文件(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-document" target="_blank" rel="noopener">document</a>) 或 <a href="http://docs.mongodb.org/manual/reference/glossary/#term-bson" target="_blank" rel="noopener">BSON</a> 文件</td>
+<td align="left">文件(<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-document">document</a>) 或 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-bson">BSON</a> 文件</td>
 </tr>
 <tr>
 <td align="left">資料行(column)</td>
-<td align="left">欄位(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-field" target="_blank" rel="noopener">field</a>)</td>
+<td align="left">欄位(<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-field">field</a>)</td>
 </tr>
 <tr>
 <td align="left">索引(index)</td>
-<td align="left">索引(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-index" target="_blank" rel="noopener">index</a>)</td>
+<td align="left">索引(<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-index">index</a>)</td>
 </tr>
 <tr>
 <td align="left">資料表連結(table joins)</td>
@@ -371,11 +376,11 @@
 </tr>
 <tr>
 <td align="left">主索引鍵(primary key)<br /><br />指定任意一個或多個欄位組合為主索引鍵，資料內容須唯一不可重複。</td>
-<td align="left">主索引鍵(<a href="http://docs.mongodb.org/manual/reference/glossary/#term-primary-key" target="_blank" rel="noopener">primary key</a>)<br /><br />在 MongoDB，主索引鍵會自動設定到 <a href="http://docs.mongodb.org/manual/reference/glossary/#term-id" target="_blank" rel="noopener">_id</a> 欄位。</td>
+<td align="left">主索引鍵(<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-primary-key">primary key</a>)<br /><br />在 MongoDB，主索引鍵會自動設定到 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-id">_id</a> 欄位。</td>
 </tr>
 <tr>
 <td align="left">彙總(aggregation)，例如：group by</td>
-<td align="left">彙總管線(aggregation pipeline)<br /><br /><a href="http://calvert.logdown.com/posts/159915-sql-to-aggregation-mapping-chart" target="_blank" rel="noopener">參閱 SQL 至彙總(Aggregation)對應表</a>.</td>
+<td align="left">彙總管線(aggregation pipeline)<br /><br /><a target="_blank" rel="noopener" href="http://calvert.logdown.com/posts/159915-sql-to-aggregation-mapping-chart">參閱 SQL 至彙總(Aggregation)對應表</a>.</td>
 </tr>
 </tbody></table>
 <h3 id="可執行檔案-Executables"><a href="#可執行檔案-Executables" class="headerlink" title="可執行檔案(Executables)"></a>可執行檔案(Executables)</h3><h5 id="下表列出了-MySQL-Oracle-可執行檔案和相應的-MongoDB-的可執行檔案。"><a href="#下表列出了-MySQL-Oracle-可執行檔案和相應的-MongoDB-的可執行檔案。" class="headerlink" title="下表列出了 MySQL / Oracle 可執行檔案和相應的 MongoDB 的可執行檔案。"></a>下表列出了 MySQL / Oracle 可執行檔案和相應的 MongoDB 的可執行檔案。</h5><table>
@@ -424,7 +429,7 @@
           Redis 是一個開源、遵守 BSD 授權、先進的鍵值對儲存庫。它通常被稱為資料結構伺服器，因為值可以是字串(String)、雜湊(Hash)、列表(List)、集合(Set)及序列集合(Sorted Set)等類型。
 
 下載並解壓縮
-123$ wget http://download.re ...
+$ wget http://download.redis ...
         
       </div>
       <a class="more" href="/2013/11/06/how-to-install-redis-in-centos-6/">繼續閱讀</a>
@@ -447,7 +452,7 @@
         
           由於有時候會重灌電腦，所以在這記錄一下重灌之後要延長 SSD 所做的步驟。
 關閉 Time Machine 的本機備份模式如果有開啟 Time Machine 功能，當備份磁碟無法使用時，系統還是會每小時建立快照摒除存在本機硬碟，使用以下指令可以禁止系統在本地端備份檔案
-1$ sudo tm ...
+$ sudo tmu ...
         
       </div>
       <a class="more" href="/2013/10/26/mac-os-x-ssd-performance-optimization/">繼續閱讀</a>
@@ -469,7 +474,9 @@
       <div class="article-summary">
         
           有時候我們會需要驗證表單中的元素陣列，例如：
-1234567891011121314151617181920212223242526272829&lt;form id="userDataForm" name="userDataForm" method="post" action=""&gt; ...
+&lt;form id="userDataForm" name="userDataForm" method="post" action="">
+  &lt;!-- User 1 -->
+  &lt;input type="text" id="us ...
         
       </div>
       <a class="more" href="/2013/10/20/jquery-validation-plugin-for-array-of-elements/">繼續閱讀</a>
@@ -501,16 +508,14 @@
           <h3 id="必要條件"><a href="#必要條件" class="headerlink" title="必要條件"></a>必要條件</h3><p>產生憑證需要 OpenSSL 類別庫，請先確認系統是否已安裝 OpenSSL。</p>
 <p>若尚未安裝，可透過以下方式安裝：</p>
 <ul>
-<li><p>Mac OS X 使用 <a href="http://mxcl.github.com/homebrew/" target="_blank" rel="noopener">Homebrew</a> 安裝</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install openssl</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Windows 可到此網站下載安裝檔：<a href="http://www.slproweb.com/products/Win32OpenSSL.html" target="_blank" rel="noopener">OpenSSL for Windows </a></p>
+<li><p>Mac OS X 使用 <a target="_blank" rel="noopener" href="http://mxcl.github.com/homebrew/">Homebrew</a> 安裝</p>
+<pre class="line-numbers language-none"><code class="language-none">$ brew install openssl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>Windows 可到此網站下載安裝檔：<a target="_blank" rel="noopener" href="http://www.slproweb.com/products/Win32OpenSSL.html">OpenSSL for Windows </a></p>
 </li>
 <li><p>Ubuntu/Debian Linux</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install openssl</span><br></pre></td></tr></table></figure>
-</li>
+<pre class="line-numbers language-none"><code class="language-none">$ sudo apt-get install openssl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 <li><p>RedHat/CentOS Linux</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install openssl</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">$ sudo yum install openssl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
         
       </div>
       <a class="more" href="/2013/10/17/creating-a-self-signed-ssl-certificate-for-nginx/">繼續閱讀</a>
@@ -530,20 +535,21 @@
   
 </main>
 
+
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
 
 <script>
   function async(u, c) {
-    var d = document, t = 'script',
+    const d = document, t = 'script',
       o = d.createElement(t),
       s = d.getElementsByTagName(t)[0];
     o.src = u;
@@ -551,20 +557,36 @@
     s.parentNode.insertBefore(o, s);
   }
 </script>
-
 <script>
   async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
     FastClick.attach(document.body);
-  })
+  });
 </script>
 
 <script>
-  $('figure').each(function(i, block) {
-    let lang = this.classList[1] || 'codeblock';
-    this.dataset.lang = lang.toUpperCase();
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
   });
 </script>
+
+
 <script src="/js/script.js"></script>
+
 
   </body>
 </html>

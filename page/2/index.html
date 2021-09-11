@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="Calvert&#39;s tech blog">
-  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
   
@@ -13,55 +13,70 @@
       Calvert&#39;s murmur
     
   </title>
-  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrcode.js"></script>
+  
   
   
     <!-- MathJax support START -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
       });
     </script>
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
+        let all = MathJax.Hub.getAllJax(), i;
         for (i = 0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- MathJax support END -->
   
 
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
-  <script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-44933497-2');
-  </script>
+    </script>
 
 
-</head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
-</div>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3999187913340509" crossorigin="anonymous"></script>
+
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
   <body>
     <header class="header fixed-header">
@@ -70,7 +85,6 @@
       <div class="logo"></div>
       <span>Calvert's murmur</span>
     </a>
-
     <ul class="right-list">
       
         <li class="list-item">
@@ -81,7 +95,7 @@
       
         <li class="list-item">
           
-            <a href="/categories/" class="item-link">Categories</a>
+            <a href="/series/" class="item-link">Series</a>
           
         </li>
       
@@ -109,49 +123,15 @@
           
         </li>
       
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
     </ul>
-
-    
-      <div id="search-form-wrap">
-        <form class="search-form">
-          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
-          <button type="submit" class="search-form-submit">
-            <span class="fa fa-search"></span>
-          </button>
-        </form>
-        <div class="ins-search">
-  <div class="ins-search-mask"></div>
-  <div class="ins-search-container">
-    <div class="ins-input-wrapper">
-      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
-      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-    </div>
-    <div class="ins-section-wrapper">
-      <div class="ins-section-container"></div>
-    </div>
-  </div>
-</div>
-<script>
-  (function (window) {
-    var INSIGHT_CONFIG = {
-      TRANSLATION: {
-        POSTS: '文章',
-        PAGES: '頁面',
-        CATEGORIES: '分類',
-        TAGS: '標籤',
-        UNTITLED: '無標題',
-      },
-      ROOT_URL: '/',
-      CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-  })(window);
-</script>
-<script src="/js/insight.js"></script>
-
-      </div>
-    
-
     <div class="menu">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -168,7 +148,7 @@
         
           <li class="menu-item">
             
-              <a href="/categories/" class="menu-link">Categories</a>
+              <a href="/series/" class="menu-link">Series</a>
             
           </li>
         
@@ -198,6 +178,31 @@
         
       </ul>
     </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
   </div>
 </header>
 
@@ -219,7 +224,7 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-functions" target="_blank" rel="noopener">Introduction to Functions in Golang</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-functions">Introduction to Functions in Golang</a></p>
 </blockquote>
 <p>函數是一個程式碼區塊，它接受一些輸入，對該輸入進行一些處理，並產生一些輸出。</p>
 <img src="/2019/11/11/introduction-to-functions-in-golang/golang-functions-illustration.jpg" class="">
@@ -246,16 +251,28 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-control-flow" target="_blank" rel="noopener">Golang Control Flow Statements: If, Switch and For</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-control-flow">Golang Control Flow Statements: If, Switch and For</a></p>
 </blockquote>
 <h3 id="if-陳述式"><a href="#if-陳述式" class="headerlink" title="if 陳述式"></a>if 陳述式</h3><p><code>if</code> 陳述式用於根據給定的條件，決定是否應執行程式碼區塊。</p>
 <p>以下是 Golang 中 <code>if</code> 陳述式的語法：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(condition) &#123;</span><br><span class="line">	<span class="comment">// Code to be executed if the condition is true.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">if</span><span class="token punctuation">(</span>condition<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// Code to be executed if the condition is true.</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>這裡有個簡單的範例：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> x = <span class="number">25</span></span><br><span class="line">	<span class="keyword">if</span> x%<span class="number">5</span> == <span class="number">0</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"%d is a multiple of 5\n"</span>, x)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">25 is a multiple of 5</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token number">25</span>
+	<span class="token keyword">if</span> x<span class="token operator">%</span><span class="token number">5</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%d is a multiple of 5\n"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+25 is a multiple of 5<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
         
       </div>
       <a class="more" href="/2019/11/11/golang-control-flow-statements/">繼續閱讀</a>
@@ -277,7 +294,7 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-typed-untyped-constants" target="_blank" rel="noopener">Working with Constants in Golang</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-typed-untyped-constants">Working with Constants in Golang</a></p>
 </blockquote>
 <h3 id="常數"><a href="#常數" class="headerlink" title="常數"></a>常數</h3><p>在 Golang 中，我們使用 <code>constant</code> 語法來表示固定（不改變）的值，如 <code>5</code>、<code>1.34</code>、<code>true</code> 和 <code>&quot;Hello&quot;</code> 等。</p>
 <h4 id="定數是常數"><a href="#定數是常數" class="headerlink" title="定數是常數"></a>定數是常數</h4><p>Golang 中的所有定數，如整數 <code>5</code>、<code>1000</code>、浮點數 <code>4.76</code>、<code>1.89</code>、布林值 <code>true</code>、<code>false</code> 或字串 <code>&quot;Hello&quot;</code>、<code>&quot;Jhon&quot;</code> 都是<strong>常數</strong>。</p>
@@ -334,7 +351,7 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-basic-types-operators-type-conversion" target="_blank" rel="noopener">Golang Basic Types, Operators and Type Conversion</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-basic-types-operators-type-conversion">Golang Basic Types, Operators and Type Conversion</a></p>
 </blockquote>
 <p>Go 是靜態型別的程式語言。Golang 中的每個變數都有關聯的型別。</p>
 <p>資料型別會對一組相關的資料集進行分類。它們定義了資料如何儲存在記憶體中、特定資料型別的變數可能儲存的值以及可以對其執行的運算。</p>
@@ -360,7 +377,7 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-variables-zero-values-type-inference" target="_blank" rel="noopener">Golang Variables, Zero Values, and Type inference</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-variables-zero-values-type-inference">Golang Variables, Zero Values, and Type inference</a></p>
 </blockquote>
 <h3 id="變數和資料型別入門"><a href="#變數和資料型別入門" class="headerlink" title="變數和資料型別入門"></a>變數和資料型別入門</h3><p>每個程式都需要在記憶體中儲存一些資料。資料被儲存在特定的記憶體位置。</p>
 <p>變數只是為儲存資料的記憶體位置所取的一個方便的名稱。除了名稱外，每個變數還有關聯的型別。</p>
@@ -385,11 +402,18 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-introduction-hello-world" target="_blank" rel="noopener">Hello Golang: Writing your first Golang Program</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-introduction-hello-world">Hello Golang: Writing your first Golang Program</a></p>
 </blockquote>
 <p>當我們開始學習一種新的程式語言時，通常會先要撰寫經典的「Hello, World」程式。</p>
 <p>讓我們用 Go 撰寫「Hello, World」程式，並了解其工作原理。開啟你慣用的文字編輯器，建立一個名為 <code>hello.go</code> 的新檔案，然後輸入以下程式碼：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// My first Program</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"Hello, World"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// My first Program</span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Hello, World"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
         
       </div>
       <a class="more" href="/2019/11/04/writing-your-first-golang-program/">繼續閱讀</a>
@@ -411,7 +435,7 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-installation-setup-gopath-workspace" target="_blank" rel="noopener">Golang Installation, Setup, GOPATH, and Go Workspace</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-installation-setup-gopath-workspace">Golang Installation, Setup, GOPATH, and Go Workspace</a></p>
 </blockquote>
 <p>Go 是 Google 建立的開源、靜態型別的編譯語言。</p>
 <p>它結合了靜態型別和動態型別語言的優點，並為你提供了有效率和輕鬆撰寫程式的完美組合。它主要適合用於快速建立、高效能和可靠的伺服器端應用程式。</p>
@@ -436,7 +460,7 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>VARVET BLOG</strong> — <a href="https://www.varvet.com/blog/working-with-time-zones-in-ruby-on-rails" target="_blank" rel="noopener">WORKING WITH TIME ZONES IN RUBY ON RAILS</a></p>
+<p>原文：<strong>VARVET BLOG</strong> — <a target="_blank" rel="noopener" href="https://www.varvet.com/blog/working-with-time-zones-in-ruby-on-rails">WORKING WITH TIME ZONES IN RUBY ON RAILS</a></p>
 </blockquote>
 <p>Rails 提供了很好的工具來處理時區，但仍有很多事情可能會出錯。這篇文章會點出這些問題並提供解決方案。</p>
 <p>讓我被欺騙最多次的應該是，Rails 會愚弄你，讓你誤以為它替你處理好了所有和時間有關的部分。別誤會我的意思，我希望 Rails 盡可能的為我做更多事情，但在學習的過程中由於不夠熟悉 Rails 為我做了些什麼，因此碰到了許多困難。另外需要注意的是，在處理時區上，有更多是你意想不到需要處理的。需要考慮資料庫、伺服器、開發機器、系統設定、使用者設定和瀏覽器。</p>
@@ -461,10 +485,22 @@
       <div class="article-summary">
         
           <p>在 Ruby 類別內，你不知道什麼時候需要使用 self，而什麼時候又可以省略，本文將透過範例來做簡單的說明。</p>
-<h3 id="範例一"><a href="#範例一" class="headerlink" title="範例一"></a>範例一</h3><figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line">  <span class="keyword">attr_writer</span> <span class="symbol">:bar</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">do_something</span></span></span><br><span class="line">    bar = <span class="number">123</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="範例一"><a href="#範例一" class="headerlink" title="範例一"></a>範例一</h3><pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token keyword">class</span> <span class="token class-name">Foo</span>
+  attr_writer <span class="token symbol">:bar</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">do_something</span></span>
+    bar <span class="token operator">=</span> <span class="token number">123</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>在此範例中 <code>bar = 123</code> 會建立一個名稱為 <code>bar</code> 的區域變數，而不是呼叫由 <code>attr_writer</code> 所產生的 <code>bar=</code> 方法，只要加上 <code>self</code> 就可以修正這個問題。</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line">  <span class="keyword">attr_writer</span> <span class="symbol">:bar</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">do_something</span></span></span><br><span class="line">    <span class="keyword">self</span>.bar = <span class="number">123</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token keyword">class</span> <span class="token class-name">Foo</span>
+  attr_writer <span class="token symbol">:bar</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">do_something</span></span>
+    <span class="token keyword">self</span><span class="token punctuation">.</span>bar <span class="token operator">=</span> <span class="token number">123</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><code>self.bar</code> 便會呼叫我們所預期的 <code>bar=</code> 方法。</p>
         
@@ -492,7 +528,7 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>Ruby on Rails Guides</strong> — <a href="http://guides.rubyonrails.org/engines.html" target="_blank" rel="noopener">Getting Started with Engines</a></p>
+<p>原文：<strong>Ruby on Rails Guides</strong> — <a target="_blank" rel="noopener" href="http://guides.rubyonrails.org/engines.html">Getting Started with Engines</a></p>
 </blockquote>
 <p><code>Rails::Engine</code> 允許你包裝特定的 Rails 應用程式或功能子集，並與其他應用程式共享或在更大的封裝應用程式中。每個 <code>Rails::Application</code> 都只是一個引擎，它允許簡單的功能及應用程式共享。</p>
 <p>任何 <code>Rails::Engine</code> 也是一個 <code>Rails::Railtie</code>，所以在 railties 可用的相同方法（如 <code>rake_tasks</code> 和 <code>generators</code>）和配置選項也可用於引擎。</p>
@@ -516,20 +552,21 @@
   
 </main>
 
+
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
 
 <script>
   function async(u, c) {
-    var d = document, t = 'script',
+    const d = document, t = 'script',
       o = d.createElement(t),
       s = d.getElementsByTagName(t)[0];
     o.src = u;
@@ -537,20 +574,36 @@
     s.parentNode.insertBefore(o, s);
   }
 </script>
-
 <script>
   async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
     FastClick.attach(document.body);
-  })
+  });
 </script>
 
 <script>
-  $('figure').each(function(i, block) {
-    let lang = this.classList[1] || 'codeblock';
-    this.dataset.lang = lang.toUpperCase();
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
   });
 </script>
+
+
 <script src="/js/script.js"></script>
+
 
   </body>
 </html>

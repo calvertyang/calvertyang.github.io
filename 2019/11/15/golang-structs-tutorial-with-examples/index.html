@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="Calvert&#39;s tech blog">
-  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
   
@@ -13,55 +13,70 @@
       Golang struct 教學與範例 | Calvert&#39;s murmur
     
   </title>
-  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrcode.js"></script>
+  
   
   
     <!-- MathJax support START -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
       });
     </script>
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
+        let all = MathJax.Hub.getAllJax(), i;
         for (i = 0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- MathJax support END -->
   
 
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
-  <script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-44933497-2');
-  </script>
+    </script>
 
 
-</head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
-</div>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3999187913340509" crossorigin="anonymous"></script>
+
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
   <body>
     <header class="header fixed-header">
@@ -70,7 +85,6 @@
       <div class="logo"></div>
       <span>Calvert's murmur</span>
     </a>
-
     <ul class="right-list">
       
         <li class="list-item">
@@ -81,7 +95,7 @@
       
         <li class="list-item">
           
-            <a href="/categories/" class="item-link">Categories</a>
+            <a href="/series/" class="item-link">Series</a>
           
         </li>
       
@@ -109,49 +123,15 @@
           
         </li>
       
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
     </ul>
-
-    
-      <div id="search-form-wrap">
-        <form class="search-form">
-          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
-          <button type="submit" class="search-form-submit">
-            <span class="fa fa-search"></span>
-          </button>
-        </form>
-        <div class="ins-search">
-  <div class="ins-search-mask"></div>
-  <div class="ins-search-container">
-    <div class="ins-input-wrapper">
-      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
-      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-    </div>
-    <div class="ins-section-wrapper">
-      <div class="ins-section-container"></div>
-    </div>
-  </div>
-</div>
-<script>
-  (function (window) {
-    var INSIGHT_CONFIG = {
-      TRANSLATION: {
-        POSTS: '文章',
-        PAGES: '頁面',
-        CATEGORIES: '分類',
-        TAGS: '標籤',
-        UNTITLED: '無標題',
-      },
-      ROOT_URL: '/',
-      CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-  })(window);
-</script>
-<script src="/js/insight.js"></script>
-
-      </div>
-    
-
     <div class="menu">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -168,7 +148,7 @@
         
           <li class="menu-item">
             
-              <a href="/categories/" class="menu-link">Categories</a>
+              <a href="/series/" class="menu-link">Series</a>
             
           </li>
         
@@ -198,98 +178,328 @@
         
       </ul>
     </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
   </div>
 </header>
 
     <div id="article-banner">
   <h2>Golang struct 教學與範例</h2>
   <p class="post-date">2019-11-15</p>
+
   <div class="arrow-down">
-    <a href="javascript:;" target="_blank" rel="noopener"></a>
+    <a href="javascript:;"></a>
   </div>
 </div>
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-structs" target="_blank" rel="noopener">Golang Structs Tutorial with Examples</a></p>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-structs">Golang Structs Tutorial with Examples</a></p>
 </blockquote>
 <p><code>struct</code> 是使用者定義的型別，包含已命名欄位/屬性的集合。它用於將相關資料分組在一起形成一個單位。任何具有一組屬性的現實世界實體都可以使用結構表示。</p>
 <p>如果你有物件導向的背景知識，你可以將 <code>struct</code> 視為支援複合但不支援繼承的輕量級類別。</p>
 <h3 id="定義-struct-型別"><a href="#定義-struct-型別" class="headerlink" title="定義 struct 型別"></a>定義 struct 型別</h3><p>你可以像這樣定義新的 <code>struct</code> 型別：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;</span><br><span class="line">	FirstName <span class="keyword">string</span></span><br><span class="line">	LastName  <span class="keyword">string</span></span><br><span class="line">	Age       <span class="keyword">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> Person <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	FirstName <span class="token builtin">string</span>
+	LastName  <span class="token builtin">string</span>
+	Age       <span class="token builtin">int</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<a id="more"></a>
+<span id="more"></span>
 
 <p><code>type</code> 關鍵字引進了新型別。其後是型別（<code>Person</code>）的名稱和關鍵字 <code>struct</code>，表示我們正在定義一個 <code>struct</code>。struct 包含了一個在大括號內的<code>欄位</code>列表。每個欄位都有名稱和型別。</p>
 <p>注意，你可以像這樣折疊相同型別的欄位：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;</span><br><span class="line">	FirstName, LastName <span class="keyword">string</span></span><br><span class="line">	Age       <span class="keyword">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> Person <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	FirstName<span class="token punctuation">,</span> LastName <span class="token builtin">string</span>
+	Age       <span class="token builtin">int</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="宣告和初始化-struct"><a href="#宣告和初始化-struct" class="headerlink" title="宣告和初始化 struct"></a>宣告和初始化 struct</h3><h4 id="宣告-struct-型別的變數"><a href="#宣告-struct-型別的變數" class="headerlink" title="宣告 struct 型別的變數"></a>宣告 struct 型別的變數</h4><p>如同其他資料型別一樣，你可以像這樣宣告 <code>struct</code> 型別的變數：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Declares a variable of type 'Person'</span></span><br><span class="line"><span class="keyword">var</span> p Person <span class="comment">// All the struct fields are initialized with their zero value</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Declares a variable of type 'Person'</span>
+<span class="token keyword">var</span> p Person <span class="token comment">// All the struct fields are initialized with their zero value</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>上面的程式碼建立了一個類型為 <code>Person</code> 的變數，預設情況下將其設為零。對於 struct，零表示所有欄位均設定為其對應的<a href="/2019/11/05/golang-variables-zero-values-type-inference/" title="零值">零值</a>。因此，欄位 <code>FirstName</code> 和 <code>LastName</code> 設定為 <code>&quot;&quot;</code>，且 <code>Age</code> 設定為 <code>0</code>。</p>
 <h4 id="初始化-struct"><a href="#初始化-struct" class="headerlink" title="初始化 struct"></a>初始化 struct</h4><p>你可以使用 struct 定數來初始化一個 <code>struct</code> 型別的變數：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Initialize a struct by supplying the value of all the struct fields.</span></span><br><span class="line"><span class="keyword">var</span> p = Person&#123;<span class="string">"Rajeev"</span>, <span class="string">"Singh"</span>, <span class="number">26</span>&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Initialize a struct by supplying the value of all the struct fields.</span>
+<span class="token keyword">var</span> p <span class="token operator">=</span> Person<span class="token punctuation">&#123;</span><span class="token string">"Rajeev"</span><span class="token punctuation">,</span> <span class="token string">"Singh"</span><span class="token punctuation">,</span> <span class="token number">26</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>注意，你需要按照在 <code>struct</code> 中宣告他們的順序來傳遞欄位值。另外，你不能使用以下語法僅初始化一部分欄位：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = Person&#123;<span class="string">"Rajeev"</span>&#125; <span class="comment">// Compiler Error: too few values in struct initializer</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> p <span class="token operator">=</span> Person<span class="token punctuation">&#123;</span><span class="token string">"Rajeev"</span><span class="token punctuation">&#125;</span> <span class="token comment">// Compiler Error: too few values in struct initializer</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="初始化-struct-時命名欄位"><a href="#初始化-struct-時命名欄位" class="headerlink" title="初始化 struct 時命名欄位"></a>初始化 struct 時命名欄位</h4><p>Go 也支援用來初始化 struct 的 <code>name: value</code> 語法（使用此語法時，欄位順序無關緊要）。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = Person&#123;FirstName: <span class="string">"Rajeev"</span>, LastName: <span class="string">"Singh"</span>, Age: <span class="number">25</span>&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> p <span class="token operator">=</span> Person<span class="token punctuation">&#123;</span>FirstName<span class="token punctuation">:</span> <span class="token string">"Rajeev"</span><span class="token punctuation">,</span> LastName<span class="token punctuation">:</span> <span class="token string">"Singh"</span><span class="token punctuation">,</span> Age<span class="token punctuation">:</span> <span class="token number">25</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>你可以用換行符號分隔多個欄位，以提高可讀性（在這種情況下，必須使用逗號結尾）：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = Person&#123;</span><br><span class="line">	FirstName: <span class="string">"John"</span>,</span><br><span class="line">	LastName:  <span class="string">"Snow"</span>,</span><br><span class="line">	Age:       <span class="number">45</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> p <span class="token operator">=</span> Person<span class="token punctuation">&#123;</span>
+	FirstName<span class="token punctuation">:</span> <span class="token string">"John"</span><span class="token punctuation">,</span>
+	LastName<span class="token punctuation">:</span>  <span class="token string">"Snow"</span><span class="token punctuation">,</span>
+	Age<span class="token punctuation">:</span>       <span class="token number">45</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><code>name: value</code> 語法允許你允許你僅初始化一部分欄位。所有未初始化的欄位均設定為其對應的零值：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = Person&#123;FirstName: <span class="string">"Alien"</span>&#125; <span class="comment">// LastName: "", Age: 0</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> p <span class="token operator">=</span> Person<span class="token punctuation">&#123;</span>FirstName<span class="token punctuation">:</span> <span class="token string">"Alien"</span><span class="token punctuation">&#125;</span> <span class="token comment">// LastName: "", Age: 0</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = Person&#123;&#125; <span class="comment">// FirstName: "", LastName: "", Age: 0</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> p <span class="token operator">=</span> Person<span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">// FirstName: "", LastName: "", Age: 0</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h3 id="完整範例：定義和初始化-struct-型別"><a href="#完整範例：定義和初始化-struct-型別" class="headerlink" title="完整範例：定義和初始化 struct 型別"></a>完整範例：定義和初始化 struct 型別</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Defining a struct type</span></span><br><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;</span><br><span class="line">	FirstName <span class="keyword">string</span></span><br><span class="line">	LastName  <span class="keyword">string</span></span><br><span class="line">	Age       <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Declaring a variable of a `struct` type</span></span><br><span class="line">	<span class="keyword">var</span> p Person <span class="comment">// // All the struct fields are initialized with their zero value</span></span><br><span class="line">	fmt.Println(p)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Declaring and initializing a struct using a struct literal</span></span><br><span class="line">	p1 := Person&#123;<span class="string">"Rajeev"</span>, <span class="string">"Singh"</span>, <span class="number">26</span>&#125;</span><br><span class="line">	fmt.Println(<span class="string">"Person1: "</span>, p1)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Naming fields while initializing a struct</span></span><br><span class="line">	p2 := Person&#123;</span><br><span class="line">		FirstName: <span class="string">"John"</span>,</span><br><span class="line">		LastName:  <span class="string">"Snow"</span>,</span><br><span class="line">		Age:       <span class="number">45</span>,</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">"Person2: "</span>, p2)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Uninitialized fields are set to their corresponding zero-value</span></span><br><span class="line">	p3 := Person&#123;FirstName: <span class="string">"Robert"</span>&#125;</span><br><span class="line">	fmt.Println(<span class="string">"Person3: "</span>, p3)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="完整範例：定義和初始化-struct-型別"><a href="#完整範例：定義和初始化-struct-型別" class="headerlink" title="完整範例：定義和初始化 struct 型別"></a>完整範例：定義和初始化 struct 型別</h3><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">&#123;  0&#125;</span><br><span class="line">Person1:  &#123;Rajeev Singh 26&#125;</span><br><span class="line">Person2:  &#123;John Snow 45&#125;</span><br><span class="line">Person3:  &#123;Robert  0&#125;</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token comment">// Defining a struct type</span>
+<span class="token keyword">type</span> Person <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	FirstName <span class="token builtin">string</span>
+	LastName  <span class="token builtin">string</span>
+	Age       <span class="token builtin">int</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// Declaring a variable of a `struct` type</span>
+	<span class="token keyword">var</span> p Person <span class="token comment">// // All the struct fields are initialized with their zero value</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span>
+
+	<span class="token comment">// Declaring and initializing a struct using a struct literal</span>
+	p1 <span class="token operator">:=</span> Person<span class="token punctuation">&#123;</span><span class="token string">"Rajeev"</span><span class="token punctuation">,</span> <span class="token string">"Singh"</span><span class="token punctuation">,</span> <span class="token number">26</span><span class="token punctuation">&#125;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Person1: "</span><span class="token punctuation">,</span> p1<span class="token punctuation">)</span>
+
+	<span class="token comment">// Naming fields while initializing a struct</span>
+	p2 <span class="token operator">:=</span> Person<span class="token punctuation">&#123;</span>
+		FirstName<span class="token punctuation">:</span> <span class="token string">"John"</span><span class="token punctuation">,</span>
+		LastName<span class="token punctuation">:</span>  <span class="token string">"Snow"</span><span class="token punctuation">,</span>
+		Age<span class="token punctuation">:</span>       <span class="token number">45</span><span class="token punctuation">,</span>
+	<span class="token punctuation">&#125;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Person2: "</span><span class="token punctuation">,</span> p2<span class="token punctuation">)</span>
+
+	<span class="token comment">// Uninitialized fields are set to their corresponding zero-value</span>
+	p3 <span class="token operator">:=</span> Person<span class="token punctuation">&#123;</span>FirstName<span class="token punctuation">:</span> <span class="token string">"Robert"</span><span class="token punctuation">&#125;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Person3: "</span><span class="token punctuation">,</span> p3<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+&#123;  0&#125;
+Person1:  &#123;Rajeev Singh 26&#125;
+Person2:  &#123;John Snow 45&#125;
+Person3:  &#123;Robert  0&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="存取-struct-的欄位"><a href="#存取-struct-的欄位" class="headerlink" title="存取 struct 的欄位"></a>存取 struct 的欄位</h3><p>你可以使用點（<code>.</code>） 運算元來存取 <code>struct</code> 的各個欄位：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Car <span class="keyword">struct</span> &#123;</span><br><span class="line">	Name, Model, Color <span class="keyword">string</span></span><br><span class="line">	WeightInKg         <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	c := Car&#123;</span><br><span class="line">		Name:       <span class="string">"Ferrari"</span>,</span><br><span class="line">		Model:      <span class="string">"GTC4"</span>,</span><br><span class="line">		Color:      <span class="string">"Red"</span>,</span><br><span class="line">		WeightInKg: <span class="number">1920</span>,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Accessing struct fields using the dot operator</span></span><br><span class="line">	fmt.Println(<span class="string">"Car Name: "</span>, c.Name)</span><br><span class="line">	fmt.Println(<span class="string">"Car Color: "</span>, c.Color)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Assigning a new value to a struct field</span></span><br><span class="line">	c.Color = <span class="string">"Black"</span></span><br><span class="line">	fmt.Println(<span class="string">"Car: "</span>, c)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Car Name:  Ferrari</span><br><span class="line">Car Color:  Red</span><br><span class="line">Car:  &#123;Ferrari GTC4 Black 1920&#125;</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">type</span> Car <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	Name<span class="token punctuation">,</span> Model<span class="token punctuation">,</span> Color <span class="token builtin">string</span>
+	WeightInKg         <span class="token builtin">float64</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	c <span class="token operator">:=</span> Car<span class="token punctuation">&#123;</span>
+		Name<span class="token punctuation">:</span>       <span class="token string">"Ferrari"</span><span class="token punctuation">,</span>
+		Model<span class="token punctuation">:</span>      <span class="token string">"GTC4"</span><span class="token punctuation">,</span>
+		Color<span class="token punctuation">:</span>      <span class="token string">"Red"</span><span class="token punctuation">,</span>
+		WeightInKg<span class="token punctuation">:</span> <span class="token number">1920</span><span class="token punctuation">,</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token comment">// Accessing struct fields using the dot operator</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Car Name: "</span><span class="token punctuation">,</span> c<span class="token punctuation">.</span>Name<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Car Color: "</span><span class="token punctuation">,</span> c<span class="token punctuation">.</span>Color<span class="token punctuation">)</span>
+
+	<span class="token comment">// Assigning a new value to a struct field</span>
+	c<span class="token punctuation">.</span>Color <span class="token operator">=</span> <span class="token string">"Black"</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Car: "</span><span class="token punctuation">,</span> c<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+Car Name:  Ferrari
+Car Color:  Red
+Car:  &#123;Ferrari GTC4 Black 1920&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="指向-struct-的指標"><a href="#指向-struct-的指標" class="headerlink" title="指向 struct 的指標"></a>指向 struct 的指標</h3><p>你可以使用 <code>&amp;</code> 運算元取得指向 <code>struct</code> 的<a href="/2019/11/15/playing-with-pointers-in-golang/" title="指標">指標</a>：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Student <span class="keyword">struct</span> &#123;</span><br><span class="line">	RollNumber <span class="keyword">int</span></span><br><span class="line">	Name       <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// instance of student struct type</span></span><br><span class="line">	s := Student&#123;<span class="number">11</span>, <span class="string">"Jack"</span>&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Pointer to the student struct</span></span><br><span class="line">	ps := &amp;s</span><br><span class="line">	fmt.Println(ps)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Accessing struct fields via pointer</span></span><br><span class="line">	fmt.Println((*ps).Name)</span><br><span class="line">	fmt.Println(ps.Name) <span class="comment">// Same as above: No need to explicitly dereference the pointer</span></span><br><span class="line"></span><br><span class="line">	ps.RollNumber = <span class="number">31</span></span><br><span class="line">	fmt.Println(ps)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">&amp;&#123;11 Jack&#125;</span><br><span class="line">Jack</span><br><span class="line">Jack</span><br><span class="line">&amp;&#123;31 Jack&#125;</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">type</span> Student <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	RollNumber <span class="token builtin">int</span>
+	Name       <span class="token builtin">string</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// instance of student struct type</span>
+	s <span class="token operator">:=</span> Student<span class="token punctuation">&#123;</span><span class="token number">11</span><span class="token punctuation">,</span> <span class="token string">"Jack"</span><span class="token punctuation">&#125;</span>
+
+	<span class="token comment">// Pointer to the student struct</span>
+	ps <span class="token operator">:=</span> <span class="token operator">&amp;</span>s
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>ps<span class="token punctuation">)</span>
+
+	<span class="token comment">// Accessing struct fields via pointer</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">*</span>ps<span class="token punctuation">)</span><span class="token punctuation">.</span>Name<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>ps<span class="token punctuation">.</span>Name<span class="token punctuation">)</span> <span class="token comment">// Same as above: No need to explicitly dereference the pointer</span>
+
+	ps<span class="token punctuation">.</span>RollNumber <span class="token operator">=</span> <span class="token number">31</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>ps<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+&amp;&#123;11 Jack&#125;
+Jack
+Jack
+&amp;&#123;31 Jack&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><em>如以上範例所示，Go 允許你透過指標直接存取 <code>struct</code> 的欄位，而不用明確的解參考。</em></p>
 <h4 id="使用內建的-new-函數建立一個-struct-並取得指向它的指標"><a href="#使用內建的-new-函數建立一個-struct-並取得指向它的指標" class="headerlink" title="使用內建的 new() 函數建立一個 struct 並取得指向它的指標"></a>使用內建的 <code>new()</code> 函數建立一個 struct 並取得指向它的指標</h4><p>你也可以使用內建的 <code>new()</code> 函數來建立 <code>struct</code> 的實體。<code>new()</code> 函數分配足夠的記憶體來符合所有的 <code>struct</code> 欄位，將他們各自設為零值，並返回指向新分配的 <code>struct</code> 的指標：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Employee <span class="keyword">struct</span> &#123;</span><br><span class="line">	Id   <span class="keyword">int</span></span><br><span class="line">	Name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// You can also get a pointer to a struct using the built-in new() function</span></span><br><span class="line">	<span class="comment">// It allocates enough memory to fit a value of the given struct type, and returns a pointer to it</span></span><br><span class="line">	pEmp := <span class="built_in">new</span>(Employee)</span><br><span class="line"></span><br><span class="line">	pEmp.Id = <span class="number">1000</span></span><br><span class="line">	pEmp.Name = <span class="string">"Sachin"</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(pEmp)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">&amp;&#123;1000 Sachin&#125;</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">type</span> Employee <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	Id   <span class="token builtin">int</span>
+	Name <span class="token builtin">string</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// You can also get a pointer to a struct using the built-in new() function</span>
+	<span class="token comment">// It allocates enough memory to fit a value of the given struct type, and returns a pointer to it</span>
+	pEmp <span class="token operator">:=</span> <span class="token function">new</span><span class="token punctuation">(</span>Employee<span class="token punctuation">)</span>
+
+	pEmp<span class="token punctuation">.</span>Id <span class="token operator">=</span> <span class="token number">1000</span>
+	pEmp<span class="token punctuation">.</span>Name <span class="token operator">=</span> <span class="token string">"Sachin"</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>pEmp<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+&amp;&#123;1000 Sachin&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="匯出與未匯出的-struct-和-struct-欄位"><a href="#匯出與未匯出的-struct-和-struct-欄位" class="headerlink" title="匯出與未匯出的 struct 和 struct 欄位"></a>匯出與未匯出的 struct 和 struct 欄位</h3><p>任何以大寫字母開頭的 <code>struct</code> 型別都會被匯出，並且可以從外部的 package 中存取。同樣的，任何以大寫字母開頭的 <code>struct</code> 欄位都會被匯出。</p>
 <p>相反的，所有以小寫字母開頭的名稱僅在同一 package 中可見。</p>
 <p>讓我們來看個範例。細想以下 Go 程式的 package 階層：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$GOPATH/src</span><br><span class="line">    example</span><br><span class="line">      main</span><br><span class="line">        main.go</span><br><span class="line">      model</span><br><span class="line">        address.go</span><br><span class="line">        customer.go</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">$GOPATH&#x2F;src
+    example
+      main
+        main.go
+      model
+        address.go
+        customer.go<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>customer.go</strong></p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> model</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Customer <span class="keyword">struct</span> &#123;  <span class="comment">// exported struct type</span></span><br><span class="line">	Id <span class="keyword">int</span>				<span class="comment">// exported field</span></span><br><span class="line">	Name <span class="keyword">string</span>			<span class="comment">// exported field</span></span><br><span class="line">	addr address        <span class="comment">// unexported field (only accessible inside package `model`)</span></span><br><span class="line">	married <span class="keyword">bool</span>  		<span class="comment">// unexported field (only accessible inside package `model`)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> model
+
+<span class="token keyword">type</span> Customer <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>  <span class="token comment">// exported struct type</span>
+	Id <span class="token builtin">int</span>				<span class="token comment">// exported field</span>
+	Name <span class="token builtin">string</span>			<span class="token comment">// exported field</span>
+	addr address        <span class="token comment">// unexported field (only accessible inside package `model`)</span>
+	married <span class="token builtin">bool</span>  		<span class="token comment">// unexported field (only accessible inside package `model`)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>address.go</strong></p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> model</span><br><span class="line"></span><br><span class="line"><span class="comment">// Unexported struct (only accessible inside package `model`)</span></span><br><span class="line"><span class="keyword">type</span> address <span class="keyword">struct</span> &#123;</span><br><span class="line">	houseNo, street, city, state, country <span class="keyword">string</span></span><br><span class="line">	zipCode                               <span class="keyword">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> model
+
+<span class="token comment">// Unexported struct (only accessible inside package `model`)</span>
+<span class="token keyword">type</span> address <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	houseNo<span class="token punctuation">,</span> street<span class="token punctuation">,</span> city<span class="token punctuation">,</span> state<span class="token punctuation">,</span> country <span class="token builtin">string</span>
+	zipCode                               <span class="token builtin">int</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>然後，這是主要程式 <strong>main.go</strong>：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"example/model"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	c := model.Customer&#123;</span><br><span class="line">		Id: <span class="number">1</span>,</span><br><span class="line">		Name: <span class="string">"Rajeev Singh"</span>,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	c.married = <span class="literal">true</span>	<span class="comment">// Error: can not refer to unexported field or method</span></span><br><span class="line"></span><br><span class="line">	a := model.address&#123;&#125; <span class="comment">// Error: can not refer to unexported name</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"Programmer = "</span>, c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"example/model"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	c <span class="token operator">:=</span> model<span class="token punctuation">.</span>Customer<span class="token punctuation">&#123;</span>
+		Id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+		Name<span class="token punctuation">:</span> <span class="token string">"Rajeev Singh"</span><span class="token punctuation">,</span>
+	<span class="token punctuation">&#125;</span>
+
+	c<span class="token punctuation">.</span>married <span class="token operator">=</span> <span class="token boolean">true</span>	<span class="token comment">// Error: can not refer to unexported field or method</span>
+
+	a <span class="token operator">:=</span> model<span class="token punctuation">.</span>address<span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">// Error: can not refer to unexported name</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Programmer = "</span><span class="token punctuation">,</span> c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>如你所見，名稱 <code>address</code> 和 <code>married</code> 是未匯出的，無法從 <code>main</code> package 中存取。</p>
 <h3 id="struct-是值型別"><a href="#struct-是值型別" class="headerlink" title="struct 是值型別"></a>struct 是值型別</h3><p>struct 是值型別。當你將一個 <code>struct</code> 變數分派給另一個變數時，會建立並分派一個新的 <code>struct</code> 副本。同樣的，當你將 <code>struct</code> 傳遞給另一個函數時，該函數將取得自己的 <code>struct</code> 副本。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Point <span class="keyword">struct</span> &#123;</span><br><span class="line">	X <span class="keyword">float64</span></span><br><span class="line">	Y <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Structs are value types.</span></span><br><span class="line">	p1 := Point&#123;<span class="number">10</span>, <span class="number">20</span>&#125;</span><br><span class="line">	p2 := p1 <span class="comment">// A copy of the struct `p1` is assigned to `p2`</span></span><br><span class="line">	fmt.Println(<span class="string">"p1 = "</span>, p1)</span><br><span class="line">	fmt.Println(<span class="string">"p2 = "</span>, p2)</span><br><span class="line"></span><br><span class="line">	p2.X = <span class="number">15</span></span><br><span class="line">	fmt.Println(<span class="string">"\nAfter modifying p2:"</span>)</span><br><span class="line">	fmt.Println(<span class="string">"p1 = "</span>, p1)</span><br><span class="line">	fmt.Println(<span class="string">"p2 = "</span>, p2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">p1 =  &#123;10 20&#125;</span><br><span class="line">p2 =  &#123;10 20&#125;</span><br><span class="line"></span><br><span class="line">After modifying p2:</span><br><span class="line">p1 =  &#123;10 20&#125;</span><br><span class="line">p2 =  &#123;15 20&#125;</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">type</span> Point <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	X <span class="token builtin">float64</span>
+	Y <span class="token builtin">float64</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// Structs are value types.</span>
+	p1 <span class="token operator">:=</span> Point<span class="token punctuation">&#123;</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">&#125;</span>
+	p2 <span class="token operator">:=</span> p1 <span class="token comment">// A copy of the struct `p1` is assigned to `p2`</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"p1 = "</span><span class="token punctuation">,</span> p1<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"p2 = "</span><span class="token punctuation">,</span> p2<span class="token punctuation">)</span>
+
+	p2<span class="token punctuation">.</span>X <span class="token operator">=</span> <span class="token number">15</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"\nAfter modifying p2:"</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"p1 = "</span><span class="token punctuation">,</span> p1<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"p2 = "</span><span class="token punctuation">,</span> p2<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+p1 &#x3D;  &#123;10 20&#125;
+p2 &#x3D;  &#123;10 20&#125;
+
+After modifying p2:
+p1 &#x3D;  &#123;10 20&#125;
+p2 &#x3D;  &#123;15 20&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="struct-等式"><a href="#struct-等式" class="headerlink" title="struct 等式"></a>struct 等式</h3><p>如果兩個 <code>struct</code> 變數的所有對應欄位都相等，則他們相等：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Point <span class="keyword">struct</span> &#123;</span><br><span class="line">	X <span class="keyword">float64</span></span><br><span class="line">	Y <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Two structs are equal if all their corresponding fields are equal.</span></span><br><span class="line">	p1 := Point&#123;<span class="number">3.4</span>, <span class="number">5.2</span>&#125;</span><br><span class="line">	p2 := Point&#123;<span class="number">3.4</span>, <span class="number">5.2</span>&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> p1 == p2 &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Point p1 and p2 are equal."</span>)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Point p1 and p2 are not equal."</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Output</span><br><span class="line">Point p1 and p2 are equal.</span><br></pre></td></tr></table></figure>
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">type</span> Point <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	X <span class="token builtin">float64</span>
+	Y <span class="token builtin">float64</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// Two structs are equal if all their corresponding fields are equal.</span>
+	p1 <span class="token operator">:=</span> Point<span class="token punctuation">&#123;</span><span class="token number">3.4</span><span class="token punctuation">,</span> <span class="token number">5.2</span><span class="token punctuation">&#125;</span>
+	p2 <span class="token operator">:=</span> Point<span class="token punctuation">&#123;</span><span class="token number">3.4</span><span class="token punctuation">,</span> <span class="token number">5.2</span><span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">if</span> p1 <span class="token operator">==</span> p2 <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Point p1 and p2 are equal."</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Point p1 and p2 are not equal."</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+Point p1 and p2 are equal.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>在本文中，你學到了 struct 的基礎。但是還有很多值得探索的地方，如結構的方法、結構的組成、嵌入欄位、提升欄位等。我將在以後的文章中介紹這些主題。</p>
 </section>
@@ -306,11 +516,9 @@
       </div>
     
     <!-- Tags END -->
-    <!-- UpdatedDate Start -->
-     
-       <p class="post-date">最後更新時間：2019-11-27</p>
-     
-   <!-- UpdatedDate END -->
+    <!-- Last updated on Start -->
+    
+    <!-- Last updated on END -->
     <!-- NAV START -->
     
   <div class="nav-container">
@@ -335,19 +543,9 @@
 
 
     <!-- NAV END -->
-    <!-- 打賞 START -->
+    <!-- QR Code START -->
     
-    <!-- 打賞 END -->
-    <!-- 二維條碼 START -->
-    
-      <div class="qrcode">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g id="share-qrcode"/>
-        </svg>
-        <p class="notice">掃描二維條碼，分享此文章</p>
-      </div>
-    
-    <!-- 二維條碼 END -->
+    <!-- QR Code END -->
   </article>
   <!-- Article END -->
   <!-- Catalog START -->
@@ -356,7 +554,7 @@
   <div class="toc-main">
     <strong class="toc-title">目錄</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#定義-struct-型別"><span class="toc-nav-text">定義 struct 型別</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#宣告和初始化-struct"><span class="toc-nav-text">宣告和初始化 struct</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#宣告-struct-型別的變數"><span class="toc-nav-text">宣告 struct 型別的變數</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#初始化-struct"><span class="toc-nav-text">初始化 struct</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#初始化-struct-時命名欄位"><span class="toc-nav-text">初始化 struct 時命名欄位</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#完整範例：定義和初始化-struct-型別"><span class="toc-nav-text">完整範例：定義和初始化 struct 型別</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#存取-struct-的欄位"><span class="toc-nav-text">存取 struct 的欄位</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#指向-struct-的指標"><span class="toc-nav-text">指向 struct 的指標</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#使用內建的-new-函數建立一個-struct-並取得指向它的指標"><span class="toc-nav-text">使用內建的 new() 函數建立一個 struct 並取得指向它的指標</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#匯出與未匯出的-struct-和-struct-欄位"><span class="toc-nav-text">匯出與未匯出的 struct 和 struct 欄位</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#struct-是值型別"><span class="toc-nav-text">struct 是值型別</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#struct-等式"><span class="toc-nav-text">struct 等式</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#結論"><span class="toc-nav-text">結論</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%AE%9A%E7%BE%A9-struct-%E5%9E%8B%E5%88%A5"><span class="toc-nav-text">定義 struct 型別</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%AE%A3%E5%91%8A%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96-struct"><span class="toc-nav-text">宣告和初始化 struct</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%AE%A3%E5%91%8A-struct-%E5%9E%8B%E5%88%A5%E7%9A%84%E8%AE%8A%E6%95%B8"><span class="toc-nav-text">宣告 struct 型別的變數</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96-struct"><span class="toc-nav-text">初始化 struct</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96-struct-%E6%99%82%E5%91%BD%E5%90%8D%E6%AC%84%E4%BD%8D"><span class="toc-nav-text">初始化 struct 時命名欄位</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%AE%8C%E6%95%B4%E7%AF%84%E4%BE%8B%EF%BC%9A%E5%AE%9A%E7%BE%A9%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96-struct-%E5%9E%8B%E5%88%A5"><span class="toc-nav-text">完整範例：定義和初始化 struct 型別</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%AD%98%E5%8F%96-struct-%E7%9A%84%E6%AC%84%E4%BD%8D"><span class="toc-nav-text">存取 struct 的欄位</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%8C%87%E5%90%91-struct-%E7%9A%84%E6%8C%87%E6%A8%99"><span class="toc-nav-text">指向 struct 的指標</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E4%BD%BF%E7%94%A8%E5%85%A7%E5%BB%BA%E7%9A%84-new-%E5%87%BD%E6%95%B8%E5%BB%BA%E7%AB%8B%E4%B8%80%E5%80%8B-struct-%E4%B8%A6%E5%8F%96%E5%BE%97%E6%8C%87%E5%90%91%E5%AE%83%E7%9A%84%E6%8C%87%E6%A8%99"><span class="toc-nav-text">使用內建的 new() 函數建立一個 struct 並取得指向它的指標</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%8C%AF%E5%87%BA%E8%88%87%E6%9C%AA%E5%8C%AF%E5%87%BA%E7%9A%84-struct-%E5%92%8C-struct-%E6%AC%84%E4%BD%8D"><span class="toc-nav-text">匯出與未匯出的 struct 和 struct 欄位</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#struct-%E6%98%AF%E5%80%BC%E5%9E%8B%E5%88%A5"><span class="toc-nav-text">struct 是值型別</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#struct-%E7%AD%89%E5%BC%8F"><span class="toc-nav-text">struct 等式</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%B5%90%E8%AB%96"><span class="toc-nav-text">結論</span></a></li></ol>
     
   </div>
 </aside>
@@ -366,23 +564,23 @@
 </main>
 
 <script>
-  (function () {
-    var url = 'https://calvertyang.github.io/2019/11/15/golang-structs-tutorial-with-examples/';
-    var banner = '';
+  (function() {
+    const url = 'https://calvertyang.github.io/2019/11/15/golang-structs-tutorial-with-examples/';
+    const banner = '';
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
-        'background-image': 'url(' + banner + ')'
+        'background-image': 'url(' + banner + ')',
       });
     } else {
       $('#article-banner').geopattern(url);
     }
     $('.header').removeClass('fixed-header');
 
-     // error image
-    $('.markdown-content img').on('error', function() {
-      $(this).attr('src', '/css/images/error-img.png');
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.svg');
       $(this).css({
-        'cursor': 'default'
+        'cursor': 'default',
       });
     });
 
@@ -391,28 +589,28 @@
       if ($(this).parents().is('a')) {
         $(this).css({
           'cursor': 'pointer',
-          'display': 'inline-block'
+          'display': 'inline-block',
         });
       }
     });
 
     // zoom image
-    $('.markdown-content img').on('click', function(e) {
-      var src = $(this).attr('src');
-      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
-        var imageW = $(this).width();
-        var imageH = $(this).height();
+    $('.markdown-content img').on('click', function() {
+      const src = $(this).attr('src');
+      if (src !== '/css/images/error_icon.svg' && !$(this).parents().is('a')) {
+        const imageW = $(this).width();
+        const imageH = $(this).height();
 
-        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        let zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
         zoom = zoom < 1 ? 1 : zoom;
         zoom = zoom > 2 ? 2 : zoom;
-        var transY = (($(window).height() - imageH) / 2).toFixed(2);
+        const transY = (($(window).height() - imageH) / 2).toFixed(2);
 
         $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
         $('.image-view-wrap').addClass('wrap-active');
         $('.image-view-wrap img').css({
-          'width': `${imageW}`,
-          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+          width: imageW,
+          transform: `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`,
         });
         $('html').css('overflow', 'hidden');
 
@@ -421,35 +619,26 @@
           $('html').attr('style', '');
         });
       }
-    });
-
-    // qrcode
-    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
-      text: document.location.href,
-      width: 100,
-      height: 100,
-      colorDark: '#000000',
-    	colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.L,
-      useSVG: true
-    });
+    })
   })();
 </script>
+
+
 
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
 
 <script>
   function async(u, c) {
-    var d = document, t = 'script',
+    const d = document, t = 'script',
       o = d.createElement(t),
       s = d.getElementsByTagName(t)[0];
     o.src = u;
@@ -457,20 +646,36 @@
     s.parentNode.insertBefore(o, s);
   }
 </script>
-
 <script>
   async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
     FastClick.attach(document.body);
-  })
+  });
 </script>
 
 <script>
-  $('figure').each(function(i, block) {
-    let lang = this.classList[1] || 'codeblock';
-    this.dataset.lang = lang.toUpperCase();
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
   });
 </script>
+
+
 <script src="/js/script.js"></script>
+
 
   </body>
 </html>

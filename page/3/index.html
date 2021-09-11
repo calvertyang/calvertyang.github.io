@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="Calvert&#39;s tech blog">
-  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
   
@@ -13,55 +13,70 @@
       Calvert&#39;s murmur
     
   </title>
-  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrcode.js"></script>
+  
   
   
     <!-- MathJax support START -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
       });
     </script>
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
+        let all = MathJax.Hub.getAllJax(), i;
         for (i = 0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- MathJax support END -->
   
 
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
-  <script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-44933497-2');
-  </script>
+    </script>
 
 
-</head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
-</div>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3999187913340509" crossorigin="anonymous"></script>
+
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
   <body>
     <header class="header fixed-header">
@@ -70,7 +85,6 @@
       <div class="logo"></div>
       <span>Calvert's murmur</span>
     </a>
-
     <ul class="right-list">
       
         <li class="list-item">
@@ -81,7 +95,7 @@
       
         <li class="list-item">
           
-            <a href="/categories/" class="item-link">Categories</a>
+            <a href="/series/" class="item-link">Series</a>
           
         </li>
       
@@ -109,49 +123,15 @@
           
         </li>
       
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
     </ul>
-
-    
-      <div id="search-form-wrap">
-        <form class="search-form">
-          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
-          <button type="submit" class="search-form-submit">
-            <span class="fa fa-search"></span>
-          </button>
-        </form>
-        <div class="ins-search">
-  <div class="ins-search-mask"></div>
-  <div class="ins-search-container">
-    <div class="ins-input-wrapper">
-      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
-      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-    </div>
-    <div class="ins-section-wrapper">
-      <div class="ins-section-container"></div>
-    </div>
-  </div>
-</div>
-<script>
-  (function (window) {
-    var INSIGHT_CONFIG = {
-      TRANSLATION: {
-        POSTS: '文章',
-        PAGES: '頁面',
-        CATEGORIES: '分類',
-        TAGS: '標籤',
-        UNTITLED: '無標題',
-      },
-      ROOT_URL: '/',
-      CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-  })(window);
-</script>
-<script src="/js/insight.js"></script>
-
-      </div>
-    
-
     <div class="menu">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -168,7 +148,7 @@
         
           <li class="menu-item">
             
-              <a href="/categories/" class="menu-link">Categories</a>
+              <a href="/series/" class="menu-link">Series</a>
             
           </li>
         
@@ -198,6 +178,31 @@
         
       </ul>
     </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
   </div>
 </header>
 
@@ -227,9 +232,9 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>HEROKU BLOG</strong> — <a href="https://blog.heroku.com/rails-active-storage" target="_blank" rel="noopener">Rails 5.2 Active Storage: Previews, Poppler, and Solving Licensing Pitfalls</a></p>
+<p>原文：<strong>HEROKU BLOG</strong> — <a target="_blank" rel="noopener" href="https://blog.heroku.com/rails-active-storage">Rails 5.2 Active Storage: Previews, Poppler, and Solving Licensing Pitfalls</a></p>
 </blockquote>
-<p>上個月剛剛發佈的 Rails 5.2 有一個重要的新功能：Active Storage。Active Storage 支援各種後端服務（如 AWS S3），為 Active Record 模型提供檔案上傳和附件功能。雖然有像 <a href="https://github.com/thoughtbot/paperclip" target="_blank" rel="noopener">Paperclip</a> 這樣的函式庫來做類似的工作，但這是 Rails 第一次發佈這樣的功能。在 Heroku，我們認為雲端儲存是最佳實作規範，所以我們確保它能在我們的平台上執行。在這篇文章中，我們將分享如何準備發佈 Rails 5.2，以及如何在部署的應用程式中使用新的 Active Storage 功能。</p>
+<p>上個月剛剛發佈的 Rails 5.2 有一個重要的新功能：Active Storage。Active Storage 支援各種後端服務（如 AWS S3），為 Active Record 模型提供檔案上傳和附件功能。雖然有像 <a target="_blank" rel="noopener" href="https://github.com/thoughtbot/paperclip">Paperclip</a> 這樣的函式庫來做類似的工作，但這是 Rails 第一次發佈這樣的功能。在 Heroku，我們認為雲端儲存是最佳實作規範，所以我們確保它能在我們的平台上執行。在這篇文章中，我們將分享如何準備發佈 Rails 5.2，以及如何在部署的應用程式中使用新的 Active Storage 功能。</p>
         
       </div>
       <a class="more" href="/2018/05/22/active-storage-on-heroku/">繼續閱讀</a>
@@ -255,9 +260,9 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>Ruby on Rails Guides</strong> — <a href="http://guides.rubyonrails.org/active_storage_overview.html" target="_blank" rel="noopener">Active Storage Overview</a></p>
+<p>原文：<strong>Ruby on Rails Guides</strong> — <a target="_blank" rel="noopener" href="http://guides.rubyonrails.org/active_storage_overview.html">Active Storage Overview</a></p>
 </blockquote>
-<p>Active Storage 是 Rails 5.2 所新增的功能，它可以讓你輕鬆的將檔案傳送到 <a href="https://aws.amazon.com/s3/" target="_blank" rel="noopener">Amazon S3</a>、<a href="https://cloud.google.com/storage/docs/" target="_blank" rel="noopener">Google Cloud Storage</a> 或 <a href="https://azure.microsoft.com/en-us/services/storage/" target="_blank" rel="noopener">Microsoft Azure Storage</a> 等雲端儲存服務，並將這些檔案附加到 Active Record。</p>
+<p>Active Storage 是 Rails 5.2 所新增的功能，它可以讓你輕鬆的將檔案傳送到 <a target="_blank" rel="noopener" href="https://aws.amazon.com/s3/">Amazon S3</a>、<a target="_blank" rel="noopener" href="https://cloud.google.com/storage/docs/">Google Cloud Storage</a> 或 <a target="_blank" rel="noopener" href="https://azure.microsoft.com/en-us/services/storage/">Microsoft Azure Storage</a> 等雲端儲存服務，並將這些檔案附加到 Active Record。</p>
 <p>支援一個主要雲端儲存服務，並在其它服務中建立鏡像以實現備援機制，它也提供了用於測試或本地部署的磁碟服務，但重點還是放在雲端儲存。</p>
 <p>檔案可以從伺服器上傳到雲端或直接從客戶端上傳到雲端。</p>
         
@@ -309,14 +314,51 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>RMagick User’s Guide and Reference</strong> — <a href="https://rmagick.github.io/rvgtut.html" target="_blank" rel="noopener">Drawing with RVG</a></p>
+<p>原文：<strong>RMagick User’s Guide and Reference</strong> — <a target="_blank" rel="noopener" href="https://rmagick.github.io/rvgtut.html">Drawing with RVG</a></p>
 </blockquote>
 <h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><p>RVG（Ruby 向量圖形）是 RMagick 的 Draw 類別的外觀，它提供了基於 W3C 推薦的可縮放向量圖形（Scalable Vector Graphics）的繪圖 API。</p>
 <p>RVG 是一個可縮放向量繪圖函式庫。可縮放意味著圖形不是固定的像素尺寸。相同的圖形可以被呈現在螢幕上或列印出來。向量圖使用了幾何物件，如直線和圓。與點陣圖不同，向量圖在放大時不會「像素化」。</p>
 <img src="/2017/03/15/drawing-with-rvg/duck.gif" class="">
 
 <p>作為 RVG 函式庫的介紹，讓我們來看看如何畫出上面這隻小鴨。以下是完整的程式。</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">'rvg/rvg'</span></span><br><span class="line"><span class="keyword">include</span> Magick</span><br><span class="line"></span><br><span class="line">RVG::dpi = <span class="number">72</span></span><br><span class="line"></span><br><span class="line">rvg = RVG.new(<span class="number">2.5</span>.<span class="keyword">in</span>, <span class="number">2.5</span>.<span class="keyword">in</span>).viewbox(<span class="number">0</span>,<span class="number">0</span>,<span class="number">250</span>,<span class="number">250</span>) <span class="keyword">do</span> <span class="params">|canvas|</span></span><br><span class="line">  canvas.background_fill = <span class="string">'white'</span></span><br><span class="line"></span><br><span class="line">  canvas.g.translate(<span class="number">100</span>, <span class="number">150</span>).rotate(-<span class="number">30</span>) <span class="keyword">do</span> <span class="params">|body|</span></span><br><span class="line">    body.styles(<span class="symbol">:fill=&gt;<span class="string">'yellow'</span></span>, <span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>, <span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>)</span><br><span class="line">    body.ellipse(<span class="number">50</span>, <span class="number">30</span>)</span><br><span class="line">    body.rect(<span class="number">45</span>, <span class="number">20</span>, -<span class="number">20</span>, -<span class="number">10</span>).skewX(-<span class="number">35</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  canvas.g.translate(<span class="number">130</span>, <span class="number">83</span>) <span class="keyword">do</span> <span class="params">|head|</span></span><br><span class="line">    head.styles(<span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>, <span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>)</span><br><span class="line">    head.circle(<span class="number">30</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'yellow'</span></span>)</span><br><span class="line">    head.circle(<span class="number">5</span>, <span class="number">10</span>, -<span class="number">5</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'black'</span></span>)</span><br><span class="line">    head.polygon(<span class="number">30</span>,<span class="number">0</span>, <span class="number">70</span>,<span class="number">5</span>, <span class="number">30</span>,<span class="number">10</span>, <span class="number">62</span>,<span class="number">25</span>, <span class="number">23</span>,<span class="number">20</span>).styles(<span class="symbol">:fill=&gt;<span class="string">'orange'</span></span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  foot = RVG::Group.new <span class="keyword">do</span> <span class="params">|_foot|</span></span><br><span class="line">    _foot.path(<span class="string">'m0,0 v30 l30,10 l5,-10, l-5,-10 l-30,10z'</span>).</span><br><span class="line">    styles(<span class="symbol">:stroke_width=&gt;</span><span class="number">2</span>, <span class="symbol">:fill=&gt;<span class="string">'orange'</span></span>, <span class="symbol">:stroke=&gt;<span class="string">'black'</span></span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  canvas.use(foot).translate(<span class="number">75</span>, <span class="number">188</span>).rotate(<span class="number">15</span>)</span><br><span class="line">  canvas.use(foot).translate(<span class="number">100</span>, <span class="number">185</span>).rotate(-<span class="number">15</span>)</span><br><span class="line"></span><br><span class="line">  canvas.text(<span class="number">125</span>, <span class="number">30</span>) <span class="keyword">do</span> <span class="params">|title|</span></span><br><span class="line">    title.tspan(<span class="string">"duck|"</span>).styles(<span class="symbol">:text_anchor=&gt;<span class="string">'end'</span></span>, <span class="symbol">:font_size=&gt;</span><span class="number">20</span>,</span><br><span class="line">      <span class="symbol">:font_family=&gt;<span class="string">'helvetica'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'black'</span></span>)</span><br><span class="line">    title.tspan(<span class="string">"type"</span>).styles(<span class="symbol">:font_size=&gt;</span><span class="number">22</span>,</span><br><span class="line">      <span class="symbol">:font_family=&gt;<span class="string">'times'</span></span>, <span class="symbol">:font_style=&gt;<span class="string">'italic'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'red'</span></span>)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    canvas.rect(<span class="number">249</span>,<span class="number">249</span>).styles(<span class="symbol">:stroke=&gt;<span class="string">'blue'</span></span>, <span class="symbol">:fill=&gt;<span class="string">'none'</span></span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">rvg.draw.write(<span class="string">'duck.gif'</span>)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token keyword">require</span> <span class="token string">'rvg/rvg'</span>
+<span class="token keyword">include</span> <span class="token constant">Magick</span>
+
+<span class="token constant">RVG</span><span class="token punctuation">:</span><span class="token punctuation">:</span>dpi <span class="token operator">=</span> <span class="token number">72</span>
+
+rvg <span class="token operator">=</span> <span class="token constant">RVG</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span><span class="token number">2.5</span><span class="token punctuation">.</span><span class="token keyword">in</span><span class="token punctuation">,</span> <span class="token number">2.5</span><span class="token punctuation">.</span><span class="token keyword">in</span><span class="token punctuation">)</span><span class="token punctuation">.</span>viewbox<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">250</span><span class="token punctuation">,</span><span class="token number">250</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>canvas<span class="token operator">|</span>
+  canvas<span class="token punctuation">.</span>background_fill <span class="token operator">=</span> <span class="token string">'white'</span>
+
+  canvas<span class="token punctuation">.</span>g<span class="token punctuation">.</span>translate<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">150</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rotate<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">30</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>body<span class="token operator">|</span>
+    body<span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'yellow'</span><span class="token punctuation">,</span> <span class="token symbol">:stroke</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'black'</span><span class="token punctuation">,</span> <span class="token symbol">:stroke_width</span><span class="token operator">=</span><span class="token operator">></span><span class="token number">2</span><span class="token punctuation">)</span>
+    body<span class="token punctuation">.</span>ellipse<span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span>
+    body<span class="token punctuation">.</span>rect<span class="token punctuation">(</span><span class="token number">45</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">20</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span>skewX<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">35</span><span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+
+  canvas<span class="token punctuation">.</span>g<span class="token punctuation">.</span>translate<span class="token punctuation">(</span><span class="token number">130</span><span class="token punctuation">,</span> <span class="token number">83</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>head<span class="token operator">|</span>
+    head<span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:stroke</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'black'</span><span class="token punctuation">,</span> <span class="token symbol">:stroke_width</span><span class="token operator">=</span><span class="token operator">></span><span class="token number">2</span><span class="token punctuation">)</span>
+    head<span class="token punctuation">.</span>circle<span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'yellow'</span><span class="token punctuation">)</span>
+    head<span class="token punctuation">.</span>circle<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'black'</span><span class="token punctuation">)</span>
+    head<span class="token punctuation">.</span>polygon<span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">70</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">62</span><span class="token punctuation">,</span><span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">23</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'orange'</span><span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+
+  foot <span class="token operator">=</span> <span class="token constant">RVG</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">Group</span><span class="token punctuation">.</span><span class="token keyword">new</span> <span class="token keyword">do</span> <span class="token operator">|</span>_foot<span class="token operator">|</span>
+    _foot<span class="token punctuation">.</span>path<span class="token punctuation">(</span><span class="token string">'m0,0 v30 l30,10 l5,-10, l-5,-10 l-30,10z'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
+    styles<span class="token punctuation">(</span><span class="token symbol">:stroke_width</span><span class="token operator">=</span><span class="token operator">></span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'orange'</span><span class="token punctuation">,</span> <span class="token symbol">:stroke</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'black'</span><span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+  canvas<span class="token punctuation">.</span>use<span class="token punctuation">(</span>foot<span class="token punctuation">)</span><span class="token punctuation">.</span>translate<span class="token punctuation">(</span><span class="token number">75</span><span class="token punctuation">,</span> <span class="token number">188</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rotate<span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span>
+  canvas<span class="token punctuation">.</span>use<span class="token punctuation">(</span>foot<span class="token punctuation">)</span><span class="token punctuation">.</span>translate<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">185</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rotate<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">15</span><span class="token punctuation">)</span>
+
+  canvas<span class="token punctuation">.</span>text<span class="token punctuation">(</span><span class="token number">125</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>title<span class="token operator">|</span>
+    title<span class="token punctuation">.</span>tspan<span class="token punctuation">(</span><span class="token string">"duck|"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:text_anchor</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'end'</span><span class="token punctuation">,</span> <span class="token symbol">:font_size</span><span class="token operator">=</span><span class="token operator">></span><span class="token number">20</span><span class="token punctuation">,</span>
+      <span class="token symbol">:font_family</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'helvetica'</span><span class="token punctuation">,</span> <span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'black'</span><span class="token punctuation">)</span>
+    title<span class="token punctuation">.</span>tspan<span class="token punctuation">(</span><span class="token string">"type"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:font_size</span><span class="token operator">=</span><span class="token operator">></span><span class="token number">22</span><span class="token punctuation">,</span>
+      <span class="token symbol">:font_family</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'times'</span><span class="token punctuation">,</span> <span class="token symbol">:font_style</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'italic'</span><span class="token punctuation">,</span> <span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'red'</span><span class="token punctuation">)</span>
+    <span class="token keyword">end</span>
+    canvas<span class="token punctuation">.</span>rect<span class="token punctuation">(</span><span class="token number">249</span><span class="token punctuation">,</span><span class="token number">249</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:stroke</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'blue'</span><span class="token punctuation">,</span> <span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'none'</span><span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+
+rvg<span class="token punctuation">.</span>draw<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string">'duck.gif'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>所有的繪圖都遵循相同的 3 個步驟：</p>
 <ol>
@@ -348,12 +390,12 @@
           以下是在 Ubunto 16.04 LTS 安裝 vsftpd 並設定虛擬帳號的步驟
 
 安裝 vsftpd
-12$ sudo apt-get update$ sudo apt-get install vsftpd
-
+$ sudo apt-get update
+$ sudo apt-get install vsftpd
 編輯設定檔
-1$ sudo vim /etc/vsftpd.conf
+$ sudo vim /etc/vsftpd.conf
 
-以下 ...
+  以下設 ...
         
       </div>
       <a class="more" href="/2017/02/06/how-to-setup-virtual-users-for-vsftpd-in-ubuntu/">繼續閱讀</a>
@@ -366,12 +408,12 @@
       <p class="article-date">2016年10月16日</p>
       
         
-  <a href="/tags#Ruby-on-Rails" >
-    <span class="tag-code">Ruby on Rails</span>
-  </a>
-
   <a href="/tags#Ed25519" >
     <span class="tag-code">Ed25519</span>
+  </a>
+
+  <a href="/tags#Ruby-on-Rails" >
+    <span class="tag-code">Ruby on Rails</span>
   </a>
 
 
@@ -394,12 +436,12 @@
       <p class="article-date">2016年10月5日</p>
       
         
-  <a href="/tags#Ed25519" >
-    <span class="tag-code">Ed25519</span>
-  </a>
-
   <a href="/tags#SSH" >
     <span class="tag-code">SSH</span>
+  </a>
+
+  <a href="/tags#Ed25519" >
+    <span class="tag-code">Ed25519</span>
   </a>
 
 
@@ -407,7 +449,7 @@
       <div class="article-summary">
         
           <blockquote>
-<p>原文：<strong>Gert van Dijk</strong> — <a href="https://blog.g3rt.nl/upgrade-your-ssh-keys.html" target="_blank" rel="noopener">Upgrade your SSH keys!</a></p>
+<p>原文：<strong>Gert van Dijk</strong> — <a target="_blank" rel="noopener" href="https://blog.g3rt.nl/upgrade-your-ssh-keys.html">Upgrade your SSH keys!</a></p>
 </blockquote>
 <p>無論你是軟體開發人員或系統管理員，我敢打賭你正在使用 SSH 金鑰。比起使用密碼來推送提交到 Github 或是管理 Unix 系統，透過 SSH 公開金鑰驗證是最佳的方法。然而，隨著時光飛逝，很多人都使用舊金鑰而沒有意識到需要產生一個新的來提供私密資料更好的保護。在這篇文章，我將示範如何平穩的轉換到 Ed25519 金鑰、你為什麼會想要它以及展示一些技巧和訣竅。</p>
 <blockquote>
@@ -416,7 +458,7 @@
 <blockquote>
 <p>我計劃發佈更多 SSH 技巧和訣竅，所以請關注我的部落格。這篇文章的重點是關於作為使用者公開金鑰驗證的 SSH 金鑰。</p>
 </blockquote>
-<h3 id="DSA-和-RSA-1024-位元已經廢止"><a href="#DSA-和-RSA-1024-位元已經廢止" class="headerlink" title="DSA 和 RSA 1024 位元已經廢止"></a>DSA 和 RSA 1024 位元已經廢止</h3><p>如果你已經使用預設選項建立金鑰超過四年，它可能不安全（RSA &lt; 2048 位元）。更糟的是，我最近看到了推特迷、同事和朋友還在使用 DSA 金鑰（OpenSSH 格式裡的 <code>ssh-dss</code> 類型）。那是一種類似於 RSA 的金鑰類型，但長度受限於 1024 位元且被<a href="https://security.stackexchange.com/a/5100/12948" target="_blank" rel="noopener">推薦</a>了很長一段時間。它顯然不安全，且被最近的 OpenSSH 版本以正當理由拒絕（請參見 <a href="http://www.openssh.com/txt/release-7.0" target="_blank" rel="noopener">7.0 更新日誌</a>）。</p>
+<h3 id="DSA-和-RSA-1024-位元已經廢止"><a href="#DSA-和-RSA-1024-位元已經廢止" class="headerlink" title="DSA 和 RSA 1024 位元已經廢止"></a>DSA 和 RSA 1024 位元已經廢止</h3><p>如果你已經使用預設選項建立金鑰超過四年，它可能不安全（RSA &lt; 2048 位元）。更糟的是，我最近看到了推特迷、同事和朋友還在使用 DSA 金鑰（OpenSSH 格式裡的 <code>ssh-dss</code> 類型）。那是一種類似於 RSA 的金鑰類型，但長度受限於 1024 位元且被<a target="_blank" rel="noopener" href="https://security.stackexchange.com/a/5100/12948">推薦</a>了很長一段時間。它顯然不安全，且被最近的 OpenSSH 版本以正當理由拒絕（請參見 <a target="_blank" rel="noopener" href="http://www.openssh.com/txt/release-7.0">7.0 更新日誌</a>）。</p>
 <p>難過的是，我看到關於如何重新啟用支援 DSA 金鑰的文章，而不是轉移到一種更安全的金鑰類型。真的，依照指示更改 <code>PubkeyAcceptedKeyTypes</code> 或 <code>HostKeyAlgorithms</code> 的設定是不明智的(host keys are for a later post)。取而代之，升級你的金鑰！</p>
 <img src="/2016/10/05/upgrade_your_ssh_keys/old_key_picture.jpg" class="" title="比較 DSA 及使用像這樣技術打造的鑰匙，你不會希望此類型的鑰匙來開啟你家的門，對吧？">
         
@@ -439,7 +481,7 @@
       
       <div class="article-summary">
         
-          <p>Mailboxer 是一個 Rails gem，為 <a href="https://github.com/ging/social_stream" target="_blank" rel="noopener">social_stream</a> 框架用來建立社群網路的一部分。它是具備一些通用方法的訊息系統，允許任何 model 擔任傳遞訊息的角色。</p>
+          <p>Mailboxer 是一個 Rails gem，為 <a target="_blank" rel="noopener" href="https://github.com/ging/social_stream">social_stream</a> 框架用來建立社群網路的一部分。它是具備一些通用方法的訊息系統，允許任何 model 擔任傳遞訊息的角色。</p>
 <p>使用 Mailboxer，你可以與一或多個收件人建立對話（訊息會被歸納到寄件匣、收件匣及垃圾桶）並透過電子郵件發送通知。它甚至可以在不同 model 間發送訊息和附件！唯一的缺點是缺乏文件，所以我希望這邊文章是有幫助的。</p>
 <p>我們要討論的範例程式為：</p>
 <ul>
@@ -452,7 +494,7 @@
 <li>設定電子郵件通知</li>
 </ul>
 <p>此範例將使用 Rails 4，但幾乎相同的解決方案也可以實作於 Rails 3.2（Mailboxer 不再支援 3.1 版）。</p>
-<p>原始碼可以在 <a href="https://github.com/CalvertYang/Synergy" target="_blank" rel="noopener">Github</a> 找到。</p>
+<p>原始碼可以在 <a target="_blank" rel="noopener" href="https://github.com/CalvertYang/Synergy">Github</a> 找到。</p>
         
       </div>
       <a class="more" href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">繼續閱讀</a>
@@ -529,20 +571,21 @@ GitHub Flow 是一個基於分支的輕量化工作流程，幫助團隊及專�
   
 </main>
 
+
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
 
 <script>
   function async(u, c) {
-    var d = document, t = 'script',
+    const d = document, t = 'script',
       o = d.createElement(t),
       s = d.getElementsByTagName(t)[0];
     o.src = u;
@@ -550,20 +593,36 @@ GitHub Flow 是一個基於分支的輕量化工作流程，幫助團隊及專�
     s.parentNode.insertBefore(o, s);
   }
 </script>
-
 <script>
   async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
     FastClick.attach(document.body);
-  })
+  });
 </script>
 
 <script>
-  $('figure').each(function(i, block) {
-    let lang = this.classList[1] || 'codeblock';
-    this.dataset.lang = lang.toUpperCase();
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
   });
 </script>
+
+
 <script src="/js/script.js"></script>
+
 
   </body>
 </html>

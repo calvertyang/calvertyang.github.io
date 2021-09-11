@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="Calvert&#39;s tech blog">
-  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
   
@@ -13,55 +13,70 @@
       為 Ngnix 建立自行簽章的憑證 | Calvert&#39;s murmur
     
   </title>
-  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrcode.js"></script>
+  
   
   
     <!-- MathJax support START -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
       });
     </script>
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
+        let all = MathJax.Hub.getAllJax(), i;
         for (i = 0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- MathJax support END -->
   
 
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
-  <script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-44933497-2');
-  </script>
+    </script>
 
 
-</head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
-</div>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3999187913340509" crossorigin="anonymous"></script>
+
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
   <body>
     <header class="header fixed-header">
@@ -70,7 +85,6 @@
       <div class="logo"></div>
       <span>Calvert's murmur</span>
     </a>
-
     <ul class="right-list">
       
         <li class="list-item">
@@ -81,7 +95,7 @@
       
         <li class="list-item">
           
-            <a href="/categories/" class="item-link">Categories</a>
+            <a href="/series/" class="item-link">Series</a>
           
         </li>
       
@@ -109,49 +123,15 @@
           
         </li>
       
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
     </ul>
-
-    
-      <div id="search-form-wrap">
-        <form class="search-form">
-          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
-          <button type="submit" class="search-form-submit">
-            <span class="fa fa-search"></span>
-          </button>
-        </form>
-        <div class="ins-search">
-  <div class="ins-search-mask"></div>
-  <div class="ins-search-container">
-    <div class="ins-input-wrapper">
-      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
-      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-    </div>
-    <div class="ins-section-wrapper">
-      <div class="ins-section-container"></div>
-    </div>
-  </div>
-</div>
-<script>
-  (function (window) {
-    var INSIGHT_CONFIG = {
-      TRANSLATION: {
-        POSTS: '文章',
-        PAGES: '頁面',
-        CATEGORIES: '分類',
-        TAGS: '標籤',
-        UNTITLED: '無標題',
-      },
-      ROOT_URL: '/',
-      CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-  })(window);
-</script>
-<script src="/js/insight.js"></script>
-
-      </div>
-    
-
     <div class="menu">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -168,7 +148,7 @@
         
           <li class="menu-item">
             
-              <a href="/categories/" class="menu-link">Categories</a>
+              <a href="/series/" class="menu-link">Series</a>
             
           </li>
         
@@ -198,14 +178,40 @@
         
       </ul>
     </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
   </div>
 </header>
 
     <div id="article-banner">
   <h2>為 Ngnix 建立自行簽章的憑證</h2>
   <p class="post-date">2013-10-17</p>
+
   <div class="arrow-down">
-    <a href="javascript:;" target="_blank" rel="noopener"></a>
+    <a href="javascript:;"></a>
   </div>
 </div>
 <main class="app-body flex-box">
@@ -214,49 +220,79 @@
     <section class="markdown-content"><h3 id="必要條件"><a href="#必要條件" class="headerlink" title="必要條件"></a>必要條件</h3><p>產生憑證需要 OpenSSL 類別庫，請先確認系統是否已安裝 OpenSSL。</p>
 <p>若尚未安裝，可透過以下方式安裝：</p>
 <ul>
-<li><p>Mac OS X 使用 <a href="http://mxcl.github.com/homebrew/" target="_blank" rel="noopener">Homebrew</a> 安裝</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install openssl</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Windows 可到此網站下載安裝檔：<a href="http://www.slproweb.com/products/Win32OpenSSL.html" target="_blank" rel="noopener">OpenSSL for Windows </a></p>
+<li><p>Mac OS X 使用 <a target="_blank" rel="noopener" href="http://mxcl.github.com/homebrew/">Homebrew</a> 安裝</p>
+<pre class="line-numbers language-none"><code class="language-none">$ brew install openssl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>Windows 可到此網站下載安裝檔：<a target="_blank" rel="noopener" href="http://www.slproweb.com/products/Win32OpenSSL.html">OpenSSL for Windows </a></p>
 </li>
 <li><p>Ubuntu/Debian Linux</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install openssl</span><br></pre></td></tr></table></figure>
-</li>
+<pre class="line-numbers language-none"><code class="language-none">$ sudo apt-get install openssl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 <li><p>RedHat/CentOS Linux</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install openssl</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h3 id="步驟一：建立存放憑證的資料夾"><a href="#步驟一：建立存放憑證的資料夾" class="headerlink" title="步驟一：建立存放憑證的資料夾"></a>步驟一：建立存放憑證的資料夾</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir /etc/nginx/ssl</span><br><span class="line">$ cd /etc/nginx/ssl</span><br></pre></td></tr></table></figure>
-
-</li>
+<pre class="line-numbers language-none"><code class="language-none">$ sudo yum install openssl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<span id="more"></span>
+<h3 id="步驟一：建立存放憑證的資料夾"><a href="#步驟一：建立存放憑證的資料夾" class="headerlink" title="步驟一：建立存放憑證的資料夾"></a>步驟一：建立存放憑證的資料夾</h3><pre class="line-numbers language-none"><code class="language-none">$ mkdir &#x2F;etc&#x2F;nginx&#x2F;ssl
+$ cd &#x2F;etc&#x2F;nginx&#x2F;ssl<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 </ul>
 <h3 id="步驟二：建立伺服器私鑰及憑證"><a href="#步驟二：建立伺服器私鑰及憑證" class="headerlink" title="步驟二：建立伺服器私鑰及憑證"></a>步驟二：建立伺服器私鑰及憑證</h3><h5 id="建立伺服器私鑰"><a href="#建立伺服器私鑰" class="headerlink" title="建立伺服器私鑰"></a>建立伺服器私鑰</h5><p>開始建立伺服器私鑰。過程中，將會提示輸入密碼，請牢記此密碼，若忘記或遺失該密碼，將無法存取憑證。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo openssl genrsa -des3 -out server.key 2048</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">$ sudo openssl genrsa -des3 -out server.key 2048<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>以下為建立私鑰時可能會看到的訊息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Generating RSA private key, 2048 bit long modulus</span><br><span class="line">....................+++</span><br><span class="line">..............................................................+++</span><br><span class="line">e is 65537 (0x10001)</span><br><span class="line">Enter pass phrase for server.key:</span><br><span class="line">Verifying - Enter pass phrase for server.key:</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">Generating RSA private key, 2048 bit long modulus
+....................+++
+..............................................................+++
+e is 65537 (0x10001)
+Enter pass phrase for server.key:
+Verifying - Enter pass phrase for server.key:<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h5 id="建立伺服器憑證"><a href="#建立伺服器憑證" class="headerlink" title="建立伺服器憑證"></a>建立伺服器憑證</h5><p>建立時會詢問私鑰密碼，若密碼不正確便無法建立憑證。<br>建立憑證時，最重要的欄位為 <strong>Common Name</strong>。請在此輸入網域名稱，若沒有網域名稱則輸入網站 IP。並請不要填寫 challenge password 及 optional company name 欄位。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo openssl req -new -key server.key -out server.csr</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">$ sudo openssl req -new -key server.key -out server.csr<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>以下為建立憑證時可能會看到的訊息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Enter pass phrase for server.key:</span><br><span class="line">You are about to be asked to enter information that will be incorporated</span><br><span class="line">into your certificate request.</span><br><span class="line">What you are about to enter is what is called a Distinguished Name or a DN.</span><br><span class="line">There are quite a few fields but you can leave some blank</span><br><span class="line">For some fields there will be a default value,</span><br><span class="line">If you enter &apos;.&apos;, the field will be left blank.</span><br><span class="line">-----</span><br><span class="line">Country Name (2 letter code) [AU]: TW</span><br><span class="line">State or Province Name (full name) [Some-State]: Taipei</span><br><span class="line">Locality Name (eg, city) []: Taipei</span><br><span class="line">Organization Name (eg, company) [Internet Widgits Pty Ltd]: Example Inc</span><br><span class="line">Organizational Unit Name (eg, section) []:</span><br><span class="line">Common Name (e.g. server FQDN or YOUR name) []: example.com</span><br><span class="line">Email Address []: admin@example.com</span><br><span class="line"></span><br><span class="line">Please enter the following &apos;extra&apos; attributes</span><br><span class="line">to be sent with your certificate request</span><br><span class="line">A challenge password []:</span><br><span class="line">An optional company name []:</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">Enter pass phrase for server.key:
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter &#39;.&#39;, the field will be left blank.
+-----
+Country Name (2 letter code) [AU]: TW
+State or Province Name (full name) [Some-State]: Taipei
+Locality Name (eg, city) []: Taipei
+Organization Name (eg, company) [Internet Widgits Pty Ltd]: Example Inc
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []: example.com
+Email Address []: admin@example.com
+
+Please enter the following &#39;extra&#39; attributes
+to be sent with your certificate request
+A challenge password []:
+An optional company name []:<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="步驟三：移除伺服器私鑰密碼-Passphrase"><a href="#步驟三：移除伺服器私鑰密碼-Passphrase" class="headerlink" title="步驟三：移除伺服器私鑰密碼(Passphrase)"></a>步驟三：移除伺服器私鑰密碼(Passphrase)</h3><p>雖然密碼可提供高度的安全性，但若有人重載 nginx 則會產生問題。在 nginx 崩潰或需要重新啟動時，永遠都需要輸入密碼才能使網頁伺服器上線。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cp server.key server.key.origin</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">$ sudo cp server.key server.key.origin<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo openssl rsa -in server.key.org -out server.key</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">$ sudo openssl rsa -in server.key.org -out server.key<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="步驟四：為憑證簽章"><a href="#步驟四：為憑證簽章" class="headerlink" title="步驟四：為憑證簽章"></a>步驟四：為憑證簽章</h3><p>可以自行指定該憑證有效期限，在此範例中憑證為 1 年後到期。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">$ sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>現在所需的憑證已產生完畢！</p>
 <h3 id="步驟五：設定憑證"><a href="#步驟五：設定憑證" class="headerlink" title="步驟五：設定憑證"></a>步驟五：設定憑證</h3><p>開啟 nginx 設定檔，加入以下設定，請記得將 <strong>server_name</strong> 改為網域名稱或 IP。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># HTTPS server</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen       443;</span><br><span class="line">    server_name example.com;</span><br><span class="line"></span><br><span class="line">    ssl on;</span><br><span class="line">    ssl_certificate /etc/nginx/ssl/server.crt;</span><br><span class="line">    ssl_certificate_key /etc/nginx/ssl/server.key;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none"># HTTPS server
+
+server &#123;
+    listen       443;
+    server_name example.com;
+
+    ssl on;
+    ssl_certificate &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;server.crt;
+    ssl_certificate_key &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;server.key;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>重新啟動 nginx</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo /etc/init.d/nginx restart</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">$ sudo &#x2F;etc&#x2F;init.d&#x2F;nginx restart<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>前往 <a href="https://domain_name" target="_blank" rel="noopener">https://domain_name</a> 將會看到自行簽章的憑證。</p>
+<p>前往 <a target="_blank" rel="noopener" href="https://domain_name/">https://domain_name</a> 將會看到自行簽章的憑證。</p>
 </section>
     <!-- Tags START -->
     
@@ -279,11 +315,9 @@
       </div>
     
     <!-- Tags END -->
-    <!-- UpdatedDate Start -->
-     
-       <p class="post-date">最後更新時間：2019-11-15</p>
-     
-   <!-- UpdatedDate END -->
+    <!-- Last updated on Start -->
+    
+    <!-- Last updated on END -->
     <!-- NAV START -->
     
   <div class="nav-container">
@@ -301,19 +335,9 @@
 
 
     <!-- NAV END -->
-    <!-- 打賞 START -->
+    <!-- QR Code START -->
     
-    <!-- 打賞 END -->
-    <!-- 二維條碼 START -->
-    
-      <div class="qrcode">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g id="share-qrcode"/>
-        </svg>
-        <p class="notice">掃描二維條碼，分享此文章</p>
-      </div>
-    
-    <!-- 二維條碼 END -->
+    <!-- QR Code END -->
   </article>
   <!-- Article END -->
   <!-- Catalog START -->
@@ -322,7 +346,7 @@
   <div class="toc-main">
     <strong class="toc-title">目錄</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#必要條件"><span class="toc-nav-text">必要條件</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#步驟一：建立存放憑證的資料夾"><span class="toc-nav-text">步驟一：建立存放憑證的資料夾</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#步驟二：建立伺服器私鑰及憑證"><span class="toc-nav-text">步驟二：建立伺服器私鑰及憑證</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#建立伺服器私鑰"><span class="toc-nav-text">建立伺服器私鑰</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#建立伺服器憑證"><span class="toc-nav-text">建立伺服器憑證</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#步驟三：移除伺服器私鑰密碼-Passphrase"><span class="toc-nav-text">步驟三：移除伺服器私鑰密碼(Passphrase)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#步驟四：為憑證簽章"><span class="toc-nav-text">步驟四：為憑證簽章</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#步驟五：設定憑證"><span class="toc-nav-text">步驟五：設定憑證</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%BF%85%E8%A6%81%E6%A2%9D%E4%BB%B6"><span class="toc-nav-text">必要條件</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%AD%A5%E9%A9%9F%E4%B8%80%EF%BC%9A%E5%BB%BA%E7%AB%8B%E5%AD%98%E6%94%BE%E6%86%91%E8%AD%89%E7%9A%84%E8%B3%87%E6%96%99%E5%A4%BE"><span class="toc-nav-text">步驟一：建立存放憑證的資料夾</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%AD%A5%E9%A9%9F%E4%BA%8C%EF%BC%9A%E5%BB%BA%E7%AB%8B%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%A7%81%E9%91%B0%E5%8F%8A%E6%86%91%E8%AD%89"><span class="toc-nav-text">步驟二：建立伺服器私鑰及憑證</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#%E5%BB%BA%E7%AB%8B%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%A7%81%E9%91%B0"><span class="toc-nav-text">建立伺服器私鑰</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#%E5%BB%BA%E7%AB%8B%E4%BC%BA%E6%9C%8D%E5%99%A8%E6%86%91%E8%AD%89"><span class="toc-nav-text">建立伺服器憑證</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%AD%A5%E9%A9%9F%E4%B8%89%EF%BC%9A%E7%A7%BB%E9%99%A4%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%A7%81%E9%91%B0%E5%AF%86%E7%A2%BC-Passphrase"><span class="toc-nav-text">步驟三：移除伺服器私鑰密碼(Passphrase)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%AD%A5%E9%A9%9F%E5%9B%9B%EF%BC%9A%E7%82%BA%E6%86%91%E8%AD%89%E7%B0%BD%E7%AB%A0"><span class="toc-nav-text">步驟四：為憑證簽章</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%AD%A5%E9%A9%9F%E4%BA%94%EF%BC%9A%E8%A8%AD%E5%AE%9A%E6%86%91%E8%AD%89"><span class="toc-nav-text">步驟五：設定憑證</span></a></li></ol>
     
   </div>
 </aside>
@@ -332,23 +356,23 @@
 </main>
 
 <script>
-  (function () {
-    var url = 'https://calvertyang.github.io/2013/10/17/creating-a-self-signed-ssl-certificate-for-nginx/';
-    var banner = '';
+  (function() {
+    const url = 'https://calvertyang.github.io/2013/10/17/creating-a-self-signed-ssl-certificate-for-nginx/';
+    const banner = '';
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
-        'background-image': 'url(' + banner + ')'
+        'background-image': 'url(' + banner + ')',
       });
     } else {
       $('#article-banner').geopattern(url);
     }
     $('.header').removeClass('fixed-header');
 
-     // error image
-    $('.markdown-content img').on('error', function() {
-      $(this).attr('src', '/css/images/error-img.png');
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.svg');
       $(this).css({
-        'cursor': 'default'
+        'cursor': 'default',
       });
     });
 
@@ -357,28 +381,28 @@
       if ($(this).parents().is('a')) {
         $(this).css({
           'cursor': 'pointer',
-          'display': 'inline-block'
+          'display': 'inline-block',
         });
       }
     });
 
     // zoom image
-    $('.markdown-content img').on('click', function(e) {
-      var src = $(this).attr('src');
-      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
-        var imageW = $(this).width();
-        var imageH = $(this).height();
+    $('.markdown-content img').on('click', function() {
+      const src = $(this).attr('src');
+      if (src !== '/css/images/error_icon.svg' && !$(this).parents().is('a')) {
+        const imageW = $(this).width();
+        const imageH = $(this).height();
 
-        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        let zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
         zoom = zoom < 1 ? 1 : zoom;
         zoom = zoom > 2 ? 2 : zoom;
-        var transY = (($(window).height() - imageH) / 2).toFixed(2);
+        const transY = (($(window).height() - imageH) / 2).toFixed(2);
 
         $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
         $('.image-view-wrap').addClass('wrap-active');
         $('.image-view-wrap img').css({
-          'width': `${imageW}`,
-          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+          width: imageW,
+          transform: `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`,
         });
         $('html').css('overflow', 'hidden');
 
@@ -387,35 +411,26 @@
           $('html').attr('style', '');
         });
       }
-    });
-
-    // qrcode
-    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
-      text: document.location.href,
-      width: 100,
-      height: 100,
-      colorDark: '#000000',
-    	colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.L,
-      useSVG: true
-    });
+    })
   })();
 </script>
+
+
 
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
 
 <script>
   function async(u, c) {
-    var d = document, t = 'script',
+    const d = document, t = 'script',
       o = d.createElement(t),
       s = d.getElementsByTagName(t)[0];
     o.src = u;
@@ -423,20 +438,36 @@
     s.parentNode.insertBefore(o, s);
   }
 </script>
-
 <script>
   async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
     FastClick.attach(document.body);
-  })
+  });
 </script>
 
 <script>
-  $('figure').each(function(i, block) {
-    let lang = this.classList[1] || 'codeblock';
-    this.dataset.lang = lang.toUpperCase();
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
   });
 </script>
+
+
 <script src="/js/script.js"></script>
+
 
   </body>
 </html>

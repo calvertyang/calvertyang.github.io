@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="Calvert&#39;s tech blog">
-  <meta name="keyword" content="calvert ruby rails ror rubyonrails">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
   
@@ -13,55 +13,70 @@
       在 Ruby on Rails 使用時區 | Calvert&#39;s murmur
     
   </title>
-  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrcode.js"></script>
+  
   
   
     <!-- MathJax support START -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
       });
     </script>
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
+        let all = MathJax.Hub.getAllJax(), i;
         for (i = 0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- MathJax support END -->
   
 
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
-  <script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-44933497-2');
-  </script>
+    </script>
 
 
-</head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
-</div>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3999187913340509" crossorigin="anonymous"></script>
+
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
   <body>
     <header class="header fixed-header">
@@ -70,7 +85,6 @@
       <div class="logo"></div>
       <span>Calvert's murmur</span>
     </a>
-
     <ul class="right-list">
       
         <li class="list-item">
@@ -81,7 +95,7 @@
       
         <li class="list-item">
           
-            <a href="/categories/" class="item-link">Categories</a>
+            <a href="/series/" class="item-link">Series</a>
           
         </li>
       
@@ -109,49 +123,15 @@
           
         </li>
       
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
     </ul>
-
-    
-      <div id="search-form-wrap">
-        <form class="search-form">
-          <input type="text" class="ins-search-input search-form-input" placeholder="搜尋" />
-          <button type="submit" class="search-form-submit">
-            <span class="fa fa-search"></span>
-          </button>
-        </form>
-        <div class="ins-search">
-  <div class="ins-search-mask"></div>
-  <div class="ins-search-container">
-    <div class="ins-input-wrapper">
-      <input type="text" class="ins-search-input" placeholder="想找什麼..." />
-      <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-    </div>
-    <div class="ins-section-wrapper">
-      <div class="ins-section-container"></div>
-    </div>
-  </div>
-</div>
-<script>
-  (function (window) {
-    var INSIGHT_CONFIG = {
-      TRANSLATION: {
-        POSTS: '文章',
-        PAGES: '頁面',
-        CATEGORIES: '分類',
-        TAGS: '標籤',
-        UNTITLED: '無標題',
-      },
-      ROOT_URL: '/',
-      CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-  })(window);
-</script>
-<script src="/js/insight.js"></script>
-
-      </div>
-    
-
     <div class="menu">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -168,7 +148,7 @@
         
           <li class="menu-item">
             
-              <a href="/categories/" class="menu-link">Categories</a>
+              <a href="/series/" class="menu-link">Series</a>
             
           </li>
         
@@ -198,64 +178,134 @@
         
       </ul>
     </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
   </div>
 </header>
 
     <div id="article-banner">
   <h2>在 Ruby on Rails 使用時區</h2>
   <p class="post-date">2018-09-18</p>
+
   <div class="arrow-down">
-    <a href="javascript:;" target="_blank" rel="noopener"></a>
+    <a href="javascript:;"></a>
   </div>
 </div>
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><blockquote>
-<p>原文：<strong>VARVET BLOG</strong> — <a href="https://www.varvet.com/blog/working-with-time-zones-in-ruby-on-rails" target="_blank" rel="noopener">WORKING WITH TIME ZONES IN RUBY ON RAILS</a></p>
+<p>原文：<strong>VARVET BLOG</strong> — <a target="_blank" rel="noopener" href="https://www.varvet.com/blog/working-with-time-zones-in-ruby-on-rails">WORKING WITH TIME ZONES IN RUBY ON RAILS</a></p>
 </blockquote>
 <p>Rails 提供了很好的工具來處理時區，但仍有很多事情可能會出錯。這篇文章會點出這些問題並提供解決方案。</p>
 <p>讓我被欺騙最多次的應該是，Rails 會愚弄你，讓你誤以為它替你處理好了所有和時間有關的部分。別誤會我的意思，我希望 Rails 盡可能的為我做更多事情，但在學習的過程中由於不夠熟悉 Rails 為我做了些什麼，因此碰到了許多困難。另外需要注意的是，在處理時區上，有更多是你意想不到需要處理的。需要考慮資料庫、伺服器、開發機器、系統設定、使用者設定和瀏覽器。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h3 id="設定你的-Rails-應用程式"><a href="#設定你的-Rails-應用程式" class="headerlink" title="設定你的 Rails 應用程式"></a>設定你的 Rails 應用程式</h3><p>作為 Rails 開發人員，我們可以使用哪些工具？最重要的一個是 <code>config/application.rb</code> 檔案中的 <code>config.time_zone</code> 設定。Active Record 會協助你轉換 UTC 和你選擇的時區（文件沒有解釋）。也就是，如果你所做的只是要透過表單取得用戶文章發佈時間，並使用 Active Record 來保存它，那麼你可以開始了。</p>
 <h3 id="處理時間資訊"><a href="#處理時間資訊" class="headerlink" title="處理時間資訊"></a>處理時間資訊</h3><p>那麼在保存時間資訊前要做些什麼呢？</p>
 <h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><p>重要的是永遠不要在沒有指定時區的情況下解析時間資訊。最好的方法是使用 <code>Time.zone.parse</code>（會使用 <code>config.time_zone</code> 指定的時區）而不是使用 <code>Time.parse</code>（會使用電腦的時區）。</p>
 <h4 id="使用數字和-Active-Record-屬性"><a href="#使用數字和-Active-Record-屬性" class="headerlink" title="使用數字和 Active Record 屬性"></a>使用數字和 Active Record 屬性</h4><p>如果可以，請使用如 <code>2.hours.ago</code> 這樣的方法，它會使用你設定的時區！Active Record 模型的時間屬性也是如此。</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">post = Post.first</span><br><span class="line">post.published_at</span><br><span class="line"><span class="comment"># =&gt; Fri, 10 Aug 2018 00:00:00 JST +09:00</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb">post <span class="token operator">=</span> <span class="token constant">Post</span><span class="token punctuation">.</span>first
+post<span class="token punctuation">.</span>published_at
+<span class="token comment"># => Fri, 10 Aug 2018 00:00:00 JST +09:00</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>Active Record 從資料庫取得 UTC 時間，並將其轉換為 <code>config.time_zone</code> 中設定的時區。</p>
 <h4 id="Date-與-Time"><a href="#Date-與-Time" class="headerlink" title="Date 與 Time"></a>Date 與 Time</h4><p><code>Time</code> 包含日期和時間資訊，但是 <code>Date</code> 只有日期資訊。即使你認為時間資訊並不重要，但很快地就會意識到它的重要性。安全地使用 <code>Time</code>（或 <code>DateTime</code>，如果你需要支援較遠的時間）。</p>
 <p>假設你需要將日期視為時間，至少要確保將它轉換為你設定的時區：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.day.from_now</span><br><span class="line"><span class="comment"># =&gt; Sat, 11 Aug 2018 12:11:11 JST +09:00</span></span><br><span class="line"></span><br><span class="line">Date.current.in_time_zone</span><br><span class="line"><span class="comment"># =&gt; Fri, 10 Aug 2018 00:00:00 JST +09:00</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token number">1.</span>day<span class="token punctuation">.</span>from_now
+<span class="token comment"># => Sat, 11 Aug 2018 12:11:11 JST +09:00</span>
+
+<span class="token constant">Date</span><span class="token punctuation">.</span>current<span class="token punctuation">.</span>in_time_zone
+<span class="token comment"># => Fri, 10 Aug 2018 00:00:00 JST +09:00</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>永遠別用：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Date.today.to_time</span><br><span class="line"><span class="comment"># =&gt; 2018-08-10 00:00:00 +0800</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token constant">Date</span><span class="token punctuation">.</span>today<span class="token punctuation">.</span>to_time
+<span class="token comment"># => 2018-08-10 00:00:00 +0800</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="查詢"><a href="#查詢" class="headerlink" title="查詢"></a>查詢</h3><p>由於 Rails 知道時間資訊是以 UTC 格式儲存於資料庫中，它會將你給它的任何時間轉換為 UTC。</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Post.where([<span class="string">'posts.published_at &gt; ?'</span>, Time.current])</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token constant">Post</span><span class="token punctuation">.</span>where<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'posts.published_at > ?'</span><span class="token punctuation">,</span> <span class="token builtin">Time</span><span class="token punctuation">.</span>current<span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>永遠不要手動建立查詢字串，應使用 <code>Time.current</code> 取得目前時間，以確保時間資訊是正確的。</p>
 <h3 id="使用於-APIs"><a href="#使用於-APIs" class="headerlink" title="使用於 APIs"></a>使用於 APIs</h3><h4 id="提供端"><a href="#提供端" class="headerlink" title="提供端"></a>提供端</h4><p>建立 Web API 提供其他人使用？請確保始終以 UTC 格式傳送所有時間資料。</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Time.current.utc.iso8601</span><br><span class="line"><span class="comment"># =&gt; "2018-08-10T03:11:35Z"</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token builtin">Time</span><span class="token punctuation">.</span>current<span class="token punctuation">.</span>utc<span class="token punctuation">.</span>iso8601
+<span class="token comment"># => "2018-08-10T03:11:35Z"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>在此閱讀更多關於為什麼 iso8601 是好的：<a href="http://devblog.avdi.org/2009/10/25/iso8601-dates-in-ruby/" target="_blank" rel="noopener">http://devblog.avdi.org/2009/10/25/iso8601-dates-in-ruby/</a></p>
+<p>在此閱讀更多關於為什麼 iso8601 是好的：<a target="_blank" rel="noopener" href="http://devblog.avdi.org/2009/10/25/iso8601-dates-in-ruby/">http://devblog.avdi.org/2009/10/25/iso8601-dates-in-ruby/</a></p>
 <h4 id="用戶端"><a href="#用戶端" class="headerlink" title="用戶端"></a>用戶端</h4><p>當你從外部 API 取得時間資訊時，你無法掌控它，只需要確定它傳送給你的格式和時區。因為 <code>Time.zone.parse</code> 可能無法使用在你收到的格式，你可能需要使用：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Time.strptime(time_string, <span class="string">'%Y-%m-%dT%H:%M:%S%z'</span>).in_time_zone</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token builtin">Time</span><span class="token punctuation">.</span>strptime<span class="token punctuation">(</span>time_string<span class="token punctuation">,</span> <span class="token string">'%Y-%m-%dT%H:%M:%S%z'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>in_time_zone<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>上面的範例假設了 time_string 是 iso8601 格式的字串。當時間字串的格式與格式樣板參數不匹配時，<code>strptime</code> 會拋出一個非常不直覺的錯誤。<code>in_time_zone</code> 預設會使用 Rails 設定的時區。</p>
 <blockquote>
 <p>目前可以使用 <code>Time.zone.strptime</code> 或 <code>Time.zone.parse</code> 來解析時間資訊。</p>
 </blockquote>
 <h3 id="使用用戶時區"><a href="#使用用戶時區" class="headerlink" title="使用用戶時區"></a>使用用戶時區</h3><p>許多系統需要支援用戶在各種時區輸入和查看時間資訊。要實現此目的，你需要儲存每個用戶的時區（可能只是一個在 <code>rake time:zones:all</code> 中找到的時區字串名稱）。然後，要實際使用該時區最常見的方式是在 ActionController 中建立一個私有方法，並將其作為 <code>around_action</code> 執行。</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">around_action <span class="symbol">:user_time_zone</span>, <span class="symbol">if:</span> <span class="symbol">:current_user</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">user_time_zone</span><span class="params">(&amp;block)</span></span></span><br><span class="line">  Time.use_zone(current_user.time_zone, &amp;block)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb">around_action <span class="token symbol">:user_time_zone</span><span class="token punctuation">,</span> <span class="token keyword">if</span><span class="token punctuation">:</span> <span class="token symbol">:current_user</span>
+
+<span class="token keyword">def</span> <span class="token method-definition"><span class="token function">user_time_zone</span></span><span class="token punctuation">(</span><span class="token operator">&amp;</span>block<span class="token punctuation">)</span>
+  <span class="token builtin">Time</span><span class="token punctuation">.</span>use_zone<span class="token punctuation">(</span>current_user<span class="token punctuation">.</span>time_zone<span class="token punctuation">,</span> <span class="token operator">&amp;</span>block<span class="token punctuation">)</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>這與 <code>config.time_zone</code> 做的事完全相同，但是是基於每個請求。我仍然建議將預設的 <code>config.time_zone</code> 更改為用戶的預設時區。</p>
 <h3 id="測試"><a href="#測試" class="headerlink" title="測試"></a>測試</h3><p>以上所有內容都是測試應該涵蓋的範圍。問題是你作為開發伺服器的用戶和電腦恰好位於同一時區。在生產環境中這種情況很少發生。</p>
-<p>有一個 <a href="https://github.com/alindeman/zonebie" target="_blank" rel="noopener">Zonebie</a> gem 可以幫助你解決這個問題。我還沒有時間試試看，但看起來很有希望。如果你覺得這有點矯枉過正，至少要確保你的測試執行時將 <code>Time.zone</code> 設定為另一時區，而不是開發機所在的時區！</p>
-<h3 id="速查表"><a href="#速查表" class="headerlink" title="速查表"></a>速查表</h3><h4 id="可以做"><a href="#可以做" class="headerlink" title="可以做"></a>可以做</h4><figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span>.hours.ago</span><br><span class="line"><span class="comment"># =&gt; Fri, 10 Aug 2018 10:12:02 JST +09:00</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>.day.from_now</span><br><span class="line"><span class="comment"># =&gt; Sat, 11 Aug 2018 12:12:15 JST +09:00</span></span><br><span class="line"></span><br><span class="line">Time.zone.parse(<span class="string">'2018-08-08T12:34:56Z'</span>)</span><br><span class="line"><span class="comment"># =&gt; Wed, 08 Aug 2018 21:34:56 JST +09:00</span></span><br><span class="line"></span><br><span class="line">Time.current</span><br><span class="line"><span class="comment"># =&gt; Fri, 10 Aug 2018 12:12:40 JST +09:00</span></span><br><span class="line"></span><br><span class="line">Time.current.utc.iso8601</span><br><span class="line"><span class="comment"># 當提供 API 時（"2018-08-10T03:12:47Z"）</span></span><br><span class="line"></span><br><span class="line">Time.strptime(<span class="string">'2018-08-08T12:34:56Z'</span>, <span class="string">'%Y-%m-%dT%H:%M:%S%z'</span>).in_time_zone</span><br><span class="line"><span class="comment"># 如果你不能使用 Time.zone.parse（Wed, 08 Aug 2018 21:34:56 JST +09:00）</span></span><br><span class="line"></span><br><span class="line">Date.current</span><br><span class="line"><span class="comment"># 如果由於某種原因你真的不能有 Time 或 DateTime（Fri, 10 Aug 2018）</span></span><br><span class="line"></span><br><span class="line">Date.current.in_time_zone</span><br><span class="line"><span class="comment"># 如果你有日期並希望充分利用它（Fri, 10 Aug 2018 00:00:00 JST +09:00）</span></span><br></pre></td></tr></table></figure>
+<p>有一個 <a target="_blank" rel="noopener" href="https://github.com/alindeman/zonebie">Zonebie</a> gem 可以幫助你解決這個問題。我還沒有時間試試看，但看起來很有希望。如果你覺得這有點矯枉過正，至少要確保你的測試執行時將 <code>Time.zone</code> 設定為另一時區，而不是開發機所在的時區！</p>
+<h3 id="速查表"><a href="#速查表" class="headerlink" title="速查表"></a>速查表</h3><h4 id="可以做"><a href="#可以做" class="headerlink" title="可以做"></a>可以做</h4><pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token number">2.</span>hours<span class="token punctuation">.</span>ago
+<span class="token comment"># => Fri, 10 Aug 2018 10:12:02 JST +09:00</span>
 
-<h4 id="不可以做"><a href="#不可以做" class="headerlink" title="不可以做"></a>不可以做</h4><figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Time.now</span><br><span class="line"><span class="comment"># 返回系統時間並忽略你設定的時區。（2018-08-10 11:13:30 +0800）</span></span><br><span class="line"></span><br><span class="line">Time.parse(<span class="string">'2015-08-27T12:09:36Z'</span>)</span><br><span class="line"><span class="comment"># 會假設時間字串是在系統的時區。（2015-08-27 12:09:36 UTC）</span></span><br><span class="line"></span><br><span class="line">Time.strptime(<span class="string">'2015-08-27T12:09:36Z'</span>, <span class="string">'%Y-%m-%dT%H:%M:%S%z'</span>)</span><br><span class="line"><span class="comment"># 與 Time.parse 相同的問題。（2015-08-27 12:09:36 UTC）</span></span><br><span class="line"></span><br><span class="line">Date.today</span><br><span class="line"><span class="comment"># 取決於機器的時區，這可能是昨天或明天，更多相關資訊，請參閱 https://github.com/ramhoj/time-zone-article/issues/1。（Fri, 10 Aug 2018）</span></span><br></pre></td></tr></table></figure>
+<span class="token number">1.</span>day<span class="token punctuation">.</span>from_now
+<span class="token comment"># => Sat, 11 Aug 2018 12:12:15 JST +09:00</span>
+
+<span class="token builtin">Time</span><span class="token punctuation">.</span>zone<span class="token punctuation">.</span>parse<span class="token punctuation">(</span><span class="token string">'2018-08-08T12:34:56Z'</span><span class="token punctuation">)</span>
+<span class="token comment"># => Wed, 08 Aug 2018 21:34:56 JST +09:00</span>
+
+<span class="token builtin">Time</span><span class="token punctuation">.</span>current
+<span class="token comment"># => Fri, 10 Aug 2018 12:12:40 JST +09:00</span>
+
+<span class="token builtin">Time</span><span class="token punctuation">.</span>current<span class="token punctuation">.</span>utc<span class="token punctuation">.</span>iso8601
+<span class="token comment"># 當提供 API 時（"2018-08-10T03:12:47Z"）</span>
+
+<span class="token builtin">Time</span><span class="token punctuation">.</span>strptime<span class="token punctuation">(</span><span class="token string">'2018-08-08T12:34:56Z'</span><span class="token punctuation">,</span> <span class="token string">'%Y-%m-%dT%H:%M:%S%z'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>in_time_zone
+<span class="token comment"># 如果你不能使用 Time.zone.parse（Wed, 08 Aug 2018 21:34:56 JST +09:00）</span>
+
+<span class="token constant">Date</span><span class="token punctuation">.</span>current
+<span class="token comment"># 如果由於某種原因你真的不能有 Time 或 DateTime（Fri, 10 Aug 2018）</span>
+
+<span class="token constant">Date</span><span class="token punctuation">.</span>current<span class="token punctuation">.</span>in_time_zone
+<span class="token comment"># 如果你有日期並希望充分利用它（Fri, 10 Aug 2018 00:00:00 JST +09:00）</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="不可以做"><a href="#不可以做" class="headerlink" title="不可以做"></a>不可以做</h4><pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token builtin">Time</span><span class="token punctuation">.</span>now
+<span class="token comment"># 返回系統時間並忽略你設定的時區。（2018-08-10 11:13:30 +0800）</span>
+
+<span class="token builtin">Time</span><span class="token punctuation">.</span>parse<span class="token punctuation">(</span><span class="token string">'2015-08-27T12:09:36Z'</span><span class="token punctuation">)</span>
+<span class="token comment"># 會假設時間字串是在系統的時區。（2015-08-27 12:09:36 UTC）</span>
+
+<span class="token builtin">Time</span><span class="token punctuation">.</span>strptime<span class="token punctuation">(</span><span class="token string">'2015-08-27T12:09:36Z'</span><span class="token punctuation">,</span> <span class="token string">'%Y-%m-%dT%H:%M:%S%z'</span><span class="token punctuation">)</span>
+<span class="token comment"># 與 Time.parse 相同的問題。（2015-08-27 12:09:36 UTC）</span>
+
+<span class="token constant">Date</span><span class="token punctuation">.</span>today
+<span class="token comment"># 取決於機器的時區，這可能是昨天或明天，更多相關資訊，請參閱 https://github.com/ramhoj/time-zone-article/issues/1。（Fri, 10 Aug 2018）</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </section>
     <!-- Tags START -->
     
@@ -270,11 +320,9 @@
       </div>
     
     <!-- Tags END -->
-    <!-- UpdatedDate Start -->
-     
-       <p class="post-date">最後更新時間：2019-11-15</p>
-     
-   <!-- UpdatedDate END -->
+    <!-- Last updated on Start -->
+    
+    <!-- Last updated on END -->
     <!-- NAV START -->
     
   <div class="nav-container">
@@ -299,19 +347,9 @@
 
 
     <!-- NAV END -->
-    <!-- 打賞 START -->
+    <!-- QR Code START -->
     
-    <!-- 打賞 END -->
-    <!-- 二維條碼 START -->
-    
-      <div class="qrcode">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g id="share-qrcode"/>
-        </svg>
-        <p class="notice">掃描二維條碼，分享此文章</p>
-      </div>
-    
-    <!-- 二維條碼 END -->
+    <!-- QR Code END -->
   </article>
   <!-- Article END -->
   <!-- Catalog START -->
@@ -320,7 +358,7 @@
   <div class="toc-main">
     <strong class="toc-title">目錄</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#設定你的-Rails-應用程式"><span class="toc-nav-text">設定你的 Rails 應用程式</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#處理時間資訊"><span class="toc-nav-text">處理時間資訊</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#解析"><span class="toc-nav-text">解析</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#使用數字和-Active-Record-屬性"><span class="toc-nav-text">使用數字和 Active Record 屬性</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Date-與-Time"><span class="toc-nav-text">Date 與 Time</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#查詢"><span class="toc-nav-text">查詢</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用於-APIs"><span class="toc-nav-text">使用於 APIs</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#提供端"><span class="toc-nav-text">提供端</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#用戶端"><span class="toc-nav-text">用戶端</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用用戶時區"><span class="toc-nav-text">使用用戶時區</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#測試"><span class="toc-nav-text">測試</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#速查表"><span class="toc-nav-text">速查表</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#可以做"><span class="toc-nav-text">可以做</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#不可以做"><span class="toc-nav-text">不可以做</span></a></li></ol></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%A8%AD%E5%AE%9A%E4%BD%A0%E7%9A%84-Rails-%E6%87%89%E7%94%A8%E7%A8%8B%E5%BC%8F"><span class="toc-nav-text">設定你的 Rails 應用程式</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%99%95%E7%90%86%E6%99%82%E9%96%93%E8%B3%87%E8%A8%8A"><span class="toc-nav-text">處理時間資訊</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E8%A7%A3%E6%9E%90"><span class="toc-nav-text">解析</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E4%BD%BF%E7%94%A8%E6%95%B8%E5%AD%97%E5%92%8C-Active-Record-%E5%B1%AC%E6%80%A7"><span class="toc-nav-text">使用數字和 Active Record 屬性</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Date-%E8%88%87-Time"><span class="toc-nav-text">Date 與 Time</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%9F%A5%E8%A9%A2"><span class="toc-nav-text">查詢</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%BC-APIs"><span class="toc-nav-text">使用於 APIs</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E6%8F%90%E4%BE%9B%E7%AB%AF"><span class="toc-nav-text">提供端</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E7%94%A8%E6%88%B6%E7%AB%AF"><span class="toc-nav-text">用戶端</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E4%BD%BF%E7%94%A8%E7%94%A8%E6%88%B6%E6%99%82%E5%8D%80"><span class="toc-nav-text">使用用戶時區</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%B8%AC%E8%A9%A6"><span class="toc-nav-text">測試</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="toc-nav-text">速查表</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%8F%AF%E4%BB%A5%E5%81%9A"><span class="toc-nav-text">可以做</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E4%B8%8D%E5%8F%AF%E4%BB%A5%E5%81%9A"><span class="toc-nav-text">不可以做</span></a></li></ol></li></ol>
     
   </div>
 </aside>
@@ -330,23 +368,23 @@
 </main>
 
 <script>
-  (function () {
-    var url = 'https://calvertyang.github.io/2018/09/18/working-with-time-zones-in-ruby-on-rails/';
-    var banner = '';
+  (function() {
+    const url = 'https://calvertyang.github.io/2018/09/18/working-with-time-zones-in-ruby-on-rails/';
+    const banner = '';
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
-        'background-image': 'url(' + banner + ')'
+        'background-image': 'url(' + banner + ')',
       });
     } else {
       $('#article-banner').geopattern(url);
     }
     $('.header').removeClass('fixed-header');
 
-     // error image
-    $('.markdown-content img').on('error', function() {
-      $(this).attr('src', '/css/images/error-img.png');
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.svg');
       $(this).css({
-        'cursor': 'default'
+        'cursor': 'default',
       });
     });
 
@@ -355,28 +393,28 @@
       if ($(this).parents().is('a')) {
         $(this).css({
           'cursor': 'pointer',
-          'display': 'inline-block'
+          'display': 'inline-block',
         });
       }
     });
 
     // zoom image
-    $('.markdown-content img').on('click', function(e) {
-      var src = $(this).attr('src');
-      if (src !== '/css/images/error-img.png' && !$(this).parents().is('a')) {
-        var imageW = $(this).width();
-        var imageH = $(this).height();
+    $('.markdown-content img').on('click', function() {
+      const src = $(this).attr('src');
+      if (src !== '/css/images/error_icon.svg' && !$(this).parents().is('a')) {
+        const imageW = $(this).width();
+        const imageH = $(this).height();
 
-        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        let zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
         zoom = zoom < 1 ? 1 : zoom;
         zoom = zoom > 2 ? 2 : zoom;
-        var transY = (($(window).height() - imageH) / 2).toFixed(2);
+        const transY = (($(window).height() - imageH) / 2).toFixed(2);
 
         $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
         $('.image-view-wrap').addClass('wrap-active');
         $('.image-view-wrap img').css({
-          'width': `${imageW}`,
-          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+          width: imageW,
+          transform: `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`,
         });
         $('html').css('overflow', 'hidden');
 
@@ -385,35 +423,26 @@
           $('html').attr('style', '');
         });
       }
-    });
-
-    // qrcode
-    var qrcode = new QRCode(document.getElementById('share-qrcode'), {
-      text: document.location.href,
-      width: 100,
-      height: 100,
-      colorDark: '#000000',
-    	colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.L,
-      useSVG: true
-    });
+    })
   })();
 </script>
+
+
 
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; Calvert 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
 
 <script>
   function async(u, c) {
-    var d = document, t = 'script',
+    const d = document, t = 'script',
       o = d.createElement(t),
       s = d.getElementsByTagName(t)[0];
     o.src = u;
@@ -421,20 +450,36 @@
     s.parentNode.insertBefore(o, s);
   }
 </script>
-
 <script>
   async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
     FastClick.attach(document.body);
-  })
+  });
 </script>
 
 <script>
-  $('figure').each(function(i, block) {
-    let lang = this.classList[1] || 'codeblock';
-    this.dataset.lang = lang.toUpperCase();
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
   });
 </script>
+
+
 <script src="/js/script.js"></script>
+
 
   </body>
 </html>
