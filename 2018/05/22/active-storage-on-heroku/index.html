@@ -239,8 +239,8 @@
 <h3 id="在-Heroku-使用-Active-Storage"><a href="#在-Heroku-使用-Active-Storage" class="headerlink" title="在 Heroku 使用 Active Storage"></a>在 Heroku 使用 Active Storage</h3><p>如果你使用按鈕部署應用程式範例，它已經透過 <code>app.json</code> 設定能在 Heroku 上運作，但是，如果你有自己的應用程式想要部署，你要如何設定它以便在 Heroku 上運作？</p>
 <p>根據<a target="_blank" rel="noopener" href="https://devcenter.heroku.com/articles/active-storage-on-heroku?preview=1">開發中心的 Active Storage 文件</a>，你將需要一個檔案儲存服務，讓你所有的 dynos 都可以與其溝通。該範例使用名為 <a target="_blank" rel="noopener" href="https://elements.heroku.com/addons/bucketeer">Bucketeer</a> 的 Heroku S3 附加元件，但你也可以使用現有的 S3 憑證。</p>
 <p>馬上開始，請將 S3 的 AWS gem 加到 Gemfile，如果你要修改圖片，請加入 Mini Magick：</p>
-<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb">gem <span class="token string">"aws-sdk-s3"</span><span class="token punctuation">,</span> <span class="token keyword">require</span><span class="token punctuation">:</span> <span class="token boolean">false</span>
-gem <span class="token string">'mini_magick'</span><span class="token punctuation">,</span> <span class="token string">'~> 4.8'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb">gem &quot;aws-sdk-s3&quot;, require: false
+gem &#39;mini_magick&#39;, &#39;~&gt; 4.8&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>更新 Gemfile 後別忘了 <code>$ bundle install</code>。</p>
 <p>接下來，在你的 <code>config/storage.yml</code> 檔案中加入一個 <code>amazon</code> 選項來指向 S3 設定，在這個範例中我們使用了由 Bucketeer 設定的配置：</p>
@@ -252,7 +252,7 @@ gem <span class="token string">'mini_magick'</span><span class="token punctuatio
   bucket: &lt;%&#x3D; ENV[&#39;BUCKETEER_BUCKET_NAME&#39;] %&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>然後確保你的應用程式設定為在生產環境中使用 <code>:amazon</code> 儲存配置：</p>
-<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb">config<span class="token punctuation">.</span>active_storage<span class="token punctuation">.</span>service <span class="token operator">=</span> <span class="token symbol">:amazon</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb">config.active_storage.service &#x3D; :amazon<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>如果你忘記了這一步，預設的儲存是使用 <code>:local</code> 將檔案儲存到磁碟。這不是處理生產環境中上傳檔案的可擴展方式。如果你不小心將它部署到 Heroku，首先它會顯示檔案已上傳，但是如果你執行超過一個 dyno，他們會在隨機的請求中消失。當重新啟動 dynos 時，這些檔案將完全消失。你可以在開發中心取得有關 <a target="_blank" rel="noopener" href="https://devcenter.heroku.com/articles/active-storage-on-heroku?preview=1#ephemeral-disk">Heroku 的臨時磁碟</a>的更多資訊。</p>
 <p>最後，要使其在生產環境中運作的最後一件事是安裝一個客制的建置套件，它將安裝用來產生資源預覽的二進位相依檔案 <code>ffmpeg</code> 和 <code>poppler</code>：</p>
@@ -270,9 +270,9 @@ gem <span class="token string">'mini_magick'</span><span class="token punctuatio
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ bin/rails db:migrate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>在資料庫遷移後，更新模型讓 Rails 知道你打算讓它能夠附加檔案：</p>
-<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token keyword">class</span> <span class="token class-name">Bulletin</span> <span class="token operator">&lt;</span> <span class="token constant">ApplicationRecord</span>
-  has_one_attached <span class="token symbol">:attachment</span>
-<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb">class Bulletin &lt; ApplicationRecord
+  has_one_attached :attachment
+end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>一旦完成，我們還需要三個部分：上傳附件的表單、儲存附件的控制器以及呈現附件的視圖。</p>
 <p>如果你有一個現有的表單，你可以透過 <code>file_field</code> 視圖輔助方法加入一個附件欄位：</p>
