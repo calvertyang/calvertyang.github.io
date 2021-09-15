@@ -211,7 +211,7 @@
   <p class="post-date">2019-11-14</p>
   <p class="word-count">
   
-  約 6080 字 / 需 33 分鐘閱讀
+  約 6077 字 / 需 33 分鐘閱讀
 </p>
 
 
@@ -225,7 +225,7 @@
     <section class="markdown-content"><blockquote>
 <p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-maps">Golang Maps by Example</a></p>
 </blockquote>
-<p>map 是沒有順序的鍵-值對集合。它將鍵對應到值。鍵在 map 是唯一的，而值可能不是。</p>
+<p>map 是沒有順序的鍵值對集合。它將鍵對應到值。鍵在 map 是唯一的，而值可能不是。</p>
 <p>map 資料結構用於基於鍵的快速尋找、取得和刪除資料。它是電腦科學中最常用的資料結構之一。</p>
 <p>Go 提供了內建的 map 型別。在本文中，我們將學到如何使用 Golang 內建的 map 型別。</p>
 <span id="more"></span>
@@ -294,7 +294,7 @@ map[]
 m is not nil
 map[one hundred:100]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="2-使用-map-定數初始化-map"><a href="#2-使用-map-定數初始化-map" class="headerlink" title="2. 使用 map 定數初始化 map"></a>2. 使用 map 定數初始化 map</h4><p>map 定數是使用某些資料初始化 map 的一種非常方便的方法。你只需要像這樣在大括號內傳遞以冒號分隔的鍵-值對：</p>
+<h4 id="2-使用-map-定數初始化-map"><a href="#2-使用-map-定數初始化-map" class="headerlink" title="2. 使用 map 定數初始化 map"></a>2. 使用 map 定數初始化 map</h4><p>map 定數是使用某些資料初始化 map 的一種非常方便的方法。你只需要像這樣在大括號內傳遞以冒號分隔的鍵值對：</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> m <span class="token operator">=</span> <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">&#123;</span>
 	<span class="token string">"one"</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
 	<span class="token string">"two"</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
@@ -327,7 +327,7 @@ map[one:1 two:2 three:3 four:4 five:5]<span aria-hidden="true" class="line-numbe
 <span class="token keyword">var</span> m <span class="token operator">=</span> <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>上面的陳述式在功能上與使用 <code>make()</code> 函數相同。</p>
-<h3 id="加入項目（鍵-值對）到-map"><a href="#加入項目（鍵-值對）到-map" class="headerlink" title="加入項目（鍵-值對）到 map"></a>加入項目（鍵-值對）到 map</h3><p>你可以使用以下語法將新項目加入到已初始化的 map：</p>
+<h3 id="加入項目（鍵值對）到-map"><a href="#加入項目（鍵值對）到-map" class="headerlink" title="加入項目（鍵值對）到 map"></a>加入項目（鍵值對）到 map</h3><p>你可以使用以下語法將新項目加入到已初始化的 map：</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go">m<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> value<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>以下的範例使用 <code>make()</code> 函數初始化 map，並對它加入一些新項目：</p>
@@ -590,7 +590,7 @@ Rajeev 25<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
   <div class="toc-main">
     <strong class="toc-title">目錄</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%AE%A3%E5%91%8A-map"><span class="toc-nav-text">宣告 map</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96-map"><span class="toc-nav-text">初始化 map</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-%E4%BD%BF%E7%94%A8%E5%85%A7%E5%BB%BA%E7%9A%84-make-%E5%87%BD%E6%95%B8%E5%88%9D%E5%A7%8B%E5%8C%96-map"><span class="toc-nav-text">1. 使用內建的 make() 函數初始化 map</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-%E4%BD%BF%E7%94%A8-map-%E5%AE%9A%E6%95%B8%E5%88%9D%E5%A7%8B%E5%8C%96-map"><span class="toc-nav-text">2. 使用 map 定數初始化 map</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%8A%A0%E5%85%A5%E9%A0%85%E7%9B%AE%EF%BC%88%E9%8D%B5-%E5%80%BC%E5%B0%8D%EF%BC%89%E5%88%B0-map"><span class="toc-nav-text">加入項目（鍵-值對）到 map</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%8F%96%E5%BE%97-map-%E4%B8%AD%E7%89%B9%E5%AE%9A%E9%8D%B5%E6%89%80%E9%97%9C%E8%81%AF%E7%9A%84%E5%80%BC"><span class="toc-nav-text">取得 map 中特定鍵所關聯的值</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E6%AA%A2%E6%9F%A5%E9%8D%B5%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E6%96%BC-map"><span class="toc-nav-text">檢查鍵是否存在於 map</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%BE%9E-map-%E4%B8%AD%E5%88%AA%E9%99%A4%E9%8D%B5"><span class="toc-nav-text">從 map 中刪除鍵</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#map-%E6%98%AF%E5%8F%83%E8%80%83%E5%9E%8B%E5%88%A5"><span class="toc-nav-text">map 是參考型別</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%BF%AD%E4%BB%A3-map"><span class="toc-nav-text">迭代 map</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%B5%90%E8%AB%96"><span class="toc-nav-text">結論</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%AE%A3%E5%91%8A-map"><span class="toc-nav-text">宣告 map</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96-map"><span class="toc-nav-text">初始化 map</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-%E4%BD%BF%E7%94%A8%E5%85%A7%E5%BB%BA%E7%9A%84-make-%E5%87%BD%E6%95%B8%E5%88%9D%E5%A7%8B%E5%8C%96-map"><span class="toc-nav-text">1. 使用內建的 make() 函數初始化 map</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-%E4%BD%BF%E7%94%A8-map-%E5%AE%9A%E6%95%B8%E5%88%9D%E5%A7%8B%E5%8C%96-map"><span class="toc-nav-text">2. 使用 map 定數初始化 map</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%8A%A0%E5%85%A5%E9%A0%85%E7%9B%AE%EF%BC%88%E9%8D%B5%E5%80%BC%E5%B0%8D%EF%BC%89%E5%88%B0-map"><span class="toc-nav-text">加入項目（鍵值對）到 map</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%8F%96%E5%BE%97-map-%E4%B8%AD%E7%89%B9%E5%AE%9A%E9%8D%B5%E6%89%80%E9%97%9C%E8%81%AF%E7%9A%84%E5%80%BC"><span class="toc-nav-text">取得 map 中特定鍵所關聯的值</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E6%AA%A2%E6%9F%A5%E9%8D%B5%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E6%96%BC-map"><span class="toc-nav-text">檢查鍵是否存在於 map</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%BE%9E-map-%E4%B8%AD%E5%88%AA%E9%99%A4%E9%8D%B5"><span class="toc-nav-text">從 map 中刪除鍵</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#map-%E6%98%AF%E5%8F%83%E8%80%83%E5%9E%8B%E5%88%A5"><span class="toc-nav-text">map 是參考型別</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%BF%AD%E4%BB%A3-map"><span class="toc-nav-text">迭代 map</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%B5%90%E8%AB%96"><span class="toc-nav-text">結論</span></a></li></ol>
     
   </div>
 </aside>

@@ -181,7 +181,7 @@
       white-space: nowrap; }
   .markdown-content > p, .article-summary > p {
     margin-top: 1rem; }
-  .markdown-content li > code, .article-summary li > code {
+  .markdown-content li code, .article-summary li code {
     background-color: #f8f8f8;
     color: #e96900;
     padding: 3px 5px;

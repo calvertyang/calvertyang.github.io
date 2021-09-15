@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Calvert&#39;s murmur">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Golang 中的 Base64 編碼和解碼 | Calvert&#39;s murmur
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        let all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-44933497-2');
+    </script>
+
+
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3999187913340509" crossorigin="anonymous"></script>
+
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Calvert's murmur</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/series/" class="item-link">Series</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/series/" class="menu-link">Series</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Golang 中的 Base64 編碼和解碼</h2>
+  <p class="post-date">2021-09-15</p>
+  <p class="word-count">
+  
+  約 2223 字 / 需 12 分鐘閱讀
+</p>
+
+
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-base64-encoding-decoding">Base64 Encoding and Decoding in Golang</a></p>
+</blockquote>
+<p>Base64 是一種二進位轉文字編碼方案。它用可列印的 ASCII 字串格式對二進位資料進行編碼。當需要透過僅設計用來處理文字資料無法正確處理二進位資料的通訊媒介傳輸二進位檔案時，通常會使用它。</p>
+<p>Go 內建支援對 Base64 編碼和解碼。在本文中，你將學到如何在 Go 中進行 Base64 編碼和解碼。</p>
+<h3 id="Go-中的-Base64-編碼"><a href="#Go-中的-Base64-編碼" class="headerlink" title="Go 中的 Base64 編碼"></a>Go 中的 Base64 編碼</h3><p>Go 的 <a target="_blank" rel="noopener" href="https://pkg.go.dev/encoding/base64">encoding/base64</a> package 支援標準及與網址相容的 Base64 編碼和解碼。與網址相容的 Base64 編碼允許你將 Base64 編碼的字串安全的放在網址內。</p>
+<p>讓我們來看個範例：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"encoding/base64"</span>
+	<span class="token string">"fmt"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	data <span class="token operator">:=</span> <span class="token string">"Gol@ng is Awesome?~"</span>
+
+    <span class="token comment">// Standard Base64 Encoding</span>
+	encodedData <span class="token operator">:=</span> base64<span class="token punctuation">.</span>StdEncoding<span class="token punctuation">.</span><span class="token function">EncodeToString</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>encodedData<span class="token punctuation">)</span>
+
+	<span class="token comment">// URL and filename-safe Base64 encoding</span>
+	urlSafeEncodedData <span class="token operator">:=</span> base64<span class="token punctuation">.</span>URLEncoding<span class="token punctuation">.</span><span class="token function">EncodeToString</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>urlSafeEncodedData<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<span id="more"></span>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+R29sQG5nIGlzIEF3ZXNvbWU&#x2F;fg&#x3D;&#x3D;
+R29sQG5nIGlzIEF3ZXNvbWU_fg&#x3D;&#x3D;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="無填充的-Base64-編碼"><a href="#無填充的-Base64-編碼" class="headerlink" title="無填充的 Base64 編碼"></a>無填充的 Base64 編碼</h3><p>如果你想進行原始、無填充的 Base64 編碼，那麼你可以使用 <code>RawStdEncoding</code> 和 <code>RawURLEncoding</code>。它們與 <code>StdEncoding</code> 和 <code>URLEncoding</code> 相同，但省略了填充字元。請注意，在實際使用上，你應該只使用上面範例中有填充的 Base64 編碼。</p>
+<p>以下是無填充的 Base64 編碼範例：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"encoding/base64"</span>
+	<span class="token string">"fmt"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	data <span class="token operator">:=</span> <span class="token string">"Gol@ng is Awesome?~"</span>
+
+	<span class="token comment">// Standard Base64 Encoding without padding</span>
+	encodedDataWithoutPadding <span class="token operator">:=</span> base64<span class="token punctuation">.</span>RawStdEncoding<span class="token punctuation">.</span><span class="token function">EncodeToString</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>encodedDataWithoutPadding<span class="token punctuation">)</span>
+
+	<span class="token comment">// URL and filename-safe Base64 encoding without padding</span>
+	urlSafeEncodedDataWithoutPadding <span class="token operator">:=</span> base64<span class="token punctuation">.</span>RawURLEncoding<span class="token punctuation">.</span><span class="token function">EncodeToString</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>urlSafeEncodedDataWithoutPadding<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+R29sQG5nIGlzIEF3ZXNvbWU&#x2F;fg
+R29sQG5nIGlzIEF3ZXNvbWU_fg<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Go-中的-Base64-解碼"><a href="#Go-中的-Base64-解碼" class="headerlink" title="Go 中的 Base64 解碼"></a>Go 中的 Base64 解碼</h3><p>以下範例示範了如何在 Go 中解碼 Base64 編碼的字串：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"encoding/base64"</span>
+	<span class="token string">"fmt"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	encodedData <span class="token operator">:=</span> <span class="token string">"R29sQG5nIGlzIEF3ZXNvbWU/fg=="</span>
+
+	<span class="token comment">// Standard Base64 Decoding</span>
+	decodedData<span class="token punctuation">,</span> err <span class="token operator">:=</span> base64<span class="token punctuation">.</span>StdEncoding<span class="token punctuation">.</span><span class="token function">DecodeString</span><span class="token punctuation">(</span>encodedData<span class="token punctuation">)</span>
+	<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Error decoding Base64 encoded data %v"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>decodedData<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+	<span class="token comment">// URL and filename-safe Base64 decoding</span>
+	urlSafeBase64EncodedData <span class="token operator">:=</span> <span class="token string">"R29sQG5nIGlzIEF3ZXNvbWU_fg=="</span>
+	urlSafeData<span class="token punctuation">,</span> err <span class="token operator">:=</span> base64<span class="token punctuation">.</span>URLEncoding<span class="token punctuation">.</span><span class="token function">DecodeString</span><span class="token punctuation">(</span>urlSafeBase64EncodedData<span class="token punctuation">)</span>
+	<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Error decoding Base64 encoded data %v"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>urlSafeData<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+Gol@ng is Awesome?~
+Gol@ng is Awesome?~<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- Last updated on Start -->
+    
+    <!-- Last updated on END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2021/09/14/reading-and-writing-environment-variables-in-go/">
+        <span class="nav-arrow">&larr; </span>
+        
+          在 Go 讀寫環境變數
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2021/09/15/golang-url-encoding-and-decoding/">
+        
+          Golang 的網址編碼和解碼
+        
+        <span class="nav-arrow"> &rarr;</span>
+      </a>
+    
+  </div>
+
+
+    <!-- NAV END -->
+    <!-- QR Code START -->
+    
+    <!-- QR Code END -->
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">目錄</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Go-%E4%B8%AD%E7%9A%84-Base64-%E7%B7%A8%E7%A2%BC"><span class="toc-nav-text">Go 中的 Base64 編碼</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%84%A1%E5%A1%AB%E5%85%85%E7%9A%84-Base64-%E7%B7%A8%E7%A2%BC"><span class="toc-nav-text">無填充的 Base64 編碼</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Go-%E4%B8%AD%E7%9A%84-Base64-%E8%A7%A3%E7%A2%BC"><span class="toc-nav-text">Go 中的 Base64 解碼</span></a></li></ol>
+    
+  </div>
+</aside>
+
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function() {
+    const url = 'https://calvertyang.github.io/2021/09/15/base64-encoding-and-decoding-in-golang/';
+    const banner = '';
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')',
+      });
+    } else {
+      $('#article-banner').geopattern(url);
+    }
+    $('.header').removeClass('fixed-header');
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.svg');
+      $(this).css({
+        'cursor': 'default',
+      });
+    });
+
+    // 若圖片放在連結內，則將游標改為 pointer 並將圖片靠左
+    $('.markdown-content img').each(function() {
+      if ($(this).parents().is('a')) {
+        $(this).css({
+          'cursor': 'pointer',
+          'display': 'inline-block',
+        });
+      }
+    });
+
+    // zoom image
+    $('.markdown-content img').on('click', function() {
+      const src = $(this).attr('src');
+      if (src !== '/css/images/error_icon.svg' && !$(this).parents().is('a')) {
+        const imageW = $(this).width();
+        const imageH = $(this).height();
+
+        let zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        zoom = zoom < 1 ? 1 : zoom;
+        zoom = zoom > 2 ? 2 : zoom;
+        const transY = (($(window).height() - imageH) / 2).toFixed(2);
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
+        $('.image-view-wrap').addClass('wrap-active');
+        $('.image-view-wrap img').css({
+          width: imageW,
+          transform: `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`,
+        });
+        $('html').css('overflow', 'hidden');
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove();
+          $('html').attr('style', '');
+        });
+      }
+    })
+  })();
+</script>
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    const d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
+    FastClick.attach(document.body);
+  });
+</script>
+
+<script>
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

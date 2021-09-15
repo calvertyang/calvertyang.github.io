@@ -4213,7 +4213,7 @@ Total Sum &#x3D; 25.50<span aria-hidden="true" class="line-numbers-rows"><span><
     <content><![CDATA[<blockquote>
 <p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-maps">Golang Maps by Example</a></p>
 </blockquote>
-<p>map 是沒有順序的鍵-值對集合。它將鍵對應到值。鍵在 map 是唯一的，而值可能不是。</p>
+<p>map 是沒有順序的鍵值對集合。它將鍵對應到值。鍵在 map 是唯一的，而值可能不是。</p>
 <p>map 資料結構用於基於鍵的快速尋找、取得和刪除資料。它是電腦科學中最常用的資料結構之一。</p>
 <p>Go 提供了內建的 map 型別。在本文中，我們將學到如何使用 Golang 內建的 map 型別。</p>
 <span id="more"></span>
@@ -4282,7 +4282,7 @@ map[]
 m is not nil
 map[one hundred:100]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="2-使用-map-定數初始化-map"><a href="#2-使用-map-定數初始化-map" class="headerlink" title="2. 使用 map 定數初始化 map"></a>2. 使用 map 定數初始化 map</h4><p>map 定數是使用某些資料初始化 map 的一種非常方便的方法。你只需要像這樣在大括號內傳遞以冒號分隔的鍵-值對：</p>
+<h4 id="2-使用-map-定數初始化-map"><a href="#2-使用-map-定數初始化-map" class="headerlink" title="2. 使用 map 定數初始化 map"></a>2. 使用 map 定數初始化 map</h4><p>map 定數是使用某些資料初始化 map 的一種非常方便的方法。你只需要像這樣在大括號內傳遞以冒號分隔的鍵值對：</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> m <span class="token operator">=</span> <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">&#123;</span>
 	<span class="token string">"one"</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
 	<span class="token string">"two"</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
@@ -4315,7 +4315,7 @@ map[one:1 two:2 three:3 four:4 five:5]<span aria-hidden="true" class="line-numbe
 <span class="token keyword">var</span> m <span class="token operator">=</span> <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>上面的陳述式在功能上與使用 <code>make()</code> 函數相同。</p>
-<h3 id="加入項目（鍵-值對）到-map"><a href="#加入項目（鍵-值對）到-map" class="headerlink" title="加入項目（鍵-值對）到 map"></a>加入項目（鍵-值對）到 map</h3><p>你可以使用以下語法將新項目加入到已初始化的 map：</p>
+<h3 id="加入項目（鍵值對）到-map"><a href="#加入項目（鍵值對）到-map" class="headerlink" title="加入項目（鍵值對）到 map"></a>加入項目（鍵值對）到 map</h3><p>你可以使用以下語法將新項目加入到已初始化的 map：</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go">m<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> value<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>以下的範例使用 <code>make()</code> 函數初始化 map，並對它加入一些新項目：</p>
@@ -6096,6 +6096,185 @@ $ .&#x2F;say-hello-to Rajeev Sachin Jack Daniel
 Hello, Rajeev!
 Hello, Sachin!
 Hello, Daniel!<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>Programming</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Golang 中的 Base64 編碼和解碼</title>
+    <url>/2021/09/15/base64-encoding-and-decoding-in-golang/</url>
+    <content><![CDATA[<blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-base64-encoding-decoding">Base64 Encoding and Decoding in Golang</a></p>
+</blockquote>
+<p>Base64 是一種二進位轉文字編碼方案。它用可列印的 ASCII 字串格式對二進位資料進行編碼。當需要透過僅設計用來處理文字資料無法正確處理二進位資料的通訊媒介傳輸二進位檔案時，通常會使用它。</p>
+<p>Go 內建支援對 Base64 編碼和解碼。在本文中，你將學到如何在 Go 中進行 Base64 編碼和解碼。</p>
+<h3 id="Go-中的-Base64-編碼"><a href="#Go-中的-Base64-編碼" class="headerlink" title="Go 中的 Base64 編碼"></a>Go 中的 Base64 編碼</h3><p>Go 的 <a href="https://pkg.go.dev/encoding/base64">encoding/base64</a> package 支援標準及與網址相容的 Base64 編碼和解碼。與網址相容的 Base64 編碼允許你將 Base64 編碼的字串安全的放在網址內。</p>
+<p>讓我們來看個範例：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"encoding/base64"</span>
+	<span class="token string">"fmt"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	data <span class="token operator">:=</span> <span class="token string">"Gol@ng is Awesome?~"</span>
+
+    <span class="token comment">// Standard Base64 Encoding</span>
+	encodedData <span class="token operator">:=</span> base64<span class="token punctuation">.</span>StdEncoding<span class="token punctuation">.</span><span class="token function">EncodeToString</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>encodedData<span class="token punctuation">)</span>
+
+	<span class="token comment">// URL and filename-safe Base64 encoding</span>
+	urlSafeEncodedData <span class="token operator">:=</span> base64<span class="token punctuation">.</span>URLEncoding<span class="token punctuation">.</span><span class="token function">EncodeToString</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>urlSafeEncodedData<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<span id="more"></span>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+R29sQG5nIGlzIEF3ZXNvbWU&#x2F;fg&#x3D;&#x3D;
+R29sQG5nIGlzIEF3ZXNvbWU_fg&#x3D;&#x3D;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="無填充的-Base64-編碼"><a href="#無填充的-Base64-編碼" class="headerlink" title="無填充的 Base64 編碼"></a>無填充的 Base64 編碼</h3><p>如果你想進行原始、無填充的 Base64 編碼，那麼你可以使用 <code>RawStdEncoding</code> 和 <code>RawURLEncoding</code>。它們與 <code>StdEncoding</code> 和 <code>URLEncoding</code> 相同，但省略了填充字元。請注意，在實際使用上，你應該只使用上面範例中有填充的 Base64 編碼。</p>
+<p>以下是無填充的 Base64 編碼範例：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"encoding/base64"</span>
+	<span class="token string">"fmt"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	data <span class="token operator">:=</span> <span class="token string">"Gol@ng is Awesome?~"</span>
+
+	<span class="token comment">// Standard Base64 Encoding without padding</span>
+	encodedDataWithoutPadding <span class="token operator">:=</span> base64<span class="token punctuation">.</span>RawStdEncoding<span class="token punctuation">.</span><span class="token function">EncodeToString</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>encodedDataWithoutPadding<span class="token punctuation">)</span>
+
+	<span class="token comment">// URL and filename-safe Base64 encoding without padding</span>
+	urlSafeEncodedDataWithoutPadding <span class="token operator">:=</span> base64<span class="token punctuation">.</span>RawURLEncoding<span class="token punctuation">.</span><span class="token function">EncodeToString</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>urlSafeEncodedDataWithoutPadding<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+R29sQG5nIGlzIEF3ZXNvbWU&#x2F;fg
+R29sQG5nIGlzIEF3ZXNvbWU_fg<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Go-中的-Base64-解碼"><a href="#Go-中的-Base64-解碼" class="headerlink" title="Go 中的 Base64 解碼"></a>Go 中的 Base64 解碼</h3><p>以下範例示範了如何在 Go 中解碼 Base64 編碼的字串：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"encoding/base64"</span>
+	<span class="token string">"fmt"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	encodedData <span class="token operator">:=</span> <span class="token string">"R29sQG5nIGlzIEF3ZXNvbWU/fg=="</span>
+
+	<span class="token comment">// Standard Base64 Decoding</span>
+	decodedData<span class="token punctuation">,</span> err <span class="token operator">:=</span> base64<span class="token punctuation">.</span>StdEncoding<span class="token punctuation">.</span><span class="token function">DecodeString</span><span class="token punctuation">(</span>encodedData<span class="token punctuation">)</span>
+	<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Error decoding Base64 encoded data %v"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>decodedData<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+	<span class="token comment">// URL and filename-safe Base64 decoding</span>
+	urlSafeBase64EncodedData <span class="token operator">:=</span> <span class="token string">"R29sQG5nIGlzIEF3ZXNvbWU_fg=="</span>
+	urlSafeData<span class="token punctuation">,</span> err <span class="token operator">:=</span> base64<span class="token punctuation">.</span>URLEncoding<span class="token punctuation">.</span><span class="token function">DecodeString</span><span class="token punctuation">(</span>urlSafeBase64EncodedData<span class="token punctuation">)</span>
+	<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Error decoding Base64 encoded data %v"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>urlSafeData<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+Gol@ng is Awesome?~
+Gol@ng is Awesome?~<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>Programming</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Golang 的網址編碼和解碼</title>
+    <url>/2021/09/15/golang-url-encoding-and-decoding/</url>
+    <content><![CDATA[<blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/golang-url-encoding-decoding">Golang URL Encoding and Decoding</a></p>
+</blockquote>
+<p>網址只能包含 US-ASCII 字元集中的有限字元。這些字元包括數字（<code>0-9</code>）、字母（<code>A-Z</code>、<code>a-z</code>）和一些特殊字元（<code>-</code>、<code>.</code>、<code>_</code>、<code>~</code>）。此字元集外的任何字元都需要進行編碼或跳脫，然後才能在網址中使用。</p>
+<p>在本文中，你將學到如何對字串進行編碼，以便將其安全的放在網址中。</p>
+<h3 id="在-Go-中進行網址編碼或跳脫字串"><a href="#在-Go-中進行網址編碼或跳脫字串" class="headerlink" title="在 Go 中進行網址編碼或跳脫字串"></a>在 Go 中進行網址編碼或跳脫字串</h3><p>一個網址由多個部分組成（伺服器位址、路徑、查詢字串等）。通用語法如下所示：</p>
+<pre class="line-numbers language-none"><code class="language-none">scheme:[&#x2F;&#x2F;[user:password@]host[:port]]path[?query][#fragment]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Go 提供了以下兩個函數來對字串進行編碼或跳脫，以便將其安全的放在網址中：</p>
+<ul>
+<li><a href="https://pkg.go.dev/net/url#QueryEscape">QueryEscape()</a>: 對字串進行編碼，以便安全的放在網址查詢字串中。</li>
+<li><a href="https://pkg.go.dev/net/url#PathEscape">PathEscape()</a>: 對字串進行編碼，以便安全的放在網址路徑中。</li>
+</ul>
+<span id="more"></span>
+
+<p>讓我們來看個範例：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"net/url"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// QueryEscape: Escape a string to safely place it inside a URL query string</span>
+	str <span class="token operator">:=</span> <span class="token string">"Gol@ng?&amp;"</span>
+	encodedStr <span class="token operator">:=</span> url<span class="token punctuation">.</span><span class="token function">QueryEscape</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>encodedStr<span class="token punctuation">)</span>
+
+	<span class="token comment">// PathEscape: Escape a string to safely place it inside a URL path segment</span>
+	pathVar <span class="token operator">:=</span> <span class="token string">"Gol@ng?&amp;"</span>
+	encodedPathVar <span class="token operator">:=</span> url<span class="token punctuation">.</span><span class="token function">PathEscape</span><span class="token punctuation">(</span>pathVar<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>encodedPathVar<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+Gol%40ng%3F%26
+Gol@ng%3F&amp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="在-Go-中解碼／取消跳脫已編碼的網址"><a href="#在-Go-中解碼／取消跳脫已編碼的網址" class="headerlink" title="在 Go 中解碼／取消跳脫已編碼的網址"></a>在 Go 中解碼／取消跳脫已編碼的網址</h3><p>你可以使用 <a href="https://pkg.go.dev/net/url#QueryUnescape">QueryUnescape()</a> 和 <a href="https://pkg.go.dev/net/url#PathUnescape">PathUnescape()</a> 函數將已編碼的網址解碼回原始形式。以下範例示範了如何使用這些函數：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"net/url"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// QueryUnescape: Decode a URL query string</span>
+	encodedStr <span class="token operator">:=</span> <span class="token string">"Gol%40ng%3F%26"</span>
+	decodedStr<span class="token punctuation">,</span> err <span class="token operator">:=</span> url<span class="token punctuation">.</span><span class="token function">QueryUnescape</span><span class="token punctuation">(</span>encodedStr<span class="token punctuation">)</span>
+	<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Error decoding the string %v"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>decodedStr<span class="token punctuation">)</span>
+
+	<span class="token comment">// PathUnescape: Decode a URL path segment</span>
+	encodedPathVar <span class="token operator">:=</span> <span class="token string">"Gol@ng%3F&amp;"</span>
+	decodedPathVar<span class="token punctuation">,</span> err <span class="token operator">:=</span> url<span class="token punctuation">.</span><span class="token function">PathUnescape</span><span class="token punctuation">(</span>encodedPathVar<span class="token punctuation">)</span>
+	<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Error decoding the string %v"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>decodedPathVar<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+Gol@ng?&amp;
+Gol@ng?&amp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 ]]></content>
       <categories>
         <category>Programming</category>

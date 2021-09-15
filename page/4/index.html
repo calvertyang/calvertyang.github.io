@@ -210,6 +210,77 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2016/10/05/upgrade_your_ssh_keys/">升級你的 SSH 金鑰！</a>
+      </h2>
+      <p class="article-date">2016年10月5日</p>
+      
+        
+  <a href="/tags#SSH" >
+    <span class="tag-code">SSH</span>
+  </a>
+
+  <a href="/tags#Ed25519" >
+    <span class="tag-code">Ed25519</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>Gert van Dijk</strong> — <a target="_blank" rel="noopener" href="https://blog.g3rt.nl/upgrade-your-ssh-keys.html">Upgrade your SSH keys!</a></p>
+</blockquote>
+<p>無論你是軟體開發人員或系統管理員，我敢打賭你正在使用 SSH 金鑰。比起使用密碼來推送提交到 Github 或是管理 Unix 系統，透過 SSH 公開金鑰驗證是最佳的方法。然而，隨著時光飛逝，很多人都使用舊金鑰而沒有意識到需要產生一個新的來提供私密資料更好的保護。在這篇文章，我將示範如何平穩的轉換到 Ed25519 金鑰、你為什麼會想要它以及展示一些技巧和訣竅。</p>
+<blockquote>
+<p>長話短說，使用 <code>ssh-keygen -o -a 100 -t ed25519</code> 來產生新的金鑰並指定一個高強度的通關密語，如果你需要平穩的轉換，請繼續往下閱讀。</p>
+</blockquote>
+<blockquote>
+<p>我計劃發佈更多 SSH 技巧和訣竅，所以請關注我的部落格。這篇文章的重點是關於作為使用者公開金鑰驗證的 SSH 金鑰。</p>
+</blockquote>
+<h3 id="DSA-和-RSA-1024-位元已經廢止"><a href="#DSA-和-RSA-1024-位元已經廢止" class="headerlink" title="DSA 和 RSA 1024 位元已經廢止"></a>DSA 和 RSA 1024 位元已經廢止</h3><p>如果你已經使用預設選項建立金鑰超過四年，它可能不安全（RSA &lt; 2048 位元）。更糟的是，我最近看到了推特迷、同事和朋友還在使用 DSA 金鑰（OpenSSH 格式裡的 <code>ssh-dss</code> 類型）。那是一種類似於 RSA 的金鑰類型，但長度受限於 1024 位元且被<a target="_blank" rel="noopener" href="https://security.stackexchange.com/a/5100/12948">推薦</a>了很長一段時間。它顯然不安全，且被最近的 OpenSSH 版本以正當理由拒絕（請參見 <a target="_blank" rel="noopener" href="http://www.openssh.com/txt/release-7.0">7.0 更新日誌</a>）。</p>
+<p>難過的是，我看到關於如何重新啟用支援 DSA 金鑰的文章，而不是轉移到一種更安全的金鑰類型。真的，依照指示更改 <code>PubkeyAcceptedKeyTypes</code> 或 <code>HostKeyAlgorithms</code> 的設定是不明智的(host keys are for a later post)。取而代之，升級你的金鑰！</p>
+<img src="/2016/10/05/upgrade_your_ssh_keys/old_key_picture.jpg" class="" title="比較 DSA 及使用像這樣技術打造的鑰匙，你不會希望此類型的鑰匙來開啟你家的門，對吧？">
+        
+      </div>
+      <a class="more" href="/2016/10/05/upgrade_your_ssh_keys/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">使用 Mailboxer 實作站內信系統</a>
+      </h2>
+      <p class="article-date">2015年5月20日</p>
+      
+        
+  <a href="/tags#Ruby-on-Rails" >
+    <span class="tag-code">Ruby on Rails</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <p>Mailboxer 是一個 Rails gem，為 <a target="_blank" rel="noopener" href="https://github.com/ging/social_stream">social_stream</a> 框架用來建立社群網路的一部分。它是具備一些通用方法的訊息系統，允許任何 model 擔任傳遞訊息的角色。</p>
+<p>使用 Mailboxer，你可以與一或多個收件人建立對話（訊息會被歸納到寄件匣、收件匣及垃圾桶）並透過電子郵件發送通知。它甚至可以在不同 model 間發送訊息和附件！唯一的缺點是缺乏文件，所以我希望這邊文章是有幫助的。</p>
+<p>我們要討論的範例程式為：</p>
+<ul>
+<li>使用 Devise 做基本身份驗證</li>
+<li>使用 Gravatar 讓使用者管理頭像</li>
+<li>整合 Mailboxer</li>
+<li>使用圖形介面來建立／回覆對話（使用 Bootstrap 樣式及 Chosen jQuery 插件）</li>
+<li>顯示資料夾，並允許在它們之間輕鬆切換</li>
+<li>允許將對話標示為已讀、放到垃圾桶或還原，也可以清理垃圾桶。</li>
+<li>設定電子郵件通知</li>
+</ul>
+<p>此範例將使用 Rails 4，但幾乎相同的解決方案也可以實作於 Rails 3.2（Mailboxer 不再支援 3.1 版）。</p>
+<p>原始碼可以在 <a target="_blank" rel="noopener" href="https://github.com/CalvertYang/Synergy">Github</a> 找到。</p>
+        
+      </div>
+      <a class="more" href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2014/09/21/understanding-the-github-flow/">了解 GitHub Flow</a>
       </h2>
       <p class="article-date">2014年9月21日</p>
@@ -539,45 +610,6 @@ $ sudo tmut ...
       <a class="more" href="/2013/10/20/jquery-validation-plugin-for-array-of-elements/">繼續閱讀</a>
     </article>
   
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2013/10/17/creating-a-self-signed-ssl-certificate-for-nginx/">為 Ngnix 建立自行簽章的憑證</a>
-      </h2>
-      <p class="article-date">2013年10月17日</p>
-      
-        
-  <a href="/tags#Linux" >
-    <span class="tag-code">Linux</span>
-  </a>
-
-  <a href="/tags#SSL" >
-    <span class="tag-code">SSL</span>
-  </a>
-
-  <a href="/tags#Nginx" >
-    <span class="tag-code">Nginx</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          <h3 id="必要條件"><a href="#必要條件" class="headerlink" title="必要條件"></a>必要條件</h3><p>產生憑證需要 OpenSSL 類別庫，請先確認系統是否已安裝 OpenSSL。</p>
-<p>若尚未安裝，可透過以下方式安裝：</p>
-<ul>
-<li><p>Mac OS X 使用 <a target="_blank" rel="noopener" href="http://mxcl.github.com/homebrew/">Homebrew</a> 安裝</p>
-<pre class="line-numbers language-none"><code class="language-none">$ brew install openssl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li><p>Windows 可到此網站下載安裝檔：<a target="_blank" rel="noopener" href="http://www.slproweb.com/products/Win32OpenSSL.html">OpenSSL for Windows </a></p>
-</li>
-<li><p>Ubuntu/Debian Linux</p>
-<pre class="line-numbers language-none"><code class="language-none">$ sudo apt-get install openssl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li><p>RedHat/CentOS Linux</p>
-<pre class="line-numbers language-none"><code class="language-none">$ sudo yum install openssl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-        
-      </div>
-      <a class="more" href="/2013/10/17/creating-a-self-signed-ssl-certificate-for-nginx/">繼續閱讀</a>
-    </article>
-  
 
   
     <div class="guide-pager">
@@ -585,7 +617,7 @@ $ sudo tmut ...
     <a href="/page/3/"><span class="page-arrow">&larr; </span>上一頁</a>
   
   
-    <a class="unvisible" href="/">下一頁 <span class="page-arrow">&rarr;</span></a>
+    <a href="/page/5/">下一頁<span class="page-arrow"> &rarr;</span></a>
   
 </div>
 

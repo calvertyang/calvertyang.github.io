@@ -210,6 +210,84 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2021/09/15/golang-url-encoding-and-decoding/">Golang 的網址編碼和解碼</a>
+      </h2>
+      <p class="article-date">2021年9月15日</p>
+      
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-url-encoding-decoding">Golang URL Encoding and Decoding</a></p>
+</blockquote>
+<p>網址只能包含 US-ASCII 字元集中的有限字元。這些字元包括數字（<code>0-9</code>）、字母（<code>A-Z</code>、<code>a-z</code>）和一些特殊字元（<code>-</code>、<code>.</code>、<code>_</code>、<code>~</code>）。此字元集外的任何字元都需要進行編碼或跳脫，然後才能在網址中使用。</p>
+<p>在本文中，你將學到如何對字串進行編碼，以便將其安全的放在網址中。</p>
+<h3 id="在-Go-中進行網址編碼或跳脫字串"><a href="#在-Go-中進行網址編碼或跳脫字串" class="headerlink" title="在 Go 中進行網址編碼或跳脫字串"></a>在 Go 中進行網址編碼或跳脫字串</h3><p>一個網址由多個部分組成（伺服器位址、路徑、查詢字串等）。通用語法如下所示：</p>
+<pre class="line-numbers language-none"><code class="language-none">scheme:[&#x2F;&#x2F;[user:password@]host[:port]]path[?query][#fragment]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Go 提供了以下兩個函數來對字串進行編碼或跳脫，以便將其安全的放在網址中：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://pkg.go.dev/net/url#QueryEscape">QueryEscape()</a>: 對字串進行編碼，以便安全的放在網址查詢字串中。</li>
+<li><a target="_blank" rel="noopener" href="https://pkg.go.dev/net/url#PathEscape">PathEscape()</a>: 對字串進行編碼，以便安全的放在網址路徑中。</li>
+</ul>
+        
+      </div>
+      <a class="more" href="/2021/09/15/golang-url-encoding-and-decoding/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2021/09/15/base64-encoding-and-decoding-in-golang/">Golang 中的 Base64 編碼和解碼</a>
+      </h2>
+      <p class="article-date">2021年9月15日</p>
+      
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-base64-encoding-decoding">Base64 Encoding and Decoding in Golang</a></p>
+</blockquote>
+<p>Base64 是一種二進位轉文字編碼方案。它用可列印的 ASCII 字串格式對二進位資料進行編碼。當需要透過僅設計用來處理文字資料無法正確處理二進位資料的通訊媒介傳輸二進位檔案時，通常會使用它。</p>
+<p>Go 內建支援對 Base64 編碼和解碼。在本文中，你將學到如何在 Go 中進行 Base64 編碼和解碼。</p>
+<h3 id="Go-中的-Base64-編碼"><a href="#Go-中的-Base64-編碼" class="headerlink" title="Go 中的 Base64 編碼"></a>Go 中的 Base64 編碼</h3><p>Go 的 <a target="_blank" rel="noopener" href="https://pkg.go.dev/encoding/base64">encoding/base64</a> package 支援標準及與網址相容的 Base64 編碼和解碼。與網址相容的 Base64 編碼允許你將 Base64 編碼的字串安全的放在網址內。</p>
+<p>讓我們來看個範例：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"encoding/base64"</span>
+	<span class="token string">"fmt"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	data <span class="token operator">:=</span> <span class="token string">"Gol@ng is Awesome?~"</span>
+
+    <span class="token comment">// Standard Base64 Encoding</span>
+	encodedData <span class="token operator">:=</span> base64<span class="token punctuation">.</span>StdEncoding<span class="token punctuation">.</span><span class="token function">EncodeToString</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>encodedData<span class="token punctuation">)</span>
+
+	<span class="token comment">// URL and filename-safe Base64 encoding</span>
+	urlSafeEncodedData <span class="token operator">:=</span> base64<span class="token punctuation">.</span>URLEncoding<span class="token punctuation">.</span><span class="token function">EncodeToString</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>urlSafeEncodedData<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        
+      </div>
+      <a class="more" href="/2021/09/15/base64-encoding-and-decoding-in-golang/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2021/09/14/reading-and-writing-environment-variables-in-go/">在 Go 讀寫環境變數</a>
       </h2>
       <p class="article-date">2021年9月14日</p>
@@ -471,58 +549,6 @@ Arguments without program path: [Hello World From Command Line]<span aria-hidden
         
       </div>
       <a class="more" href="/2019/11/15/playing-with-pointers-in-golang/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2019/11/14/golang-maps-by-example/">Golang map 介紹</a>
-      </h2>
-      <p class="article-date">2019年11月14日</p>
-      
-        
-  <a href="/tags#Golang" >
-    <span class="tag-code">Golang</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-maps">Golang Maps by Example</a></p>
-</blockquote>
-<p>map 是沒有順序的鍵-值對集合。它將鍵對應到值。鍵在 map 是唯一的，而值可能不是。</p>
-<p>map 資料結構用於基於鍵的快速尋找、取得和刪除資料。它是電腦科學中最常用的資料結構之一。</p>
-<p>Go 提供了內建的 map 型別。在本文中，我們將學到如何使用 Golang 內建的 map 型別。</p>
-        
-      </div>
-      <a class="more" href="/2019/11/14/golang-maps-by-example/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2019/11/13/introduction-to-slices-in-golang/">Golang Slice 介紹</a>
-      </h2>
-      <p class="article-date">2019年11月13日</p>
-      
-        
-  <a href="/tags#Golang" >
-    <span class="tag-code">Golang</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-slices">Introduction to Slices in Golang</a></p>
-</blockquote>
-<p>Slice 是陣列的一部分。Slice 建構在陣列之上，與陣列相比提供了更多功能、靈活性和便利性。</p>
-<p>如同陣列一樣，Slice 是可索引的且具有長度。但與陣列不同的是，它們可以調整長度。</p>
-<p>在內部，Slice 只是對底層陣列的參考。在本文中，我們將學到如何建立和使用 Slice，並了解它們背後的運作方式。</p>
-        
-      </div>
-      <a class="more" href="/2019/11/13/introduction-to-slices-in-golang/">繼續閱讀</a>
     </article>
   
 
