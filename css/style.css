@@ -1007,6 +1007,14 @@ h2.article-head {
       #article-banner h2 {
         font-size: 2em; } }
   #article-banner .post-date {
+    margin: 10px 0;
+    color: #ffffff;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.4s;
+    transition-delay: 0.05s; }
+  #article-banner .word-count {
+    font-size: 14px;
     margin: 10px 0 20px 0;
     color: #ffffff;
     opacity: 0;

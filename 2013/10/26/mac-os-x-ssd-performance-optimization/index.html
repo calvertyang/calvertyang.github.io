@@ -3,7 +3,7 @@
   <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <meta name="description" content="Calvert&#39;s tech blog">
+  <meta name="description" content="Calvert&#39;s murmur">
   <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
@@ -209,6 +209,11 @@
     <div id="article-banner">
   <h2>Mac OS X 延長 SSD 壽命</h2>
   <p class="post-date">2013-10-26</p>
+  <p class="word-count">
+  
+  約 1646 字 / 需 9 分鐘閱讀
+</p>
+
 
   <div class="arrow-down">
     <a href="javascript:;"></a>
@@ -218,7 +223,7 @@
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><p>由於有時候會重灌電腦，所以在這記錄一下重灌之後要延長 SSD 所做的步驟。</p>
-<h3 id="關閉-Time-Machine-的本機備份模式"><a href="#關閉-Time-Machine-的本機備份模式" class="headerlink" title="關閉 Time Machine 的本機備份模式"></a>關閉 Time Machine 的本機備份模式</h3><p>如果有開啟 Time Machine 功能，當備份磁碟無法使用時，系統還是會每小時建立快照摒除存在本機硬碟，使用以下指令可以禁止系統在本地端備份檔案</p>
+<h3 id="關閉-Time-Machine-的本機備份模式"><a href="#關閉-Time-Machine-的本機備份模式" class="headerlink" title="關閉 Time Machine 的本機備份模式"></a>關閉 Time Machine 的本機備份模式</h3><p>如果有開啟 Time Machine 功能，當備份磁碟無法使用時，系統還是會每小時建立快照摒除存在本機硬碟，使用以下指令可以禁止系統在本機備份檔案</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> tmutil disablelocal<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>往後也可以使用以下的指令重新開啟這個功能</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> tmutil enablelocal<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>

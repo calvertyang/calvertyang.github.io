@@ -3,7 +3,7 @@
   <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <meta name="description" content="Calvert&#39;s tech blog">
+  <meta name="description" content="Calvert&#39;s murmur">
   <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
@@ -210,6 +210,75 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2018/07/31/when-should-you-use-self-in-your-classes/">什麼時候應該在類別內使用 self</a>
+      </h2>
+      <p class="article-date">2018年7月31日</p>
+      
+        
+  <a href="/tags#Ruby" >
+    <span class="tag-code">Ruby</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <p>在 Ruby 類別內，你不知道什麼時候需要使用 self，而什麼時候又可以省略，本文將透過範例來做簡單的說明。</p>
+<h3 id="範例一"><a href="#範例一" class="headerlink" title="範例一"></a>範例一</h3><pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token keyword">class</span> <span class="token class-name">Foo</span>
+  attr_writer <span class="token symbol">:bar</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">do_something</span></span>
+    bar <span class="token operator">=</span> <span class="token number">123</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在此範例中 <code>bar = 123</code> 會建立一個名稱為 <code>bar</code> 的區域變數，而不是呼叫由 <code>attr_writer</code> 所產生的 <code>bar=</code> 方法，只要加上 <code>self</code> 就可以修正這個問題。</p>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token keyword">class</span> <span class="token class-name">Foo</span>
+  attr_writer <span class="token symbol">:bar</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">do_something</span></span>
+    <span class="token keyword">self</span><span class="token punctuation">.</span>bar <span class="token operator">=</span> <span class="token number">123</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>self.bar</code> 便會呼叫我們所預期的 <code>bar=</code> 方法。</p>
+        
+      </div>
+      <a class="more" href="/2018/07/31/when-should-you-use-self-in-your-classes/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2018/06/11/getting-started-with-engines/">Rails Engine 入門</a>
+      </h2>
+      <p class="article-date">2018年6月11日</p>
+      
+        
+  <a href="/tags#Ruby-on-Rails" >
+    <span class="tag-code">Ruby on Rails</span>
+  </a>
+
+  <a href="/tags#Rails-Engine" >
+    <span class="tag-code">Rails Engine</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>Ruby on Rails Guides</strong> — <a target="_blank" rel="noopener" href="http://guides.rubyonrails.org/engines.html">Getting Started with Engines</a></p>
+</blockquote>
+<p><code>Rails::Engine</code> 允許你包裝特定的 Rails 應用程式或功能子集，並與其他應用程式共享或在更大的封裝應用程式中。每個 <code>Rails::Application</code> 都只是一個引擎，它允許簡單的功能及應用程式共享。</p>
+<p>任何 <code>Rails::Engine</code> 也是一個 <code>Rails::Railtie</code>，所以在 railties 可用的相同方法（如 <code>rake_tasks</code> 和 <code>generators</code>）和配置選項也可用於引擎。</p>
+<p>在本指南中，你將瞭解引擎以及如何透過乾淨且非常易於使用的介面，為主應用程式提供附加功能。</p>
+        
+      </div>
+      <a class="more" href="/2018/06/11/getting-started-with-engines/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2018/05/22/active-storage-on-heroku/">在 Heroku 使用 Active Storage</a>
       </h2>
       <p class="article-date">2018年5月22日</p>
@@ -263,7 +332,7 @@
 <p>原文：<strong>Ruby on Rails Guides</strong> — <a target="_blank" rel="noopener" href="http://guides.rubyonrails.org/active_storage_overview.html">Active Storage Overview</a></p>
 </blockquote>
 <p>Active Storage 是 Rails 5.2 所新增的功能，它可以讓你輕鬆的將檔案傳送到 <a target="_blank" rel="noopener" href="https://aws.amazon.com/s3/">Amazon S3</a>、<a target="_blank" rel="noopener" href="https://cloud.google.com/storage/docs/">Google Cloud Storage</a> 或 <a target="_blank" rel="noopener" href="https://azure.microsoft.com/en-us/services/storage/">Microsoft Azure Storage</a> 等雲端儲存服務，並將這些檔案附加到 Active Record。</p>
-<p>支援一個主要雲端儲存服務，並在其它服務中建立鏡像以實現備援機制，它也提供了用於測試或本地部署的磁碟服務，但重點還是放在雲端儲存。</p>
+<p>支援一個主要雲端儲存服務，並在其它服務中建立鏡像以實現備援機制，它也提供了用於測試或本機部署的磁碟服務，但重點還是放在雲端儲存。</p>
 <p>檔案可以從伺服器上傳到雲端或直接從客戶端上傳到雲端。</p>
         
       </div>
@@ -423,7 +492,7 @@ $ sudo vim /etc/vsftpd.conf
           
 原文：steigr — Capistrano with ED25519 keys
 
-我最近將我的 Capistrano 自動化部署切換到了 Ed25519 金鑰。在正常運作之前我發現到一些奇怪的錯誤，部署使用者/代理程式無法登入到主機。在檢查 authorized_keys 檔案權限、本地 ...
+我最近將我的 Capistrano 自動化部署切換到了 Ed25519 金鑰。在正常運作之前我發現到一些奇怪的錯誤，部署使用者/代理程式無法登入到主機。在檢查 authorized_keys 檔案權限、本機 ...
         
       </div>
       <a class="more" href="/2016/10/16/capistrano-with-ed25519-keys/">繼續閱讀</a>
@@ -498,63 +567,6 @@ $ sudo vim /etc/vsftpd.conf
         
       </div>
       <a class="more" href="/2015/05/20/use-the-mailboxer-to-implement-messaging-systems/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2014/09/21/understanding-the-github-flow/">了解 GitHub Flow</a>
-      </h2>
-      <p class="article-date">2014年9月21日</p>
-      
-        
-  <a href="/tags#GitHub" >
-    <span class="tag-code">GitHub</span>
-  </a>
-
-  <a href="/tags#GitHub-Flow" >
-    <span class="tag-code">GitHub Flow</span>
-  </a>
-
-  <a href="/tags#Workflow" >
-    <span class="tag-code">Workflow</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          
-原文：GitHub — Understanding the GitHub Flow
-
-GitHub Flow 是一個基於分支的輕量化工作流程，幫助團隊及專案定期的進行部署。
-
-
-在進行一項專案時，任何時候你可能會有一堆不同功能或想法，有些已經準備好了，而另有些則沒有。分支的存在是為了幫助你 ...
-        
-      </div>
-      <a class="more" href="/2014/09/21/understanding-the-github-flow/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審</a>
-      </h2>
-      <p class="article-date">2014年8月23日</p>
-      
-        
-  <a href="/tags#iOS" >
-    <span class="tag-code">iOS</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          這次 App 送審被 Apple 以違反 PLA 3.3.12 而退審，內容大致上是說 Advertising Identifier(IDFA) 僅可基於廣告目的使用於應用程式內，但審核團隊沒發現需用 IDFA 來呈現廣告的地方。
-因送審的 App 內僅使用 iAd，而 iAd 是不需 Ad ...
-        
-      </div>
-      <a class="more" href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">繼續閱讀</a>
     </article>
   
 

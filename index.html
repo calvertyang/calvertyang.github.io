@@ -3,7 +3,7 @@
   <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <meta name="description" content="Calvert&#39;s tech blog">
+  <meta name="description" content="Calvert&#39;s murmur">
   <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
@@ -207,6 +207,85 @@
 </header>
 
     <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2021/09/14/reading-and-writing-environment-variables-in-go/">在 Go 讀寫環境變數</a>
+      </h2>
+      <p class="article-date">2021年9月14日</p>
+      
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/go-read-write-environment-variables">Reading and Writing Environment Variables in Go</a></p>
+</blockquote>
+<p>環境變數是在程式執行時向程式提供動態設定資訊的一種方式。環境變數通常用於讓同一個程式在不同的環境中運作，如本機、驗證或生產環境。</p>
+<h3 id="在-Go-取得、設定、取消設定和擴充環境變數"><a href="#在-Go-取得、設定、取消設定和擴充環境變數" class="headerlink" title="在 Go 取得、設定、取消設定和擴充環境變數"></a>在 Go 取得、設定、取消設定和擴充環境變數</h3><p>下面的程式示範了如何在 Go 中使用環境變數。它利用了 <code>os</code> package 提供的以下功能：</p>
+<ul>
+<li><strong>os.Setenv(key, value)</strong>: 設定環境變數。</li>
+<li><strong>os.Getenv(key)</strong>: 取得環境變數。如果環境變數不存在，則返回空值。要區分空值和未設定的值，請使用 LookupEnv。</li>
+<li><strong>os.Unsetenv(key)</strong>: 取消設定環境變數。</li>
+<li><strong>os.LookupEnv(key)</strong>: 取得環境變數值和一個用來表示環境變數是否存在的布林值。它返回一個字串和布林值，如果環境變數不存在，布林值為 false。</li>
+<li><strong>os.ExpandEnv(str)</strong>: 根據目前的環境變數，取代字串中的 <code>$&#123;var&#125;</code> 或 <code>$var</code> 來擴充字串。</li>
+</ul>
+        
+      </div>
+      <a class="more" href="/2021/09/14/reading-and-writing-environment-variables-in-go/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2021/09/14/reading-command-line-arguments-in-go/">在 Go 讀取命令列引數</a>
+      </h2>
+      <p class="article-date">2021年9月14日</p>
+      
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/go-read-command-line-arguments">Reading command line arguments in Go</a></p>
+</blockquote>
+<p>命令列引數是在程式啟動時向程式提供額外資訊的一種方式。提供命命列引數最簡單的方法是執行指令時在後面指定以空格分隔的數值：</p>
+<pre class="line-numbers language-none"><code class="language-none">$ .&#x2F;my-program Arg1 Arg2 Arg3<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="在-Go-讀取命令列引數"><a href="#在-Go-讀取命令列引數" class="headerlink" title="在 Go 讀取命令列引數"></a>在 Go 讀取命令列引數</h3><p>在 Go 中，你可以使用 <code>os.Args</code> 變數來讀取原始命令列引數。它是一個 <a href="/2019/11/13/introduction-to-slices-in-golang/">slice</a> 且包含了以程式名稱為首的所有命令列引數。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"os"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	args <span class="token operator">:=</span> os<span class="token punctuation">.</span>Args
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"All arguments: %v\n"</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span>
+
+	argsWithoutProgram <span class="token operator">:=</span> os<span class="token punctuation">.</span>Args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Arguments without program name: %v\n"</span><span class="token punctuation">,</span> argsWithoutProgram<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">$ go build command-line-arguments.go
+
+$ .&#x2F;command-line-arguments Hello World From Command Line
+All arguments: [.&#x2F;command-line-arguments Hello World From Command Line]
+Arguments without program path: [Hello World From Command Line]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        
+      </div>
+      <a class="more" href="/2021/09/14/reading-command-line-arguments-in-go/">繼續閱讀</a>
+    </article>
   
     <article class="article-card">
       <h2 class="article-head">
@@ -414,7 +493,7 @@
 </blockquote>
 <p>map 是沒有順序的鍵-值對集合。它將鍵對應到值。鍵在 map 是唯一的，而值可能不是。</p>
 <p>map 資料結構用於基於鍵的快速尋找、取得和刪除資料。它是電腦科學中最常用的資料結構之一。</p>
-<p>Go 提供了內建的 map 型別。在本文中，我們將學習如何使用 Golang 內建的 map 型別。</p>
+<p>Go 提供了內建的 map 型別。在本文中，我們將學到如何使用 Golang 內建的 map 型別。</p>
         
       </div>
       <a class="more" href="/2019/11/14/golang-maps-by-example/">繼續閱讀</a>
@@ -440,61 +519,10 @@
 </blockquote>
 <p>Slice 是陣列的一部分。Slice 建構在陣列之上，與陣列相比提供了更多功能、靈活性和便利性。</p>
 <p>如同陣列一樣，Slice 是可索引的且具有長度。但與陣列不同的是，它們可以調整長度。</p>
-<p>在內部，Slice 只是對底層陣列的參考。在本文中，我們將學習如何建立和使用 Slice，並了解它們背後的運作方式。</p>
+<p>在內部，Slice 只是對底層陣列的參考。在本文中，我們將學到如何建立和使用 Slice，並了解它們背後的運作方式。</p>
         
       </div>
       <a class="more" href="/2019/11/13/introduction-to-slices-in-golang/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2019/11/12/working-with-arrays-in-golang/">在 Golang 中使用陣列</a>
-      </h2>
-      <p class="article-date">2019年11月12日</p>
-      
-        
-  <a href="/tags#Golang" >
-    <span class="tag-code">Golang</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-arrays">Working with Arrays in Golang</a></p>
-</blockquote>
-<p>陣列是固定長度的相同型別元素的集合。陣列的元素按順序儲存，並且可以使用它們的 <code>index</code> 來存取。</p>
-<img src="/2019/11/12/working-with-arrays-in-golang/golang-array.jpg" class="">
-        
-      </div>
-      <a class="more" href="/2019/11/12/working-with-arrays-in-golang/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2019/11/12/a-beginners-guide-to-packages-in-golang/">Golang Package 初學者指南</a>
-      </h2>
-      <p class="article-date">2019年11月12日</p>
-      
-        
-  <a href="/tags#Golang" >
-    <span class="tag-code">Golang</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-packages">A beginners guide to Packages in Golang</a></p>
-</blockquote>
-<p>Go 旨在鼓勵良好的軟體工程實踐。高品質軟體的指導原則之一是 DRY 原則：<strong>D</strong>on’t <strong>R</strong>epeat <strong>Y</strong>ourself，這意味著你永遠不應重複撰寫相同的程式碼。你應該重複使用並儘可能建立在現有程式碼上。</p>
-<p>允許程式碼重複使用的最基本的建構區塊是<a href="/2019/11/11/introduction-to-functions-in-golang/" title="函數">函數</a>。<strong>Package</strong> 是程式碼可重複使用性的下一步。他們可幫助你將相關的 Go 原始檔組織到同一單元中，使他們模組化、可重複使用和可維護。</p>
-<p><em>在本文中，你將學習如何將 Go 程式碼組織到可重複使用的 package 中，如何匯入 package，如何將函數、型別或變數匯出到外部 package，以及如何安裝第三方 package。</em></p>
-        
-      </div>
-      <a class="more" href="/2019/11/12/a-beginners-guide-to-packages-in-golang/">繼續閱讀</a>
     </article>
   
 

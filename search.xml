@@ -182,7 +182,7 @@ server &#123;
     <title>Mac OS X 延長 SSD 壽命</title>
     <url>/2013/10/26/mac-os-x-ssd-performance-optimization/</url>
     <content><![CDATA[<p>由於有時候會重灌電腦，所以在這記錄一下重灌之後要延長 SSD 所做的步驟。</p>
-<h3 id="關閉-Time-Machine-的本機備份模式"><a href="#關閉-Time-Machine-的本機備份模式" class="headerlink" title="關閉 Time Machine 的本機備份模式"></a>關閉 Time Machine 的本機備份模式</h3><p>如果有開啟 Time Machine 功能，當備份磁碟無法使用時，系統還是會每小時建立快照摒除存在本機硬碟，使用以下指令可以禁止系統在本地端備份檔案</p>
+<h3 id="關閉-Time-Machine-的本機備份模式"><a href="#關閉-Time-Machine-的本機備份模式" class="headerlink" title="關閉 Time Machine 的本機備份模式"></a>關閉 Time Machine 的本機備份模式</h3><p>如果有開啟 Time Machine 功能，當備份磁碟無法使用時，系統還是會每小時建立快照摒除存在本機硬碟，使用以下指令可以禁止系統在本機備份檔案</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> tmutil disablelocal<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>往後也可以使用以下的指令重新開啟這個功能</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> tmutil enablelocal<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -774,7 +774,7 @@ make<span class="token punctuation">[</span><span class="token number">1</span><
 <h3 id="進階提示-3"><a href="#進階提示-3" class="headerlink" title="進階提示"></a>進階提示</h3><p>Pull Request 的意見都是用 Markdown 撰寫，所以你可以插入圖片和表情符號，使用預先格式化的文字區塊，及其他輕量化的格式。</p>
 <img src="/2014/09/21/understanding-the-github-flow/merge_and_deploy.png" class="">
 
-<p>一旦你的 Pull Request 進行了檢閱且分支通過測試，是時候將程式碼合併到 master 分支進行部署。如果你想在合併到 GitHub 儲存庫前測試東西，你可以先在本地進行合併。若你沒有推送到儲存庫的權限，這就派上用場了。</p>
+<p>一旦你的 Pull Request 進行了檢閱且分支通過測試，是時候將程式碼合併到 master 分支進行部署。如果你想在合併到 GitHub 儲存庫前測試東西，你可以先在本機進行合併。若你沒有推送到儲存庫的權限，這就派上用場了。</p>
 <p>合併後，Pull Requests 保存了一筆程式碼的修改歷史記錄。因為他們是可搜尋的，可讓任何人回頭來了解為什麼及如何作出決定。</p>
 <h3 id="進階提示-4"><a href="#進階提示-4" class="headerlink" title="進階提示"></a>進階提示</h3><p>你可以透過將特定的關鍵字放入 Pull Request 訊息中，將問題與程式碼做關聯。當你的 Pull Request 被合併，相關的問題也將被關閉。舉例來說，輸入 <code>Closes #32</code> 將會關閉儲存庫中編號 32 的問題。欲了解更多資訊，請查看我們的<a href="https://help.github.com/articles/closing-issues-via-commit-messages">幫助文章</a>。</p>
 ]]></content>
@@ -886,7 +886,7 @@ $ ssh-keygen -t rsa -b <span class="token number">4096</span> -o -a <span class=
     <content><![CDATA[<blockquote>
 <p>原文：<strong>steigr</strong> — <a href="https://blog.stei.gr/?p=4">Capistrano with ED25519 keys</a></p>
 </blockquote>
-<p>我最近將我的 Capistrano 自動化部署切換到了 Ed25519 金鑰。在正常運作之前我發現到一些奇怪的錯誤，部署使用者/代理程式無法登入到主機。在檢查 authorized_keys 檔案權限、本地 SSH 代理程式後，我開始用 Google 搜尋這個問題。結果是，net-ssh 版本小於 4 不支援 Ed25519 金鑰。</p>
+<p>我最近將我的 Capistrano 自動化部署切換到了 Ed25519 金鑰。在正常運作之前我發現到一些奇怪的錯誤，部署使用者/代理程式無法登入到主機。在檢查 authorized_keys 檔案權限、本機 SSH 代理程式後，我開始用 Google 搜尋這個問題。結果是，net-ssh 版本小於 4 不支援 Ed25519 金鑰。</p>
 <p>在 Gemfile 加入以下幾行，安裝所需的版本和 ruby gems 以啟用 Ed25519 金鑰支援：</p>
 <pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby">gem <span class="token string">'bcrypt_pbkdf'</span><span class="token punctuation">,</span> group<span class="token punctuation">:</span> <span class="token symbol">:development</span>
 gem <span class="token string">'rbnacl-libsodium'</span><span class="token punctuation">,</span> group<span class="token punctuation">:</span> <span class="token symbol">:development</span>
@@ -936,7 +936,7 @@ local_umask=022
 # 若目錄下有 .message 檔案時，當使用者進入此目錄是否顯示該檔案的內容
 dirmessage_enable=YES
 
-# 是否使用本地時間
+# 是否使用本機時間
 use_localtime=YES
 
 # 是否將使用者上傳與下載檔案記錄起來
@@ -1000,7 +1000,7 @@ tcp_wrappers=YES
 # 這個選項允許根據各別用戶來覆蓋本設定檔中指定的任何設定
 user_config_dir=/etc/vsftpd/user_conf
 
-# 虛擬帳號是否將使用與本地用戶相同的權限
+# 虛擬帳號是否將使用與本機用戶相同的權限
 virtual_use_local_privs=YES
 
 # 基於模板為每個虛擬帳號自動產生主目錄
@@ -1283,8 +1283,8 @@ canvas<span class="token punctuation">.</span>use<span class="token punctuation"
 <h3 id="在-Heroku-使用-Active-Storage"><a href="#在-Heroku-使用-Active-Storage" class="headerlink" title="在 Heroku 使用 Active Storage"></a>在 Heroku 使用 Active Storage</h3><p>如果你使用按鈕部署應用程式範例，它已經透過 <code>app.json</code> 設定能在 Heroku 上運作，但是，如果你有自己的應用程式想要部署，你要如何設定它以便在 Heroku 上運作？</p>
 <p>根據<a href="https://devcenter.heroku.com/articles/active-storage-on-heroku?preview=1">開發中心的 Active Storage 文件</a>，你將需要一個檔案儲存服務，讓你所有的 dynos 都可以與其溝通。該範例使用名為 <a href="https://elements.heroku.com/addons/bucketeer">Bucketeer</a> 的 Heroku S3 附加元件，但你也可以使用現有的 S3 憑證。</p>
 <p>馬上開始，請將 S3 的 AWS gem 加到 Gemfile，如果你要修改圖片，請加入 Mini Magick：</p>
-<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb">gem &quot;aws-sdk-s3&quot;, require: false
-gem &#39;mini_magick&#39;, &#39;~&gt; 4.8&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb">gem <span class="token string">"aws-sdk-s3"</span><span class="token punctuation">,</span> <span class="token keyword">require</span><span class="token punctuation">:</span> <span class="token boolean">false</span>
+gem <span class="token string">'mini_magick'</span><span class="token punctuation">,</span> <span class="token string">'~> 4.8'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>更新 Gemfile 後別忘了 <code>$ bundle install</code>。</p>
 <p>接下來，在你的 <code>config/storage.yml</code> 檔案中加入一個 <code>amazon</code> 選項來指向 S3 設定，在這個範例中我們使用了由 Bucketeer 設定的配置：</p>
@@ -1296,7 +1296,7 @@ gem &#39;mini_magick&#39;, &#39;~&gt; 4.8&#39;<span aria-hidden="true" class="li
   bucket: &lt;%&#x3D; ENV[&#39;BUCKETEER_BUCKET_NAME&#39;] %&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>然後確保你的應用程式設定為在生產環境中使用 <code>:amazon</code> 儲存配置：</p>
-<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb">config.active_storage.service &#x3D; :amazon<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb">config<span class="token punctuation">.</span>active_storage<span class="token punctuation">.</span>service <span class="token operator">=</span> <span class="token symbol">:amazon</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>如果你忘記了這一步，預設的儲存是使用 <code>:local</code> 將檔案儲存到磁碟。這不是處理生產環境中上傳檔案的可擴展方式。如果你不小心將它部署到 Heroku，首先它會顯示檔案已上傳，但是如果你執行超過一個 dyno，他們會在隨機的請求中消失。當重新啟動 dynos 時，這些檔案將完全消失。你可以在開發中心取得有關 <a href="https://devcenter.heroku.com/articles/active-storage-on-heroku?preview=1#ephemeral-disk">Heroku 的臨時磁碟</a>的更多資訊。</p>
 <p>最後，要使其在生產環境中運作的最後一件事是安裝一個客制的建置套件，它將安裝用來產生資源預覽的二進位相依檔案 <code>ffmpeg</code> 和 <code>poppler</code>：</p>
@@ -1314,9 +1314,9 @@ gem &#39;mini_magick&#39;, &#39;~&gt; 4.8&#39;<span aria-hidden="true" class="li
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ bin/rails db:migrate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>在資料庫遷移後，更新模型讓 Rails 知道你打算讓它能夠附加檔案：</p>
-<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb">class Bulletin &lt; ApplicationRecord
-  has_one_attached :attachment
-end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token keyword">class</span> <span class="token class-name">Bulletin</span> <span class="token operator">&lt;</span> <span class="token constant">ApplicationRecord</span>
+  has_one_attached <span class="token symbol">:attachment</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>一旦完成，我們還需要三個部分：上傳附件的表單、儲存附件的控制器以及呈現附件的視圖。</p>
 <p>如果你有一個現有的表單，你可以透過 <code>file_field</code> 視圖輔助方法加入一個附件欄位：</p>
@@ -1556,7 +1556,7 @@ post<span class="token punctuation">.</span>published_at
 <li><p>卓越的工具支援</p>
 </li>
 </ul>
-<p>這是我們 Go <a href="https://calvertyang.github.io/tags#Golang">教學系列</a>的第一部份。在本文中，你將學到如何在系統中安裝 Go，以及如何為 Go 專案設定開發環境。</p>
+<p>這是我們 Go <a href="/tags#Golang">教學系列</a>的第一部份。在本文中，你將學到如何在系統中安裝 Go，以及如何為 Go 專案設定開發環境。</p>
 <h3 id="安裝-Go"><a href="#安裝-Go" class="headerlink" title="安裝 Go"></a>安裝 Go</h3><p>Go 二進位發行版適用於所有主要作業系統，如 Linux、Windows 和 macOS。從二進位發行版安裝 Go 非常簡單。</p>
 <p>如果沒有適用於你的作業系統的二進位發行版，可以嘗試<a href="https://golang.org/doc/install/source">從原始碼安裝 Go</a>。</p>
 <h4 id="Mac-OS-X"><a href="#Mac-OS-X" class="headerlink" title="Mac OS X"></a>Mac OS X</h4><h5 id="使用-Homebrew"><a href="#使用-Homebrew" class="headerlink" title="使用 Homebrew"></a>使用 Homebrew</h5><p>在 macOS 中安裝 Go 最簡單的方法是使用 <a href="https://brew.sh/">Homebrew</a>：</p>
@@ -1728,7 +1728,7 @@ Hello, World<span aria-hidden="true" class="line-numbers-rows"><span></span><spa
 
 <p>你也可以將 <code>$HOME/go/bin</code> 目錄加到 <code>PATH</code> 變數，以便從任何位置執行 go 可執行檔。</p>
 <p><strong>別忘了查看：<code>go help run</code>、<code>go help build</code> 和 <code>go help install</code>。</strong></p>
-<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>希望你能深入研究並進一步了解 Go 程式語言，你可以從 <a href="https://calvertyang.github.io/tags#Golang">Golang 分類</a>中找到所有用 Go 撰寫的教學。</p>
+<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>希望你能深入研究並進一步了解 Go 程式語言，你可以從 <a href="/tags#Golang">Golang 分類</a>中找到所有用 Go 撰寫的教學。</p>
 ]]></content>
       <categories>
         <category>Programming</category>
@@ -3173,7 +3173,7 @@ The Stock Price increased by $40000.00<span aria-hidden="true" class="line-numbe
 </blockquote>
 <p>Go 旨在鼓勵良好的軟體工程實踐。高品質軟體的指導原則之一是 DRY 原則：<strong>D</strong>on’t <strong>R</strong>epeat <strong>Y</strong>ourself，這意味著你永遠不應重複撰寫相同的程式碼。你應該重複使用並儘可能建立在現有程式碼上。</p>
 <p>允許程式碼重複使用的最基本的建構區塊是<a href="/2019/11/11/introduction-to-functions-in-golang/" title="函數">函數</a>。<strong>Package</strong> 是程式碼可重複使用性的下一步。他們可幫助你將相關的 Go 原始檔組織到同一單元中，使他們模組化、可重複使用和可維護。</p>
-<p><em>在本文中，你將學習如何將 Go 程式碼組織到可重複使用的 package 中，如何匯入 package，如何將函數、型別或變數匯出到外部 package，以及如何安裝第三方 package。</em></p>
+<p><em>在本文中，你將學到如何將 Go 程式碼組織到可重複使用的 package 中，如何匯入 package，如何將函數、型別或變數匯出到外部 package，以及如何安裝第三方 package。</em></p>
 <span id="more"></span>
 
 <p>讓我們開始吧！</p>
@@ -3189,7 +3189,7 @@ The Stock Price increased by $40000.00<span aria-hidden="true" class="line-numbe
 
 <p>上面的 package 宣告必須是 Go 原始檔案中的第一行程式碼。Go 原始檔案中定義的所有函數、型別和變數都會成為所宣告 package 的一部分。</p>
 <p>你可以選擇將 package 中定義的成員匯出到外部 package，或保持其私有化在相同 package。其他 package 可以匯入並使用從 package 中匯出的函數或型別。</p>
-<p><strong>讓我們來看個範例</strong>：到目前為止，我們在本<a href="https://calvertyang.github.io/tags#Golang">系列教學</a>中幾乎會看到所有程式碼都包含以下這行：</p>
+<p><strong>讓我們來看個範例</strong>：到目前為止，我們在本<a href="/tags#Golang">系列教學</a>中幾乎會看到所有程式碼都包含以下這行：</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">import</span> <span class="token string">"fmt"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><code>fmt</code> 是一個核心函式庫，包含格式化和列印輸出或從各種 I/O 來源讀取輸入等相關的功能。它匯出如 <code>Println()</code>、<code>Printf()</code>、<code>Scanf()</code>等函數，以供其他 package 重複使用。</p>
@@ -3678,7 +3678,7 @@ Day 6 of week &#x3D; Sun<span aria-hidden="true" class="line-numbers-rows"><span
 Sum of all the elements in array [3.5 7.2 4.8 9.5] &#x3D; 25.000000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="Golang-中的多維陣列"><a href="#Golang-中的多維陣列" class="headerlink" title="Golang 中的多維陣列"></a>Golang 中的多維陣列</h3><p>到目前為止，我們在本文中建立的所有陣列都是一維的。你也可以在 Golang 中建立多維陣列。</p>
-<p>以下範例示範如何建立多維陣列：</p>
+<p>以下範例示範了如何建立多維陣列：</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
 <span class="token keyword">import</span> <span class="token string">"fmt"</span>
@@ -3721,7 +3721,7 @@ Sum of all the elements in array [3.5 7.2 4.8 9.5] &#x3D; 25.000000<span aria-hi
 </blockquote>
 <p>Slice 是陣列的一部分。Slice 建構在陣列之上，與陣列相比提供了更多功能、靈活性和便利性。</p>
 <p>如同陣列一樣，Slice 是可索引的且具有長度。但與陣列不同的是，它們可以調整長度。</p>
-<p>在內部，Slice 只是對底層陣列的參考。在本文中，我們將學習如何建立和使用 Slice，並了解它們背後的運作方式。</p>
+<p>在內部，Slice 只是對底層陣列的參考。在本文中，我們將學到如何建立和使用 Slice，並了解它們背後的運作方式。</p>
 <span id="more"></span>
 
 <h3 id="宣告-Slice"><a href="#宣告-Slice" class="headerlink" title="宣告 Slice"></a>宣告 Slice</h3><p>使用 <code>[]T</code> 宣告型別為 <code>T</code> 的 Slice。舉例來說，以下是宣告 <code>int</code> 型別的 Slice 的方法：</p>
@@ -4198,7 +4198,7 @@ PrimeNumber(10) &#x3D; 29<span aria-hidden="true" class="line-numbers-rows"><spa
 Total Sum &#x3D; 25.50<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>在本文中，你學到了如何建立 Slice、Slice 內部如何運作，以及如何使用內建函數 <code>copy()</code> 和 <code>append()</code> 來增加 Slice。</p>
-<p>在下一篇文章中，我們將學習另一個非常有用的資料結構：map。</p>
+<p>在下一篇文章中，我們將學到另一個非常有用的資料結構：map。</p>
 ]]></content>
       <categories>
         <category>Programming</category>
@@ -4215,7 +4215,7 @@ Total Sum &#x3D; 25.50<span aria-hidden="true" class="line-numbers-rows"><span><
 </blockquote>
 <p>map 是沒有順序的鍵-值對集合。它將鍵對應到值。鍵在 map 是唯一的，而值可能不是。</p>
 <p>map 資料結構用於基於鍵的快速尋找、取得和刪除資料。它是電腦科學中最常用的資料結構之一。</p>
-<p>Go 提供了內建的 map 型別。在本文中，我們將學習如何使用 Golang 內建的 map 型別。</p>
+<p>Go 提供了內建的 map 型別。在本文中，我們將學到如何使用 Golang 內建的 map 型別。</p>
 <span id="more"></span>
 
 <h3 id="宣告-map"><a href="#宣告-map" class="headerlink" title="宣告 map"></a>宣告 map</h3><p>使用以下語法宣告 map：</p>
@@ -5934,6 +5934,177 @@ HELLO<span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
       </tags>
   </entry>
   <entry>
+    <title>在 Go 讀寫環境變數</title>
+    <url>/2021/09/14/reading-and-writing-environment-variables-in-go/</url>
+    <content><![CDATA[<blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/go-read-write-environment-variables">Reading and Writing Environment Variables in Go</a></p>
+</blockquote>
+<p>環境變數是在程式執行時向程式提供動態設定資訊的一種方式。環境變數通常用於讓同一個程式在不同的環境中運作，如本機、驗證或生產環境。</p>
+<h3 id="在-Go-取得、設定、取消設定和擴充環境變數"><a href="#在-Go-取得、設定、取消設定和擴充環境變數" class="headerlink" title="在 Go 取得、設定、取消設定和擴充環境變數"></a>在 Go 取得、設定、取消設定和擴充環境變數</h3><p>下面的程式示範了如何在 Go 中使用環境變數。它利用了 <code>os</code> package 提供的以下功能：</p>
+<ul>
+<li><strong>os.Setenv(key, value)</strong>: 設定環境變數。</li>
+<li><strong>os.Getenv(key)</strong>: 取得環境變數。如果環境變數不存在，則返回空值。要區分空值和未設定的值，請使用 LookupEnv。</li>
+<li><strong>os.Unsetenv(key)</strong>: 取消設定環境變數。</li>
+<li><strong>os.LookupEnv(key)</strong>: 取得環境變數值和一個用來表示環境變數是否存在的布林值。它返回一個字串和布林值，如果環境變數不存在，布林值為 false。</li>
+<li><strong>os.ExpandEnv(str)</strong>: 根據目前的環境變數，取代字串中的 <code>$&#123;var&#125;</code> 或 <code>$var</code> 來擴充字串。</li>
+</ul>
+<span id="more"></span>
+
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"os"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// Set an Environment Variable</span>
+	os<span class="token punctuation">.</span><span class="token function">Setenv</span><span class="token punctuation">(</span><span class="token string">"DB_HOST"</span><span class="token punctuation">,</span> <span class="token string">"localhost"</span><span class="token punctuation">)</span>
+	os<span class="token punctuation">.</span><span class="token function">Setenv</span><span class="token punctuation">(</span><span class="token string">"DB_PORT"</span><span class="token punctuation">,</span> <span class="token string">"5432"</span><span class="token punctuation">)</span>
+	os<span class="token punctuation">.</span><span class="token function">Setenv</span><span class="token punctuation">(</span><span class="token string">"DB_USERNAME"</span><span class="token punctuation">,</span> <span class="token string">"root"</span><span class="token punctuation">)</span>
+	os<span class="token punctuation">.</span><span class="token function">Setenv</span><span class="token punctuation">(</span><span class="token string">"DB_PASSWORD"</span><span class="token punctuation">,</span> <span class="token string">"admin"</span><span class="token punctuation">)</span>
+	os<span class="token punctuation">.</span><span class="token function">Setenv</span><span class="token punctuation">(</span><span class="token string">"DB_NAME"</span><span class="token punctuation">,</span> <span class="token string">"test"</span><span class="token punctuation">)</span>
+
+	<span class="token comment">// Get the value of an Environment Variable</span>
+	host <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">Getenv</span><span class="token punctuation">(</span><span class="token string">"DB_HOST"</span><span class="token punctuation">)</span>
+	port <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">Getenv</span><span class="token punctuation">(</span><span class="token string">"DB_PORT"</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Host: %s, Port: %s\n"</span><span class="token punctuation">,</span> host<span class="token punctuation">,</span> port<span class="token punctuation">)</span>
+
+	<span class="token comment">// Unset an Environment Variable</span>
+	os<span class="token punctuation">.</span><span class="token function">Unsetenv</span><span class="token punctuation">(</span><span class="token string">"DB_PORT"</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"After unset, Port: %s\n"</span><span class="token punctuation">,</span> os<span class="token punctuation">.</span><span class="token function">Getenv</span><span class="token punctuation">(</span><span class="token string">"DB_PORT"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+	<span class="token comment">/*
+		Get the value of an environment variable and a boolean indicating whether the
+		environment variable is present or not.
+	*/</span>
+	driver<span class="token punctuation">,</span> ok <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">LookupEnv</span><span class="token punctuation">(</span><span class="token string">"DB_DRIVER"</span><span class="token punctuation">)</span>
+	<span class="token keyword">if</span> <span class="token operator">!</span>ok <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"DB_DRIVER is not present"</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Driver: %s\n"</span><span class="token punctuation">,</span> driver<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token comment">// Expand a string containing environment variables in the form of $var or $&#123;var&#125;</span>
+	dbURL <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">ExpandEnv</span><span class="token punctuation">(</span><span class="token string">"postgres://$DB_USERNAME:$DB_PASSWORD@DB_HOST:$DB_PORT/$DB_NAME"</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"DB URL: "</span><span class="token punctuation">,</span> dbURL<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+Host: localhost, Port: 5432
+After unset, Port:
+DB_DRIVER is not present
+DB URL:  postgres:&#x2F;&#x2F;root:admin@DB_HOST:&#x2F;test<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="列出並清除-Go-中的所有環境變數"><a href="#列出並清除-Go-中的所有環境變數" class="headerlink" title="列出並清除 Go 中的所有環境變數"></a>列出並清除 Go 中的所有環境變數</h3><ul>
+<li><strong>os.Environ()</strong>: 此函數以 <code>key=value</code> 的形式返回一個包含所有環境變數的 <code>[]string</code>。</li>
+<li><strong>os.Clearenv()</strong>: 此函數會刪除所有環境變數。在撰寫測試要從乾淨的環境開始時可能會派上用場。</li>
+</ul>
+<p>以下範例示範了如何使用這兩個函數：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"os"</span>
+	<span class="token string">"strings"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+	<span class="token comment">// Environ returns a copy of strings representing the environment,</span>
+	<span class="token comment">// in the form "key=value".</span>
+	<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> env <span class="token operator">:=</span> <span class="token keyword">range</span> os<span class="token punctuation">.</span><span class="token function">Environ</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token comment">// env is</span>
+		envPair <span class="token operator">:=</span> strings<span class="token punctuation">.</span><span class="token function">SplitN</span><span class="token punctuation">(</span>env<span class="token punctuation">,</span> <span class="token string">"="</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+		key <span class="token operator">:=</span> envPair<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+		value <span class="token operator">:=</span> envPair<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%s : %s\n"</span><span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token comment">// Delete all environment variables</span>
+	os<span class="token punctuation">.</span><span class="token function">Clearenv</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Number of environment variables: "</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span><span class="token function">Environ</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+TERM_SESSION_ID : w0t0p1:70C49068-9C87-4032-9C9B-49FB6B86687B
+PATH : &#x2F;Users&#x2F;callicoder&#x2F;.nvm&#x2F;versions&#x2F;node&#x2F;v10.0.0&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;sbin:&#x2F;usr&#x2F;local&#x2F;sbin:&#x2F;Users&#x2F;callicoder&#x2F;protobuf&#x2F;bin:&#x2F;Users&#x2F;callicoder&#x2F;go&#x2F;bin:&#x2F;Users&#x2F;callicoder&#x2F;vaultproject:&#x2F;Users&#x2F;callicoder&#x2F;google-cloud-sdk&#x2F;bin:&#x2F;Users&#x2F;callicoder&#x2F;.rbenv&#x2F;bin:&#x2F;Users&#x2F;callicoder&#x2F;.rbenv&#x2F;shims:&#x2F;Users&#x2F;callicoder&#x2F;anaconda3&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;usr&#x2F;bin:&#x2F;bin:&#x2F;usr&#x2F;sbin:&#x2F;sbin:&#x2F;Users&#x2F;callicoder&#x2F;Library&#x2F;Android&#x2F;sdk&#x2F;platform-tools:&#x2F;opt&#x2F;flutter&#x2F;bin
+.... # Output truncated for brevity
+
+Number of environment variables:  0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>Programming</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在 Go 讀取命令列引數</title>
+    <url>/2021/09/14/reading-command-line-arguments-in-go/</url>
+    <content><![CDATA[<blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a href="https://www.callicoder.com/go-read-command-line-arguments">Reading command line arguments in Go</a></p>
+</blockquote>
+<p>命令列引數是在程式啟動時向程式提供額外資訊的一種方式。提供命命列引數最簡單的方法是執行指令時在後面指定以空格分隔的數值：</p>
+<pre class="line-numbers language-none"><code class="language-none">$ .&#x2F;my-program Arg1 Arg2 Arg3<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="在-Go-讀取命令列引數"><a href="#在-Go-讀取命令列引數" class="headerlink" title="在 Go 讀取命令列引數"></a>在 Go 讀取命令列引數</h3><p>在 Go 中，你可以使用 <code>os.Args</code> 變數來讀取原始命令列引數。它是一個 <a href="/2019/11/13/introduction-to-slices-in-golang/">slice</a> 且包含了以程式名稱為首的所有命令列引數。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"os"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	args <span class="token operator">:=</span> os<span class="token punctuation">.</span>Args
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"All arguments: %v\n"</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span>
+
+	argsWithoutProgram <span class="token operator">:=</span> os<span class="token punctuation">.</span>Args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Arguments without program name: %v\n"</span><span class="token punctuation">,</span> argsWithoutProgram<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">$ go build command-line-arguments.go
+
+$ .&#x2F;command-line-arguments Hello World From Command Line
+All arguments: [.&#x2F;command-line-arguments Hello World From Command Line]
+Arguments without program path: [Hello World From Command Line]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<span id="more"></span>
+
+<h3 id="Go-命令列引數範例"><a href="#Go-命令列引數範例" class="headerlink" title="Go 命令列引數範例"></a>Go 命令列引數範例</h3><p>這裡有另一個範例，它從命令列讀取一堆名字，並向所有名字打招呼：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"os"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	names <span class="token operator">:=</span> os<span class="token punctuation">.</span>Args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span>
+
+	<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> name <span class="token operator">:=</span> <span class="token keyword">range</span> names <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Hello, %s!\n"</span><span class="token punctuation">,</span> name<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">$ go build say-hello-to.go
+$ .&#x2F;say-hello-to Rajeev Sachin Jack Daniel
+Hello, Rajeev!
+Hello, Sachin!
+Hello, Daniel!<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>Programming</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SQL 及 MongoDB 基本指令對應表</title>
     <url>/2013/11/14/sql-to-mongodb-mapping-chart/</url>
     <content><![CDATA[<p>由於新專案採用了 <a href="http://nodejs.org/">Node.js</a> 開發且使用 <a href="http://www.mongodb.org/">MongoDB</a> 作為儲存媒介，所以動手翻譯了官方文件方便查閱相關指令用法。</p>
@@ -7238,7 +7409,7 @@ resources <span class="token symbol">:users</span><span class="token punctuation
 <p>原文：<strong>Ruby on Rails Guides</strong> — <a href="http://guides.rubyonrails.org/active_storage_overview.html">Active Storage Overview</a></p>
 </blockquote>
 <p>Active Storage 是 Rails 5.2 所新增的功能，它可以讓你輕鬆的將檔案傳送到 <a href="https://aws.amazon.com/s3/">Amazon S3</a>、<a href="https://cloud.google.com/storage/docs/">Google Cloud Storage</a> 或 <a href="https://azure.microsoft.com/en-us/services/storage/">Microsoft Azure Storage</a> 等雲端儲存服務，並將這些檔案附加到 Active Record。</p>
-<p>支援一個主要雲端儲存服務，並在其它服務中建立鏡像以實現備援機制，它也提供了用於測試或本地部署的磁碟服務，但重點還是放在雲端儲存。</p>
+<p>支援一個主要雲端儲存服務，並在其它服務中建立鏡像以實現備援機制，它也提供了用於測試或本機部署的磁碟服務，但重點還是放在雲端儲存。</p>
 <p>檔案可以從伺服器上傳到雲端或直接從客戶端上傳到雲端。</p>
 <span id="more"></span>
 
@@ -7253,7 +7424,7 @@ resources <span class="token symbol">:users</span><span class="token punctuation
 <li>如何清理測試過程中儲存的檔案。</li>
 <li>如何實作對其它雲端儲存服務的支援。</li>
 </ul>
-<h3 id="1-什麼是-Active-Storage"><a href="#1-什麼是-Active-Storage" class="headerlink" title="1. 什麼是 Active Storage?"></a>1. 什麼是 Active Storage?</h3><p>Active Storage 方便將檔案上傳到 Amazon S3、Google Cloud Storage 或 Microsoft Azure Storage 等雲端儲存服務，並將這些檔案附加到 Active Record 物件。它配備了本地磁碟服務以進行開發和測試，並支援將檔案鏡像到次要服務以進行備份和遷移。</p>
+<h3 id="1-什麼是-Active-Storage"><a href="#1-什麼是-Active-Storage" class="headerlink" title="1. 什麼是 Active Storage?"></a>1. 什麼是 Active Storage?</h3><p>Active Storage 方便將檔案上傳到 Amazon S3、Google Cloud Storage 或 Microsoft Azure Storage 等雲端儲存服務，並將這些檔案附加到 Active Record 物件。它配備了本機磁碟服務以進行開發和測試，並支援將檔案鏡像到次要服務以進行備份和遷移。</p>
 <p>使用 Active Storage，應用程式可以透過 <a href="https://www.imagemagick.org/">ImageMagick</a> 轉換上傳圖片，產生非圖片檔案（如 PDF 或影片）的預覽圖，並從任意檔案中提取中繼資料。</p>
 <h3 id="2-安裝"><a href="#2-安裝" class="headerlink" title="2. 安裝"></a>2. 安裝</h3><p>Active Storage 在應用程式資料庫中使用兩個名為 <code>active_storage_blobs</code> 和 <code>active_storage_attachments</code> 的資料表。建立新的應用程式（或將應用程式升級到 Rails 5.2），執行 <code>rails active_storage:install</code> 來產生用來建立這些資料表的遷移。使用 <code>rails db:migrate</code> 來執行遷移。</p>
 <p>在 <code>config/storage.yml</code> 定義 Active Storage 服務。對應用程式使用的每個服務，提供一個名稱和必要的設定。下面的範例定義了三個名為 <code>local</code>、<code>test</code> 和 <code>amazon</code> 的服務：</p>
@@ -7271,7 +7442,7 @@ amazon:
   secret_access_key: &quot;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>透過設定 <code>Rails.application.config.active_storage.service</code> 告訴 Active Storage 要使用哪個服務。由於每個環境都可能使用不同的服務，因此建議在每個環境的基礎設定上進行。要在開發環境中使用先前範例中的磁碟服務，你可以將以下內容加到 <code>config/environments/development.rb</code>：</p>
-<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token comment"># 在本地儲存檔案。</span>
+<pre class="line-numbers language-rb" data-language="rb"><code class="language-rb"><span class="token comment"># 在本機儲存檔案。</span>
 config<span class="token punctuation">.</span>active_storage<span class="token punctuation">.</span>service <span class="token operator">=</span> <span class="token symbol">:local</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>要在生產環境使用 Amazon S3，你可以將以下內容加到 <code>config/environments/production.rb</code>：</p>
