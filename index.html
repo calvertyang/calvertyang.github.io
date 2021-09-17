@@ -210,6 +210,83 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2021/09/16/go-command-line-flags-options/">Go 的命令列旗標／選項</a>
+      </h2>
+      <p class="article-date">2021年9月16日</p>
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/go-command-line-flags-options-exmple">Go Command-line flags/options</a></p>
+</blockquote>
+<p>命令列程式通常會接受來自使用者的旗標或選項來自訂指令的執行。旗標是在執行指令時加在指令名稱後的鍵值對。</p>
+<p>Go 允許你使用標準函式庫中的 <a target="_blank" rel="noopener" href="https://pkg.go.dev/flag"><code>flags</code></a> package 來接收命令列旗標。在本文中，你將學到如何為命令列程式接收旗標。</p>
+<h3 id="Go-的命令列旗標"><a href="#Go-的命令列旗標" class="headerlink" title="Go 的命令列旗標"></a>Go 的命令列旗標</h3><p>要接收命令列旗標，你需要定義旗標以便從命令列取值。你可以透過多種方式做到：</p>
+<ol>
+<li>使用 <code>flag.String()</code>、<code>flag.Bool()</code>、<code>flag.Int()</code> 等方法定義旗標。</li>
+<li>使用 <code>flag.StringVar()</code>, <code>flag.IntVar()</code> 等方法將現有變數綁定到命令列旗標。</li>
+<li>透過宣告一個實作 <a target="_blank" rel="noopener" href="https://pkg.go.dev/flag#Value"><code>flag.Value</code></a> 介面的類型來建立自訂旗標，然後使用 <code>flag.Var()</code> 方法將自訂類型的變數與命令列旗標綁定。</li>
+</ol>
+        
+      </div>
+      <a class="more" href="/2021/09/16/go-command-line-flags-options/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2021/09/16/golang-sorting-and-custom-sorting-by-functions/">Golang 的排序和透過函數自訂排序</a>
+      </h2>
+      <p class="article-date">2021年9月16日</p>
+      
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-sorting-custom-functions">Golang Sorting and Custom Sorting by functions</a></p>
+</blockquote>
+<p>排序是我們平常撰寫程式時常見的用法。在本文中，你將學到如何在 Go 中對原始類型（string、int、float64）和自訂的集合進行排序。</p>
+<h3 id="在-Go-中對字串、整數或浮點數的-slice-進行排序"><a href="#在-Go-中對字串、整數或浮點數的-slice-進行排序" class="headerlink" title="在 Go 中對字串、整數或浮點數的 slice 進行排序"></a>在 Go 中對字串、整數或浮點數的 slice 進行排序</h3><p>Go 的 <a target="_blank" rel="noopener" href="https://pkg.go.dev/sort">sort</a> package 提供了幾種方便的方法來對原始類型的 slice 進行排序。以下範例示範了如何在 Go 中對字串、整數和浮點數的 slice 進行排序：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"sort"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// Sorting a slice of Strings</span>
+	strs <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">&#123;</span><span class="token string">"quick"</span><span class="token punctuation">,</span> <span class="token string">"brown"</span><span class="token punctuation">,</span> <span class="token string">"fox"</span><span class="token punctuation">,</span> <span class="token string">"jumps"</span><span class="token punctuation">&#125;</span>
+	sort<span class="token punctuation">.</span><span class="token function">Strings</span><span class="token punctuation">(</span>strs<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Sorted strings: "</span><span class="token punctuation">,</span> strs<span class="token punctuation">)</span>
+
+	<span class="token comment">// Sorting a slice of Integers</span>
+	ints <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">&#123;</span><span class="token number">56</span><span class="token punctuation">,</span> <span class="token number">19</span><span class="token punctuation">,</span> <span class="token number">78</span><span class="token punctuation">,</span> <span class="token number">67</span><span class="token punctuation">,</span> <span class="token number">14</span><span class="token punctuation">,</span> <span class="token number">25</span><span class="token punctuation">&#125;</span>
+	sort<span class="token punctuation">.</span><span class="token function">Ints</span><span class="token punctuation">(</span>ints<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Sorted integers: "</span><span class="token punctuation">,</span> ints<span class="token punctuation">)</span>
+
+	<span class="token comment">// Sorting a slice of Floats</span>
+	floats <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">float64</span><span class="token punctuation">&#123;</span><span class="token number">176.8</span><span class="token punctuation">,</span> <span class="token number">19.5</span><span class="token punctuation">,</span> <span class="token number">20.8</span><span class="token punctuation">,</span> <span class="token number">57.4</span><span class="token punctuation">&#125;</span>
+	sort<span class="token punctuation">.</span><span class="token function">Float64s</span><span class="token punctuation">(</span>floats<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Sorted floats: "</span><span class="token punctuation">,</span> floats<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">$ go run sorting.go
+Sorted strings:  [brown fox jumps quick]
+Sorted integers:  [14 19 25 56 67 78]
+Sorted floats:  [19.5 20.8 57.4 176.8]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+        
+      </div>
+      <a class="more" href="/2021/09/16/golang-sorting-and-custom-sorting-by-functions/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2021/09/15/golang-url-encoding-and-decoding/">Golang 的網址編碼和解碼</a>
       </h2>
       <p class="article-date">2021年9月15日</p>
@@ -493,62 +570,6 @@ Arguments without program path: [Hello World From Command Line]<span aria-hidden
         
       </div>
       <a class="more" href="/2019/11/19/golang-methods-tutorial-with-examples/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2019/11/15/golang-structs-tutorial-with-examples/">Golang struct 教學與範例</a>
-      </h2>
-      <p class="article-date">2019年11月15日</p>
-      
-        
-  <a href="/tags#Golang" >
-    <span class="tag-code">Golang</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-structs">Golang Structs Tutorial with Examples</a></p>
-</blockquote>
-<p><code>struct</code> 是使用者定義的型別，包含已命名欄位/屬性的集合。它用於將相關資料分組在一起形成一個單位。任何具有一組屬性的現實世界實體都可以使用結構表示。</p>
-<p>如果你有物件導向的背景知識，你可以將 <code>struct</code> 視為支援複合但不支援繼承的輕量級類別。</p>
-<h3 id="定義-struct-型別"><a href="#定義-struct-型別" class="headerlink" title="定義 struct 型別"></a>定義 struct 型別</h3><p>你可以像這樣定義新的 <code>struct</code> 型別：</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> Person <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
-	FirstName <span class="token builtin">string</span>
-	LastName  <span class="token builtin">string</span>
-	Age       <span class="token builtin">int</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-        
-      </div>
-      <a class="more" href="/2019/11/15/golang-structs-tutorial-with-examples/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2019/11/15/playing-with-pointers-in-golang/">在 Golang 與指標共舞</a>
-      </h2>
-      <p class="article-date">2019年11月15日</p>
-      
-        
-  <a href="/tags#Golang" >
-    <span class="tag-code">Golang</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-pointers">Playing with Pointers in Golang</a></p>
-</blockquote>
-<p>指標是一個變數，用來儲存另一個變數的記憶體位址。疑惑嗎？讓我來解釋一下。</p>
-<p>首先讓我們來了解什麼是變數。當我們在撰寫任何程式時，我們需要在記憶體中儲存一些資料。資料儲存在記憶體中的特定位址。記憶體位址看起來會像 <code>0xAFFFF</code>（這是以十六進制來表示記憶體位址）。</p>
-        
-      </div>
-      <a class="more" href="/2019/11/15/playing-with-pointers-in-golang/">繼續閱讀</a>
     </article>
   
 

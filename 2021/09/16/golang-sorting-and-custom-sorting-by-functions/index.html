@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Calvert&#39;s murmur">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Golang 的排序和透過函數自訂排序 | Calvert&#39;s murmur
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        let all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-44933497-2');
+    </script>
+
+
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3999187913340509" crossorigin="anonymous"></script>
+
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Calvert's murmur</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/series/" class="item-link">Series</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/series/" class="menu-link">Series</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Golang 的排序和透過函數自訂排序</h2>
+  <p class="post-date">2021-09-16</p>
+  <p class="word-count">
+  
+  約 5365 字 / 需 29 分鐘閱讀
+</p>
+
+
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-sorting-custom-functions">Golang Sorting and Custom Sorting by functions</a></p>
+</blockquote>
+<p>排序是我們平常撰寫程式時常見的用法。在本文中，你將學到如何在 Go 中對原始類型（string、int、float64）和自訂的集合進行排序。</p>
+<h3 id="在-Go-中對字串、整數或浮點數的-slice-進行排序"><a href="#在-Go-中對字串、整數或浮點數的-slice-進行排序" class="headerlink" title="在 Go 中對字串、整數或浮點數的 slice 進行排序"></a>在 Go 中對字串、整數或浮點數的 slice 進行排序</h3><p>Go 的 <a target="_blank" rel="noopener" href="https://pkg.go.dev/sort">sort</a> package 提供了幾種方便的方法來對原始類型的 slice 進行排序。以下範例示範了如何在 Go 中對字串、整數和浮點數的 slice 進行排序：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"sort"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// Sorting a slice of Strings</span>
+	strs <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">&#123;</span><span class="token string">"quick"</span><span class="token punctuation">,</span> <span class="token string">"brown"</span><span class="token punctuation">,</span> <span class="token string">"fox"</span><span class="token punctuation">,</span> <span class="token string">"jumps"</span><span class="token punctuation">&#125;</span>
+	sort<span class="token punctuation">.</span><span class="token function">Strings</span><span class="token punctuation">(</span>strs<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Sorted strings: "</span><span class="token punctuation">,</span> strs<span class="token punctuation">)</span>
+
+	<span class="token comment">// Sorting a slice of Integers</span>
+	ints <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">&#123;</span><span class="token number">56</span><span class="token punctuation">,</span> <span class="token number">19</span><span class="token punctuation">,</span> <span class="token number">78</span><span class="token punctuation">,</span> <span class="token number">67</span><span class="token punctuation">,</span> <span class="token number">14</span><span class="token punctuation">,</span> <span class="token number">25</span><span class="token punctuation">&#125;</span>
+	sort<span class="token punctuation">.</span><span class="token function">Ints</span><span class="token punctuation">(</span>ints<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Sorted integers: "</span><span class="token punctuation">,</span> ints<span class="token punctuation">)</span>
+
+	<span class="token comment">// Sorting a slice of Floats</span>
+	floats <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">float64</span><span class="token punctuation">&#123;</span><span class="token number">176.8</span><span class="token punctuation">,</span> <span class="token number">19.5</span><span class="token punctuation">,</span> <span class="token number">20.8</span><span class="token punctuation">,</span> <span class="token number">57.4</span><span class="token punctuation">&#125;</span>
+	sort<span class="token punctuation">.</span><span class="token function">Float64s</span><span class="token punctuation">(</span>floats<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Sorted floats: "</span><span class="token punctuation">,</span> floats<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">$ go run sorting.go
+Sorted strings:  [brown fox jumps quick]
+Sorted integers:  [14 19 25 56 67 78]
+Sorted floats:  [19.5 20.8 57.4 176.8]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<span id="more"></span>
+
+<h3 id="以相反順序對-slice-進行排序"><a href="#以相反順序對-slice-進行排序" class="headerlink" title="以相反順序對 slice 進行排序"></a>以相反順序對 slice 進行排序</h3><p>要以相反順序對 slice 進行排序，你可以在 <code>StringSlice</code>、<code>IntSlice</code> 和 <code>Float64Slice</code> 類型上使用 <code>Reverse()</code> 函數。這些類型實作了 <code>sort</code> package 中定義用來比較和交換的 <code>Interface</code>。</p>
+<p><code>Reverse()</code> 函數返回了相反順序的資料。讓我們來看一個以相反順序對字串、整數和浮點數的 slice 進行排序的範例：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"sort"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// Sorting a slice of Strings</span>
+	strs <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">&#123;</span><span class="token string">"quick"</span><span class="token punctuation">,</span> <span class="token string">"brown"</span><span class="token punctuation">,</span> <span class="token string">"fox"</span><span class="token punctuation">,</span> <span class="token string">"jumps"</span><span class="token punctuation">&#125;</span>
+	sort<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span>sort<span class="token punctuation">.</span><span class="token function">Reverse</span><span class="token punctuation">(</span>sort<span class="token punctuation">.</span><span class="token function">StringSlice</span><span class="token punctuation">(</span>strs<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Sorted strings in reverse order: "</span><span class="token punctuation">,</span> strs<span class="token punctuation">)</span>
+
+	<span class="token comment">// Sorting a slice of Integers</span>
+	ints <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">&#123;</span><span class="token number">56</span><span class="token punctuation">,</span> <span class="token number">19</span><span class="token punctuation">,</span> <span class="token number">78</span><span class="token punctuation">,</span> <span class="token number">67</span><span class="token punctuation">,</span> <span class="token number">14</span><span class="token punctuation">,</span> <span class="token number">25</span><span class="token punctuation">&#125;</span>
+	sort<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span>sort<span class="token punctuation">.</span><span class="token function">Reverse</span><span class="token punctuation">(</span>sort<span class="token punctuation">.</span><span class="token function">IntSlice</span><span class="token punctuation">(</span>ints<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Sorted integers in reverse order: "</span><span class="token punctuation">,</span> ints<span class="token punctuation">)</span>
+
+	<span class="token comment">// Sorting a slice of Floats</span>
+	floats <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">float64</span><span class="token punctuation">&#123;</span><span class="token number">176.8</span><span class="token punctuation">,</span> <span class="token number">19.5</span><span class="token punctuation">,</span> <span class="token number">20.8</span><span class="token punctuation">,</span> <span class="token number">57.4</span><span class="token punctuation">&#125;</span>
+	sort<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span>sort<span class="token punctuation">.</span><span class="token function">Reverse</span><span class="token punctuation">(</span>sort<span class="token punctuation">.</span><span class="token function">Float64Slice</span><span class="token punctuation">(</span>floats<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Sorted floats in reverse order: "</span><span class="token punctuation">,</span> floats<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">$ go run reverse-sorting.go
+Sorted strings in reverse order:  [quick jumps fox brown]
+Sorted integers in reverse order:  [78 67 56 25 19 14]
+Sorted floats in reverse order:  [176.8 57.4 20.8 19.5]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="在-Go-中使用比較器函數對-slice-進行排序"><a href="#在-Go-中使用比較器函數對-slice-進行排序" class="headerlink" title="在 Go 中使用比較器函數對 slice 進行排序"></a>在 Go 中使用比較器函數對 slice 進行排序</h3><p>很多時候，你可能希望按照自然順序以外的方式對集合進行排序。例如，你想按照長度對字串 slice 進行排序，或者按照年齡對使用者進行排序。</p>
+<p>對於這些案例，你可以使用 <code>sort</code> package 提供的 <code>Slice()</code> 和 <code>SliceStable()</code> 函數。這些是能接受 <code>less</code> 函數作為參數的高階函數：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">Slice</span><span class="token punctuation">(</span>x <span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> less <span class="token keyword">func</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">bool</span><span class="token punctuation">)</span>
+<span class="token keyword">func</span> <span class="token function">SliceStable</span><span class="token punctuation">(</span>x <span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> less <span class="token keyword">func</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">bool</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><code>less</code> 函數是一個比較器函數，它回報索引 <code>i</code> 處的元素是否應該排在索引 <code>j</code> 處的元素前。如果 <code>less(i, j)</code> 和 <code>less(j, i)</code> 都是返回 <code>false</code>，那麼索引 <code>i</code> 和 <code>j</code> 處的元素被視為是相同的。</p>
+<p>當使用 <code>Slice()</code> 函數時，排序不保證穩定：相等的元素可能會和它們原本的順序顛倒。要穩定的排序，請使用 <code>SliceStable()</code>。</p>
+<p>讓我們來看個範例：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"sort"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// Sorting a slice of strings by length</span>
+	strs <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">&#123;</span><span class="token string">"United States"</span><span class="token punctuation">,</span> <span class="token string">"India"</span><span class="token punctuation">,</span> <span class="token string">"France"</span><span class="token punctuation">,</span> <span class="token string">"United Kingdom"</span><span class="token punctuation">,</span> <span class="token string">"Spain"</span><span class="token punctuation">&#125;</span>
+	sort<span class="token punctuation">.</span><span class="token function">Slice</span><span class="token punctuation">(</span>strs<span class="token punctuation">,</span> <span class="token keyword">func</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">return</span> <span class="token function">len</span><span class="token punctuation">(</span>strs<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token function">len</span><span class="token punctuation">(</span>strs<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Sorted strings by length: "</span><span class="token punctuation">,</span> strs<span class="token punctuation">)</span>
+
+	<span class="token comment">// Stable sort</span>
+	sort<span class="token punctuation">.</span><span class="token function">SliceStable</span><span class="token punctuation">(</span>strs<span class="token punctuation">,</span> <span class="token keyword">func</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">return</span> <span class="token function">len</span><span class="token punctuation">(</span>strs<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token function">len</span><span class="token punctuation">(</span>strs<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"[Stable] Sorted strings by length: "</span><span class="token punctuation">,</span> strs<span class="token punctuation">)</span>
+
+	<span class="token comment">// Sorting a slice of strings in the reverse order of length</span>
+	sort<span class="token punctuation">.</span><span class="token function">SliceStable</span><span class="token punctuation">(</span>strs<span class="token punctuation">,</span> <span class="token keyword">func</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">return</span> <span class="token function">len</span><span class="token punctuation">(</span>strs<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token function">len</span><span class="token punctuation">(</span>strs<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"[Stable] Sorted strings by reverse order of length: "</span><span class="token punctuation">,</span> strs<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">$ go run sorting-by-comparator.go
+Sorted strings by length:  [India Spain France United States United Kingdom]
+[Stable] Sorted strings by length:  [India Spain France United States United Kingdom]
+[Stable] Sorted strings by reverse order of length:  [United Kingdom United States France India Spain]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="在-Go-中使用比較器函數對-struce-slice-進行排序"><a href="#在-Go-中使用比較器函數對-struce-slice-進行排序" class="headerlink" title="在 Go 中使用比較器函數對 struce slice 進行排序"></a>在 Go 中使用比較器函數對 struce slice 進行排序</h3><p>延續上一個範例，此範例將示範如何透過將自訂的 <code>less</code> 函數傳遞給 <code>Slice()</code> 和 <code>SliceStable()</code> 函數，來對使用者自訂的 struct 進行排序：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"sort"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">type</span> User <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	Name <span class="token builtin">string</span>
+	Age  <span class="token builtin">int</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// Sorting a slice of structs by a field</span>
+	users <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>User<span class="token punctuation">&#123;</span>
+		<span class="token punctuation">&#123;</span>
+			Name<span class="token punctuation">:</span> <span class="token string">"Rajeev"</span><span class="token punctuation">,</span>
+			Age<span class="token punctuation">:</span>  <span class="token number">28</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#123;</span>
+			Name<span class="token punctuation">:</span> <span class="token string">"Monica"</span><span class="token punctuation">,</span>
+			Age<span class="token punctuation">:</span>  <span class="token number">31</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#123;</span>
+			Name<span class="token punctuation">:</span> <span class="token string">"John"</span><span class="token punctuation">,</span>
+			Age<span class="token punctuation">:</span>  <span class="token number">56</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#123;</span>
+			Name<span class="token punctuation">:</span> <span class="token string">"Amanda"</span><span class="token punctuation">,</span>
+			Age<span class="token punctuation">:</span>  <span class="token number">16</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#123;</span>
+			Name<span class="token punctuation">:</span> <span class="token string">"Steven"</span><span class="token punctuation">,</span>
+			Age<span class="token punctuation">:</span>  <span class="token number">28</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+	<span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// Sort users by their age</span>
+	sort<span class="token punctuation">.</span><span class="token function">Slice</span><span class="token punctuation">(</span>users<span class="token punctuation">,</span> <span class="token keyword">func</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">return</span> users<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>Age <span class="token operator">&lt;</span> users<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>Age
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Sorted users by age: "</span><span class="token punctuation">,</span> users<span class="token punctuation">)</span>
+
+	<span class="token comment">// Stable sort</span>
+	sort<span class="token punctuation">.</span><span class="token function">SliceStable</span><span class="token punctuation">(</span>users<span class="token punctuation">,</span> <span class="token keyword">func</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">return</span> users<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>Age <span class="token operator">&lt;</span> users<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>Age
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Sorted users by age: "</span><span class="token punctuation">,</span> users<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="透過實作-sort-Interface-來自訂排序"><a href="#透過實作-sort-Interface-來自訂排序" class="headerlink" title="透過實作 sort.Interface 來自訂排序"></a>透過實作 sort.Interface 來自訂排序</h3><p>最後，讓我們看一下在 Go 中對原始類型的集合或使用者自訂的 struct 進行排序的最通用方式。要啟用對任何類型集合的自訂排序，你需要定義一個相對應的類型並實作 <code>sort</code> package 提供的通用 <code>Interface</code>。該 <code>Interface</code> 包含以下方法：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> Interface <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// Len is the number of elements in the collection.</span>
+	<span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span>
+
+	<span class="token comment">// Less reports whether the element with index i must sort before the element with index j.</span>
+	<span class="token comment">// If both Less(i, j) and Less(j, i) are false, then the elements at index i and j are considered equal.</span>
+	<span class="token function">Less</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">bool</span>
+
+	<span class="token comment">// Swap swaps the elements with indexes i and j.</span>
+	<span class="token function">Swap</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>實作上述 <code>Interface</code> 後，你可以使用 <code>Sort()</code> 或 <code>Stable()</code> 函數對任何實作 <code>sort.Interface</code> 介面的集合進行排序。</p>
+<p>讓我們透過一個範例來理解：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"sort"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">type</span> User <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	Name <span class="token builtin">string</span>
+	Age  <span class="token builtin">int</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Define a collection type that implements sort.Interface</span>
+<span class="token keyword">type</span> UsersByAge <span class="token punctuation">[</span><span class="token punctuation">]</span>User
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>u UsersByAge<span class="token punctuation">)</span> <span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token function">len</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>u UsersByAge<span class="token punctuation">)</span> <span class="token function">Swap</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	u<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> u<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> u<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> u<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>u UsersByAge<span class="token punctuation">)</span> <span class="token function">Less</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> u<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>Age <span class="token operator">&lt;</span> u<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>Age
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	users <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>User<span class="token punctuation">&#123;</span>
+		<span class="token punctuation">&#123;</span>
+			Name<span class="token punctuation">:</span> <span class="token string">"Rajeev"</span><span class="token punctuation">,</span>
+			Age<span class="token punctuation">:</span>  <span class="token number">28</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#123;</span>
+			Name<span class="token punctuation">:</span> <span class="token string">"Monica"</span><span class="token punctuation">,</span>
+			Age<span class="token punctuation">:</span>  <span class="token number">31</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#123;</span>
+			Name<span class="token punctuation">:</span> <span class="token string">"John"</span><span class="token punctuation">,</span>
+			Age<span class="token punctuation">:</span>  <span class="token number">56</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#123;</span>
+			Name<span class="token punctuation">:</span> <span class="token string">"Amanda"</span><span class="token punctuation">,</span>
+			Age<span class="token punctuation">:</span>  <span class="token number">16</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#123;</span>
+			Name<span class="token punctuation">:</span> <span class="token string">"Steven"</span><span class="token punctuation">,</span>
+			Age<span class="token punctuation">:</span>  <span class="token number">28</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token comment">// Sorting a slice of users by age (Sort may place equal elements in any order in the final result)</span>
+	sort<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span><span class="token function">UsersByAge</span><span class="token punctuation">(</span>users<span class="token punctuation">)</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Sorted users by age: "</span><span class="token punctuation">,</span> users<span class="token punctuation">)</span>
+
+	<span class="token comment">// Stable Sorting (Stavle sort preserves the original input order of equal elements)</span>
+	sort<span class="token punctuation">.</span><span class="token function">Stable</span><span class="token punctuation">(</span><span class="token function">UsersByAge</span><span class="token punctuation">(</span>users<span class="token punctuation">)</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"[Stable] Sorted users by age: "</span><span class="token punctuation">,</span> users<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">$ go run custom-sorting-struct.go
+Sorted users by age:  [&#123;Amanda 16&#125; &#123;Rajeev 28&#125; &#123;Steven 28&#125; &#123;Monica 31&#125; &#123;John 56&#125;]
+[Stable] Sorted users by age:  [&#123;Amanda 16&#125; &#123;Rajeev 28&#125; &#123;Steven 28&#125; &#123;Monica 31&#125; &#123;John 56&#125;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- Last updated on Start -->
+    
+    <!-- Last updated on END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2021/09/15/golang-url-encoding-and-decoding/">
+        <span class="nav-arrow">&larr; </span>
+        
+          Golang 的網址編碼和解碼
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2021/09/16/go-command-line-flags-options/">
+        
+          Go 的命令列旗標／選項
+        
+        <span class="nav-arrow"> &rarr;</span>
+      </a>
+    
+  </div>
+
+
+    <!-- NAV END -->
+    <!-- QR Code START -->
+    
+    <!-- QR Code END -->
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">目錄</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%9C%A8-Go-%E4%B8%AD%E5%B0%8D%E5%AD%97%E4%B8%B2%E3%80%81%E6%95%B4%E6%95%B8%E6%88%96%E6%B5%AE%E9%BB%9E%E6%95%B8%E7%9A%84-slice-%E9%80%B2%E8%A1%8C%E6%8E%92%E5%BA%8F"><span class="toc-nav-text">在 Go 中對字串、整數或浮點數的 slice 進行排序</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E4%BB%A5%E7%9B%B8%E5%8F%8D%E9%A0%86%E5%BA%8F%E5%B0%8D-slice-%E9%80%B2%E8%A1%8C%E6%8E%92%E5%BA%8F"><span class="toc-nav-text">以相反順序對 slice 進行排序</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%9C%A8-Go-%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%AF%94%E8%BC%83%E5%99%A8%E5%87%BD%E6%95%B8%E5%B0%8D-slice-%E9%80%B2%E8%A1%8C%E6%8E%92%E5%BA%8F"><span class="toc-nav-text">在 Go 中使用比較器函數對 slice 進行排序</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%9C%A8-Go-%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%AF%94%E8%BC%83%E5%99%A8%E5%87%BD%E6%95%B8%E5%B0%8D-struce-slice-%E9%80%B2%E8%A1%8C%E6%8E%92%E5%BA%8F"><span class="toc-nav-text">在 Go 中使用比較器函數對 struce slice 進行排序</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E9%80%8F%E9%81%8E%E5%AF%A6%E4%BD%9C-sort-Interface-%E4%BE%86%E8%87%AA%E8%A8%82%E6%8E%92%E5%BA%8F"><span class="toc-nav-text">透過實作 sort.Interface 來自訂排序</span></a></li></ol>
+    
+  </div>
+</aside>
+
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function() {
+    const url = 'https://calvertyang.github.io/2021/09/16/golang-sorting-and-custom-sorting-by-functions/';
+    const banner = '';
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')',
+      });
+    } else {
+      $('#article-banner').geopattern(url);
+    }
+    $('.header').removeClass('fixed-header');
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.svg');
+      $(this).css({
+        'cursor': 'default',
+      });
+    });
+
+    // 若圖片放在連結內，則將游標改為 pointer 並將圖片靠左
+    $('.markdown-content img').each(function() {
+      if ($(this).parents().is('a')) {
+        $(this).css({
+          'cursor': 'pointer',
+          'display': 'inline-block',
+        });
+      }
+    });
+
+    // zoom image
+    $('.markdown-content img').on('click', function() {
+      const src = $(this).attr('src');
+      if (src !== '/css/images/error_icon.svg' && !$(this).parents().is('a')) {
+        const imageW = $(this).width();
+        const imageH = $(this).height();
+
+        let zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        zoom = zoom < 1 ? 1 : zoom;
+        zoom = zoom > 2 ? 2 : zoom;
+        const transY = (($(window).height() - imageH) / 2).toFixed(2);
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
+        $('.image-view-wrap').addClass('wrap-active');
+        $('.image-view-wrap img').css({
+          width: imageW,
+          transform: `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`,
+        });
+        $('html').css('overflow', 'hidden');
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove();
+          $('html').attr('style', '');
+        });
+      }
+    })
+  })();
+</script>
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    const d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
+    FastClick.attach(document.body);
+  });
+</script>
+
+<script>
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

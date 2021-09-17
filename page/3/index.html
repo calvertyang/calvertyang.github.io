@@ -210,6 +210,64 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2019/11/05/golang-variables-zero-values-type-inference/">Golang 變數、零值和型別推斷</a>
+      </h2>
+      <p class="article-date">2019年11月5日</p>
+      
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-variables-zero-values-type-inference">Golang Variables, Zero Values, and Type inference</a></p>
+</blockquote>
+<h3 id="變數和資料型別入門"><a href="#變數和資料型別入門" class="headerlink" title="變數和資料型別入門"></a>變數和資料型別入門</h3><p>每個程式都需要在記憶體中儲存一些資料。資料被儲存在特定的記憶體位置。</p>
+<p>變數只是為儲存資料的記憶體位置所取的一個方便的名稱。除了名稱外，每個變數還有關聯的型別。</p>
+        
+      </div>
+      <a class="more" href="/2019/11/05/golang-variables-zero-values-type-inference/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/11/04/writing-your-first-golang-program/">哈囉 Golang：撰寫你的第一個 Golang 程式</a>
+      </h2>
+      <p class="article-date">2019年11月4日</p>
+      
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-introduction-hello-world">Hello Golang: Writing your first Golang Program</a></p>
+</blockquote>
+<p>當我們開始學習一種新的程式語言時，通常會先要撰寫經典的「Hello, World」程式。</p>
+<p>讓我們用 Go 撰寫「Hello, World」程式，並了解其工作原理。開啟你慣用的文字編輯器，建立一個名為 <code>hello.go</code> 的新檔案，然後輸入以下程式碼：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// My first Program</span>
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Hello, World"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        
+      </div>
+      <a class="more" href="/2019/11/04/writing-your-first-golang-program/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2019/11/01/golang-installation-setup-gopath-workspace/">安裝、設定 Golang 的 GOPATH 和 Go 工作區</a>
       </h2>
       <p class="article-date">2019年11月1日</p>
@@ -489,63 +547,6 @@ rvg<span class="token punctuation">.</span>draw<span class="token punctuation">.
         
       </div>
       <a class="more" href="/2017/03/15/drawing-with-rvg/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2017/02/06/how-to-setup-virtual-users-for-vsftpd-in-ubuntu/">如何在 Ubuntu 中為 vsftpd 設置虛擬帳號</a>
-      </h2>
-      <p class="article-date">2017年2月6日</p>
-      
-        
-  <a href="/tags#Linux" >
-    <span class="tag-code">Linux</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          以下是在 Ubunto 16.04 LTS 安裝 vsftpd 並設定虛擬帳號的步驟
-
-安裝 vsftpd
-$ sudo apt-get update
-$ sudo apt-get install vsftpd
-編輯設定檔
-$ sudo vim /etc/vsftpd.conf
-
-  以下設 ...
-        
-      </div>
-      <a class="more" href="/2017/02/06/how-to-setup-virtual-users-for-vsftpd-in-ubuntu/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2016/10/16/capistrano-with-ed25519-keys/">在 Capistrano 自動化部署時使用 Ed25519 金鑰</a>
-      </h2>
-      <p class="article-date">2016年10月16日</p>
-      
-        
-  <a href="/tags#Ed25519" >
-    <span class="tag-code">Ed25519</span>
-  </a>
-
-  <a href="/tags#Ruby-on-Rails" >
-    <span class="tag-code">Ruby on Rails</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          
-原文：steigr — Capistrano with ED25519 keys
-
-我最近將我的 Capistrano 自動化部署切換到了 Ed25519 金鑰。在正常運作之前我發現到一些奇怪的錯誤，部署使用者/代理程式無法登入到主機。在檢查 authorized_keys 檔案權限、本機 ...
-        
-      </div>
-      <a class="more" href="/2016/10/16/capistrano-with-ed25519-keys/">繼續閱讀</a>
     </article>
   
 

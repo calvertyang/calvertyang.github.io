@@ -210,6 +210,63 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2017/02/06/how-to-setup-virtual-users-for-vsftpd-in-ubuntu/">如何在 Ubuntu 中為 vsftpd 設置虛擬帳號</a>
+      </h2>
+      <p class="article-date">2017年2月6日</p>
+      
+        
+  <a href="/tags#Linux" >
+    <span class="tag-code">Linux</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          以下是在 Ubunto 16.04 LTS 安裝 vsftpd 並設定虛擬帳號的步驟
+
+安裝 vsftpd
+$ sudo apt-get update
+$ sudo apt-get install vsftpd
+編輯設定檔
+$ sudo vim /etc/vsftpd.conf
+
+  以下設 ...
+        
+      </div>
+      <a class="more" href="/2017/02/06/how-to-setup-virtual-users-for-vsftpd-in-ubuntu/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2016/10/16/capistrano-with-ed25519-keys/">在 Capistrano 自動化部署時使用 Ed25519 金鑰</a>
+      </h2>
+      <p class="article-date">2016年10月16日</p>
+      
+        
+  <a href="/tags#Ed25519" >
+    <span class="tag-code">Ed25519</span>
+  </a>
+
+  <a href="/tags#Ruby-on-Rails" >
+    <span class="tag-code">Ruby on Rails</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          
+原文：steigr — Capistrano with ED25519 keys
+
+我最近將我的 Capistrano 自動化部署切換到了 Ed25519 金鑰。在正常運作之前我發現到一些奇怪的錯誤，部署使用者/代理程式無法登入到主機。在檢查 authorized_keys 檔案權限、本機 ...
+        
+      </div>
+      <a class="more" href="/2016/10/16/capistrano-with-ed25519-keys/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2016/10/05/upgrade_your_ssh_keys/">升級你的 SSH 金鑰！</a>
       </h2>
       <p class="article-date">2016年10月5日</p>
@@ -561,53 +618,6 @@ $ wget http://download.redis ...
         
       </div>
       <a class="more" href="/2013/11/06/how-to-install-redis-in-centos-6/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2013/10/26/mac-os-x-ssd-performance-optimization/">Mac OS X 延長 SSD 壽命</a>
-      </h2>
-      <p class="article-date">2013年10月26日</p>
-      
-        
-  <a href="/tags#Mac" >
-    <span class="tag-code">Mac</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          由於有時候會重灌電腦，所以在這記錄一下重灌之後要延長 SSD 所做的步驟。
-關閉 Time Machine 的本機備份模式如果有開啟 Time Machine 功能，當備份磁碟無法使用時，系統還是會每小時建立快照摒除存在本機硬碟，使用以下指令可以禁止系統在本機備份檔案
-$ sudo tmut ...
-        
-      </div>
-      <a class="more" href="/2013/10/26/mac-os-x-ssd-performance-optimization/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2013/10/20/jquery-validation-plugin-for-array-of-elements/">使用 jQuery Validation Plugin 驗證元素陣列</a>
-      </h2>
-      <p class="article-date">2013年10月20日</p>
-      
-        
-  <a href="/tags#JavaScript" >
-    <span class="tag-code">JavaScript</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          有時候我們會需要驗證表單中的元素陣列，例如：
-&lt;form id="userDataForm" name="userDataForm" method="post" action="">
-  &lt;!-- User 1 -->
-  &lt;input type="text" id="us ...
-        
-      </div>
-      <a class="more" href="/2013/10/20/jquery-validation-plugin-for-array-of-elements/">繼續閱讀</a>
     </article>
   
 
