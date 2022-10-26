@@ -76,7 +76,7 @@
 
 
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
   <body>
     <header class="header fixed-header">
@@ -207,6 +207,32 @@
 </header>
 
     <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/11/05/golang-basic-types-operators-type-conversion/">Golang 基本型別、運算子和型別轉換</a>
+      </h2>
+      <p class="article-date">2019年11月5日</p>
+      
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-basic-types-operators-type-conversion">Golang Basic Types, Operators and Type Conversion</a></p>
+</blockquote>
+<p>Go 是靜態型別的程式語言。Golang 中的每個變數都有關聯的型別。</p>
+<p>資料型別會對一組相關的資料集進行分類。它們定義了資料如何儲存在記憶體中、特定資料型別的變數可能儲存的值以及可以對其執行的運算。</p>
+<p>Golang 具有多種內建的資料型別，用於表示常見的值，如數字、布林值、字串等。在本文中，我們將逐一介紹這些基本資料型別，並了解它們的工作原理。</p>
+        
+      </div>
+      <a class="more" href="/2019/11/05/golang-basic-types-operators-type-conversion/">繼續閱讀</a>
+    </article>
   
     <article class="article-card">
       <h2 class="article-head">
@@ -471,84 +497,6 @@
       <a class="more" href="/2018/01/24/electron-api-demos/">繼續閱讀</a>
     </article>
   
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2017/03/15/drawing-with-rvg/">使用 RVG 繪圖</a>
-      </h2>
-      <p class="article-date">2017年3月15日</p>
-      
-        
-  <a href="/tags#Ruby" >
-    <span class="tag-code">Ruby</span>
-  </a>
-
-  <a href="/tags#Rmagick" >
-    <span class="tag-code">Rmagick</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          <blockquote>
-<p>原文：<strong>RMagick User’s Guide and Reference</strong> — <a target="_blank" rel="noopener" href="https://rmagick.github.io/rvgtut.html">Drawing with RVG</a></p>
-</blockquote>
-<h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><p>RVG（Ruby 向量圖形）是 RMagick 的 Draw 類別的外觀，它提供了基於 W3C 推薦的可縮放向量圖形（Scalable Vector Graphics）的繪圖 API。</p>
-<p>RVG 是一個可縮放向量繪圖函式庫。可縮放意味著圖形不是固定的像素尺寸。相同的圖形可以被呈現在螢幕上或列印出來。向量圖使用了幾何物件，如直線和圓。與點陣圖不同，向量圖在放大時不會「像素化」。</p>
-<img src="/2017/03/15/drawing-with-rvg/duck.gif" class="">
-
-<p>作為 RVG 函式庫的介紹，讓我們來看看如何畫出上面這隻小鴨。以下是完整的程式。</p>
-<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token keyword">require</span> <span class="token string">'rvg/rvg'</span>
-<span class="token keyword">include</span> <span class="token constant">Magick</span>
-
-<span class="token constant">RVG</span><span class="token punctuation">:</span><span class="token punctuation">:</span>dpi <span class="token operator">=</span> <span class="token number">72</span>
-
-rvg <span class="token operator">=</span> <span class="token constant">RVG</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span><span class="token number">2.5</span><span class="token punctuation">.</span><span class="token keyword">in</span><span class="token punctuation">,</span> <span class="token number">2.5</span><span class="token punctuation">.</span><span class="token keyword">in</span><span class="token punctuation">)</span><span class="token punctuation">.</span>viewbox<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">250</span><span class="token punctuation">,</span><span class="token number">250</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>canvas<span class="token operator">|</span>
-  canvas<span class="token punctuation">.</span>background_fill <span class="token operator">=</span> <span class="token string">'white'</span>
-
-  canvas<span class="token punctuation">.</span>g<span class="token punctuation">.</span>translate<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">150</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rotate<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">30</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>body<span class="token operator">|</span>
-    body<span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'yellow'</span><span class="token punctuation">,</span> <span class="token symbol">:stroke</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'black'</span><span class="token punctuation">,</span> <span class="token symbol">:stroke_width</span><span class="token operator">=</span><span class="token operator">></span><span class="token number">2</span><span class="token punctuation">)</span>
-    body<span class="token punctuation">.</span>ellipse<span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span>
-    body<span class="token punctuation">.</span>rect<span class="token punctuation">(</span><span class="token number">45</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">20</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span>skewX<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">35</span><span class="token punctuation">)</span>
-  <span class="token keyword">end</span>
-
-  canvas<span class="token punctuation">.</span>g<span class="token punctuation">.</span>translate<span class="token punctuation">(</span><span class="token number">130</span><span class="token punctuation">,</span> <span class="token number">83</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>head<span class="token operator">|</span>
-    head<span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:stroke</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'black'</span><span class="token punctuation">,</span> <span class="token symbol">:stroke_width</span><span class="token operator">=</span><span class="token operator">></span><span class="token number">2</span><span class="token punctuation">)</span>
-    head<span class="token punctuation">.</span>circle<span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'yellow'</span><span class="token punctuation">)</span>
-    head<span class="token punctuation">.</span>circle<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'black'</span><span class="token punctuation">)</span>
-    head<span class="token punctuation">.</span>polygon<span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">70</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">62</span><span class="token punctuation">,</span><span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">23</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'orange'</span><span class="token punctuation">)</span>
-  <span class="token keyword">end</span>
-
-  foot <span class="token operator">=</span> <span class="token constant">RVG</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">Group</span><span class="token punctuation">.</span><span class="token keyword">new</span> <span class="token keyword">do</span> <span class="token operator">|</span>_foot<span class="token operator">|</span>
-    _foot<span class="token punctuation">.</span>path<span class="token punctuation">(</span><span class="token string">'m0,0 v30 l30,10 l5,-10, l-5,-10 l-30,10z'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
-    styles<span class="token punctuation">(</span><span class="token symbol">:stroke_width</span><span class="token operator">=</span><span class="token operator">></span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'orange'</span><span class="token punctuation">,</span> <span class="token symbol">:stroke</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'black'</span><span class="token punctuation">)</span>
-  <span class="token keyword">end</span>
-  canvas<span class="token punctuation">.</span>use<span class="token punctuation">(</span>foot<span class="token punctuation">)</span><span class="token punctuation">.</span>translate<span class="token punctuation">(</span><span class="token number">75</span><span class="token punctuation">,</span> <span class="token number">188</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rotate<span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span>
-  canvas<span class="token punctuation">.</span>use<span class="token punctuation">(</span>foot<span class="token punctuation">)</span><span class="token punctuation">.</span>translate<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">185</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rotate<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">15</span><span class="token punctuation">)</span>
-
-  canvas<span class="token punctuation">.</span>text<span class="token punctuation">(</span><span class="token number">125</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>title<span class="token operator">|</span>
-    title<span class="token punctuation">.</span>tspan<span class="token punctuation">(</span><span class="token string">"duck|"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:text_anchor</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'end'</span><span class="token punctuation">,</span> <span class="token symbol">:font_size</span><span class="token operator">=</span><span class="token operator">></span><span class="token number">20</span><span class="token punctuation">,</span>
-      <span class="token symbol">:font_family</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'helvetica'</span><span class="token punctuation">,</span> <span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'black'</span><span class="token punctuation">)</span>
-    title<span class="token punctuation">.</span>tspan<span class="token punctuation">(</span><span class="token string">"type"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:font_size</span><span class="token operator">=</span><span class="token operator">></span><span class="token number">22</span><span class="token punctuation">,</span>
-      <span class="token symbol">:font_family</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'times'</span><span class="token punctuation">,</span> <span class="token symbol">:font_style</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'italic'</span><span class="token punctuation">,</span> <span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'red'</span><span class="token punctuation">)</span>
-    <span class="token keyword">end</span>
-    canvas<span class="token punctuation">.</span>rect<span class="token punctuation">(</span><span class="token number">249</span><span class="token punctuation">,</span><span class="token number">249</span><span class="token punctuation">)</span><span class="token punctuation">.</span>styles<span class="token punctuation">(</span><span class="token symbol">:stroke</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'blue'</span><span class="token punctuation">,</span> <span class="token symbol">:fill</span><span class="token operator">=</span><span class="token operator">></span><span class="token string">'none'</span><span class="token punctuation">)</span>
-  <span class="token keyword">end</span>
-
-rvg<span class="token punctuation">.</span>draw<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string">'duck.gif'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>所有的繪圖都遵循相同的 3 個步驟：</p>
-<ol>
-<li>建立一個 RVG 物件。指定最終圖片的寬度和高度。轉交程式碼區塊給 <code>RVG.new</code> 方法。</li>
-<li>在程式區塊內，在 RVG 物件調用方法來指定背景，加入形狀、文字或點陣圖，或加入一組形狀、文字或點陣圖。</li>
-<li>調用 <code>draw</code> 方法在背景繪出形狀、文字或點陣圖。</li>
-</ol>
-<p>我將逐行介紹範例。</p>
-        
-      </div>
-      <a class="more" href="/2017/03/15/drawing-with-rvg/">繼續閱讀</a>
-    </article>
-  
 
   
     <div class="guide-pager">
@@ -569,7 +517,7 @@ rvg<span class="token punctuation">.</span>draw<span class="token punctuation">.
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; 2022 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
     Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
   </p>

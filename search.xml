@@ -9303,4 +9303,88 @@ Sorted users by age:  [&#123;Amanda 16&#125; &#123;Rajeev 28&#125; &#123;Steven 
         <tag>Golang</tag>
       </tags>
   </entry>
+  <entry>
+    <title>如何預設為每個模型及遷移加上軟刪除？</title>
+    <url>/2022/10/26/how-to-add-soft-deletes-to-every-model-migration-by-default/</url>
+    <content><![CDATA[<blockquote>
+<p>原文：<strong>Povilas Korop</strong> — <a href="https://laraveldaily.com/post/laravel-soft-deletes-stub-publish">How to Add Soft Deletes to Every Model&#x2F;Migration By Default?</a></p>
+</blockquote>
+<p>有太多次我的客戶要求我恢復<strong>已刪除</strong>的資料。以防萬一，我非常喜歡對幾乎所有的 Eloquent 模型使用軟刪除功能。那麼，如何使該過程自動化一點呢？</p>
+<p>一般來說，我們如何加入<a href="https://laravel.com/docs/9.x/eloquent#soft-deleting">軟刪除</a>呢？透過將 Trait 加入到模型中：</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Database<span class="token punctuation">\</span>Eloquent<span class="token punctuation">\</span>SoftDeletes</span><span class="token punctuation">;</span>
+ 
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">Task</span> <span class="token keyword">extends</span> <span class="token class-name">Model</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">use</span> <span class="token package">SoftDeletes</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<span id="more"></span>
+
+<p>此外，我們需要將 <strong><code>deleted_at</code></strong> 加到遷移中：</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token class-name static-context">Schema</span><span class="token operator">::</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'tasks'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token class-name type-declaration">Blueprint</span> <span class="token variable">$table</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token variable">$table</span><span class="token operator">-></span><span class="token function">id</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// ... other fields</span>
+    <span class="token variable">$table</span><span class="token operator">-></span><span class="token function">timestamps</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$table</span><span class="token operator">-></span><span class="token function">softDeletes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// THIS ONE</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>現在，我們要如何確保每當我們執行 <code>php artisan make:model</code> 和 <code>php artisan make:migration</code> 時，新檔案都會包含這些修改？</p>
+<p>我們可以自訂預設的樣板（Stub）檔案，新檔案會基於它們來建立。</p>
+<p>執行這個指令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">php artisan stub:publish<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>它會將檔案從 <code>/vendor</code> 資料夾複製到名為 <code>/stubs</code> 的資料夾中。在這些檔案中，讓我們先關注在模型及遷移上。</p>
+<pre class="line-numbers language-php" data-language="php"><div class="caption"><span>stubs/migration.create.stub</span></div><code class="language-php"><span class="token comment">// ... other code</span>
+ 
+<span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">up</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token class-name static-context">Schema</span><span class="token operator">::</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'&#123;&#123; table &#125;&#125;'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token class-name type-declaration">Blueprint</span> <span class="token variable">$table</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token variable">$table</span><span class="token operator">-></span><span class="token function">id</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token variable">$table</span><span class="token operator">-></span><span class="token function">timestamps</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>所以，我們要做的就是在這加上第三行：</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">up</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token class-name static-context">Schema</span><span class="token operator">::</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'&#123;&#123; table &#125;&#125;'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token class-name type-declaration">Blueprint</span> <span class="token variable">$table</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token variable">$table</span><span class="token operator">-></span><span class="token function">id</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token variable">$table</span><span class="token operator">-></span><span class="token function">timestamps</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token variable">$table</span><span class="token operator">-></span><span class="token function">softDeletes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>同樣地，也要修改模型的樣板檔。</p>
+<pre class="line-numbers language-php" data-language="php"><div class="caption"><span>stubs/model.stub</span></div><code class="language-php"><span class="token keyword">namespace</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> <span class="token keyword">namespace</span> <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+ 
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Database<span class="token punctuation">\</span>Eloquent<span class="token punctuation">\</span>Factories<span class="token punctuation">\</span>HasFactory</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Database<span class="token punctuation">\</span>Eloquent<span class="token punctuation">\</span>Model</span><span class="token punctuation">;</span>
+ 
+<span class="token keyword">class</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> <span class="token keyword">class</span> <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> <span class="token keyword">extends</span> <span class="token class-name">Model</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">use</span> <span class="token package">HasFactory</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>加上 SoftDeletes 後：</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">namespace</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> <span class="token keyword">namespace</span> <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+ 
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Database<span class="token punctuation">\</span>Eloquent<span class="token punctuation">\</span>Factories<span class="token punctuation">\</span>HasFactory</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Database<span class="token punctuation">\</span>Eloquent<span class="token punctuation">\</span>Model</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Database<span class="token punctuation">\</span>Eloquent<span class="token punctuation">\</span>SoftDeletes</span><span class="token punctuation">;</span>
+ 
+<span class="token keyword">class</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> <span class="token keyword">class</span> <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> <span class="token keyword">extends</span> <span class="token class-name">Model</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">use</span> <span class="token package">HasFactory</span><span class="token punctuation">,</span> SoftDeletes<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>就是這樣！現在試著執行 <code>php artisan make:model SomeModel -m</code> 就能看到軟刪除自動被加入到模型及遷移中了。</p>
+]]></content>
+      <categories>
+        <category>Programming</category>
+      </categories>
+      <tags>
+        <tag>PHP</tag>
+        <tag>Laravel</tag>
+      </tags>
+  </entry>
 </search>
