@@ -210,6 +210,38 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2019/11/19/golang-interfaces-tutorial-with-examples/">Golang 介面教學與範例</a>
+      </h2>
+      <p class="article-date">2019年11月19日</p>
+      
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-interfaces">Golang Interfaces Tutorial with Examples</a></p>
+</blockquote>
+<h3 id="Go-的介面"><a href="#Go-的介面" class="headerlink" title="Go 的介面"></a>Go 的介面</h3><p>Go 中的介面是使用一組方法簽名定義的<strong>型別</strong>。介面定義了類似物件型別的行為。</p>
+<p>舉例來說，這是一個定義幾何形狀行為的介面：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Go Interface - `Shape`</span>
+<span class="token keyword">type</span> Shape <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">Area</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">float64</span>
+	<span class="token function">Perimeter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">float64</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>使用 <strong>type</strong> 關鍵字定義介面，後面接著介面名稱和關鍵字 <code>interface</code>。然後，在大括號內指定一組方法簽名。</p>
+        
+      </div>
+      <a class="more" href="/2019/11/19/golang-interfaces-tutorial-with-examples/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2019/11/19/golang-methods-tutorial-with-examples/">Golang 方法教學與範例</a>
       </h2>
       <p class="article-date">2019年11月19日</p>
@@ -461,63 +493,6 @@
         
       </div>
       <a class="more" href="/2019/11/11/golang-control-flow-statements/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2019/11/06/working-with-constants-in-golang/">在 Golang 中使用常數</a>
-      </h2>
-      <p class="article-date">2019年11月6日</p>
-      
-        
-  <a href="/tags#Golang" >
-    <span class="tag-code">Golang</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          <blockquote>
-<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-typed-untyped-constants">Working with Constants in Golang</a></p>
-</blockquote>
-<h3 id="常數"><a href="#常數" class="headerlink" title="常數"></a>常數</h3><p>在 Golang 中，我們使用 <code>constant</code> 語法來表示固定（不改變）的值，如 <code>5</code>、<code>1.34</code>、<code>true</code> 和 <code>&quot;Hello&quot;</code> 等。</p>
-<h4 id="定數是常數"><a href="#定數是常數" class="headerlink" title="定數是常數"></a>定數是常數</h4><p>Golang 中的所有定數，如整數 <code>5</code>、<code>1000</code>、浮點數 <code>4.76</code>、<code>1.89</code>、布林值 <code>true</code>、<code>false</code> 或字串 <code>&quot;Hello&quot;</code>、<code>&quot;Jhon&quot;</code> 都是<strong>常數</strong>。</p>
-<table>
-<thead>
-<tr>
-<th>常數</th>
-<th>範例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>整數常數</td>
-<td><code>1000</code>、<code>67413</code></td>
-</tr>
-<tr>
-<td>浮點數常數</td>
-<td><code>4.56</code>、<code>128.372</code></td>
-</tr>
-<tr>
-<td>布林常數</td>
-<td><code>true</code>、<code>false</code></td>
-</tr>
-<tr>
-<td>表示字元的常數</td>
-<td><code>&#39;C&#39;</code>、<code>&#39;ä&#39;</code></td>
-</tr>
-<tr>
-<td>複數常數</td>
-<td><code>2.7i</code>、<code>3 + 5i</code></td>
-</tr>
-<tr>
-<td>字串常數</td>
-<td><code>&quot;Hello&quot;</code>、<code>&quot;Rajeev&quot;</code></td>
-</tr>
-</tbody></table>
-        
-      </div>
-      <a class="more" href="/2019/11/06/working-with-constants-in-golang/">繼續閱讀</a>
     </article>
   
 

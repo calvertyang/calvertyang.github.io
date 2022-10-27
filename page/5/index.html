@@ -210,6 +210,94 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2013/11/14/sql-to-mongodb-mapping-chart/">SQL 及 MongoDB 基本指令對應表</a>
+      </h2>
+      <p class="article-date">2013年11月14日</p>
+      
+        
+  <a href="/tags#SQL" >
+    <span class="tag-code">SQL</span>
+  </a>
+
+  <a href="/tags#NoSQL" >
+    <span class="tag-code">NoSQL</span>
+  </a>
+
+  <a href="/tags#MongoDB" >
+    <span class="tag-code">MongoDB</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <p>由於新專案採用了 <a target="_blank" rel="noopener" href="http://nodejs.org/">Node.js</a> 開發且使用 <a target="_blank" rel="noopener" href="http://www.mongodb.org/">MongoDB</a> 作為儲存媒介，所以動手翻譯了官方文件方便查閱相關指令用法。</p>
+<h3 id="術語和概念-Terminology-and-Concepts"><a href="#術語和概念-Terminology-and-Concepts" class="headerlink" title="術語和概念(Terminology and Concepts)"></a>術語和概念(Terminology and Concepts)</h3><h5 id="下表列出了各種-SQL-和相應的-MongoDB-的術語和概念。"><a href="#下表列出了各種-SQL-和相應的-MongoDB-的術語和概念。" class="headerlink" title="下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。"></a>下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。</h5><table>
+<thead>
+<tr>
+<th align="left">SQL 術語/概念</th>
+<th align="left">MongoDB 術語/概念</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">資料庫(database)</td>
+<td align="left">資料庫(<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-database">database</a>)</td>
+</tr>
+<tr>
+<td align="left">資料表(table)</td>
+<td align="left">集合(<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-collection">collection</a>)</td>
+</tr>
+<tr>
+<td align="left">資料列(row)</td>
+<td align="left">文件(<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-document">document</a>) 或 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-bson">BSON</a> 文件</td>
+</tr>
+<tr>
+<td align="left">資料行(column)</td>
+<td align="left">欄位(<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-field">field</a>)</td>
+</tr>
+<tr>
+<td align="left">索引(index)</td>
+<td align="left">索引(<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-index">index</a>)</td>
+</tr>
+<tr>
+<td align="left">資料表連結(table joins)</td>
+<td align="left">嵌入式文件及連結(embedded documents and linking)</td>
+</tr>
+<tr>
+<td align="left">主索引鍵(primary key)<br /><br />指定任意一個或多個欄位組合為主索引鍵，資料內容須唯一不可重複。</td>
+<td align="left">主索引鍵(<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-primary-key">primary key</a>)<br /><br />在 MongoDB，主索引鍵會自動設定到 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-id">_id</a> 欄位。</td>
+</tr>
+<tr>
+<td align="left">彙總(aggregation)，例如：group by</td>
+<td align="left">彙總管線(aggregation pipeline)<br /><br /><a target="_blank" rel="noopener" href="http://calvert.logdown.com/posts/159915-sql-to-aggregation-mapping-chart">參閱 SQL 至彙總(Aggregation)對應表</a>.</td>
+</tr>
+</tbody></table>
+<h3 id="可執行檔案-Executables"><a href="#可執行檔案-Executables" class="headerlink" title="可執行檔案(Executables)"></a>可執行檔案(Executables)</h3><h5 id="下表列出了-MySQL-Oracle-可執行檔案和相應的-MongoDB-的可執行檔案。"><a href="#下表列出了-MySQL-Oracle-可執行檔案和相應的-MongoDB-的可執行檔案。" class="headerlink" title="下表列出了 MySQL / Oracle 可執行檔案和相應的 MongoDB 的可執行檔案。"></a>下表列出了 MySQL / Oracle 可執行檔案和相應的 MongoDB 的可執行檔案。</h5><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">MySQL / Oracle</th>
+<th align="left">MongoDB</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">資料庫伺服器(Database Server)</td>
+<td align="left">mysqld / oracle</td>
+<td align="left">mongod</td>
+</tr>
+<tr>
+<td align="left">資料庫用戶端(Database Client)</td>
+<td align="left">mysql / sqlplus</td>
+<td align="left">mongo</td>
+</tr>
+</tbody></table>
+        
+      </div>
+      <a class="more" href="/2013/11/14/sql-to-mongodb-mapping-chart/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2013/11/06/how-to-install-redis-in-centos-6/">如何在 CentOS 6 安裝 Redis</a>
       </h2>
       <p class="article-date">2013年11月6日</p>
