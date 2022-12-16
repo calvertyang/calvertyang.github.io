@@ -9594,4 +9594,215 @@ Sorted users by age:  [&#123;Amanda 16&#125; &#123;Rajeev 28&#125; &#123;Steven 
         <tag>Laravel</tag>
       </tags>
   </entry>
+  <entry>
+    <title>透過 OAuth 2.0 JWT 整合 Salesforce API 到你的伺服器</title>
+    <url>/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/</url>
+    <content><![CDATA[<p>有時你會想要授權伺服器來存取資料，而不需在每次伺服器交換資訊時透過互動方式登入。</p>
+<p>本文將帶你了解如何整合 Salesforce API 到你的伺服器。我們將使用<a href="https://help.salesforce.com/s/articleView?id=sf.remoteaccess_oauth_jwt_flow.htm&type=5">適用於伺服器對伺服器整合的 OAuth 2.0 JWT 承載者流程</a>來達成此需求。此授權流程使用憑證來簽署 JWT，設定完成後你的伺服器不需要與使用者互動即可呼叫 Salesforce 的 API。但，此流程需要預先授權連線應用程式。</p>
+<p>註：在 Salesforce 中，你的自訂應用程式稱為「連線應用程式（Connected App）」。</p>
+<span id="more"></span>
+
+<p>此教學會涵蓋以下步驟：</p>
+<ol>
+<li><p>建立 X.509 憑證來識別你的連線應用程式。</p>
+</li>
+<li><p>在 Salesforce 建立連線應用程式。</p>
+</li>
+<li><p>預先授權「允許的使用者」存取連線應用程式。</p>
+</li>
+<li><p>更新使用者設定檔，並指派連線應用程式。</p>
+</li>
+<li><p>建立並簽署 JWT。</p>
+</li>
+<li><p>使用 JWT 對 Salesforce 發出 HTTP POST 請求要求存取權杖。</p>
+</li>
+<li><p>Salesforce 將授與存取權杖並回應 HTTP 請求。</p>
+</li>
+</ol>
+<h3 id="建立-X-509-憑證"><a href="#建立-X-509-憑證" class="headerlink" title="建立 X.509 憑證"></a>建立 X.509 憑證</h3><p>使用 OpenSSL 為連線應用程式建立 X.509 證書和私鑰。執行以下指令來建立密鑰和證書檔案。</p>
+<p>建立私鑰</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">openssl genrsa <span class="token parameter variable">-out</span> private.key <span class="token number">4096</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/private-key.jpg" class="">
+
+<p>建立 X.509 證書</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">openssl req <span class="token parameter variable">-new</span> <span class="token parameter variable">-x509</span> <span class="token parameter variable">-key</span> private.key <span class="token parameter variable">-out</span> cert.pem <span class="token parameter variable">-days</span> <span class="token number">365</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/x509.jpg" class="">
+
+<h3 id="建立連線應用程式"><a href="#建立連線應用程式" class="headerlink" title="建立連線應用程式"></a>建立連線應用程式</h3><ol>
+<li><p>使用你的管理員帳號登入 Salesforce。</p>
+</li>
+<li><p>點選右上方齒輪進入目前的 App 設定頁面。</p>
+  <img src="/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/sf-setup.jpg" class="">
+</li>
+<li><p>在快速搜尋框內輸入「app manager」並點選 App Manager。</p>
+  <img src="/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/app-manager.jpg" class="">
+</li>
+<li><p>點選 New Connected App。</p>
+  <img src="/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/new-connected-app-1.jpg" class="">
+</li>
+<li><p>輸入欄位資訊如下：</p>
+<ol>
+<li><p>Connected App Name：例如 <code>Demo App</code>。</p>
+</li>
+<li><p>API Name：應該會自動填入如 <code>Demo_App</code> 或類似名稱。</p>
+</li>
+<li><p>Contact Email：輸入你的聯絡信箱。</p>
+</li>
+<li><p>勾選「Enable OAuth Settings」。</p>
+</li>
+<li><p>Callback URL：例如 <code>http://localhost/callback</code>（本欄位在此範例不會用到，但為 Salesforce 必填欄位）。</p>
+</li>
+<li><p>勾選「Use digital signatures」，並點選 Browse 選擇前一個步驟所建立的 <code>cert.pem</code>。</p>
+</li>
+<li><p>「Selected OAuth Scopes」的部分加入你想要的功能，此處我們選擇 <code>Manage user data via APIs (api)</code> 和 <code>Perform requests at any time (refresh_token, offline_access)</code>。</p>
+   <img src="/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/new-connected-app-2.jpg" class=""></li>
+</ol>
+</li>
+<li><p>點選 Save。</p>
+</li>
+<li><p>點選 Continue。</p>
+</li>
+<li><p>點選 Manage Consumer Details 並在新開啟的頁面將 Consumer Key 記下來，稍後的步驟會用到它。</p>
+  <img src="/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/consumer-key-1.jpg" class="">
+  <img src="/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/consumer-key-2.jpg" class=""></li>
+</ol>
+<h3 id="預先授權「允許的使用者」存取連線應用程式"><a href="#預先授權「允許的使用者」存取連線應用程式" class="headerlink" title="預先授權「允許的使用者」存取連線應用程式"></a>預先授權「允許的使用者」存取連線應用程式</h3><ol>
+<li><p>在快速搜尋框內輸入「manage connected apps」並點選 Manage Connected Apps。</p>
+  <img src="/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/manage-connected-apps.jpg" class="">
+</li>
+<li><p>對 Demo App 點選 Edit。</p>
+  <img src="/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/connected-apps-1.jpg" class="">
+</li>
+<li><p>「Permitted Users」的地方選擇「Admin approved users are pre-authorized」。</p>
+  <img src="/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/connected-apps-2.jpg" class="">
+</li>
+<li><p>點選 Save。</p>
+</li>
+</ol>
+<h3 id="更新使用者設定檔"><a href="#更新使用者設定檔" class="headerlink" title="更新使用者設定檔"></a>更新使用者設定檔</h3><ol>
+<li><p>在快速搜尋框內輸入「profiles」並點選 Profiles。</p>
+  <img src="/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/user-profiles-1.jpg" class="">
+</li>
+<li><p>根據你的使用者選擇對應的設定檔，此處我們選擇「System Administrator」。</p>
+  <img src="/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/user-profiles-2.jpg" class="">
+</li>
+<li><p>點選 Assigned Connected Apps。</p>
+  <img src="/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/user-profiles-3.jpg" class="">
+</li>
+<li><p>點選 Edit。</p>
+  <img src="/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/user-profiles-4.jpg" class="">
+</li>
+<li><p>選擇並加入 Demo App 後點選 Save。</p>
+  <img src="/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/user-profiles-5.jpg" class=""></li>
+</ol>
+<h3 id="建立並簽署-JWT"><a href="#建立並簽署-JWT" class="headerlink" title="建立並簽署 JWT"></a>建立並簽署 JWT</h3><p>Salesforce 需要使用 RSA SHA256 來簽署 JWT，連線應用程式會使用建立時所上傳的憑證來確認簽章。</p>
+<p>有許多程式語言都有函式庫讓你可以更輕鬆地在程式中使用 JWT。不過，在本篇文章中，我們會使用線上工具來設定我們的 JWT。</p>
+<p>現在，我們先來準備設定 JWT 所需的參數：</p>
+<table>
+<thead>
+<tr>
+<th align="left">參數</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">iss</td>
+<td align="left">連線應用程式的 Consumer Key。</td>
+</tr>
+<tr>
+<td align="left">aud</td>
+<td align="left"><a href="https://login.salesforce.com/">https://login.salesforce.com</a> 或 <a href="https://test.salesforce.com/">https://test.salesforce.com</a>。</td>
+</tr>
+<tr>
+<td align="left">sub</td>
+<td align="left">Salesforce 使用者名稱，通常是 Email 格式。</td>
+</tr>
+<tr>
+<td align="left">exp</td>
+<td align="left">有效期限，表示方式為從 UTC 1970-01-01T00:00:00Z 起到現在的總秒數。</td>
+</tr>
+</tbody></table>
+<p>你可以在 Linux 或 macOS 使用以下指令來產生有效期限：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 印出 180 秒 後的時間</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> +%s<span class="token variable">)</span></span> + 180"</span> <span class="token operator">|</span> <span class="token function">bc</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>開始來建立 JWT 吧</p>
+<ol>
+<li><p>使用瀏覽器開啟新分頁到 <a href="https://jwt.io/">https://jwt.io</a>。</p>
+</li>
+<li><p>往下捲到 Debugger 的地方。</p>
+</li>
+<li><p>Algorithm 的地方選擇 <code>RS256</code>。</p>
+</li>
+<li><p>確認 Header 的資料是否正確</p>
+  <pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"alg"</span><span class="token operator">:</span> <span class="token string">"RS256"</span><span class="token punctuation">,</span>
+  <span class="token property">"typ"</span><span class="token operator">:</span> <span class="token string">"JWT"</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>設定 Payload，範例如下：</p>
+  <pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"iss"</span><span class="token operator">:</span> <span class="token string">"3MVG9yRD.KdtVEtqTFjp0wXaNDJsKX8KyNQxEk_5Sb3rGBKT31MVrvaPOaf0NdG2f8LBjrxqGJqdeGqVWpWc3"</span><span class="token punctuation">,</span>
+  <span class="token property">"aud"</span><span class="token operator">:</span> <span class="token string">"https://login.salesforce.com"</span><span class="token punctuation">,</span>
+  <span class="token property">"sub"</span><span class="token operator">:</span> <span class="token string">"contact@example.com"</span><span class="token punctuation">,</span>
+  <span class="token property">"exp"</span><span class="token operator">:</span> <span class="token string">"1671198418"</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>驗證簽章</p>
+<ol>
+<li><p>使用文字編輯器開啟 <code>cert.pem</code> 並將內容複製到第一個輸入框內。</p>
+</li>
+<li><p>使用文字編輯器開啟 <code>private.key</code> 並將內容複製到第二個輸入框內。</p>
+</li>
+<li><p>確認左下角顯示的是「Signature Verified」。如果看到「Invalid Signature」，表示你的證書或私鑰有問題。</p>
+</li>
+<li><p>複製左側已編碼的 JWT，稍後的步驟會用到它。</p>
+</li>
+</ol>
+</li>
+</ol>
+<img src="/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/jwt.jpg" class="">
+
+<h3 id="向-Salesforce-要求存取權杖"><a href="#向-Salesforce-要求存取權杖" class="headerlink" title="向 Salesforce 要求存取權杖"></a>向 Salesforce 要求存取權杖</h3><p>到此，我們可以對 Salesforce 發出 HTTP POST 請求要求存取權杖，相關參數如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">參數</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">grant_type</td>
+<td align="left">請填入 <code>urn:ietf:params:oauth:grant-type:jwt-bearer</code>。</td>
+</tr>
+<tr>
+<td align="left">assertion</td>
+<td align="left">請填入前一步驟產生的 JWT。</td>
+</tr>
+<tr>
+<td align="left">format</td>
+<td align="left">（選填）用於指定回傳格式，此參數會覆寫請求的標頭，支援 <code>urlencoded</code>、<code>json</code>（預設值）和 <code>xml</code> 格式。</td>
+</tr>
+</tbody></table>
+<p>如果所有設定都正確，你應該會收到像這樣的回應：</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+    <span class="token property">"access_token"</span><span class="token operator">:</span> <span class="token string">"00DBU0000001gTR!AQEAOJQJCQJtQYOPa2weo4ke.cCz_6_y9tTpluBrPiFWO3lZ7IS5gfoaXKyXrCeHjUnYnQEQE4kk_ogm64slPRszhQTH9QCt"</span><span class="token punctuation">,</span>
+    <span class="token property">"scope"</span><span class="token operator">:</span> <span class="token string">"api"</span><span class="token punctuation">,</span>
+    <span class="token property">"instance_url"</span><span class="token operator">:</span> <span class="token string">"https://demo.my.salesforce.com"</span><span class="token punctuation">,</span>
+    <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"https://login.salesforce.com/id/00DBU0000001gKB1CZ/008A2000000IoDSIB0"</span><span class="token punctuation">,</span>
+    <span class="token property">"token_type"</span><span class="token operator">:</span> <span class="token string">"Bearer"</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/request-token.jpg" class="">
+]]></content>
+      <categories>
+        <category>Programming</category>
+      </categories>
+      <tags>
+        <tag>Salesforce</tag>
+        <tag>OAuth 2.0</tag>
+      </tags>
+  </entry>
 </search>

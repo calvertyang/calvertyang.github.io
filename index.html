@@ -210,6 +210,33 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/">透過 OAuth 2.0 JWT 整合 Salesforce API 到你的伺服器</a>
+      </h2>
+      <p class="article-date">2022年12月16日</p>
+      
+        
+  <a href="/tags#Salesforce" >
+    <span class="tag-code">Salesforce</span>
+  </a>
+
+  <a href="/tags#OAuth-2.0" >
+    <span class="tag-code">OAuth 2.0</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <p>有時你會想要授權伺服器來存取資料，而不需在每次伺服器交換資訊時透過互動方式登入。</p>
+<p>本文將帶你了解如何整合 Salesforce API 到你的伺服器。我們將使用<a target="_blank" rel="noopener" href="https://help.salesforce.com/s/articleView?id=sf.remoteaccess_oauth_jwt_flow.htm&type=5">適用於伺服器對伺服器整合的 OAuth 2.0 JWT 承載者流程</a>來達成此需求。此授權流程使用憑證來簽署 JWT，設定完成後你的伺服器不需要與使用者互動即可呼叫 Salesforce 的 API。但，此流程需要預先授權連線應用程式。</p>
+<p>註：在 Salesforce 中，你的自訂應用程式稱為「連線應用程式（Connected App）」。</p>
+        
+      </div>
+      <a class="more" href="/2022/12/16/oauth-2-0-jwt-bearer-flow-for-server-to-server-integration/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2022/10/27/laravel-route-grouping-6-techniques-to-organize-routes/">Laravel 路由群組：6 個組織路由的技巧</a>
       </h2>
       <p class="article-date">2022年10月27日</p>
@@ -531,51 +558,6 @@ Arguments without program path: [Hello World From Command Line]<span aria-hidden
         
       </div>
       <a class="more" href="/2020/06/16/implement-laravel-rest-api-using-jwt-authentication/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2020/06/04/how-laravel-generate-email-verification-url/">Laravel 如何產生 Email 驗證網址</a>
-      </h2>
-      <p class="article-date">2020年6月4日</p>
-      
-        
-  <a href="/tags#PHP" >
-    <span class="tag-code">PHP</span>
-  </a>
-
-  <a href="/tags#Laravel" >
-    <span class="tag-code">Laravel</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          <p>由於新專案決定使用 <a target="_blank" rel="noopener" href="https://laravel.com/">Laravel</a> 開發，在實作 Email 驗證時發現與 <a target="_blank" rel="noopener" href="https://github.com/heartcombo/devise">Devise</a> 不同的是，它沒有在資料表內建立 <code>confirmation_token</code> 欄位，於是便讓我想了解一下它產生驗證網址的方式。</p>
-<p>在追蹤原始碼後發現驗證網址是透過 <code>verificationUrl</code> 函數所產生的。</p>
-<pre class="line-numbers language-php" data-language="php"><div class="caption"><span>vendor/laravel/framework/src/Illuminate/Auth/Notifications/VerifyEmail.php</span></div><code class="language-php"><span class="token comment">/**
- * Get the verification URL for the given notifiable.
- *
- * @param  mixed  $notifiable
- * @return string
- */</span>
-<span class="token keyword">protected</span> <span class="token keyword">function</span> <span class="token function-definition function">verificationUrl</span><span class="token punctuation">(</span><span class="token variable">$notifiable</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> <span class="token class-name static-context">URL</span><span class="token operator">::</span><span class="token function">temporarySignedRoute</span><span class="token punctuation">(</span>
-        <span class="token string single-quoted-string">'verification.verify'</span><span class="token punctuation">,</span>
-        <span class="token class-name static-context">Carbon</span><span class="token operator">::</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-></span><span class="token function">addMinutes</span><span class="token punctuation">(</span><span class="token class-name static-context">Config</span><span class="token operator">::</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'auth.verification.expire'</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span>
-            <span class="token string single-quoted-string">'id'</span> <span class="token operator">=></span> <span class="token variable">$notifiable</span><span class="token operator">-></span><span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-            <span class="token string single-quoted-string">'hash'</span> <span class="token operator">=></span> <span class="token function">sha1</span><span class="token punctuation">(</span><span class="token variable">$notifiable</span><span class="token operator">-></span><span class="token function">getEmailForVerification</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        <span class="token punctuation">]</span>
-    <span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>由以上程式碼可看到它透過了 <code>UrlGenerator</code> 提供的 <code>temporarySignedRoute</code> 函數來產生暫時性的驗證網址。</p>
-        
-      </div>
-      <a class="more" href="/2020/06/04/how-laravel-generate-email-verification-url/">繼續閱讀</a>
     </article>
   
 

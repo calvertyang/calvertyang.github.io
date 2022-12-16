@@ -210,6 +210,49 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2019/11/11/golang-control-flow-statements/">Golang 流程控制陳述式：if、switch 與 for</a>
+      </h2>
+      <p class="article-date">2019年11月11日</p>
+      
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      
+      <div class="article-summary">
+        
+          <blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-control-flow">Golang Control Flow Statements: If, Switch and For</a></p>
+</blockquote>
+<h3 id="if-陳述式"><a href="#if-陳述式" class="headerlink" title="if 陳述式"></a>if 陳述式</h3><p><code>if</code> 陳述式用於根據給定的條件，決定是否應執行程式碼區塊。</p>
+<p>以下是 Golang 中 <code>if</code> 陳述式的語法：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">if</span><span class="token punctuation">(</span>condition<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// Code to be executed if the condition is true.</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>這裡有個簡單的範例：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token number">25</span>
+	<span class="token keyword">if</span> x<span class="token operator">%</span><span class="token number">5</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%d is a multiple of 5\n"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+25 is a multiple of 5<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+        
+      </div>
+      <a class="more" href="/2019/11/11/golang-control-flow-statements/">繼續閱讀</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2019/11/06/working-with-constants-in-golang/">在 Golang 中使用常數</a>
       </h2>
       <p class="article-date">2019年11月6日</p>
@@ -498,36 +541,6 @@
         
       </div>
       <a class="more" href="/2018/05/22/active-storage-on-heroku/">繼續閱讀</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2018/05/18/active-storage-overview/">Active Storage 概要</a>
-      </h2>
-      <p class="article-date">2018年5月18日</p>
-      
-        
-  <a href="/tags#Ruby-on-Rails" >
-    <span class="tag-code">Ruby on Rails</span>
-  </a>
-
-  <a href="/tags#Active-Storage" >
-    <span class="tag-code">Active Storage</span>
-  </a>
-
-
-      
-      <div class="article-summary">
-        
-          <blockquote>
-<p>原文：<strong>Ruby on Rails Guides</strong> — <a target="_blank" rel="noopener" href="http://guides.rubyonrails.org/active_storage_overview.html">Active Storage Overview</a></p>
-</blockquote>
-<p>Active Storage 是 Rails 5.2 所新增的功能，它可以讓你輕鬆的將檔案傳送到 <a target="_blank" rel="noopener" href="https://aws.amazon.com/s3/">Amazon S3</a>、<a target="_blank" rel="noopener" href="https://cloud.google.com/storage/docs/">Google Cloud Storage</a> 或 <a target="_blank" rel="noopener" href="https://azure.microsoft.com/en-us/services/storage/">Microsoft Azure Storage</a> 等雲端儲存服務，並將這些檔案附加到 Active Record。</p>
-<p>支援一個主要雲端儲存服務，並在其它服務中建立鏡像以實現備援機制，它也提供了用於測試或本機部署的磁碟服務，但重點還是放在雲端儲存。</p>
-<p>檔案可以從伺服器上傳到雲端或直接從客戶端上傳到雲端。</p>
-        
-      </div>
-      <a class="more" href="/2018/05/18/active-storage-overview/">繼續閱讀</a>
     </article>
   
 
