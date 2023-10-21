@@ -9805,4 +9805,54 @@ Sorted users by age:  [&#123;Amanda 16&#125; &#123;Rajeev 28&#125; &#123;Steven 
         <tag>OAuth 2.0</tag>
       </tags>
   </entry>
+  <entry>
+    <title>如何增加 PHP 記憶體限制</title>
+    <url>/2023/10/21/how-to-increase-php-memory-limits/</url>
+    <content><![CDATA[<blockquote>
+<p>原文：<strong>Eric L. Barnes</strong> — <a href="https://laravel-news.com/how-to-increase-php-memory-limits">How to Increase PHP Memory Limits</a></p>
+</blockquote>
+<p>為什麼 PHP 記憶體限制對你的網站開發之旅很重要？PHP 是一種著名的後端技術，許多科技巨頭用它來支援他們的應用程式。PHP 提供了許多進階功能，使網頁更加動態，並能整合一些僅靠 JavaScript、HTML 和 CSS 無法實現的功能。</p>
+<p>每當你設定一個新的 PHP 專案時，系統會自動分配一些記憶體。這些記憶體通常適用於一班的應用程式。但在某些情況下，例如當你的網站使用高解析圖片，在載入一些大型圖片時，可能會出現一些錯誤，如：</p>
+<pre class="language-none"><code class="language-none">“Fatal error: Allowed memory size of xxxxxx bytes exhausted”</code></pre>
+
+<p>和</p>
+<pre class="language-none"><code class="language-none">“filename.jpg exceeds the maximum upload size for this site.”</code></pre>
+
+<p>解決此錯誤的最佳辦法是聯繫主機供應商並增加應用程式的記憶體限制。但有一些方法可以在不需要專家協助的情況下，增加整個網站或特定程式的記憶體限制，例如使用 php.ini 檔案、.htaccess 檔案等。在本文中，我們將討論增加記憶體限制的各種策略以及增加 PHP 應用程式記憶體限制的好處。</p>
+<span id="more"></span>
+
+<h3 id="什麼是-PHP-記憶體限制？"><a href="#什麼是-PHP-記憶體限制？" class="headerlink" title="什麼是 PHP 記憶體限制？"></a>什麼是 PHP 記憶體限制？</h3><p>PHP 記憶體限制是分配給每個 PHP 程式的記憶體量，類似於特定任務可以佔用的儲存限制。在某些情況下，這個限制很有用，例如當一些編寫不佳的程式碼可能會耗盡堆疊中的所有記憶體。</p>
+<p>大多數 WordPress 網站的記憶體限制是 32M，但在許多情況下你可能需要更多記憶體。例如執行大量資料庫呼叫和圖片處理時，則需要增加記憶體限制。</p>
+<h3 id="可考慮的策略"><a href="#可考慮的策略" class="headerlink" title="可考慮的策略"></a>可考慮的策略</h3><p>我們將分享增加 PHP 應用程式記憶體限制的各種方法。這些方法雖然不是唯一的，但大多數開發人員會使用這些步驟來解決記憶體限制問題。</p>
+<p>此外，更改應用程式的記憶體限制可能會產生問題，因此你應該先備份系統的資料。</p>
+<p>在嘗試增加記憶體前，你應該先與網站的伺服器供應商聯繫，他們可以協助你使用最佳實踐來增加記憶體限制。</p>
+<h4 id="策略-1：編輯-PHP-ini-檔"><a href="#策略-1：編輯-PHP-ini-檔" class="headerlink" title="策略 1：編輯 PHP.ini 檔"></a>策略 1：編輯 PHP.ini 檔</h4><p>每次 PHP 應用程式執行時都會讀取 php.ini 檔案，用於控制 PHP 的各種設定，例如最大上傳大小、記憶體限制、逾時限制等。</p>
+<p>要增加記憶體限制，你可以更改以下變數。但請注意，這些變數區分大小寫，並且更改後需要重啟伺服器才能生效。</p>
+<pre class="line-numbers language-php.ini" data-language="php.ini"><code class="language-php.ini">memory_limit &#x3D; 256M
+upload_max_filesize &#x3D; 12M
+post_max_size &#x3D; 13M
+file_uploads &#x3D; On
+max_execution_time &#x3D; 180<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>max_execution_time</code> 指的是 PHP 的逾時時間，表示程式可以執行的最長時間。</p>
+<h4 id="策略-2-編輯-HTAccess-檔"><a href="#策略-2-編輯-HTAccess-檔" class="headerlink" title="策略 2: 編輯 HTAccess 檔"></a>策略 2: 編輯 HTAccess 檔</h4><p>.htaccess 檔案是一個隱藏檔案，因此其名稱以點號開頭。如果你使用共享主機，或者由於某些原因無法存取 php.ini 檔案，則需要編輯 .htaccess 檔案來增加記憶體限制。</p>
+<p>.htaccess 檔案有多種用途。要增加記憶體限制，你需要在這個檔案中加入以下幾行。</p>
+<pre class="line-numbers language-.htaccess" data-language=".htaccess"><code class="language-.htaccess">php_value memory_limit 256M
+php_value upload_max_filesize 12M
+php_value post_max_size 13M<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="策略-3-透過-ini-set-函數增加"><a href="#策略-3-透過-ini-set-函數增加" class="headerlink" title="策略 3: 透過 ini_set() 函數增加"></a>策略 3: 透過 ini_set() 函數增加</h4><p>ini_set() 函數僅用於設定程式中的特定屬性值。它被認為是上述所有方法中最安全的，因為它僅為特定程式設定屬性值，限制了編寫不佳的程式佔用伺服器的所有記憶體。</p>
+<p>要使用這個函數增加記憶體限制，你可以簡單地這樣做。</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token function">ini_set</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'memory_limit'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'512MB'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>上述函數將記憶體限制設定為 512 MB。此外，ini_set() 函數僅用於臨時設定變數的值；一旦關閉程式並重新啟動，它將從 php.ini 檔案中使用原始值。</p>
+<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>像這樣的記憶體限制錯誤很常見。在本文中，我們討論了增加記憶體限制的不同策略。需要注意的是，你應該將增加 PHP 記憶體限制的方法作為最後的手段，因為這非常重要，會對網站產生多方面的影響。</p>
+]]></content>
+      <categories>
+        <category>Programming</category>
+      </categories>
+      <tags>
+        <tag>PHP</tag>
+      </tags>
+  </entry>
 </search>
