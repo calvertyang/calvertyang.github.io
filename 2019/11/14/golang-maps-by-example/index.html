@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Calvert&#39;s murmur">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Golang map 介紹 | Calvert&#39;s murmur
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        let all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-44933497-2');
+    </script>
+
+
+  
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Calvert's murmur</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/series/" class="item-link">Series</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/series/" class="menu-link">Series</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Golang map 介紹</h2>
+  <p class="post-date">2019-11-14</p>
+  <p class="word-count">
+  
+  約 6077 字 / 需 33 分鐘閱讀
+</p>
+
+
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-maps">Golang Maps by Example</a></p>
+</blockquote>
+<p>map 是沒有順序的鍵值對集合。它將鍵對應到值。鍵在 map 是唯一的，而值可能不是。</p>
+<p>map 資料結構用於基於鍵的快速尋找、取得和刪除資料。它是電腦科學中最常用的資料結構之一。</p>
+<p>Go 提供了內建的 map 型別。在本文中，我們將學到如何使用 Golang 內建的 map 型別。</p>
+<span id="more"></span>
+
+<h3 id="宣告-map"><a href="#宣告-map" class="headerlink" title="宣告 map"></a>宣告 map</h3><p>使用以下語法宣告 map：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> m <span class="token keyword">map</span><span class="token punctuation">[</span>KeyType<span class="token punctuation">]</span>ValueType<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>舉例來說，這是你如何宣告一個 <code>string</code> 鍵對應到 <code>int</code> 值的 map：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> m <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>map 的<a href="/2019/11/05/golang-variables-zero-values-type-inference/" title="Golang 變數、零值和型別推斷">零值</a>是 <code>nil</code>。<code>nil</code> 的 map 沒有鍵。此外，任何嘗試將鍵加到 <code>nil</code> 的 map 的行為將導致執行時期錯誤。</p>
+<p>我們來看一個範例：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> m <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span>
+
+	<span class="token keyword">if</span> m <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"m is nil"</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token comment">// Attempting to add keys to a nil map will result in a runtime error</span>
+	<span class="token comment">// m["one hundred"] = 100</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+map[]
+m is nil<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>如果你取消陳述式 <code>m[&quot;one hundred&quot;] = 100</code> 的註解，程式將產生以下錯誤：</p>
+<pre class="line-numbers language-none"><code class="language-none">panic: assignment to entry in nil map<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>因此，必需在加入項目之前初始化 map。</p>
+<h3 id="初始化-map"><a href="#初始化-map" class="headerlink" title="初始化 map"></a>初始化 map</h3><h4 id="1-使用內建的-make-函數初始化-map"><a href="#1-使用內建的-make-函數初始化-map" class="headerlink" title="1. 使用內建的 make() 函數初始化 map"></a>1. 使用內建的 <code>make()</code> 函數初始化 map</h4><p>你可以使用內建的 <code>make()</code> 函數初始化 map。你只需要像下面的範例將 map 型別傳遞給 <code>make()</code> 函數即可。該函數將返回已初始化及可以使用的 map：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Initializing a map using the built-in make() function</span>
+<span class="token keyword">var</span> m <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>讓我們來看一個完整範例：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> m <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">)</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span>
+
+	<span class="token keyword">if</span> m <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"m is nil"</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"m is not nil"</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token comment">// make() function returns an initialized and ready to use map.</span>
+	<span class="token comment">// Since it is initialized, you can add new keys to it.</span>
+	m<span class="token punctuation">[</span><span class="token string">"one hundred"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">100</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+map[]
+m is not nil
+map[one hundred:100]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-使用-map-定數初始化-map"><a href="#2-使用-map-定數初始化-map" class="headerlink" title="2. 使用 map 定數初始化 map"></a>2. 使用 map 定數初始化 map</h4><p>map 定數是使用某些資料初始化 map 的一種非常方便的方法。你只需要像這樣在大括號內傳遞以冒號分隔的鍵值對：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> m <span class="token operator">=</span> <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">&#123;</span>
+	<span class="token string">"one"</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+	<span class="token string">"two"</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+	<span class="token string">"three"</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注意，最後一個逗號是必要的，否則將出現編譯器錯誤。</p>
+<p>讓我們來看一個完整範例：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> m <span class="token operator">=</span> <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">&#123;</span>
+		<span class="token string">"one"</span><span class="token punctuation">:</span>   <span class="token number">1</span><span class="token punctuation">,</span>
+		<span class="token string">"two"</span><span class="token punctuation">:</span>   <span class="token number">2</span><span class="token punctuation">,</span>
+		<span class="token string">"three"</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+		<span class="token string">"four"</span><span class="token punctuation">:</span>  <span class="token number">4</span><span class="token punctuation">,</span>
+		<span class="token string">"five"</span><span class="token punctuation">:</span>  <span class="token number">5</span><span class="token punctuation">,</span> <span class="token comment">// Comma is necessary</span>
+	<span class="token punctuation">&#125;</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+map[one:1 two:2 three:3 four:4 five:5]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>你也可以透過將大括號留空，使用 map 定數來建立一個空 map：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Initialize an empty map</span>
+<span class="token keyword">var</span> m <span class="token operator">=</span> <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>上面的陳述式在功能上與使用 <code>make()</code> 函數相同。</p>
+<h3 id="加入項目（鍵值對）到-map"><a href="#加入項目（鍵值對）到-map" class="headerlink" title="加入項目（鍵值對）到 map"></a>加入項目（鍵值對）到 map</h3><p>你可以使用以下語法將新項目加入到已初始化的 map：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">m<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> value<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>以下的範例使用 <code>make()</code> 函數初始化 map，並對它加入一些新項目：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// Initializing a map</span>
+	<span class="token keyword">var</span> tinderMatch <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">)</span>
+
+	<span class="token comment">// Adding keys to a map</span>
+	tinderMatch<span class="token punctuation">[</span><span class="token string">"Rajeev"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"Angelina"</span> <span class="token comment">// Assigns the value "Angelina" to the key "Rajeev"</span>
+	tinderMatch<span class="token punctuation">[</span><span class="token string">"James"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"Sophia"</span>
+	tinderMatch<span class="token punctuation">[</span><span class="token string">"David"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"Emma"</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>tinderMatch<span class="token punctuation">)</span>
+
+	<span class="token comment">/*
+	  Adding a key that already exists will simply override
+	  the existing key with the new value
+	*/</span>
+	tinderMatch<span class="token punctuation">[</span><span class="token string">"Rajeev"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"Jennifer"</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>tinderMatch<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+map[Rajeev:Angelina James:Sophia David:Emma]
+map[Rajeev:Jennifer James:Sophia David:Emma]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>如果你嘗試加入一個已經存在於 map 中的鍵，那麼它將被新的值覆蓋。</p>
+<h3 id="取得-map-中特定鍵所關聯的值"><a href="#取得-map-中特定鍵所關聯的值" class="headerlink" title="取得 map 中特定鍵所關聯的值"></a>取得 map 中特定鍵所關聯的值</h3><p>你可以使用語法 <code>m[key]</code> 來取得分派給 map 中的鍵的值。如果鍵已經存在於 map，則將取得分派的值。否則，你將取得 map 的值型別的零值。</p>
+<p>讓我們看個範例來了解這一點：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> personMobileNo <span class="token operator">=</span> <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">&#123;</span>
+		<span class="token string">"John"</span><span class="token punctuation">:</span>  <span class="token string">"+33-8273658526"</span><span class="token punctuation">,</span>
+		<span class="token string">"Steve"</span><span class="token punctuation">:</span> <span class="token string">"+1-8579822345"</span><span class="token punctuation">,</span>
+		<span class="token string">"David"</span><span class="token punctuation">:</span> <span class="token string">"+44-9462834443"</span><span class="token punctuation">,</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">var</span> mobileNo <span class="token operator">=</span> personMobileNo<span class="token punctuation">[</span><span class="token string">"Steve"</span><span class="token punctuation">]</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Steve's Mobile No : "</span><span class="token punctuation">,</span> mobileNo<span class="token punctuation">)</span>
+
+	<span class="token comment">// If a key doesn't exist in the map, we get the zero value of the value type</span>
+	mobileNo <span class="token operator">=</span> personMobileNo<span class="token punctuation">[</span><span class="token string">"Jack"</span><span class="token punctuation">]</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Jack's Mobile No : "</span><span class="token punctuation">,</span> mobileNo<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+Steve&#39;s Mobile No :  +1-8579822345
+Jack&#39;s Mobile No :<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>在上面的範例中，由於鍵 <code>&quot;Jack&quot;</code> 不存在於 map 中，我們得到 map 的值型別的零值。由於 map 的值型別是 <code>string</code>，因此我們得到 <code>&quot;&quot;</code>。</p>
+<p><em>與其他語言不同，如果鍵不存在於 map 中，不會在 Golang 中出現執行時期錯誤。</em></p>
+<p><strong>但是，如果你要檢查 key 是否存在怎麼辦？</strong> 在上面的範例中，即使鍵 <code>&quot;Jack&quot;</code> 具有值為 <code>&quot;&quot;</code>，map 也將返回 <code>&quot;&quot;</code>。那麼，如何區別鍵的值與型別的零值相同和鍵不存在的情況？</p>
+<p>嗯，讓我們來找出答案吧。</p>
+<h4 id="檢查鍵是否存在於-map"><a href="#檢查鍵是否存在於-map" class="headerlink" title="檢查鍵是否存在於 map"></a>檢查鍵是否存在於 map</h4><p>當你使用語法 <code>map[key]</code> 取得分派給特定鍵的值時，它也會返回一個額外的布林值，如果鍵存在於 map 中，則返回 <code>true</code>，否則返回 <code>false</code>。</p>
+<p>因此，你可以使用以下雙值分派來檢查鍵是否存在於 map 中：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">value<span class="token punctuation">,</span> ok <span class="token operator">:=</span> m<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果鍵存在，則布林變數 <code>ok</code> 將為 <code>true</code>，否則為 <code>false</code>。</p>
+<p>細想以下 map 範例。它將 employeeIds 對應到名稱：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> employees <span class="token operator">=</span> <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">&#123;</span>
+	<span class="token number">1001</span><span class="token punctuation">:</span> <span class="token string">"Rajeev"</span><span class="token punctuation">,</span>
+	<span class="token number">1002</span><span class="token punctuation">:</span> <span class="token string">"Sachin"</span><span class="token punctuation">,</span>
+	<span class="token number">1003</span><span class="token punctuation">:</span> <span class="token string">"James"</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>由於鍵 <code>1001</code> 存在於 map 中，因此存取鍵 <code>1001</code> 會返回 <code>&quot;Rajeev&quot;</code> 和 <code>true</code>：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">name<span class="token punctuation">,</span> ok <span class="token operator">:=</span> employees<span class="token punctuation">[</span><span class="token number">1001</span><span class="token punctuation">]</span> <span class="token comment">// "Rajeev", true</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>但是，如果你嘗試存取不存在的鍵，map 會返回一個空字串 <code>&quot;&quot;</code>（字串的零值）和 <code>false</code>：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">name<span class="token punctuation">,</span> ok <span class="token operator">:=</span> employees<span class="token punctuation">[</span><span class="token number">1010</span><span class="token punctuation">]</span> <span class="token comment">// "", false</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果你只是想檢查某個鍵是否存在而無需取得與該鍵關聯的值，那麼你可以使用 <code>_</code>（底線）代替第一個值：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token boolean">_</span><span class="token punctuation">,</span> ok <span class="token operator">:=</span> employees<span class="token punctuation">[</span><span class="token number">1005</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>現在，讓我們看一個完整範例：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> employees <span class="token operator">=</span> <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">&#123;</span>
+		<span class="token number">1001</span><span class="token punctuation">:</span> <span class="token string">"John"</span><span class="token punctuation">,</span>
+		<span class="token number">1002</span><span class="token punctuation">:</span> <span class="token string">"Steve"</span><span class="token punctuation">,</span>
+		<span class="token number">1003</span><span class="token punctuation">:</span> <span class="token string">"Maria"</span><span class="token punctuation">,</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token function">printEmployee</span><span class="token punctuation">(</span>employees<span class="token punctuation">,</span> <span class="token number">1001</span><span class="token punctuation">)</span>
+	<span class="token function">printEmployee</span><span class="token punctuation">(</span>employees<span class="token punctuation">,</span> <span class="token number">1010</span><span class="token punctuation">)</span>
+
+	<span class="token keyword">if</span> <span class="token function">isEmployeeExists</span><span class="token punctuation">(</span>employees<span class="token punctuation">,</span> <span class="token number">1002</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"EmployeeId 1002 found"</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">printEmployee</span><span class="token punctuation">(</span>employees <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">,</span> employeeId <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> name<span class="token punctuation">,</span> ok <span class="token operator">:=</span> employees<span class="token punctuation">[</span>employeeId<span class="token punctuation">]</span><span class="token punctuation">;</span> ok <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"name = %s, ok = %v\n"</span><span class="token punctuation">,</span> name<span class="token punctuation">,</span> ok<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"EmployeeId %d not found\n"</span><span class="token punctuation">,</span> employeeId<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">isEmployeeExists</span><span class="token punctuation">(</span>employees <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">,</span> employeeId <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">&#123;</span>
+	<span class="token boolean">_</span><span class="token punctuation">,</span> ok <span class="token operator">:=</span> employees<span class="token punctuation">[</span>employeeId<span class="token punctuation">]</span>
+	<span class="token keyword">return</span> ok
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+name &#x3D; Rajeev, ok &#x3D; true
+EmployeeId 1010 not found
+EmployeeId 1002 found<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在上面的範例中，我在 <code>if</code> 陳述式中使用了<a href="/2019/11/11/golang-control-flow-statements/" title="Golang 流程控制陳述式：if、switch 與 for">簡短宣告</a>來初始化 <code>name</code> 和 <code>ok</code> 值，然後測試布林值 <code>ok</code>。它使程式碼更加簡潔。</p>
+<h3 id="從-map-中刪除鍵"><a href="#從-map-中刪除鍵" class="headerlink" title="從 map 中刪除鍵"></a>從 map 中刪除鍵</h3><p>你可以使用內建的 <code>delete()</code> 函數從 map 中刪除鍵。語法如下：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Delete the `key` from the `map`</span>
+<span class="token function">delete</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">,</span> key<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><code>delete()</code> 函數不會返回任何值。另外，如果該鍵不存在於 map，它也不會執行任何操作。</p>
+<p>這是一個完整範例：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> fileExtensions <span class="token operator">=</span> <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">&#123;</span>
+		<span class="token string">"Python"</span><span class="token punctuation">:</span> <span class="token string">".py"</span><span class="token punctuation">,</span>
+		<span class="token string">"C++"</span><span class="token punctuation">:</span>    <span class="token string">".cpp"</span><span class="token punctuation">,</span>
+		<span class="token string">"Java"</span><span class="token punctuation">:</span>   <span class="token string">".java"</span><span class="token punctuation">,</span>
+		<span class="token string">"Golang"</span><span class="token punctuation">:</span> <span class="token string">".go"</span><span class="token punctuation">,</span>
+		<span class="token string">"Kotlin"</span><span class="token punctuation">:</span> <span class="token string">".kt"</span><span class="token punctuation">,</span>
+	<span class="token punctuation">&#125;</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>fileExtensions<span class="token punctuation">)</span>
+
+	<span class="token function">delete</span><span class="token punctuation">(</span>fileExtensions<span class="token punctuation">,</span> <span class="token string">"Kotlin"</span><span class="token punctuation">)</span>
+
+	<span class="token comment">// delete function doesn't do anything if the key doesn't exist</span>
+	<span class="token function">delete</span><span class="token punctuation">(</span>fileExtensions<span class="token punctuation">,</span> <span class="token string">"Javascript"</span><span class="token punctuation">)</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>fileExtensions<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+map[Python:.py C++:.cpp Java:.java Golang:.go Kotlin:.kt]
+map[Python:.py C++:.cpp Java:.java Golang:.go]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="map-是參考型別"><a href="#map-是參考型別" class="headerlink" title="map 是參考型別"></a>map 是參考型別</h3><p>map 是參考型別。當你將 map 分派給新變數時，它們都參考相同的底層資料結構。因此，一個變數完成的更改另一個變數將會看到。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> m1 <span class="token operator">=</span> <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">&#123;</span>
+		<span class="token string">"one"</span><span class="token punctuation">:</span>   <span class="token number">1</span><span class="token punctuation">,</span>
+		<span class="token string">"two"</span><span class="token punctuation">:</span>   <span class="token number">2</span><span class="token punctuation">,</span>
+		<span class="token string">"three"</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+		<span class="token string">"four"</span><span class="token punctuation">:</span>  <span class="token number">4</span><span class="token punctuation">,</span>
+		<span class="token string">"five"</span><span class="token punctuation">:</span>  <span class="token number">5</span><span class="token punctuation">,</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">var</span> m2 <span class="token operator">=</span> m1
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"m1 = "</span><span class="token punctuation">,</span> m1<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"m2 = "</span><span class="token punctuation">,</span> m2<span class="token punctuation">)</span>
+
+	m2<span class="token punctuation">[</span><span class="token string">"ten"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">10</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"\nm1 = "</span><span class="token punctuation">,</span> m1<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"m2 = "</span><span class="token punctuation">,</span> m2<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+m1 &#x3D;  map[one:1 two:2 three:3 four:4 five:5]
+m2 &#x3D;  map[one:1 two:2 three:3 four:4 five:5]
+
+m1 &#x3D;  map[one:1 two:2 three:3 four:4 five:5 ten:10]
+m2 &#x3D;  map[one:1 two:2 three:3 four:4 five:5 ten:10]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>將 map 傳遞給函數時，會套用相同概念。函數內部對 map 所做的任何更改，呼叫者也看得到。</p>
+<h3 id="迭代-map"><a href="#迭代-map" class="headerlink" title="迭代 map"></a>迭代 map</h3><p>你可以使用 <code>range</code> 格式的 for 迴圈迭代 map。它在每次迭代中會給你 <code>key, value</code>：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> personAge <span class="token operator">=</span> <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">&#123;</span>
+		<span class="token string">"Rajeev"</span><span class="token punctuation">:</span> <span class="token number">25</span><span class="token punctuation">,</span>
+		<span class="token string">"James"</span><span class="token punctuation">:</span>  <span class="token number">32</span><span class="token punctuation">,</span>
+		<span class="token string">"Sarah"</span><span class="token punctuation">:</span>  <span class="token number">29</span><span class="token punctuation">,</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">for</span> name<span class="token punctuation">,</span> age <span class="token operator">:=</span> <span class="token keyword">range</span> personAge <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> age<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+James 32
+Sarah 29
+Rajeev 25<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注意，map 是沒有順序的集合，因此每次迭代時，不能保證 map 的迭代順序都相同。</p>
+<p>因此，如果多次執行上面的程式，你將得到不同順序的結果。</p>
+<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>在本文中，你學到了如何宣告和初始化 map、如何將鍵加到 map、如何取得 map 中特定鍵所關聯的值、如何檢查鍵是否存在於 map 中、如何從 map 中刪除鍵，以及如何迭代 map。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- Last updated on Start -->
+    
+    <!-- Last updated on END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/11/13/introduction-to-slices-in-golang/">
+        <span class="nav-arrow">&larr; </span>
+        
+          Golang Slice 介紹
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/11/15/playing-with-pointers-in-golang/">
+        
+          在 Golang 與指標共舞
+        
+        <span class="nav-arrow"> &rarr;</span>
+      </a>
+    
+  </div>
+
+
+    <!-- NAV END -->
+    <!-- QR Code START -->
+    
+    <!-- QR Code END -->
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">目錄</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%AE%A3%E5%91%8A-map"><span class="toc-nav-text">宣告 map</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96-map"><span class="toc-nav-text">初始化 map</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-%E4%BD%BF%E7%94%A8%E5%85%A7%E5%BB%BA%E7%9A%84-make-%E5%87%BD%E6%95%B8%E5%88%9D%E5%A7%8B%E5%8C%96-map"><span class="toc-nav-text">1. 使用內建的 make() 函數初始化 map</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-%E4%BD%BF%E7%94%A8-map-%E5%AE%9A%E6%95%B8%E5%88%9D%E5%A7%8B%E5%8C%96-map"><span class="toc-nav-text">2. 使用 map 定數初始化 map</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%8A%A0%E5%85%A5%E9%A0%85%E7%9B%AE%EF%BC%88%E9%8D%B5%E5%80%BC%E5%B0%8D%EF%BC%89%E5%88%B0-map"><span class="toc-nav-text">加入項目（鍵值對）到 map</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%8F%96%E5%BE%97-map-%E4%B8%AD%E7%89%B9%E5%AE%9A%E9%8D%B5%E6%89%80%E9%97%9C%E8%81%AF%E7%9A%84%E5%80%BC"><span class="toc-nav-text">取得 map 中特定鍵所關聯的值</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E6%AA%A2%E6%9F%A5%E9%8D%B5%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E6%96%BC-map"><span class="toc-nav-text">檢查鍵是否存在於 map</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%BE%9E-map-%E4%B8%AD%E5%88%AA%E9%99%A4%E9%8D%B5"><span class="toc-nav-text">從 map 中刪除鍵</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#map-%E6%98%AF%E5%8F%83%E8%80%83%E5%9E%8B%E5%88%A5"><span class="toc-nav-text">map 是參考型別</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%BF%AD%E4%BB%A3-map"><span class="toc-nav-text">迭代 map</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%B5%90%E8%AB%96"><span class="toc-nav-text">結論</span></a></li></ol>
+    
+  </div>
+</aside>
+
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function() {
+    const url = 'https://calvertyang.github.io/2019/11/14/golang-maps-by-example/';
+    const banner = '';
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')',
+      });
+    } else {
+      $('#article-banner').geopattern(url);
+    }
+    $('.header').removeClass('fixed-header');
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.svg');
+      $(this).css({
+        'cursor': 'default',
+      });
+    });
+
+    // 若圖片放在連結內，則將游標改為 pointer 並將圖片靠左
+    $('.markdown-content img').each(function() {
+      if ($(this).parents().is('a')) {
+        $(this).css({
+          'cursor': 'pointer',
+          'display': 'inline-block',
+        });
+      }
+    });
+
+    // zoom image
+    $('.markdown-content img').on('click', function() {
+      const src = $(this).attr('src');
+      if (src !== '/css/images/error_icon.svg' && !$(this).parents().is('a')) {
+        const imageW = $(this).width();
+        const imageH = $(this).height();
+
+        let zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        zoom = zoom < 1 ? 1 : zoom;
+        zoom = zoom > 2 ? 2 : zoom;
+        const transY = (($(window).height() - imageH) / 2).toFixed(2);
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
+        $('.image-view-wrap').addClass('wrap-active');
+        $('.image-view-wrap img').css({
+          width: imageW,
+          transform: `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`,
+        });
+        $('html').css('overflow', 'hidden');
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove();
+          $('html').attr('style', '');
+        });
+      }
+    })
+  })();
+</script>
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2025 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    const d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
+    FastClick.attach(document.body);
+  });
+</script>
+
+<script>
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Calvert&#39;s murmur">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      如何在 Ubuntu 中為 vsftpd 設置虛擬帳號 | Calvert&#39;s murmur
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        let all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-44933497-2');
+    </script>
+
+
+  
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Calvert's murmur</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/series/" class="item-link">Series</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/series/" class="menu-link">Series</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>如何在 Ubuntu 中為 vsftpd 設置虛擬帳號</h2>
+  <p class="post-date">2017-02-06</p>
+  <p class="word-count">
+  
+  約 2814 字 / 需 15 分鐘閱讀
+</p>
+
+
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>以下是在 Ubunto 16.04 LTS 安裝 vsftpd 並設定虛擬帳號的步驟</p>
+<ol>
+<li><p>安裝 vsftpd</p>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">apt-get</span> update
+$ <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> vsftpd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>編輯設定檔</p>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">vim</span> /etc/vsftpd.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ol>
+<p>  以下設定僅供參考，可依實際使用情形調整（詳細設定及說明可查看 <code>man vsftpd.conf</code>）<br>  <pre class="line-numbers language-text" data-language="text"><div class="caption"><span>/etc/vsftpd.conf</span></div><code class="language-text"># 設定為 YES 表示 vsftpd 是以 standalone 的方式來啟動
+# 註：listen_ipv6 預設接受 IPv6 及 IPv4 連線，因此設定 listen_ipv6 為 YES 即可
+listen=NO
+listen_ipv6=YES
+
+# 是否允許匿名者登入
+anonymous_enable=NO
+
+# 是否以實體用戶的方式登入 vsftpd 伺服器
+# 註：使用虛擬帳號時需要一個實體帳號
+local_enable=YES
+
+# 是否允許使用者上傳資料
+write_enable=YES
+
+# 建立新目錄與檔案的權限預設值
+local_umask=022
+
+# 若目錄下有 .message 檔案時，當使用者進入此目錄是否顯示該檔案的內容
+dirmessage_enable=YES
+
+# 是否使用本機時間
+use_localtime=YES
+
+# 是否將使用者上傳與下載檔案記錄起來
+xferlog_enable=YES
+
+# 是否支援主動式連線功能
+connect_from_port_20=YES
+
+# 使用者在指定秒數內都沒有命令動作時，是否強制離線
+idle_session_timeout=600
+
+# 是否將使用者限制在自己的家目錄之內
+chroot_local_user=YES
+
+# 用於 chroot 的空目錄路徑，此目錄不應被 ftp 使用者寫入
+secure_chroot_dir=/var/run/vsftpd/empty
+
+# pam 模組的名稱
+pam_service_name=vsftpd
+
+# RSA 加密的憑證檔案所在位置
+rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+
+# RSA 加密的私鑰檔案所在位置
+rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+
+# 是否啟動 SSL 支援
+ssl_enable=NO
+
+# 是否標示 vsftpd 使用 UTF-8 檔案系統
+utf8_filesystem=YES
+
+# 是否將目錄中的所有使用者和群組資訊顯示為 "ftp"
+hide_ids=YES
+
+# 限制同一時間可以同時連上 vsftpd 的用戶端數量
+max_clients=50
+
+# 限制同一時間同一個 IP 的最大連線數量
+max_per_ip=5
+
+# 是否支援被動式連線模式
+pasv_enable=YES
+
+# 設定被動式連線模式可用的連接埠範圍
+pasv_min_port=65400
+pasv_max_port=65410
+
+# 指定某個純文字檔作為使用者登入 vsftpd 伺服器時所顯示的歡迎訊息
+banner_file=/etc/vsftpd/banner_file
+
+# 是否同時產生 wu-ftpd 格式及 vsftpd 自有格式的記錄檔
+dual_log_enable=YES
+
+# vsftpd 格式記錄檔的所在位置
+vsftpd_log_file=/var/log/vsftpd.log
+
+# 是否支援 TCP Wrappers 的防火牆機制
+tcp_wrappers=YES
+
+# 這個選項允許根據各別用戶來覆蓋本設定檔中指定的任何設定
+user_config_dir=/etc/vsftpd/user_conf
+
+# 虛擬帳號是否將使用與本機用戶相同的權限
+virtual_use_local_privs=YES
+
+# 基於模板為每個虛擬帳號自動產生主目錄
+user_sub_token=$USER
+
+# 設定用戶家目錄
+local_root=/var/ftp/$USER
+
+# 是否允許用戶根目錄有寫入權限
+allow_writeable_chroot=YES
+
+# 若這個值設定為 YES 時，那麼任何實體帳號，均會被視為 guest
+guest_enable=YES
+
+# 指定訪客身份
+guest_username=vsftpd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
+<ol start="3">
+<li><p>設定虛擬帳號前仍須先建立一個實體帳號，虛擬帳號皆會使用此帳號登入</p>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">useradd</span> <span class="token parameter variable">--home</span> /home/vsftpd <span class="token parameter variable">--gid</span> nogroup <span class="token parameter variable">-m</span> <span class="token parameter variable">--shell</span> /bin/false vsftpd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>設定虛擬帳號<br>  由於要使用非實體帳號來登入，需另外建立帳號及密碼資料提供 vsftpd 作認證</p>
+</li>
+</ol>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">vim</span> /etc/vsftpd/virtual-user<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>  建立帳密文件，格式為一行帳號、一行密碼<br>  <pre class="line-numbers language-text" data-language="text"><div class="caption"><span>/etc/vsftpd/virtual-user</span></div><code class="language-text">user1
+user1_password
+user2
+user2_password<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></p>
+<p>  接著將帳密文件轉換成資料庫檔案（Berkeley DB 格式）</p>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> db_load <span class="token parameter variable">-T</span> <span class="token parameter variable">-t</span> <span class="token builtin class-name">hash</span> <span class="token parameter variable">-f</span> /etc/vsftpd/virtual-user /etc/vsftpd/virtual-user.db<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>  註：若出現 <code>The program &#39;db_load&#39; is currently not installed.</code> 訊息，則用以下指令安裝必要套件</p>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> db-util<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="5">
+<li>因設定檔內有使用了 <code>user_config_dir</code> 設定，可在此目錄內針對各使用者套用額外設定</li>
+</ol>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">mkdir</span> /etc/vsftpd/user_conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>  以下範例為限制 <code>user2</code> 僅擁有上傳權限</p>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">vim</span> /etc/vsftpd/user_conf/user2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>  設定內容如下</p>
+  <pre class="line-numbers language-text" data-language="text"><div class="caption"><span>/etc/vsftpd/user_conf/user2</span></div><code class="language-text">download_enable=NO<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="6">
+<li>修改 vsftpd 認證設定</li>
+</ol>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">mv</span> /etc/pam.d/vsftpd /etc/pam.d/vsftpd.old
+$ <span class="token function">sudo</span> <span class="token function">vim</span> /etc/pam.d/vsftpd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>  設定內容如下<br>  <pre class="line-numbers language-text" data-language="text"><div class="caption"><span>/etc/pam.d/vsftpd</span></div><code class="language-text">auth required pam_userdb.so db=/etc/vsftpd/virtual-user
+account required pam_userdb.so db=/etc/vsftpd/virtual-user<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></p>
+<ol start="7">
+<li>重啟服務</li>
+</ol>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> systemctl restart vsftpd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>  現在已可透過虛擬帳號登入囉！</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Linux" >
+    <span class="tag-code">Linux</span>
+  </a>
+
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- Last updated on Start -->
+    
+    <!-- Last updated on END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2016/10/16/capistrano-with-ed25519-keys/">
+        <span class="nav-arrow">&larr; </span>
+        
+          在 Capistrano 自動化部署時使用 Ed25519 金鑰
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2017/03/15/drawing-with-rvg/">
+        
+          使用 RVG 繪圖
+        
+        <span class="nav-arrow"> &rarr;</span>
+      </a>
+    
+  </div>
+
+
+    <!-- NAV END -->
+    <!-- QR Code START -->
+    
+    <!-- QR Code END -->
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">目錄</strong>
+    
+      <ol class="nav">無</ol>
+    
+  </div>
+</aside>
+
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function() {
+    const url = 'https://calvertyang.github.io/2017/02/06/how-to-setup-virtual-users-for-vsftpd-in-ubuntu/';
+    const banner = '';
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')',
+      });
+    } else {
+      $('#article-banner').geopattern(url);
+    }
+    $('.header').removeClass('fixed-header');
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.svg');
+      $(this).css({
+        'cursor': 'default',
+      });
+    });
+
+    // 若圖片放在連結內，則將游標改為 pointer 並將圖片靠左
+    $('.markdown-content img').each(function() {
+      if ($(this).parents().is('a')) {
+        $(this).css({
+          'cursor': 'pointer',
+          'display': 'inline-block',
+        });
+      }
+    });
+
+    // zoom image
+    $('.markdown-content img').on('click', function() {
+      const src = $(this).attr('src');
+      if (src !== '/css/images/error_icon.svg' && !$(this).parents().is('a')) {
+        const imageW = $(this).width();
+        const imageH = $(this).height();
+
+        let zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        zoom = zoom < 1 ? 1 : zoom;
+        zoom = zoom > 2 ? 2 : zoom;
+        const transY = (($(window).height() - imageH) / 2).toFixed(2);
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
+        $('.image-view-wrap').addClass('wrap-active');
+        $('.image-view-wrap img').css({
+          width: imageW,
+          transform: `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`,
+        });
+        $('html').css('overflow', 'hidden');
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove();
+          $('html').attr('style', '');
+        });
+      }
+    })
+  })();
+</script>
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2025 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    const d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
+    FastClick.attach(document.body);
+  });
+</script>
+
+<script>
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

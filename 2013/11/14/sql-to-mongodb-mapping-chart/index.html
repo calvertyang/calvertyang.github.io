@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Calvert&#39;s murmur">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      SQL 及 MongoDB 基本指令對應表 | Calvert&#39;s murmur
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        let all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-44933497-2');
+    </script>
+
+
+  
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Calvert's murmur</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/series/" class="item-link">Series</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/series/" class="menu-link">Series</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>SQL 及 MongoDB 基本指令對應表</h2>
+  <p class="post-date">2013-11-14</p>
+  <p class="word-count">
+  
+  約 12705 字 / 需 70 分鐘閱讀
+</p>
+
+
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>由於新專案採用了 <a target="_blank" rel="noopener" href="http://nodejs.org/">Node.js</a> 開發且使用 <a target="_blank" rel="noopener" href="http://www.mongodb.org/">MongoDB</a> 作為儲存媒介，所以動手翻譯了官方文件方便查閱相關指令用法。</p>
+<h3 id="術語和概念-Terminology-and-Concepts"><a href="#術語和概念-Terminology-and-Concepts" class="headerlink" title="術語和概念(Terminology and Concepts)"></a>術語和概念(Terminology and Concepts)</h3><h5 id="下表列出了各種-SQL-和相應的-MongoDB-的術語和概念。"><a href="#下表列出了各種-SQL-和相應的-MongoDB-的術語和概念。" class="headerlink" title="下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。"></a>下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。</h5><table>
+<thead>
+<tr>
+<th align="left">SQL 術語&#x2F;概念</th>
+<th align="left">MongoDB 術語&#x2F;概念</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">資料庫(database)</td>
+<td align="left">資料庫(<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-database">database</a>)</td>
+</tr>
+<tr>
+<td align="left">資料表(table)</td>
+<td align="left">集合(<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-collection">collection</a>)</td>
+</tr>
+<tr>
+<td align="left">資料列(row)</td>
+<td align="left">文件(<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-document">document</a>) 或 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-bson">BSON</a> 文件</td>
+</tr>
+<tr>
+<td align="left">資料行(column)</td>
+<td align="left">欄位(<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-field">field</a>)</td>
+</tr>
+<tr>
+<td align="left">索引(index)</td>
+<td align="left">索引(<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-index">index</a>)</td>
+</tr>
+<tr>
+<td align="left">資料表連結(table joins)</td>
+<td align="left">嵌入式文件及連結(embedded documents and linking)</td>
+</tr>
+<tr>
+<td align="left">主索引鍵(primary key)<br /><br />指定任意一個或多個欄位組合為主索引鍵，資料內容須唯一不可重複。</td>
+<td align="left">主索引鍵(<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-primary-key">primary key</a>)<br /><br />在 MongoDB，主索引鍵會自動設定到 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/glossary/#term-id">_id</a> 欄位。</td>
+</tr>
+<tr>
+<td align="left">彙總(aggregation)，例如：group by</td>
+<td align="left">彙總管線(aggregation pipeline)<br /><br /><a target="_blank" rel="noopener" href="http://calvert.logdown.com/posts/159915-sql-to-aggregation-mapping-chart">參閱 SQL 至彙總(Aggregation)對應表</a>.</td>
+</tr>
+</tbody></table>
+<h3 id="可執行檔案-Executables"><a href="#可執行檔案-Executables" class="headerlink" title="可執行檔案(Executables)"></a>可執行檔案(Executables)</h3><h5 id="下表列出了-MySQL-x2F-Oracle-可執行檔案和相應的-MongoDB-的可執行檔案。"><a href="#下表列出了-MySQL-x2F-Oracle-可執行檔案和相應的-MongoDB-的可執行檔案。" class="headerlink" title="下表列出了 MySQL &#x2F; Oracle 可執行檔案和相應的 MongoDB 的可執行檔案。"></a>下表列出了 MySQL &#x2F; Oracle 可執行檔案和相應的 MongoDB 的可執行檔案。</h5><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">MySQL &#x2F; Oracle</th>
+<th align="left">MongoDB</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">資料庫伺服器(Database Server)</td>
+<td align="left">mysqld &#x2F; oracle</td>
+<td align="left">mongod</td>
+</tr>
+<tr>
+<td align="left">資料庫用戶端(Database Client)</td>
+<td align="left">mysql &#x2F; sqlplus</td>
+<td align="left">mongo</td>
+</tr>
+</tbody></table>
+<span id="more"></span>
+
+<h3 id="範例-Examples"><a href="#範例-Examples" class="headerlink" title="範例(Examples)"></a>範例(Examples)</h3><h5 id="下表列出了各種-SQL-語句和相應的-MongoDB-語句。在表格中的範例假定有下列條件："><a href="#下表列出了各種-SQL-語句和相應的-MongoDB-語句。在表格中的範例假定有下列條件：" class="headerlink" title="下表列出了各種 SQL 語句和相應的 MongoDB 語句。在表格中的範例假定有下列條件："></a>下表列出了各種 SQL 語句和相應的 MongoDB 語句。在表格中的範例假定有下列條件：</h5><ul>
+<li><p>SQL 範例假設是名為 users 的資料表</p>
+</li>
+<li><p>MongoDB 範例假設是名為 users 的集合，包含的文件原型如下：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">&#123;
+　　_id: ObjectID<span class="token punctuation">(</span><span class="token string">"509a8fb2f3f4948bd2f983a0"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+　　user_id: <span class="token string">"abc123"</span><span class="token punctuation">,</span>
+　　age: <span class="token number">55</span><span class="token punctuation">,</span>
+　　<span class="token keyword">status</span>: <span class="token string">'A'</span>
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h4 id="建立及修改資料表-Create-and-Alter"><a href="#建立及修改資料表-Create-and-Alter" class="headerlink" title="建立及修改資料表(Create and Alter)"></a>建立及修改資料表(Create and Alter)</h4><p>下面列出了關於資料表層級操作的各種 SQL 語句和相應的 MongoDB 語句。</p>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> users <span class="token punctuation">(</span>
+　id <span class="token keyword">MEDIUMINT</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span>
+　　<span class="token keyword">AUTO_INCREMENT</span><span class="token punctuation">,</span>
+　user_id <span class="token keyword">Varchar</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+　age Number<span class="token punctuation">,</span>
+　<span class="token keyword">status</span> <span class="token keyword">char</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+　<span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span>id<span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句<br>在第一次插入資料操作時透過隱含方式建立。若未指定 _id 欄位，則會自動建立主索引鍵 _id。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span><span class="token keyword">insert</span><span class="token punctuation">(</span> &#123;
+　user_id: <span class="token string">"abc123"</span><span class="token punctuation">,</span>
+　age: <span class="token number">55</span><span class="token punctuation">,</span>
+　<span class="token keyword">status</span>: <span class="token string">"A"</span>
+ &#125; <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>然而，你也可以明確地建立一個集合：</p>
+<pre class="line-numbers language-SQL" data-language="SQL"><code class="language-SQL">db.createCollection(&quot;users&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.insert/#db.collection.insert">insert()</a> 和 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.createCollection/#db.createCollection">db.createCollection()</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> users
+<span class="token keyword">ADD</span> join_date <span class="token keyword">DATETIME</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句<br>集合不描述或強制其文件結構，即在集合層級沒有結構上的改變。<br>然而，在文件層級，update() 操作可以透過 $set 運算元加入欄位到已存在的文件。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span><span class="token keyword">update</span><span class="token punctuation">(</span>
+　&#123; &#125;<span class="token punctuation">,</span>
+　&#123; $<span class="token keyword">set</span>: &#123; join_date: new <span class="token keyword">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span> &#125; &#125;<span class="token punctuation">,</span>
+　&#123; multi: <span class="token boolean">true</span> &#125;
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/core/data-models/">Data Modeling Concepts</a>、<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.update/#db.collection.update">update()</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/update/set/#up._S_set">$set</a> 取得更多改變集合中文件結構的更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> users
+<span class="token keyword">DROP</span> <span class="token keyword">COLUMN</span> join_date<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句<br>集合不描述或強制其文件結構，即在集合層級中沒有結構上的改變。<br>然而，在文件層級，update() 操作可以透過 $unset 運算元從文件移除欄位。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span><span class="token keyword">update</span><span class="token punctuation">(</span>
+　&#123; &#125;<span class="token punctuation">,</span>
+　&#123; $unset: &#123; join_date: <span class="token string">""</span> &#125; &#125;<span class="token punctuation">,</span>
+　&#123; multi: <span class="token boolean">true</span> &#125;
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/core/data-models/">Data Modeling Concepts</a>、<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.update/#db.collection.update">update()</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/update/unset/#up._S_unset">$unset</a> 取得更多改變集合中文件結構的更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">INDEX</span> idx_user_id_asc
+<span class="token keyword">ON</span> users<span class="token punctuation">(</span>user_id<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>ensureIndex<span class="token punctuation">(</span> &#123; user_id: <span class="token number">1</span> &#125; <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.ensureIndex/#db.collection.ensureIndex">ensureIndex()</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/core/indexes/">indexes</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">INDEX</span>
+　idx_user_id_asc_age_desc
+<span class="token keyword">ON</span> users<span class="token punctuation">(</span>user_id<span class="token punctuation">,</span> age <span class="token keyword">DESC</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>ensureIndex<span class="token punctuation">(</span> &#123; user_id: <span class="token number">1</span><span class="token punctuation">,</span> age: <span class="token operator">-</span><span class="token number">1</span> &#125; <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.ensureIndex/#db.collection.ensureIndex">ensureIndex()</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/core/indexes/">indexes</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> users<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span><span class="token keyword">drop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.drop/#db.collection.drop">drop()</a> 取得更多資訊。</p>
+</li>
+</ul>
+<h4 id="插入-Insert"><a href="#插入-Insert" class="headerlink" title="插入(Insert)"></a>插入(Insert)</h4><p>下面列出了關於插入資料到資料表的各種 SQL 語句和相應的 MongoDB 語句。</p>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> users<span class="token punctuation">(</span>
+　user_id<span class="token punctuation">,</span>
+　age<span class="token punctuation">,</span>
+　<span class="token keyword">status</span><span class="token punctuation">)</span>
+<span class="token keyword">VALUES</span> <span class="token punctuation">(</span>
+　<span class="token string">"bcd001"</span><span class="token punctuation">,</span>
+　<span class="token number">45</span><span class="token punctuation">,</span>
+　<span class="token string">"A"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span><span class="token keyword">insert</span><span class="token punctuation">(</span> &#123;
+　user_id: <span class="token string">"bcd001"</span><span class="token punctuation">,</span>
+　age: <span class="token number">45</span><span class="token punctuation">,</span>
+　<span class="token keyword">status</span>: <span class="token string">"A"</span>
+&#125; <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.insert/#db.collection.insert">insert()</a> 取得更多資訊。</p>
+</li>
+</ul>
+<h4 id="選擇-Select"><a href="#選擇-Select" class="headerlink" title="選擇(Select)"></a>選擇(Select)</h4><p>下面列出了關於從資料表讀取資料的各種 SQL 語句和相應的 MongoDB 語句。</p>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> users<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> id<span class="token punctuation">,</span> user_id<span class="token punctuation">,</span> <span class="token keyword">status</span>
+<span class="token keyword">FROM</span> users<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span>
+　&#123; &#125;<span class="token punctuation">,</span>
+　&#123; user_id: <span class="token number">1</span><span class="token punctuation">,</span> <span class="token keyword">status</span>: <span class="token number">1</span> &#125;
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> user_id<span class="token punctuation">,</span> <span class="token keyword">status</span>
+<span class="token keyword">FROM</span> users<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span>
+　&#123; &#125;<span class="token punctuation">,</span>
+　&#123; user_id: <span class="token number">1</span><span class="token punctuation">,</span> <span class="token keyword">status</span>: <span class="token number">1</span><span class="token punctuation">,</span> _id: <span class="token number">0</span> &#125;
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> users
+<span class="token keyword">WHERE</span> <span class="token keyword">status</span> <span class="token operator">=</span> <span class="token string">"A"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span>
+　&#123; <span class="token keyword">status</span>: <span class="token string">"A"</span> &#125;
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> user_id<span class="token punctuation">,</span> <span class="token keyword">status</span>
+<span class="token keyword">FROM</span> users
+<span class="token keyword">WHERE</span> <span class="token keyword">status</span> <span class="token operator">=</span> <span class="token string">"A"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span>
+　&#123; <span class="token keyword">status</span>: <span class="token string">"A"</span> &#125;<span class="token punctuation">,</span>
+　&#123; user_id: <span class="token number">1</span><span class="token punctuation">,</span> <span class="token keyword">status</span>: <span class="token number">1</span><span class="token punctuation">,</span> _id: <span class="token number">0</span> &#125;
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> users
+<span class="token keyword">WHERE</span> <span class="token keyword">status</span> <span class="token operator">!=</span> <span class="token string">"A"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span>
+　&#123; <span class="token keyword">status</span>: &#123; $ne: <span class="token string">"A"</span> &#125; &#125;
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/query/ne/#op._S_ne">$ne</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> users
+<span class="token keyword">WHERE</span> <span class="token keyword">status</span> <span class="token operator">=</span> <span class="token string">"A"</span>
+<span class="token operator">AND</span> age <span class="token operator">=</span> <span class="token number">50</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span>
+　&#123; <span class="token keyword">status</span>: <span class="token string">"A"</span><span class="token punctuation">,</span>
+　　age: <span class="token number">50</span> &#125;
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/query/and/#op._S_and">$and</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> users
+<span class="token keyword">WHERE</span> <span class="token keyword">status</span> <span class="token operator">=</span> <span class="token string">"A"</span>
+<span class="token operator">OR</span> age <span class="token operator">=</span> <span class="token number">50</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span>
+　&#123; $<span class="token operator">or</span>: <span class="token punctuation">[</span> &#123; <span class="token keyword">status</span>: <span class="token string">"A"</span> &#125; <span class="token punctuation">,</span>
+　　　　 　 &#123; age: <span class="token number">50</span> &#125; <span class="token punctuation">]</span> &#125;
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/query/or/#op._S_or">$or</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> users
+<span class="token keyword">WHERE</span> age <span class="token operator">></span> <span class="token number">25</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span>
+　&#123; age: &#123; $gt: <span class="token number">25</span> &#125; &#125;
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/query/gt/#op._S_gt">$gt</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> users
+<span class="token keyword">WHERE</span> age <span class="token operator">&lt;</span> <span class="token number">25</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span>
+　&#123; age: &#123; $lt: <span class="token number">25</span> &#125; &#125;
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/query/lt/#op._S_lt">$lt</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> users
+<span class="token keyword">WHERE</span> age <span class="token operator">></span> <span class="token number">25</span>
+<span class="token operator">AND</span>　 age <span class="token operator">&lt;=</span> <span class="token number">50</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span>
+　&#123; age: &#123; $gt: <span class="token number">25</span><span class="token punctuation">,</span> $lte: <span class="token number">50</span> &#125; &#125;
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a>、<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/query/gt/#op._S_gt">$gt</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/query/lte/#op._S_lte">$lte</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> users
+<span class="token keyword">WHERE</span> user_id <span class="token operator">like</span> <span class="token string">"%bc%"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span>
+　&#123; user_id: <span class="token operator">/</span>bc<span class="token operator">/</span> &#125;
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/query/regex/#op._S_regex">$regex</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> users
+<span class="token keyword">WHERE</span> user_id <span class="token operator">like</span> <span class="token string">"bc%"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span>
+　&#123; user_id: <span class="token operator">/</span><span class="token operator">^</span>bc<span class="token operator">/</span> &#125;
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/query/regex/#op._S_regex">$regex</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> users
+<span class="token keyword">WHERE</span> <span class="token keyword">status</span> <span class="token operator">=</span> <span class="token string">"A"</span>
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> user_id <span class="token keyword">ASC</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span> &#123; <span class="token keyword">status</span>: <span class="token string">"A"</span> &#125; <span class="token punctuation">)</span><span class="token punctuation">.</span>sort<span class="token punctuation">(</span> &#123; user_id: <span class="token number">1</span> &#125; <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/cursor.sort/#cursor.sort">sort()</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> users
+<span class="token keyword">WHERE</span> <span class="token keyword">status</span> <span class="token operator">=</span> <span class="token string">"A"</span>
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> user_id <span class="token keyword">DESC</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span> &#123; <span class="token keyword">status</span>: <span class="token string">"A"</span> &#125; <span class="token punctuation">)</span><span class="token punctuation">.</span>sort<span class="token punctuation">(</span> &#123; user_id: <span class="token operator">-</span><span class="token number">1</span> &#125; <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/cursor.sort/#cursor.sort">sort()</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span>
+<span class="token keyword">FROM</span> users<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>或</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/cursor.count/#cursor.count">count()</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token function">COUNT</span><span class="token punctuation">(</span>user_id<span class="token punctuation">)</span>
+<span class="token keyword">FROM</span> users<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span> &#123; user_id: &#123; $<span class="token keyword">exists</span>: <span class="token boolean">true</span> &#125; &#125; <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>或</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span> &#123; user_id: &#123; $<span class="token keyword">exists</span>: <span class="token boolean">true</span> &#125; &#125; <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a>、<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/cursor.count/#cursor.count">count()</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/query/exists/#op._S_exists">$exists</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span>
+<span class="token keyword">FROM</span> users
+<span class="token keyword">WHERE</span> age <span class="token operator">></span> <span class="token number">30</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span> &#123; age: &#123; $gt: <span class="token number">30</span> &#125; &#125; <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>或</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span> &#123; age: &#123; $gt: <span class="token number">30</span> &#125; &#125; <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a>、<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/cursor.count/#cursor.count">count()</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/query/gt/#op._S_gt">$gt</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token keyword">DISTINCT</span><span class="token punctuation">(</span><span class="token keyword">status</span><span class="token punctuation">)</span>
+<span class="token keyword">FROM</span> users<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span><span class="token keyword">distinct</span><span class="token punctuation">(</span> <span class="token string">"status"</span> <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.distinct/#db.collection.distinct">distinct()</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> users
+<span class="token keyword">LIMIT</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>findOne<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>或</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">limit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a>、<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.findOne/#db.collection.findOne">findOne()</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/cursor.limit/#cursor.limit">limit()</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> users
+<span class="token keyword">LIMIT</span> <span class="token number">5</span>
+SKIP <span class="token number">10</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">limit</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">.</span>skip<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a>、<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/cursor.limit/#cursor.limit">limit()</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/cursor.skip/#cursor.skip">skip()</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">EXPLAIN</span> <span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> users
+<span class="token keyword">WHERE</span> <span class="token keyword">status</span> <span class="token operator">=</span> <span class="token string">"A"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>find<span class="token punctuation">(</span> &#123; <span class="token keyword">status</span>: <span class="token string">"A"</span> &#125; <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">explain</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find">find()</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/cursor.explain/#cursor.explain">explain()</a> 取得更多資訊。</p>
+</li>
+</ul>
+<h4 id="修改資料-Update-Records"><a href="#修改資料-Update-Records" class="headerlink" title="修改資料(Update Records)"></a>修改資料(Update Records)</h4><p>下面列出了關於修改現有資料表內資料的各種 SQL 語句和相應的 MongoDB 語句。</p>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">UPDATE</span> users
+<span class="token keyword">SET</span> <span class="token keyword">status</span> <span class="token operator">=</span> <span class="token string">"C"</span>
+<span class="token keyword">WHERE</span> age <span class="token operator">></span> <span class="token number">25</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span><span class="token keyword">update</span><span class="token punctuation">(</span>
+　&#123; age: &#123; $gt: <span class="token number">25</span> &#125; &#125;<span class="token punctuation">,</span>
+　&#123; $<span class="token keyword">set</span>: &#123; <span class="token keyword">status</span>: <span class="token string">"C"</span> &#125; &#125;<span class="token punctuation">,</span>
+　&#123; multi: <span class="token boolean">true</span> &#125;
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.update/#db.collection.update">update()</a>、<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/query/gt/#op._S_gt">$gt</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/update/set/#up._S_set">$set</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">UPDATE</span> users
+<span class="token keyword">SET</span> age <span class="token operator">=</span> age <span class="token operator">+</span> <span class="token number">3</span>
+<span class="token keyword">WHERE</span> <span class="token keyword">status</span> <span class="token operator">=</span> <span class="token string">"A"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span><span class="token keyword">update</span><span class="token punctuation">(</span>
+　&#123; <span class="token keyword">status</span>: <span class="token string">"A"</span> &#125; <span class="token punctuation">,</span>
+　&#123; $inc: &#123; age: <span class="token number">3</span> &#125; &#125;<span class="token punctuation">,</span>
+　&#123; multi: <span class="token boolean">true</span> &#125;
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.update/#db.collection.update">update()</a>、<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/update/inc/#up._S_inc">$inc</a> 及 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/operator/update/set/#up._S_set">$set</a> 取得更多資訊。</p>
+</li>
+</ul>
+<h4 id="刪除資料-Delete-Records"><a href="#刪除資料-Delete-Records" class="headerlink" title="刪除資料(Delete Records)"></a>刪除資料(Delete Records)</h4><p>下面列出了關於從資料表刪除資料的各種 SQL 語句和相應的 MongoDB 語句。</p>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">DELETE</span> <span class="token keyword">FROM</span> users
+<span class="token keyword">WHERE</span> <span class="token keyword">status</span> <span class="token operator">=</span> <span class="token string">"D"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>remove<span class="token punctuation">(</span> &#123; <span class="token keyword">status</span>: <span class="token string">"D"</span> &#125; <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.remove/#db.collection.remove">remove()</a> 取得更多資訊。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>SQL 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">DELETE</span> <span class="token keyword">FROM</span> users<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>MongoDB 架構語句</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">db<span class="token punctuation">.</span>users<span class="token punctuation">.</span>remove<span class="token punctuation">(</span> <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>參閱 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/method/db.collection.remove/#db.collection.remove">remove()</a> 取得更多資訊。</p>
+</li>
+</ul>
+<p>參考資料：<a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/sql-comparison/">SQL to MongoDB Mapping Chart</a></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#SQL" >
+    <span class="tag-code">SQL</span>
+  </a>
+
+  <a href="/tags#NoSQL" >
+    <span class="tag-code">NoSQL</span>
+  </a>
+
+  <a href="/tags#MongoDB" >
+    <span class="tag-code">MongoDB</span>
+  </a>
+
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- Last updated on Start -->
+    
+    <!-- Last updated on END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2013/11/06/how-to-install-redis-in-centos-6/">
+        <span class="nav-arrow">&larr; </span>
+        
+          如何在 CentOS 6 安裝 Redis
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2013/11/16/sql-to-aggregation-mapping-chart/">
+        
+          SQL 及 MongoDB 集合(Aggregation)指令對應表
+        
+        <span class="nav-arrow"> &rarr;</span>
+      </a>
+    
+  </div>
+
+
+    <!-- NAV END -->
+    <!-- QR Code START -->
+    
+    <!-- QR Code END -->
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">目錄</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%A1%93%E8%AA%9E%E5%92%8C%E6%A6%82%E5%BF%B5-Terminology-and-Concepts"><span class="toc-nav-text">術語和概念(Terminology and Concepts)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#%E4%B8%8B%E8%A1%A8%E5%88%97%E5%87%BA%E4%BA%86%E5%90%84%E7%A8%AE-SQL-%E5%92%8C%E7%9B%B8%E6%87%89%E7%9A%84-MongoDB-%E7%9A%84%E8%A1%93%E8%AA%9E%E5%92%8C%E6%A6%82%E5%BF%B5%E3%80%82"><span class="toc-nav-text">下表列出了各種 SQL 和相應的 MongoDB 的術語和概念。</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%8F%AF%E5%9F%B7%E8%A1%8C%E6%AA%94%E6%A1%88-Executables"><span class="toc-nav-text">可執行檔案(Executables)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#%E4%B8%8B%E8%A1%A8%E5%88%97%E5%87%BA%E4%BA%86-MySQL-x2F-Oracle-%E5%8F%AF%E5%9F%B7%E8%A1%8C%E6%AA%94%E6%A1%88%E5%92%8C%E7%9B%B8%E6%87%89%E7%9A%84-MongoDB-%E7%9A%84%E5%8F%AF%E5%9F%B7%E8%A1%8C%E6%AA%94%E6%A1%88%E3%80%82"><span class="toc-nav-text">下表列出了 MySQL &#x2F; Oracle 可執行檔案和相應的 MongoDB 的可執行檔案。</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%AF%84%E4%BE%8B-Examples"><span class="toc-nav-text">範例(Examples)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#%E4%B8%8B%E8%A1%A8%E5%88%97%E5%87%BA%E4%BA%86%E5%90%84%E7%A8%AE-SQL-%E8%AA%9E%E5%8F%A5%E5%92%8C%E7%9B%B8%E6%87%89%E7%9A%84-MongoDB-%E8%AA%9E%E5%8F%A5%E3%80%82%E5%9C%A8%E8%A1%A8%E6%A0%BC%E4%B8%AD%E7%9A%84%E7%AF%84%E4%BE%8B%E5%81%87%E5%AE%9A%E6%9C%89%E4%B8%8B%E5%88%97%E6%A2%9D%E4%BB%B6%EF%BC%9A"><span class="toc-nav-text">下表列出了各種 SQL 語句和相應的 MongoDB 語句。在表格中的範例假定有下列條件：</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%BB%BA%E7%AB%8B%E5%8F%8A%E4%BF%AE%E6%94%B9%E8%B3%87%E6%96%99%E8%A1%A8-Create-and-Alter"><span class="toc-nav-text">建立及修改資料表(Create and Alter)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E6%8F%92%E5%85%A5-Insert"><span class="toc-nav-text">插入(Insert)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E9%81%B8%E6%93%87-Select"><span class="toc-nav-text">選擇(Select)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E4%BF%AE%E6%94%B9%E8%B3%87%E6%96%99-Update-Records"><span class="toc-nav-text">修改資料(Update Records)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%88%AA%E9%99%A4%E8%B3%87%E6%96%99-Delete-Records"><span class="toc-nav-text">刪除資料(Delete Records)</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function() {
+    const url = 'https://calvertyang.github.io/2013/11/14/sql-to-mongodb-mapping-chart/';
+    const banner = '';
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')',
+      });
+    } else {
+      $('#article-banner').geopattern(url);
+    }
+    $('.header').removeClass('fixed-header');
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.svg');
+      $(this).css({
+        'cursor': 'default',
+      });
+    });
+
+    // 若圖片放在連結內，則將游標改為 pointer 並將圖片靠左
+    $('.markdown-content img').each(function() {
+      if ($(this).parents().is('a')) {
+        $(this).css({
+          'cursor': 'pointer',
+          'display': 'inline-block',
+        });
+      }
+    });
+
+    // zoom image
+    $('.markdown-content img').on('click', function() {
+      const src = $(this).attr('src');
+      if (src !== '/css/images/error_icon.svg' && !$(this).parents().is('a')) {
+        const imageW = $(this).width();
+        const imageH = $(this).height();
+
+        let zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        zoom = zoom < 1 ? 1 : zoom;
+        zoom = zoom > 2 ? 2 : zoom;
+        const transY = (($(window).height() - imageH) / 2).toFixed(2);
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
+        $('.image-view-wrap').addClass('wrap-active');
+        $('.image-view-wrap img').css({
+          width: imageW,
+          transform: `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`,
+        });
+        $('html').css('overflow', 'hidden');
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove();
+          $('html').attr('style', '');
+        });
+      }
+    })
+  })();
+</script>
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2025 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    const d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
+    FastClick.attach(document.body);
+  });
+</script>
+
+<script>
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

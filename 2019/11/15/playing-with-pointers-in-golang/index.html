@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Calvert&#39;s murmur">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      在 Golang 與指標共舞 | Calvert&#39;s murmur
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        let all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-44933497-2');
+    </script>
+
+
+  
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Calvert's murmur</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/series/" class="item-link">Series</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/series/" class="menu-link">Series</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>在 Golang 與指標共舞</h2>
+  <p class="post-date">2019-11-15</p>
+  <p class="word-count">
+  
+  約 3108 字 / 需 17 分鐘閱讀
+</p>
+
+
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><blockquote>
+<p>原文：<strong>CalliCoder</strong> — <a target="_blank" rel="noopener" href="https://www.callicoder.com/golang-pointers">Playing with Pointers in Golang</a></p>
+</blockquote>
+<p>指標是一個變數，用來儲存另一個變數的記憶體位址。疑惑嗎？讓我來解釋一下。</p>
+<p>首先讓我們來了解什麼是變數。當我們在撰寫任何程式時，我們需要在記憶體中儲存一些資料。資料儲存在記憶體中的特定位址。記憶體位址看起來會像 <code>0xAFFFF</code>（這是以十六進制來表示記憶體位址）。</p>
+<span id="more"></span>
+
+<p>現在，要存取資料的話，我們需要知道資料的儲存位址。我們可以追蹤所有與我們的程式相關的儲存資料的記憶體位址。但是，想像一下要記住所有記憶體位址並使用它們存取資料有多麼困難。</p>
+<p>這就是為什麼我們有變數的概念。變數只是為儲存資料的記憶體位置所取的一個方便的名稱。</p>
+<p>指標也是一個變數。但它是一種特殊的變數，因為它儲存的資料不是一般的數值，如簡單的整數或字串，它是另一個變數的記憶體位址。</p>
+<img src="/2019/11/15/playing-with-pointers-in-golang/golang-pointers-illustration.jpg" class="">
+
+<p>在上面的例子中，指標 <code>p</code> 含有數值 <code>0x0001</code>，它是變數 <code>a</code> 的位址。</p>
+<h3 id="宣告指標"><a href="#宣告指標" class="headerlink" title="宣告指標"></a>宣告指標</h3><p>使用以下語法宣告一個型別為 T 的指標：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// A pointer of type T</span>
+<span class="token keyword">var</span> p <span class="token operator">*</span>T<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>型別 <code>T</code> 是指標指向的變數的型別。舉例來說，以下是型別為 <code>int</code> 的指標：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// A pointer of type int</span>
+<span class="token keyword">var</span> p <span class="token operator">*</span><span class="token builtin">int</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>上面的指標只能儲存 <code>int</code> 變數的記憶體位址。</p>
+<p>指標的<a href="/2019/11/05/golang-variables-zero-values-type-inference/" title="Golang 變數、零值和型別推斷">零值</a>為 <code>nil</code>。也就是說，任何未初始化的指標都會是 <code>nil</code>。讓我們來看一個完整範例：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> p <span class="token operator">*</span><span class="token builtin">int</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"p = "</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+p &#x3D;  &lt;nil&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="初始化指標"><a href="#初始化指標" class="headerlink" title="初始化指標"></a>初始化指標</h3><p>你可以使用另一個變數的記憶體位址來初始化指標。可以使用 <code>&amp;</code> 運算子取得變數的位址：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token number">100</span>
+<span class="token keyword">var</span> p <span class="token operator">*</span><span class="token builtin">int</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>x<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>注意我們如何使用 <code>&amp;</code> 運算子與變數 <code>x</code> 來取得它的位址，然後將位址指派給指標 <code>p</code>。</p>
+<p>與 Golang 中的其他變數一樣，編譯器也可以推斷出指標變數的型別。因此，你可以省略上面範例中指標 <code>p</code> 的型別宣告，並像這樣撰寫它：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> p <span class="token operator">=</span> <span class="token operator">&amp;</span>a<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>讓我們看一個完整範例來更清楚的了解：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">5.67</span>
+	<span class="token keyword">var</span> p <span class="token operator">=</span> <span class="token operator">&amp;</span>a
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Value stored in variable a = "</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Address of variable a = "</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>a<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Value stored in variable p = "</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+Value stored in variable a &#x3D;  5.67
+Address of variable a &#x3D;  0xc4200120a8
+Value stored in variable p &#x3D;  0xc4200120a8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="解參考指標"><a href="#解參考指標" class="headerlink" title="解參考指標"></a>解參考指標</h3><p>你可以對指標使用 <code>*</code> 運算子來存取儲存在指標所指向的變數中的值。這稱為_解參考_或_間接取值_：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">100</span>
+	<span class="token keyword">var</span> p <span class="token operator">=</span> <span class="token operator">&amp;</span>a
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"a = "</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"p = "</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"*p = "</span><span class="token punctuation">,</span> <span class="token operator">*</span>p<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+a &#x3D;  100
+p &#x3D;  0xc4200120a8
+*p &#x3D;  100<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>你不僅可以使用 <code>*</code> 運算子來存取所指向變數的值，還可以對其進行修改。以下範例透過指標 <code>p</code> 來設定儲存在變數 <code>a</code> 中的值：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1000</span>
+	<span class="token keyword">var</span> p <span class="token operator">=</span> <span class="token operator">&amp;</span>a
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"a (before) = "</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span>
+
+	<span class="token comment">// Changing the value stored in the pointed variable through the pointer</span>
+	<span class="token operator">*</span>p <span class="token operator">=</span> <span class="token number">2000</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"a (after) = "</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+a (before) &#x3D;  1000
+a (after) &#x3D;  2000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="使用內建的-new-函數建立指標"><a href="#使用內建的-new-函數建立指標" class="headerlink" title="使用內建的 new() 函數建立指標"></a>使用內建的 new() 函數建立指標</h3><p>你也可以使用內建的 <code>new()</code> 函數建立指標。<code>new()</code> 函數將型別當作參數，分配足夠的記憶體來容納該型別的值，然後回傳指向該型別的指標。</p>
+<p>這有一個範例：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	ptr <span class="token operator">:=</span> <span class="token function">new</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token comment">// Pointer to an `int` type</span>
+	<span class="token operator">*</span>ptr <span class="token operator">=</span> <span class="token number">100</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Ptr = %#x, Ptr value = %d\n"</span><span class="token punctuation">,</span> ptr<span class="token punctuation">,</span> <span class="token operator">*</span>ptr<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+Ptr &#x3D; 0xc420014058, Ptr value &#x3D; 100<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="指標的指標"><a href="#指標的指標" class="headerlink" title="指標的指標"></a>指標的指標</h3><p>指標可以指向任何型別的變數。它也可以指向另一個指標。下面的範例展示了如何建立指向另一個指標的指標：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">7.98</span>
+	<span class="token keyword">var</span> p <span class="token operator">=</span> <span class="token operator">&amp;</span>a
+	<span class="token keyword">var</span> pp <span class="token operator">=</span> <span class="token operator">&amp;</span>p
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"a = "</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"address of a = "</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>a<span class="token punctuation">)</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"p = "</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"address of p = "</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>p<span class="token punctuation">)</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"pp = "</span><span class="token punctuation">,</span> pp<span class="token punctuation">)</span>
+
+	<span class="token comment">// Dereferencing a pointer to pointer</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"*pp = "</span><span class="token punctuation">,</span> <span class="token operator">*</span>pp<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"**pp = "</span><span class="token punctuation">,</span> <span class="token operator">*</span><span class="token operator">*</span>pp<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none"># Output
+a &#x3D;  7.98
+address of a &#x3D;  0xc4200120a8
+p &#x3D;  0xc4200120a8
+address of p &#x3D;  0xc42000c028
+pp &#x3D;  0xc42000c028
+*pp &#x3D;  0xc4200120a8
+**pp &#x3D;  7.98<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Go-沒有指標運算"><a href="#Go-沒有指標運算" class="headerlink" title="Go 沒有指標運算"></a>Go 沒有指標運算</h3><p>如果你使用過 C&#x2F;C++，那麼你必須知道這些語言支援指標運算。<br>舉例來說，你可以遞增&#x2F;遞減指標來移動到下一個&#x2F;上一個記憶體位址。<br>你可以對指標增加或減去一個整數值，你也可以使用關係運算子 <code>==</code>、<code>&lt;</code>、<code>&gt;</code> 等比較兩個指標。</p>
+<p>但是 Go 不支援對指標進行此類算術運算。任何此類運算都會導致編譯時期錯誤：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token number">67</span>
+	<span class="token keyword">var</span> p <span class="token operator">=</span> <span class="token operator">&amp;</span>x
+
+	<span class="token keyword">var</span> p1 <span class="token operator">=</span> p <span class="token operator">+</span> <span class="token number">1</span> <span class="token comment">// Compiler Error: invalid operation</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>但是，你可以使用 <code>==</code> 運算子比較兩個相同型別的指標是否相等。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">75</span>
+	<span class="token keyword">var</span> p1 <span class="token operator">=</span> <span class="token operator">&amp;</span>a
+	<span class="token keyword">var</span> p2 <span class="token operator">=</span> <span class="token operator">&amp;</span>a
+
+	<span class="token keyword">if</span> p1 <span class="token operator">==</span> p2 <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Both pointers p1 and p2 point to the same variable."</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>我希望你了解什麼是指標、如何宣告和初始化指標，以及如何解參考指標。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Golang" >
+    <span class="tag-code">Golang</span>
+  </a>
+
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- Last updated on Start -->
+    
+    <!-- Last updated on END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/11/14/golang-maps-by-example/">
+        <span class="nav-arrow">&larr; </span>
+        
+          Golang map 介紹
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/11/15/golang-structs-tutorial-with-examples/">
+        
+          Golang struct 教學與範例
+        
+        <span class="nav-arrow"> &rarr;</span>
+      </a>
+    
+  </div>
+
+
+    <!-- NAV END -->
+    <!-- QR Code START -->
+    
+    <!-- QR Code END -->
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">目錄</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%AE%A3%E5%91%8A%E6%8C%87%E6%A8%99"><span class="toc-nav-text">宣告指標</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%8C%87%E6%A8%99"><span class="toc-nav-text">初始化指標</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%A7%A3%E5%8F%83%E8%80%83%E6%8C%87%E6%A8%99"><span class="toc-nav-text">解參考指標</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E4%BD%BF%E7%94%A8%E5%85%A7%E5%BB%BA%E7%9A%84-new-%E5%87%BD%E6%95%B8%E5%BB%BA%E7%AB%8B%E6%8C%87%E6%A8%99"><span class="toc-nav-text">使用內建的 new() 函數建立指標</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%8C%87%E6%A8%99%E7%9A%84%E6%8C%87%E6%A8%99"><span class="toc-nav-text">指標的指標</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Go-%E6%B2%92%E6%9C%89%E6%8C%87%E6%A8%99%E9%81%8B%E7%AE%97"><span class="toc-nav-text">Go 沒有指標運算</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%B5%90%E8%AB%96"><span class="toc-nav-text">結論</span></a></li></ol>
+    
+  </div>
+</aside>
+
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function() {
+    const url = 'https://calvertyang.github.io/2019/11/15/playing-with-pointers-in-golang/';
+    const banner = '';
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')',
+      });
+    } else {
+      $('#article-banner').geopattern(url);
+    }
+    $('.header').removeClass('fixed-header');
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.svg');
+      $(this).css({
+        'cursor': 'default',
+      });
+    });
+
+    // 若圖片放在連結內，則將游標改為 pointer 並將圖片靠左
+    $('.markdown-content img').each(function() {
+      if ($(this).parents().is('a')) {
+        $(this).css({
+          'cursor': 'pointer',
+          'display': 'inline-block',
+        });
+      }
+    });
+
+    // zoom image
+    $('.markdown-content img').on('click', function() {
+      const src = $(this).attr('src');
+      if (src !== '/css/images/error_icon.svg' && !$(this).parents().is('a')) {
+        const imageW = $(this).width();
+        const imageH = $(this).height();
+
+        let zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        zoom = zoom < 1 ? 1 : zoom;
+        zoom = zoom > 2 ? 2 : zoom;
+        const transY = (($(window).height() - imageH) / 2).toFixed(2);
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
+        $('.image-view-wrap').addClass('wrap-active');
+        $('.image-view-wrap img').css({
+          width: imageW,
+          transform: `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`,
+        });
+        $('html').css('overflow', 'hidden');
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove();
+          $('html').attr('style', '');
+        });
+      }
+    })
+  })();
+</script>
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2025 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    const d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
+    FastClick.attach(document.body);
+  });
+</script>
+
+<script>
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

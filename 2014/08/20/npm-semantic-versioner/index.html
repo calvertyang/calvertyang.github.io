@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Calvert&#39;s murmur">
+  <meta name="keyword" content="calvert ruby rails ror rubyonrails go golang laravel">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      看懂 npm 語意化版本 | Calvert&#39;s murmur
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        let all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44933497-2"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-44933497-2');
+    </script>
+
+
+  
+
+  
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Calvert's murmur</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/series/" class="item-link">Series</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+  <a role="button" class="popup-trigger">
+    <i class="fas fa-search fa-fw"></i>
+  </a>
+</li>
+
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/series/" class="menu-link">Series</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+  <div class="popup search-popup">
+    <div class="search-header">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+      <input autocomplete="off" autocapitalize="off"
+        placeholder="想找什麼..." spellcheck="false"
+        type="search" class="search-input">
+      </div>
+      <span class="popup-btn-close">
+        <i class="fas fa-times-circle"></i>
+      </span>
+    </div>
+    <div id="search-result">
+      <div id="no-result">
+        <i class="fas fa-spinner fa-spin fa-5x fa-fw"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>看懂 npm 語意化版本</h2>
+  <p class="post-date">2014-08-20</p>
+  <p class="word-count">
+  
+  約 1412 字 / 需 7 分鐘閱讀
+</p>
+
+
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>npm(Node Package Manager) 採用語意化版本 2.0.0 規範，詳細的規範內容可查看 <a target="_blank" rel="noopener" href="http://semver.org/">http://semver.org/</a>。</p>
+<p>使用 npm 管理套件時，你會注意到 package.json 內的套件版本有許多表示法，以下說明各表示法所代表的意思：</p>
+<table>
+<thead>
+<tr>
+<th align="left">版本</th>
+<th align="left">說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>1.2.3</code></td>
+<td align="left">指定版本。需為完整的版號，包含<strong>主版號</strong>、<strong>次版號</strong>及<strong>修訂號</strong>。<br/>需注意的是，版本編譯資訊（Metadata）會被忽略，所以 <code>1.2.3+build2012</code> 滿足此條件。</td>
+</tr>
+<tr>
+<td align="left"><code>&gt;1.2.3</code></td>
+<td align="left">大於指定版本。</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;1.2.3</code></td>
+<td align="left">小於指定版本。如果沒有預先發佈版在此版本範圍，則沒有預先發佈版會被允許，即使在技術上是「小於」。</td>
+</tr>
+<tr>
+<td align="left"><code>&gt;=1.2.3</code></td>
+<td align="left">大於或等於。需注意的是，預先發佈版不等同其版本。<br/>因此 <code>1.2.3-beta</code> 不滿足此條件，但 <code>2.3.0-beta</code> 則會。</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;=1.2.3</code></td>
+<td align="left">小於或等於。在這種情況下，允許預先發佈版，所以 <code>1.2.3-beta</code> 滿足此條件。</td>
+</tr>
+<tr>
+<td align="left"><code>1.2.3 - 2.3.4</code></td>
+<td align="left">等同於 <code>&gt;=1.2.3 &lt;=2.3.4</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>~1.2.3</code></td>
+<td align="left">等同於 <code>&gt;=1.2.3-0 &lt;1.3.0-0</code>，當使用 ~ 符號時，支援預先發佈版，但不含次版號的變更（及其預先發佈版）。<br/>因此 <code>1.3.0-beta</code> 不滿足 <code>~1.2.3</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>^1.2.3</code></td>
+<td align="left">等同於 <code>&gt;=1.2.3-0 &lt;2.0.0-0</code>，當使用 ^ 符號時，支援任何次版號及修訂號的變更（含預先發佈版），但不含主版號的變更（及其預先發佈版）。<br/>因此 <code>1.5.1</code> 能滿足 <code>^1.2.3</code>，而 <code>1.2.2</code> 及 <code>2.0.0-beta</code> 則不會。</td>
+</tr>
+<tr>
+<td align="left"><code>^0.1.3</code></td>
+<td align="left">等同於 <code>0.1.3</code>，與 0.1.3 版相容。0.x.x 版比較特殊，因為語意化版本規範規定 0.x.x 版不作任何穩定性保證，只有指定的版本被認為是有效的。</td>
+</tr>
+<tr>
+<td align="left"><code>~0.0.2</code></td>
+<td align="left">等同於 <code>0.0.2</code>，與 0.0.2 版相容。</td>
+</tr>
+<tr>
+<td align="left"><code>~1.2</code></td>
+<td align="left">等同於 <code>&gt;=1.2.0-0 &lt;1.3.0-0</code>，任何從 1.2 開始的版本。</td>
+</tr>
+<tr>
+<td align="left"><code>^1.2</code></td>
+<td align="left">等同於 <code>&gt;=1.2.0-0 &lt;1.3.0-0</code>，任何相容於從 1.2 開始的版本。</td>
+</tr>
+<tr>
+<td align="left"><code>1.2.x</code></td>
+<td align="left">等同於 <code>&gt;=1.2.0-0 &lt;1.3.0-0</code>，任何從 1.2 開始的版本。</td>
+</tr>
+<tr>
+<td align="left"><code>1.2.*</code></td>
+<td align="left">等同於 <code>1.2.x</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>1.2</code></td>
+<td align="left">等同於 <code>1.2.x</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>~1</code></td>
+<td align="left">等同於 <code>&gt;=1.0.0-0 &lt;2.0.0-0</code>，任何從 1 開始的版本。</td>
+</tr>
+<tr>
+<td align="left"><code>^1</code></td>
+<td align="left">等同於 <code>&gt;=1.0.0-0 &lt;2.0.0-0</code>，任何相容於從 1 開始的版本。</td>
+</tr>
+<tr>
+<td align="left"><code>1.x</code></td>
+<td align="left">等同於 <code>&gt;=1.0.0-0 &lt;2.0.0-0</code>，任何從 1 開始的版本。</td>
+</tr>
+<tr>
+<td align="left"><code>1.*</code></td>
+<td align="left">等同於 <code>1.x</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>1</code></td>
+<td align="left">等同於 <code>1.x</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>*</code></td>
+<td align="left">任何版本。</td>
+</tr>
+<tr>
+<td align="left"><code>x</code></td>
+<td align="left">等同於 <code>*</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>&quot;&quot;</code></td>
+<td align="left">空字串，等同於 <code>*</code>。</td>
+</tr>
+</tbody></table>
+<p>官方文件：<a target="_blank" rel="noopener" href="https://www.npmjs.org/doc/misc/semver.html">The semantic versioner for npm</a></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Node.js" >
+    <span class="tag-code">Node.js</span>
+  </a>
+
+  <a href="/tags#npm" >
+    <span class="tag-code">npm</span>
+  </a>
+
+  <a href="/tags#SemVer" >
+    <span class="tag-code">SemVer</span>
+  </a>
+
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- Last updated on Start -->
+    
+    <!-- Last updated on END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2013/11/16/sql-to-aggregation-mapping-chart/">
+        <span class="nav-arrow">&larr; </span>
+        
+          SQL 及 MongoDB 集合(Aggregation)指令對應表
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2014/08/23/revised-app-rejected-because-of-idfa-in-facebooksdk/">
+        
+          修正 FacebookSDK 使用 Advertising Identifier(IDFA) 造成的 App 退審
+        
+        <span class="nav-arrow"> &rarr;</span>
+      </a>
+    
+  </div>
+
+
+    <!-- NAV END -->
+    <!-- QR Code START -->
+    
+    <!-- QR Code END -->
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">目錄</strong>
+    
+      <ol class="nav">無</ol>
+    
+  </div>
+</aside>
+
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function() {
+    const url = 'https://calvertyang.github.io/2014/08/20/npm-semantic-versioner/';
+    const banner = '';
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')',
+      });
+    } else {
+      $('#article-banner').geopattern(url);
+    }
+    $('.header').removeClass('fixed-header');
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.svg');
+      $(this).css({
+        'cursor': 'default',
+      });
+    });
+
+    // 若圖片放在連結內，則將游標改為 pointer 並將圖片靠左
+    $('.markdown-content img').each(function() {
+      if ($(this).parents().is('a')) {
+        $(this).css({
+          'cursor': 'pointer',
+          'display': 'inline-block',
+        });
+      }
+    });
+
+    // zoom image
+    $('.markdown-content img').on('click', function() {
+      const src = $(this).attr('src');
+      if (src !== '/css/images/error_icon.svg' && !$(this).parents().is('a')) {
+        const imageW = $(this).width();
+        const imageH = $(this).height();
+
+        let zoom = ($(window).width() * 0.95 / imageW).toFixed(2);
+        zoom = zoom < 1 ? 1 : zoom;
+        zoom = zoom > 2 ? 2 : zoom;
+        const transY = (($(window).height() - imageH) / 2).toFixed(2);
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>');
+        $('.image-view-wrap').addClass('wrap-active');
+        $('.image-view-wrap img').css({
+          width: imageW,
+          transform: `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`,
+        });
+        $('html').css('overflow', 'hidden');
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove();
+          $('html').attr('style', '');
+        });
+      }
+    })
+  })();
+</script>
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2025 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    const d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async('//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js', function() {
+    FastClick.attach(document.body);
+  });
+</script>
+
+<script>
+  const hasLine = 'true';
+  async('//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', function() {
+    $('figure pre').each(function(i, block) {
+      const figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      const lang = figure.attr('class').split(' ')[1] || 'code';
+      const codeHtml = $(this).html();
+      const codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>
